@@ -1,7 +1,8 @@
 import asyncio
 from datetime import datetime, time, timedelta
 from utils.logger import logger
-from utils.message_handler import get_message_handler
+from discord_utils.message_handler import get_message_handler
+from config import config
 
 class TaskScheduler:
     def __init__(self, bot):
@@ -27,7 +28,7 @@ class TaskScheduler:
         async def daily_export_task():
             while self.running:
                 try:
-                    now = datetime.now()
+                    now = datetime.now(config.app_timezone)
                     target_time = time(hour, minute)
                     
                     # Calculate next run time
@@ -49,7 +50,7 @@ class TaskScheduler:
                     if self.running:
                         logger.info(f"Starting scheduled export for channel {channel_id}")
                         message_handler = get_message_handler(self.bot)
-                        filepath = await message_handler.export_channel_messages(channel_id, hours_back=24)
+                        filepath = await message_handler.export_channel_to_text(channel_id, hours_back=24)
                         
                         if filepath:
                             logger.info(f"Scheduled export completed: {filepath}")

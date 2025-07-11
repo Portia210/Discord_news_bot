@@ -1,0 +1,186 @@
+{
+    "quoteResponse": {
+        "result": [
+            {
+                "fullExchangeName": "DJI",
+                "symbol": "^DJI",
+                "gmtOffSetMilliseconds": -14400000,
+                "language": "en-US",
+                "regularMarketTime": {
+                    "raw": 1752163029,
+                    "fmt": "11:57AM EDT"
+                },
+                "regularMarketChangePercent": {
+                    "raw": 0.49927258,
+                    "fmt": "0.50%"
+                },
+                "quoteType": "INDEX",
+                "typeDisp": "Index",
+                "tradeable": false,
+                "exchangeTimezoneName": "America/New_York",
+                "cryptoTradeable": false,
+                "exchangeDataDelayedBy": 0,
+                "firstTradeDateMilliseconds": 694362600000,
+                "exchangeTimezoneShortName": "EDT",
+                "hasPrePostMarketData": false,
+                "customPriceAlertConfidence": "HIGH",
+                "regularMarketPrice": {
+                    "raw": 44680.27,
+                    "fmt": "44,680.27"
+                },
+                "marketState": "REGULAR",
+                "market": "us_market",
+                "quoteSourceName": "Free Realtime Quote",
+                "priceHint": 2,
+                "exchange": "DJI",
+                "sourceInterval": 120,
+                "region": "US",
+                "triggerable": true
+            },
+            {
+                "fullExchangeName": "SNP",
+                "symbol": "^GSPC",
+                "gmtOffSetMilliseconds": -14400000,
+                "language": "en-US",
+                "regularMarketTime": {
+                    "raw": 1752163029,
+                    "fmt": "11:57AM EDT"
+                },
+                "regularMarketChangePercent": {
+                    "raw": 0.23805669,
+                    "fmt": "0.24%"
+                },
+                "quoteType": "INDEX",
+                "typeDisp": "Index",
+                "tradeable": false,
+                "exchangeTimezoneName": "America/New_York",
+                "cryptoTradeable": false,
+                "exchangeDataDelayedBy": 0,
+                "firstTradeDateMilliseconds": -1325583000000,
+                "exchangeTimezoneShortName": "EDT",
+                "hasPrePostMarketData": false,
+                "customPriceAlertConfidence": "HIGH",
+                "regularMarketPrice": {
+                    "raw": 6278.17,
+                    "fmt": "6,278.17"
+                },
+                "marketState": "REGULAR",
+                "market": "us_market",
+                "quoteSourceName": "Free Realtime Quote",
+                "priceHint": 2,
+                "exchange": "SNP",
+                "sourceInterval": 15,
+                "region": "US",
+                "triggerable": true
+            },
+            {
+                "fullExchangeName": "Nasdaq GIDS",
+                "symbol": "^IXIC",
+                "gmtOffSetMilliseconds": -14400000,
+                "language": "en-US",
+                "regularMarketTime": {
+                    "raw": 1752163027,
+                    "fmt": "11:57AM EDT"
+                },
+                "regularMarketChangePercent": {
+                    "raw": 0.0042640325,
+                    "fmt": "0.00%"
+                },
+                "quoteType": "INDEX",
+                "typeDisp": "Index",
+                "tradeable": false,
+                "exchangeTimezoneName": "America/New_York",
+                "cryptoTradeable": false,
+                "exchangeDataDelayedBy": 0,
+                "firstTradeDateMilliseconds": 34612200000,
+                "exchangeTimezoneShortName": "EDT",
+                "hasPrePostMarketData": false,
+                "customPriceAlertConfidence": "HIGH",
+                "regularMarketPrice": {
+                    "raw": 20612.217,
+                    "fmt": "20,612.22"
+                },
+                "marketState": "REGULAR",
+                "market": "us_market",
+                "quoteSourceName": "Free Realtime Quote",
+                "priceHint": 2,
+                "exchange": "NIM",
+                "sourceInterval": 15,
+                "region": "US",
+                "triggerable": true
+            },
+            {
+                "fullExchangeName": "Chicago Options",
+                "symbol": "^RUT",
+                "gmtOffSetMilliseconds": -14400000,
+                "language": "en-US",
+                "regularMarketTime": {
+                    "raw": 1752162125,
+                    "fmt": "11:42AM EDT"
+                },
+                "regularMarketChangePercent": {
+                    "raw": 0.5785141,
+                    "fmt": "0.58%"
+                },
+                "quoteType": "INDEX",
+                "typeDisp": "Index",
+                "tradeable": false,
+                "exchangeTimezoneName": "America/New_York",
+                "cryptoTradeable": false,
+                "exchangeDataDelayedBy": 15,
+                "firstTradeDateMilliseconds": 558279000000,
+                "exchangeTimezoneShortName": "EDT",
+                "hasPrePostMarketData": false,
+                "customPriceAlertConfidence": "HIGH",
+                "regularMarketPrice": {
+                    "raw": 2265.5203,
+                    "fmt": "2,265.52"
+                },
+                "marketState": "REGULAR",
+                "market": "us_market",
+                "quoteSourceName": "Delayed Quote",
+                "priceHint": 2,
+                "exchange": "WCB",
+                "sourceInterval": 15,
+                "region": "US",
+                "triggerable": true
+            },
+            {
+                "exchangeTimezoneName": "America/Chicago",
+                "fullExchangeName": "Cboe Indices",
+                "symbol": "^VIX",
+                "cryptoTradeable": false,
+                "gmtOffSetMilliseconds": -18000000,
+                "exchangeDataDelayedBy": 0,
+                "firstTradeDateMilliseconds": 631267200000,
+                "language": "en-US",
+                "regularMarketTime": {
+                    "raw": 1752162121,
+                    "fmt": "10:42AM CDT"
+                },
+                "regularMarketChangePercent": {
+                    "raw": -0.5018816,
+                    "fmt": "-0.50%"
+                },
+                "exchangeTimezoneShortName": "CDT",
+                "quoteType": "INDEX",
+                "hasPrePostMarketData": false,
+                "customPriceAlertConfidence": "LOW",
+                "regularMarketPrice": {
+                    "raw": 15.86,
+                    "fmt": "15.86"
+                },
+                "marketState": "REGULAR",
+                "market": "cboe_market",
+                "typeDisp": "Index",
+                "priceHint": 2,
+                "tradeable": false,
+                "exchange": "CXI",
+                "sourceInterval": 15,
+                "region": "US",
+                "triggerable": false
+            }
+        ],
+        "error": null
+    }
+}

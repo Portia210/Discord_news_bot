@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>News Report</title>
     <!-- Main styles -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
     <!-- Theme overrides -->
-    <link rel="stylesheet" href="morning.css" id="morning-theme">
-    <link rel="stylesheet" href="evening.css" id="evening-theme" disabled>
+    <link rel="stylesheet" href="style/morning.css" id="morning-theme">
+    <link rel="stylesheet" href="style/evening.css" id="evening-theme" disabled>
 </head>
 <body>
     <div class="container">
@@ -18,6 +18,76 @@
                 <div class="header-text">
                     <h1>דוח חדשות</h1>
                     <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Price Symbols Section -->
+        <div class="price-symbols">
+            <div class="symbols-container">
+                <div class="symbol-item" id="symbol-1">
+                    <div class="symbol-main">
+                        <div class="symbol-price-section">
+                            <div class="symbol-price">$150.25</div>
+                            <div class="symbol-change">
+                                <span class="change-amount">+2.15</span>
+                                <span class="change-percent">(+1.45%)</span>
+                                <span class="change-arrow">↗</span>
+                            </div>
+                        </div>
+                        <div class="symbol-info">
+                            <div class="symbol-ticker">AAPL</div>
+                            <div class="symbol-company">Apple Inc.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="symbol-item" id="symbol-2">
+                    <div class="symbol-main">
+                        <div class="symbol-price-section">
+                            <div class="symbol-price">$2,850.75</div>
+                            <div class="symbol-change">
+                                <span class="change-amount">-15.30</span>
+                                <span class="change-percent">(-0.53%)</span>
+                                <span class="change-arrow">↘</span>
+                            </div>
+                        </div>
+                        <div class="symbol-info">
+                            <div class="symbol-ticker">GOOGL</div>
+                            <div class="symbol-company">Alphabet Inc.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="symbol-item" id="symbol-3">
+                    <div class="symbol-main">
+                        <div class="symbol-price-section">
+                            <div class="symbol-price">$380.50</div>
+                            <div class="symbol-change">
+                                <span class="change-amount">+5.75</span>
+                                <span class="change-percent">(+1.54%)</span>
+                                <span class="change-arrow">↗</span>
+                            </div>
+                        </div>
+                        <div class="symbol-info">
+                            <div class="symbol-ticker">MSFT</div>
+                            <div class="symbol-company">Microsoft Corp.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="symbol-item" id="symbol-4">
+                    <div class="symbol-main">
+                        <div class="symbol-price-section">
+                            <div class="symbol-price">$245.80</div>
+                            <div class="symbol-change">
+                                <span class="change-amount">-8.20</span>
+                                <span class="change-percent">(-3.23%)</span>
+                                <span class="change-arrow">↘</span>
+                            </div>
+                        </div>
+                        <div class="symbol-info">
+                            <div class="symbol-ticker">TSLA</div>
+                            <div class="symbol-company">Tesla Inc.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,6 +107,7 @@
         // This will be populated by the Python script
         const newsData = {{NEWS_DATA}};
         const reportTime = "{{REPORT_TIME}}"; // morning or evening
+        const priceSymbols = {{PRICE_SYMBOLS}}; // New data for price symbols
         
         function setTheme() {
             const morningTheme = document.getElementById('morning-theme');
@@ -81,6 +152,40 @@
             return timeStr;
         }
         
+        function populatePriceSymbols() {
+            if (priceSymbols && priceSymbols.length > 0) {
+                priceSymbols.forEach((symbol, index) => {
+                    const symbolElement = document.getElementById(`symbol-${index + 1}`);
+                    if (symbolElement) {
+                        const tickerElement = symbolElement.querySelector('.symbol-ticker');
+                        const companyElement = symbolElement.querySelector('.symbol-company');
+                        const priceElement = symbolElement.querySelector('.symbol-price');
+                        const changeElement = symbolElement.querySelector('.symbol-change');
+                        
+                        tickerElement.textContent = symbol.ticker || 'N/A';
+                        companyElement.textContent = symbol.company || 'N/A';
+                        priceElement.textContent = symbol.price || '$0.00';
+                        
+                        const changeAmount = symbol.changeAmount || '0.00';
+                        const changePercent = symbol.changePercent || '0.00%';
+                        const isPositive = symbol.isPositive !== undefined ? symbol.isPositive : parseFloat(changeAmount) >= 0;
+                        
+                        // Add parentheses to percentage if not already present
+                        let formattedPercent = changePercent;
+                        if (!changePercent.includes('(') && !changePercent.includes(')')) {
+                            formattedPercent = `(${changePercent})`;
+                        }
+                        
+                        changeElement.innerHTML = `
+                            <span class="change-amount ${isPositive ? 'positive' : 'negative'}">${changeAmount}</span>
+                            <span class="change-percent ${isPositive ? 'positive' : 'negative'}">${formattedPercent}</span>
+                            <span class="change-arrow ${isPositive ? 'up' : 'down'}">${isPositive ? '↗' : '↘'}</span>
+                        `;
+                    }
+                });
+            }
+        }
+        
         function populateNews() {
             const container = document.getElementById('news-container');
             const generationTime = document.getElementById('generation-time');
@@ -108,6 +213,7 @@
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             setTheme();
+            populatePriceSymbols();
             populateNews();
         });
     </script>

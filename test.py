@@ -1,8 +1,6 @@
-import requests
-import json
-from utils.read_write import read_json_file
-from utils.safe_update_dict import safe_update_dict
+import yfinance as yf
 
-# Test read_json_file (will trigger error)
-read_json_file("file.json")
-
+stock = yf.Ticker("ABEV3.SA")
+price = stock.info['regularMarketPrice']
+print(price)
+ 

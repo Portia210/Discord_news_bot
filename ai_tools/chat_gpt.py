@@ -1,9 +1,7 @@
 import os
 from openai import OpenAI
-from datetime import datetime
-from typing import List, Dict
 from utils.logger import logger
-from utils.read_write import read_text_file, write_text_file, write_json_file
+from utils.read_write import read_text_file, write_json_file
 from dotenv import load_dotenv
 import re
 import json
@@ -60,6 +58,10 @@ class AIInterpreter:
         response = self.get_interpretation(prompt)
         return self._clean_json_response(response)
     
+
+
+
+
 
 if __name__ == "__main__":
     ai_interpreter = AIInterpreter()

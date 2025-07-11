@@ -1,0 +1,82 @@
+{
+    "quoteResponse": {
+        "result": [
+            {
+                "language": "en-US",
+                "region": "US",
+                "triggerable": false,
+                "customPriceAlertConfidence": "NONE",
+                "shortName": "Microsoft Corporation",
+                "stockStoryURL": "https://stockstory.org/us/stocks/nasdaq/msft?partner=yahoo&utm_source=yahoo",
+                "stockStoryQuality": "HIGH",
+                "stockStoryIsTopSixThisWeek": true,
+                "stockStoryTopSixURL": "https://stockstory.org/high-quality/top-6-to-buy-this-week?partner=yahoo&utm_source=yahoo",
+                "longName": "Microsoft Corporation",
+                "tradeable": false,
+                "cryptoTradeable": false,
+                "symbol": "MSFT"
+            },
+            {
+                "language": "en-US",
+                "region": "US",
+                "triggerable": false,
+                "customPriceAlertConfidence": "NONE",
+                "shortName": "monday.com Ltd.",
+                "stockStoryURL": "https://stockstory.org/us/stocks/nasdaq/mndy?partner=yahoo&utm_source=yahoo",
+                "stockStoryQuality": "HIGH",
+                "stockStoryIsTopSixThisWeek": true,
+                "stockStoryTopSixURL": "https://stockstory.org/high-quality/top-6-to-buy-this-week?partner=yahoo&utm_source=yahoo",
+                "longName": "monday.com Ltd.",
+                "tradeable": false,
+                "cryptoTradeable": false,
+                "symbol": "MNDY"
+            },
+            {
+                "language": "en-US",
+                "region": "US",
+                "triggerable": false,
+                "customPriceAlertConfidence": "NONE",
+                "shortName": "Verra Mobility Corporation",
+                "stockStoryURL": "https://stockstory.org/us/stocks/nasdaq/vrrm?partner=yahoo&utm_source=yahoo",
+                "stockStoryQuality": "HIGH",
+                "stockStoryIsTopSixThisWeek": true,
+                "stockStoryTopSixURL": "https://stockstory.org/high-quality/top-6-to-buy-this-week?partner=yahoo&utm_source=yahoo",
+                "longName": "Verra Mobility Corporation",
+                "tradeable": false,
+                "cryptoTradeable": false,
+                "symbol": "VRRM"
+            },
+            {
+                "language": "en-US",
+                "region": "US",
+                "triggerable": false,
+                "customPriceAlertConfidence": "NONE",
+                "shortName": "FTAI Aviation Ltd.",
+                "stockStoryURL": "https://stockstory.org/us/stocks/nasdaq/ftai?partner=yahoo&utm_source=yahoo",
+                "stockStoryQuality": "HIGH",
+                "stockStoryIsTopSixThisWeek": true,
+                "stockStoryTopSixURL": "https://stockstory.org/high-quality/top-6-to-buy-this-week?partner=yahoo&utm_source=yahoo",
+                "longName": "FTAI Aviation Ltd.",
+                "tradeable": false,
+                "cryptoTradeable": false,
+                "symbol": "FTAI"
+            },
+            {
+                "language": "en-US",
+                "region": "US",
+                "triggerable": false,
+                "customPriceAlertConfidence": "NONE",
+                "shortName": "Monolithic Power Systems, Inc.",
+                "stockStoryURL": "https://stockstory.org/us/stocks/nasdaq/mpwr?partner=yahoo&utm_source=yahoo",
+                "stockStoryQuality": "HIGH",
+                "stockStoryIsTopSixThisWeek": true,
+                "stockStoryTopSixURL": "https://stockstory.org/high-quality/top-6-to-buy-this-week?partner=yahoo&utm_source=yahoo",
+                "longName": "Monolithic Power Systems, Inc.",
+                "tradeable": false,
+                "cryptoTradeable": false,
+                "symbol": "MPWR"
+            }
+        ],
+        "error": null
+    }
+}

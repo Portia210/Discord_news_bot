@@ -1,0 +1,25 @@
+import pytz
+
+class ChannelIds:
+    def __init__(self):
+        self.tweeter_news = 1328615279697330227
+        self.tweeter_trade_alerts = 1229499082884518016
+        self.investing_bot = 1389349923962491061
+        self.python_bot = 1389360754200936538
+
+class UserIds:
+    def __init__(self):
+        self.ifitt_bot = 832731781231804447
+        self.python_bot = 1358545327551942887
+        self.admin = 949994517774364682
+
+
+class Config:
+    def __init__(self):
+        self.channel_ids = ChannelIds()
+        self.user_ids = UserIds()
+        self.market_timezone = pytz.timezone('America/New_York')
+        self.israel_timezone = pytz.timezone('Asia/Jerusalem')
+        self.app_timezone = self.israel_timezone
+
+config = Config()

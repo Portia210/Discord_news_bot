@@ -1,0 +1,3479 @@
+{
+    "finance": {
+        "result": {
+            "sections": {
+                "neo_investment_ideas": {
+                    "screenersList": [
+                        {
+                            "id": "704d5655-c714-47a3-a280-069b439d252b",
+                            "predefinedScr": true,
+                            "title": "Analyst Strong Buy Stocks",
+                            "description": "Stocks with a minimum upside potential of 20% backed by an analyst's strong buy rating.",
+                            "canonicalName": "ANALYST_STRONG_BUY_STOCKS",
+                            "total": 28,
+                            "versionId": 1,
+                            "creationDate": 1620852449653,
+                            "lastUpdated": 1629498469017,
+                            "entityIdType": "ANALYST_RATINGS",
+                            "records": [
+                                {
+                                    "marketCap": {
+                                        "raw": 32084428616.363525,
+                                        "fmt": "32.084B",
+                                        "longFmt": "32,084,428,616"
+                                    },
+                                    "ticker": "NRG",
+                                    "regularMarketChange": {
+                                        "raw": 2.85001,
+                                        "fmt": "2.85"
+                                    },
+                                    "regularMarketChangePercent": {
+                                        "raw": 1.83233,
+                                        "fmt": "1.83%"
+                                    },
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_nrg.png",
+                                    "regularMarketPrice": {
+                                        "raw": 158.39,
+                                        "fmt": "158.39"
+                                    },
+                                    "fiftyTwoWeekLow": {
+                                        "raw": 65.11,
+                                        "fmt": "65.11"
+                                    },
+                                    "regularMarketVolume": {
+                                        "raw": 2078876,
+                                        "fmt": "2.079M",
+                                        "longFmt": "2,078,876"
+                                    },
+                                    "pricePercentChange": {
+                                        "raw": 1.83233,
+                                        "fmt": "1.83%"
+                                    },
+                                    "price": {
+                                        "raw": 158.39,
+                                        "fmt": "158.39"
+                                    },
+                                    "dayVolume": {
+                                        "raw": 2078876,
+                                        "fmt": "2.079M",
+                                        "longFmt": "2,078,876"
+                                    },
+                                    "fiftyTwoWeekHigh": {
+                                        "raw": 168.57,
+                                        "fmt": "168.57"
+                                    },
+                                    "intradayPriceChange": {
+                                        "raw": 2.85001,
+                                        "fmt": "2.85"
+                                    }
+                                },
+                                {
+                                    "regularMarketVolume": {
+                                        "raw": 535165,
+                                        "fmt": "535,165",
+                                        "longFmt": "535,165"
+                                    },
+                                    "pricePercentChange": {
+                                        "raw": 1.05454,
+                                        "fmt": "1.05%"
+                                    },
+                                    "marketCap": {
+                                        "raw": 3011150848.1941223,
+                                        "fmt": "3.011B",
+                                        "longFmt": "3,011,150,848"
+                                    },
+                                    "ticker": "AUB",
+                                    "price": {
+                                        "raw": 33.54,
+                                        "fmt": "33.54"
+                                    },
+                                    "regularMarketChange": {
+                                        "raw": 0.350002,
+                                        "fmt": "0.35"
+                                    },
+                                    "dayVolume": {
+                                        "raw": 535165,
+                                        "fmt": "535,165",
+                                        "longFmt": "535,165"
+                                    },
+                                    "regularMarketChangePercent": {
+                                        "raw": 1.05454,
+                                        "fmt": "1.05%"
+                                    },
+                                    "fiftyTwoWeekHigh": {
+                                        "raw": 44.54,
+                                        "fmt": "44.54"
+                                    },
+                                    "regularMarketPrice": {
+                                        "raw": 33.54,
+                                        "fmt": "33.54"
+                                    },
+                                    "fiftyTwoWeekLow": {
+                                        "raw": 22.85,
+                                        "fmt": "22.85"
+                                    },
+                                    "intradayPriceChange": {
+                                        "raw": 0.350002,
+                                        "fmt": "0.35"
+                                    }
+                                },
+                                {
+                                    "marketCap": {
+                                        "raw": 27713617998.161316,
+                                        "fmt": "27.714B",
+                                        "longFmt": "27,713,617,998"
+                                    },
+                                    "ticker": "HPE",
+                                    "regularMarketChange": {
+                                        "raw": 0.0900002,
+                                        "fmt": "0.09"
+                                    },
+                                    "regularMarketChangePercent": {
+                                        "raw": 0.42353,
+                                        "fmt": "0.42%"
+                                    },
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_hewlettpackardenterprise.png",
+                                    "regularMarketPrice": {
+                                        "raw": 21.34,
+                                        "fmt": "21.34"
+                                    },
+                                    "fiftyTwoWeekLow": {
+                                        "raw": 11.965,
+                                        "fmt": "11.97"
+                                    },
+                                    "regularMarketVolume": {
+                                        "raw": 10467131,
+                                        "fmt": "10.467M",
+                                        "longFmt": "10,467,131"
+                                    },
+                                    "pricePercentChange": {
+                                        "raw": 0.42353,
+                                        "fmt": "0.42%"
+                                    },
+                                    "price": {
+                                        "raw": 21.34,
+                                        "fmt": "21.34"
+                                    },
+                                    "dayVolume": {
+                                        "raw": 10467131,
+                                        "fmt": "10.467M",
+                                        "longFmt": "10,467,131"
+                                    },
+                                    "fiftyTwoWeekHigh": {
+                                        "raw": 24.66,
+                                        "fmt": "24.66"
+                                    },
+                                    "intradayPriceChange": {
+                                        "raw": 0.0900002,
+                                        "fmt": "0.09"
+                                    }
+                                },
+                                {
+                                    "regularMarketVolume": {
+                                        "raw": 1387563,
+                                        "fmt": "1.388M",
+                                        "longFmt": "1,387,563"
+                                    },
+                                    "pricePercentChange": {
+                                        "raw": 0.21973,
+                                        "fmt": "0.22%"
+                                    },
+                                    "marketCap": {
+                                        "raw": 69265718358.23059,
+                                        "fmt": "69.266B",
+                                        "longFmt": "69,265,718,358"
+                                    },
+                                    "ticker": "EOG",
+                                    "price": {
+                                        "raw": 123.15,
+                                        "fmt": "123.15"
+                                    },
+                                    "regularMarketChange": {
+                                        "raw": 0.270004,
+                                        "fmt": "0.27"
+                                    },
+                                    "dayVolume": {
+                                        "raw": 1387563,
+                                        "fmt": "1.388M",
+                                        "longFmt": "1,387,563"
+                                    },
+                                    "regularMarketChangePercent": {
+                                        "raw": 0.21973,
+                                        "fmt": "0.22%"
+                                    },
+                                    "fiftyTwoWeekHigh": {
+                                        "raw": 138.18,
+                                        "fmt": "138.18"
+                                    },
+                                    "regularMarketPrice": {
+                                        "raw": 123.15,
+                                        "fmt": "123.15"
+                                    },
+                                    "fiftyTwoWeekLow": {
+                                        "raw": 102.52,
+                                        "fmt": "102.52"
+                                    },
+                                    "intradayPriceChange": {
+                                        "raw": 0.270004,
+                                        "fmt": "0.27"
+                                    }
+                                },
+                                {
+                                    "regularMarketVolume": {
+                                        "raw": 1689527,
+                                        "fmt": "1.69M",
+                                        "longFmt": "1,689,527"
+                                    },
+                                    "pricePercentChange": {
+                                        "raw": -0.0564702,
+                                        "fmt": "-0.06%"
+                                    },
+                                    "marketCap": {
+                                        "raw": 16134115936.37085,
+                                        "fmt": "16.134B",
+                                        "longFmt": "16,134,115,936"
+                                    },
+                                    "ticker": "DECK",
+                                    "price": {
+                                        "raw": 106.2,
+                                        "fmt": "106.20"
+                                    },
+                                    "regularMarketChange": {
+                                        "raw": -0.0600052,
+                                        "fmt": "-0.06"
+                                    },
+                                    "dayVolume": {
+                                        "raw": 1689527,
+                                        "fmt": "1.69M",
+                                        "longFmt": "1,689,527"
+                                    },
+                                    "regularMarketChangePercent": {
+                                        "raw": -0.0564702,
+                                        "fmt": "-0.06%"
+                                    },
+                                    "fiftyTwoWeekHigh": {
+                                        "raw": 223.98,
+                                        "fmt": "223.98"
+                                    },
+                                    "regularMarketPrice": {
+                                        "raw": 106.2,
+                                        "fmt": "106.20"
+                                    },
+                                    "fiftyTwoWeekLow": {
+                                        "raw": 93.72,
+                                        "fmt": "93.72"
+                                    },
+                                    "intradayPriceChange": {
+                                        "raw": -0.0600052,
+                                        "fmt": "-0.06"
+                                    }
+                                }
+                            ],
+                            "isPremium": true
+                        },
+                        {
+                            "id": "ec5bebb9-b7b2-4474-9e5c-3e258b61cbe6",
+                            "predefinedScr": true,
+                            "title": "Day Gainers",
+                            "description": "Discover the equities with the greatest gains in the trading day.",
+                            "canonicalName": "DAY_GAINERS",
+                            "total": 97,
+                            "versionId": 12,
+                            "creationDate": 1473796102800,
+                            "lastUpdated": 1747134042853,
+                            "quoteType": "EQUITY",
+                            "records": [
+                                {
+                                    "ticker": "BMNR"
+                                },
+                                {
+                                    "ticker": "RUN",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_sunrun.png"
+                                },
+                                {
+                                    "ticker": "TRIP",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_tripadvisor.png"
+                                },
+                                {
+                                    "ticker": "DDOG"
+                                },
+                                {
+                                    "ticker": "SYM"
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "8ecefa87-a8b0-434a-9b39-e061a0baef9b",
+                            "predefinedScr": true,
+                            "title": "Day Losers",
+                            "description": "Discover the equities with the greatest losses in the trading day.",
+                            "canonicalName": "DAY_LOSERS",
+                            "total": 14,
+                            "versionId": 10,
+                            "creationDate": 1473801651414,
+                            "lastUpdated": 1747133840778,
+                            "quoteType": "EQUITY",
+                            "records": [
+                                {
+                                    "ticker": "LEN"
+                                },
+                                {
+                                    "ticker": "LEN-B",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_lennar.png"
+                                },
+                                {
+                                    "ticker": "ESGRP"
+                                },
+                                {
+                                    "ticker": "HOOD"
+                                },
+                                {
+                                    "ticker": "BG"
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "b8de821c-461d-4f65-8fdf-715193e1c020",
+                            "predefinedScr": true,
+                            "title": "Fundamental Trade Ideas",
+                            "description": "Discover fundamental investment ideas from Morningstar and Argus, supported by backtested strategies.",
+                            "canonicalName": "FUNDAMENTAL_TRADE_IDEAS",
+                            "total": 358267,
+                            "versionId": 0,
+                            "creationDate": 1690240521401,
+                            "lastUpdated": 1690240521401,
+                            "entityIdType": "TRADE_IDEA",
+                            "records": [
+                                {
+                                    "id": "argus_US26614N1028_831411",
+                                    "ticker": "DD",
+                                    "term": "Long term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Fundamental",
+                                    "currentPrice": 73.72,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "DuPont de Nemours, Inc.",
+                                    "title": "DuPont de Nemours, Inc. - DD has a BULLISH trend",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction-dark.svg",
+                                    "provider": "Argus",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "argus_US7739031091_831410",
+                                    "ticker": "ROK",
+                                    "term": "Long term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Fundamental",
+                                    "currentPrice": 347.07,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "Rockwell Automation, Inc.",
+                                    "title": "Rockwell Automation, Inc. - ROK has a BULLISH trend",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction-dark.svg",
+                                    "provider": "Argus",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "argus_IE00028FXN24_831412",
+                                    "ticker": "SW",
+                                    "term": "Long term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Fundamental",
+                                    "currentPrice": 48.03,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "Smurfit Westrock Plc",
+                                    "title": "Smurfit Westrock Plc - SW has a BULLISH trend",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction-dark.svg",
+                                    "provider": "Argus",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "argus_US00846U1016_829408",
+                                    "ticker": "A",
+                                    "term": "Long term",
+                                    "date": 1751414400000,
+                                    "ideaType": "Fundamental",
+                                    "currentPrice": 121.38,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Neutral",
+                                    "companyName": "Agilent Technologies, Inc.",
+                                    "title": "Agilent Technologies, Inc. - A has a NEUTRAL trend",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/slated-to-be-neutral.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/slated-to-be-neutral-dark.svg",
+                                    "provider": "Argus",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "argus_US10948W1036_830646",
+                                    "ticker": "AAMI",
+                                    "term": "Long term",
+                                    "date": 1751414400000,
+                                    "ideaType": "Fundamental",
+                                    "currentPrice": 37.58,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "Acadian Asset Management Inc.",
+                                    "title": "Acadian Asset Management Inc. - AAMI has a BULLISH trend",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/trend-up-prediction-dark.svg",
+                                    "provider": "Argus",
+                                    "isActive": true
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "c8235580-5fb0-47ae-9f5c-e70f2a0cbe5d",
+                            "predefinedScr": true,
+                            "title": "Morningstar 5-Star Stocks",
+                            "description": "Discover equities recently labeled as undervalued and discounted by Morningstar.",
+                            "canonicalName": "MORNINGSTAR_FIVE_STAR_STOCKS",
+                            "total": 78,
+                            "versionId": 1,
+                            "creationDate": 1629755482403,
+                            "lastUpdated": 1677013509657,
+                            "quoteType": "EQUITY",
+                            "records": [
+                                {
+                                    "ticker": "RHHBY"
+                                },
+                                {
+                                    "ticker": "TMO",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_thermofisher.png"
+                                },
+                                {
+                                    "ticker": "PFE"
+                                },
+                                {
+                                    "ticker": "ELV"
+                                },
+                                {
+                                    "ticker": "GSK",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_gsk.png"
+                                }
+                            ],
+                            "isPremium": true
+                        },
+                        {
+                            "id": "437465ef-980e-4d8c-a860-de7cbfbab373",
+                            "predefinedScr": true,
+                            "title": "Most Actives",
+                            "description": "Discover the most traded equities in the trading day.",
+                            "canonicalName": "MOST_ACTIVES",
+                            "total": 189,
+                            "versionId": 10,
+                            "creationDate": 1473802561519,
+                            "lastUpdated": 1747133602605,
+                            "quoteType": "EQUITY",
+                            "records": [
+                                {
+                                    "ticker": "LCID"
+                                },
+                                {
+                                    "ticker": "NVDA",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_nvidia.png"
+                                },
+                                {
+                                    "ticker": "INTC",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_intel.png"
+                                },
+                                {
+                                    "ticker": "F",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_ford.png"
+                                },
+                                {
+                                    "ticker": "TSLA",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_tesla.png"
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "bb23cc39-bc29-4605-a7c1-b98ef732dee1",
+                            "predefinedScr": true,
+                            "title": "Technical Trade Ideas",
+                            "description": "Discover technical investment ideas from Trading Central, supported by backtested strategies.",
+                            "canonicalName": "TECHNICAL_TRADE_IDEAS",
+                            "total": 1373,
+                            "versionId": 0,
+                            "creationDate": 1690240438467,
+                            "lastUpdated": 1690240438467,
+                            "entityIdType": "TRADE_IDEA",
+                            "records": [
+                                {
+                                    "id": "tc_USv0uGAAmAZQAjgABAACAAAD6CJg",
+                                    "ticker": "ABBV",
+                                    "term": "Short term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Technical",
+                                    "currentPrice": 189.28,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "AbbVie Inc.",
+                                    "title": "AbbVie Inc. - ABBV forms a Flag (Bullish) pattern",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/bullish-flag.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/bullish-flag-dark.svg",
+                                    "provider": "Trading Central",
+                                    "isActive": true,
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_abbvie.png"
+                                },
+                                {
+                                    "id": "tc_USv0tSAKXGfwA_gABAACAAAD6CRg",
+                                    "ticker": "ACI",
+                                    "term": "Mid term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Technical",
+                                    "currentPrice": 21.93,
+                                    "priceTimestamp": 1751562002000,
+                                    "trend": "Bullish",
+                                    "companyName": "Albertsons Companies, Inc.",
+                                    "title": "Albertsons Companies, Inc. - ACI forms a Continuation Diamond (Bullish) pattern",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/bullish-continuation-diamond.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/bullish-continuation-diamond-dark.svg",
+                                    "provider": "Trading Central",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "tc_USv0uKAI-WLQAigABAACAAAD6CRg",
+                                    "ticker": "ACMR",
+                                    "term": "Mid term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Technical",
+                                    "currentPrice": 27.81,
+                                    "priceTimestamp": 1751562001000,
+                                    "trend": "Bullish",
+                                    "companyName": "ACM Research, Inc.",
+                                    "title": "ACM Research, Inc. - ACMR forms a Bottom Triangle pattern",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/bullish-bottom-triangle-bottom-wedge.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/bullish-bottom-triangle-bottom-wedge-dark.svg",
+                                    "provider": "Trading Central",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "tc_USv0tuAAQMowApgABAACAAAD6CQg",
+                                    "ticker": "AEIS",
+                                    "term": "Mid term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Technical",
+                                    "currentPrice": 138.14,
+                                    "priceTimestamp": 1751562001000,
+                                    "trend": "Bearish",
+                                    "companyName": "Advanced Energy Industries, Inc.",
+                                    "title": "Advanced Energy Industries, Inc. - AEIS forms a Continuation Wedge (Bearish) pattern",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/bearish-continuation-wedge.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/bearish-continuation-wedge-dark.svg",
+                                    "provider": "Trading Central",
+                                    "isActive": true
+                                },
+                                {
+                                    "id": "tc_USv0rWAAf58QApgABAACAAAD6CQg",
+                                    "ticker": "AGNC",
+                                    "term": "Mid term",
+                                    "date": 1751500800000,
+                                    "ideaType": "Technical",
+                                    "currentPrice": 9.39,
+                                    "priceTimestamp": 1751562001000,
+                                    "trend": "Bearish",
+                                    "companyName": "AGNC Investment Corp.",
+                                    "title": "AGNC Investment Corp. - AGNC forms a Continuation Wedge (Bearish) pattern",
+                                    "imageUrl": "https://s.yimg.com/uc/fin/img/assets/bearish-continuation-wedge.svg",
+                                    "imageUrlDark": "https://s.yimg.com/uc/fin/img/assets/bearish-continuation-wedge-dark.svg",
+                                    "provider": "Trading Central",
+                                    "isActive": true
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "b34d612c-4204-4fd5-b0c4-2fca8b596411",
+                            "predefinedScr": true,
+                            "title": "Top ETFs US",
+                            "description": "ETFs ordered by Percent Change for US region",
+                            "canonicalName": "TOP_ETFS_US",
+                            "total": 515,
+                            "versionId": 0,
+                            "creationDate": 1494279644246,
+                            "lastUpdated": 1494279644246,
+                            "quoteType": "ETF",
+                            "records": [
+                                {
+                                    "ticker": "PXI"
+                                },
+                                {
+                                    "ticker": "CIBR"
+                                },
+                                {
+                                    "ticker": "QLD"
+                                },
+                                {
+                                    "ticker": "PRN"
+                                },
+                                {
+                                    "ticker": "FBZ"
+                                }
+                            ],
+                            "isPremium": false
+                        },
+                        {
+                            "id": "b597175e-7243-4b42-82da-6811218a0945",
+                            "predefinedScr": true,
+                            "title": "Undervalued Growth Stocks",
+                            "description": "Stocks with earnings growth rates better than 25% and relatively low PE and PEG ratios.",
+                            "canonicalName": "UNDERVALUED_GROWTH_STOCKS",
+                            "total": 152,
+                            "versionId": 0,
+                            "creationDate": 1492807394884,
+                            "lastUpdated": 1492807394884,
+                            "quoteType": "EQUITY",
+                            "records": [
+                                {
+                                    "ticker": "GM",
+                                    "logoUrl": "https://s.yimg.com/lb/brands/150x150_generalmotors.png"
+                                },
+                                {
+                                    "ticker": "ET"
+                                },
+                                {
+                                    "ticker": "APA"
+                                },
+                                {
+                                    "ticker": "KGC"
+                                },
+                                {
+                                    "ticker": "LAUR"
+                                }
+                            ],
+                            "isPremium": false
+                        }
+                    ]
+                }
+            },
+            "quotes": {
+                "PXI": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "PXI",
+                    "netAssets": {
+                        "raw": 42754324.0,
+                        "fmt": "42.754M",
+                        "longFmt": "42,754,324"
+                    },
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751561975,
+                        "fmt": "12:59PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 2.04163,
+                        "fmt": "2.04%"
+                    },
+                    "quoteType": "ETF",
+                    "typeDisp": "ETF",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751562251,
+                        "fmt": "1:04PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 42.52,
+                        "fmt": "42.52"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.018669,
+                        "fmt": "0.02%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.868099,
+                        "fmt": "0.87"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1160659800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 43.3881,
+                        "fmt": "43.39"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 43.3881,
+                        "fmt": "43.39"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0080986,
+                        "fmt": "0.01"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "Invesco Dorsey Wright Energy Mo",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Invesco DWA Energy Momentum ETF"
+                },
+                "DD": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "DD",
+                    "averageAnalystRating": "1.4 - Strong Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.05552,
+                        "fmt": "1.06%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576025,
+                        "fmt": "4:53PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 72.95,
+                        "fmt": "72.95"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.0271355,
+                        "fmt": "-0.03%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.770004,
+                        "fmt": "0.77"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 76253400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 73.72,
+                        "fmt": "73.72"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 73.7,
+                        "fmt": "73.70"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0200043,
+                        "fmt": "-0.02"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "DuPont de Nemours, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "DuPont de Nemours, Inc."
+                },
+                "A": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "A",
+                    "averageAnalystRating": "2.1 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.596713,
+                        "fmt": "0.60%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575481,
+                        "fmt": "4:44PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 120.66,
+                        "fmt": "120.66"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0,
+                        "fmt": "0.00%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.719994,
+                        "fmt": "0.72"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 942935400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 121.38,
+                        "fmt": "121.38"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 121.38,
+                        "fmt": "121.38"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.0,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Agilent Technologies, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Agilent Technologies, Inc."
+                },
+                "TRIP": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "TRIP",
+                    "averageAnalystRating": "2.9 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 16.7445,
+                        "fmt": "16.74%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576015,
+                        "fmt": "4:53PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 14.99,
+                        "fmt": "14.99"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.678286,
+                        "fmt": "-0.68%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 2.51,
+                        "fmt": "2.51"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1323268200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 17.5,
+                        "fmt": "17.50"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 17.3813,
+                        "fmt": "17.38"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.1187,
+                        "fmt": "-0.12"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "TripAdvisor, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Tripadvisor, Inc."
+                },
+                "NRG": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "NRG",
+                    "averageAnalystRating": "2.2 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.83233,
+                        "fmt": "1.83%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575929,
+                        "fmt": "4:52PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 155.54,
+                        "fmt": "155.54"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.561904,
+                        "fmt": "-0.56%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 2.85001,
+                        "fmt": "2.85"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1070375400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 158.39,
+                        "fmt": "158.39"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 157.5,
+                        "fmt": "157.50"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.889999,
+                        "fmt": "-0.89"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "NRG Energy, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "NRG Energy, Inc."
+                },
+                "BG": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "BG",
+                    "averageAnalystRating": "1.9 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -3.62452,
+                        "fmt": "-3.62%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575249,
+                        "fmt": "4:40PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 81.39,
+                        "fmt": "81.39"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.012741595,
+                        "fmt": "0.01%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -2.95,
+                        "fmt": "-2.95"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 996759000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 78.44,
+                        "fmt": "78.44"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 78.45,
+                        "fmt": "78.45"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.009994507,
+                        "fmt": "0.01"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Bunge Limited",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Bunge Global SA"
+                },
+                "AGNC": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "AGNC",
+                    "averageAnalystRating": "2.1 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.318469,
+                        "fmt": "-0.32%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576364,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 9.42,
+                        "fmt": "9.42"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.212987,
+                        "fmt": "0.21%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -0.0299997,
+                        "fmt": "-0.03"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1210858200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 9.39,
+                        "fmt": "9.39"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 9.41,
+                        "fmt": "9.41"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0199995,
+                        "fmt": "0.02"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "AGNC Investment Corp.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "AGNC Investment Corp."
+                },
+                "F": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "F",
+                    "averageAnalystRating": "3.0 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.339847,
+                        "fmt": "0.34%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576395,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 11.77,
+                        "fmt": "11.77"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.16935188,
+                        "fmt": "-0.17%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.04,
+                        "fmt": "0.04"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 76253400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 11.81,
+                        "fmt": "11.81"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 11.79,
+                        "fmt": "11.79"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": -0.020000458,
+                        "fmt": "-0.02"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Ford Motor Company",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Ford Motor Company"
+                },
+                "DDOG": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "DDOG",
+                    "averageAnalystRating": "1.6 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 14.9174,
+                        "fmt": "14.92%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576386,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 135.01,
+                        "fmt": "135.01"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 1.00549,
+                        "fmt": "1.01%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 20.14,
+                        "fmt": "20.14"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1568899800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 155.15,
+                        "fmt": "155.15"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 156.71,
+                        "fmt": "156.71"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 1.56001,
+                        "fmt": "1.56"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Datadog, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Datadog, Inc."
+                },
+                "QLD": {
+                    "fullExchangeName": "NYSEArca",
+                    "symbol": "QLD",
+                    "netAssets": {
+                        "raw": 7666291700.0,
+                        "fmt": "7.666B",
+                        "longFmt": "7,666,291,712"
+                    },
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.87569,
+                        "fmt": "1.88%"
+                    },
+                    "quoteType": "ETF",
+                    "typeDisp": "ETF",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576344,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 117.29,
+                        "fmt": "117.29"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.13389911,
+                        "fmt": "-0.13%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 2.2,
+                        "fmt": "2.20"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1150896600000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 119.49,
+                        "fmt": "119.49"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 119.33,
+                        "fmt": "119.33"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": -0.15999603,
+                        "fmt": "-0.16"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "PCX",
+                    "shortName": "ProShares Ultra QQQ",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "ProShares Ultra QQQ"
+                },
+                "RHHBY": {
+                    "fullExchangeName": "OTC Markets OTCQX",
+                    "symbol": "RHHBY",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751572800,
+                        "fmt": "4:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -1.7254019,
+                        "fmt": "-1.73%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "regularMarketPreviousClose": {
+                        "raw": 41.15,
+                        "fmt": "41.15"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "regularMarketChange": {
+                        "raw": -0.7100029,
+                        "fmt": "-0.71"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1061386200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": false,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 40.44,
+                        "fmt": "40.44"
+                    },
+                    "market": "us_market",
+                    "quoteSourceName": "Delayed Quote",
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "OQX",
+                    "shortName": "Roche Holding Ltd",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Roche Holding AG"
+                },
+                "PRN": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "PRN",
+                    "netAssets": {
+                        "raw": 336398176.0,
+                        "fmt": "336.398M",
+                        "longFmt": "336,398,176"
+                    },
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751561980,
+                        "fmt": "12:59PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.84659,
+                        "fmt": "1.85%"
+                    },
+                    "quoteType": "ETF",
+                    "typeDisp": "ETF",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751562243,
+                        "fmt": "1:04PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 154.88,
+                        "fmt": "154.88"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.165107,
+                        "fmt": "0.17%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 2.86,
+                        "fmt": "2.86"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1160659800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 157.74,
+                        "fmt": "157.74"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 157.74,
+                        "fmt": "157.74"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.26001,
+                        "fmt": "0.26"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "Invesco Dorsey Wright Industria",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Invesco Dorsey Wright Industrials Momentum ETF"
+                },
+                "AUB": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "AUB",
+                    "averageAnalystRating": "1.7 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.05454,
+                        "fmt": "1.05%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751574000,
+                        "fmt": "4:20PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 33.19,
+                        "fmt": "33.19"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0,
+                        "fmt": "0.00%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.350002,
+                        "fmt": "0.35"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 749914200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 33.54,
+                        "fmt": "33.54"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 33.54,
+                        "fmt": "33.54"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Atlantic Union Bankshares Corpo",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Atlantic Union Bankshares Corporation"
+                },
+                "PFE": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "PFE",
+                    "averageAnalystRating": "2.4 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.236965,
+                        "fmt": "0.24%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576325,
+                        "fmt": "4:58PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 25.32,
+                        "fmt": "25.32"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.19701003,
+                        "fmt": "0.20%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.0599995,
+                        "fmt": "0.06"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 76253400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 25.38,
+                        "fmt": "25.38"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 25.43,
+                        "fmt": "25.43"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.050001144,
+                        "fmt": "0.05"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Pfizer, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Pfizer Inc."
+                },
+                "ELV": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "ELV",
+                    "averageAnalystRating": "1.6 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.688081,
+                        "fmt": "-0.69%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576347,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 350.25,
+                        "fmt": "350.25"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.33348772,
+                        "fmt": "0.33%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -2.41,
+                        "fmt": "-2.41"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1004452200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 347.84,
+                        "fmt": "347.84"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 349.0,
+                        "fmt": "349.00"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 1.1600037,
+                        "fmt": "1.16"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Elevance Health, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Elevance Health, Inc."
+                },
+                "BMNR": {
+                    "fullExchangeName": "NYSE American",
+                    "symbol": "BMNR",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 130.769,
+                        "fmt": "130.77%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576399,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 58.5,
+                        "fmt": "58.50"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -10.9852,
+                        "fmt": "-10.99%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 76.5,
+                        "fmt": "76.50"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1749130200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 135.0,
+                        "fmt": "135.00"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 120.17,
+                        "fmt": "120.17"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -14.83,
+                        "fmt": "-14.83"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "ASE",
+                    "shortName": "BitMine Immersion Technologies,",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Bitmine Immersion Technologies, Inc."
+                },
+                "AEIS": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "AEIS",
+                    "averageAnalystRating": "1.8 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.428932,
+                        "fmt": "0.43%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751574380,
+                        "fmt": "4:26PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 137.55,
+                        "fmt": "137.55"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.101346,
+                        "fmt": "-0.10%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.589996,
+                        "fmt": "0.59"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 816618600000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 138.14,
+                        "fmt": "138.14"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 138.0,
+                        "fmt": "138.00"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.139999,
+                        "fmt": "-0.14"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Advanced Energy Industries, Inc",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Advanced Energy Industries, Inc."
+                },
+                "TSLA": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "TSLA",
+                    "averageAnalystRating": "2.6 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.0950381,
+                        "fmt": "-0.10%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576398,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 315.65,
+                        "fmt": "315.65"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.849847,
+                        "fmt": "-0.85%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -0.299988,
+                        "fmt": "-0.30"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1277818200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 315.35,
+                        "fmt": "315.35"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 312.67,
+                        "fmt": "312.67"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -2.67999,
+                        "fmt": "-2.68"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Tesla, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Tesla, Inc."
+                },
+                "ACMR": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "ACMR",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.94374,
+                        "fmt": "0.94%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751574615,
+                        "fmt": "4:30PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 27.55,
+                        "fmt": "27.55"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.611291,
+                        "fmt": "-0.61%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.26,
+                        "fmt": "0.26"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1509629400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 27.81,
+                        "fmt": "27.81"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 27.64,
+                        "fmt": "27.64"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.17,
+                        "fmt": "-0.17"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "ACM Research, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "ACM Research, Inc."
+                },
+                "EOG": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "EOG",
+                    "averageAnalystRating": "2.0 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.21973,
+                        "fmt": "0.22%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576083,
+                        "fmt": "4:54PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 122.88,
+                        "fmt": "122.88"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 1.31546,
+                        "fmt": "1.32%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.270004,
+                        "fmt": "0.27"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 623511000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 123.15,
+                        "fmt": "123.15"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 124.77,
+                        "fmt": "124.77"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 1.62,
+                        "fmt": "1.62"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "EOG Resources, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "EOG Resources, Inc."
+                },
+                "GSK": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "GSK",
+                    "averageAnalystRating": "3.1 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.856915,
+                        "fmt": "-0.86%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576388,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 38.51,
+                        "fmt": "38.51"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.31429788,
+                        "fmt": "0.31%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -0.329998,
+                        "fmt": "-0.33"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 323101800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 38.18,
+                        "fmt": "38.18"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 38.3,
+                        "fmt": "38.30"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.11999893,
+                        "fmt": "0.12"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "GSK plc",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "GSK plc"
+                },
+                "FBZ": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "FBZ",
+                    "netAssets": {
+                        "raw": 6766727.0,
+                        "fmt": "6.767M",
+                        "longFmt": "6,766,727"
+                    },
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751552175,
+                        "fmt": "10:16AM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.57384,
+                        "fmt": "1.57%"
+                    },
+                    "quoteType": "ETF",
+                    "typeDisp": "ETF",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751570488,
+                        "fmt": "3:21PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 11.9962,
+                        "fmt": "12.00"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.205167,
+                        "fmt": "0.21%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.188801,
+                        "fmt": "0.19"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1303219800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 12.185,
+                        "fmt": "12.19"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 12.21,
+                        "fmt": "12.21"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0249996,
+                        "fmt": "0.02"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "First Trust Brazil AlphaDEX Fun",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "First Trust Brazil AlphaDEX Fund"
+                },
+                "NVDA": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "NVDA",
+                    "averageAnalystRating": "1.5 - Strong Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.32909,
+                        "fmt": "1.33%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576398,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 157.25,
+                        "fmt": "157.25"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.0564807,
+                        "fmt": "-0.06%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 2.09,
+                        "fmt": "2.09"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 917015400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 159.34,
+                        "fmt": "159.34"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 159.25,
+                        "fmt": "159.25"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0899963,
+                        "fmt": "-0.09"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "NVIDIA Corporation",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "NVIDIA Corporation"
+                },
+                "AAMI": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "AAMI",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 2.25851,
+                        "fmt": "2.26%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751574000,
+                        "fmt": "4:20PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 36.75,
+                        "fmt": "36.75"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0,
+                        "fmt": "0.00%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.830002,
+                        "fmt": "0.83"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1412861400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 37.58,
+                        "fmt": "37.58"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 37.58,
+                        "fmt": "37.58"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Acadian Asset Management Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Acadian Asset Management Inc."
+                },
+                "ESGRP": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "ESGRP",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -3.9079,
+                        "fmt": "-3.91%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "regularMarketPreviousClose": {
+                        "raw": 20.241,
+                        "fmt": "20.24"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "regularMarketChange": {
+                        "raw": -0.790998,
+                        "fmt": "-0.79"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1529501400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 19.45,
+                        "fmt": "19.45"
+                    },
+                    "market": "us_market",
+                    "quoteSourceName": "Delayed Quote",
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Enstar Group Limited - Deposita",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Enstar Group Limited"
+                },
+                "SW": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "SW",
+                    "averageAnalystRating": "1.8 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.80161,
+                        "fmt": "1.80%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751574000,
+                        "fmt": "4:20PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 47.18,
+                        "fmt": "47.18"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0,
+                        "fmt": "0.00%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.849998,
+                        "fmt": "0.85"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1720445400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 48.03,
+                        "fmt": "48.03"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 48.03,
+                        "fmt": "48.03"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Smurfit WestRock plc",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Smurfit Westrock Plc"
+                },
+                "LEN-B": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "LEN-B",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -3.97308,
+                        "fmt": "-3.97%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575008,
+                        "fmt": "4:36PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 109.99,
+                        "fmt": "109.99"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 2.44271,
+                        "fmt": "2.44%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -4.37,
+                        "fmt": "-4.37"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1051104600000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 105.62,
+                        "fmt": "105.62"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 108.2,
+                        "fmt": "108.20"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 2.57999,
+                        "fmt": "2.58"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Lennar Corporation",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Lennar Corporation"
+                },
+                "SYM": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "SYM",
+                    "averageAnalystRating": "2.1 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 13.5308,
+                        "fmt": "13.53%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576380,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 42.2,
+                        "fmt": "42.20"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.0626149,
+                        "fmt": "-0.06%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 5.71,
+                        "fmt": "5.71"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1615300200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 47.91,
+                        "fmt": "47.91"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 47.88,
+                        "fmt": "47.88"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0299988,
+                        "fmt": "-0.03"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "Symbotic Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Symbotic Inc."
+                },
+                "GM": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "GM",
+                    "averageAnalystRating": "2.4 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.398632,
+                        "fmt": "0.40%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576140,
+                        "fmt": "4:55PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 52.68,
+                        "fmt": "52.68"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.113446,
+                        "fmt": "0.11%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.209999,
+                        "fmt": "0.21"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1290090600000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 52.89,
+                        "fmt": "52.89"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 52.95,
+                        "fmt": "52.95"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0600014,
+                        "fmt": "0.06"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "General Motors Company",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "General Motors Company"
+                },
+                "KGC": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "KGC",
+                    "averageAnalystRating": "1.9 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.86256,
+                        "fmt": "1.86%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576321,
+                        "fmt": "4:58PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 15.57,
+                        "fmt": "15.57"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.019446298,
+                        "fmt": "0.02%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.29,
+                        "fmt": "0.29"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 353687400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 15.86,
+                        "fmt": "15.86"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 15.863084,
+                        "fmt": "15.86"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.0030841827,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Kinross Gold Corporation",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Kinross Gold Corporation"
+                },
+                "ACI": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "ACI",
+                    "averageAnalystRating": "2.2 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.272849,
+                        "fmt": "-0.27%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575609,
+                        "fmt": "4:46PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 21.99,
+                        "fmt": "21.99"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.5471994,
+                        "fmt": "-0.55%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -0.0599995,
+                        "fmt": "-0.06"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1593178200000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 21.93,
+                        "fmt": "21.93"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 21.81,
+                        "fmt": "21.81"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": -0.12000084,
+                        "fmt": "-0.12"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Albertsons Companies, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Albertsons Companies, Inc."
+                },
+                "CIBR": {
+                    "fullExchangeName": "NasdaqGM",
+                    "symbol": "CIBR",
+                    "netAssets": {
+                        "raw": 9327760400.0,
+                        "fmt": "9.328B",
+                        "longFmt": "9,327,760,384"
+                    },
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.89211,
+                        "fmt": "1.89%"
+                    },
+                    "quoteType": "ETF",
+                    "typeDisp": "ETF",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575274,
+                        "fmt": "4:41PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 74.52,
+                        "fmt": "74.52"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.447776,
+                        "fmt": "0.45%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 1.41,
+                        "fmt": "1.41"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1436275800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 75.93,
+                        "fmt": "75.93"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 76.27,
+                        "fmt": "76.27"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.339996,
+                        "fmt": "0.34"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NGM",
+                    "shortName": "First Trust NASDAQ Cybersecurit",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "First Trust NASDAQ Cybersecurity ETF"
+                },
+                "RUN": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "RUN",
+                    "averageAnalystRating": "2.4 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 16.7964,
+                        "fmt": "16.80%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576398,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 8.99,
+                        "fmt": "8.99"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.666664,
+                        "fmt": "-0.67%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 1.51,
+                        "fmt": "1.51"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1438781400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 10.5,
+                        "fmt": "10.50"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 10.43,
+                        "fmt": "10.43"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0699997,
+                        "fmt": "-0.07"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Sunrun Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Sunrun Inc."
+                },
+                "ABBV": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "ABBV",
+                    "averageAnalystRating": "2.0 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.770643,
+                        "fmt": "-0.77%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576319,
+                        "fmt": "4:58PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 190.75,
+                        "fmt": "190.75"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.0184931,
+                        "fmt": "-0.02%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -1.47,
+                        "fmt": "-1.47"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1357137000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 189.28,
+                        "fmt": "189.28"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 189.245,
+                        "fmt": "189.24"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0350037,
+                        "fmt": "-0.04"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "AbbVie Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "AbbVie Inc."
+                },
+                "ET": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "ET",
+                    "averageAnalystRating": "1.4 - Strong Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.39106,
+                        "fmt": "0.39%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576342,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 17.9,
+                        "fmt": "17.90"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0278301,
+                        "fmt": "0.03%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.0699997,
+                        "fmt": "0.07"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1138977000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 17.97,
+                        "fmt": "17.97"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 17.975,
+                        "fmt": "17.98"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.00500107,
+                        "fmt": "0.01"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Energy Transfer LP",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Energy Transfer LP"
+                },
+                "ROK": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "ROK",
+                    "averageAnalystRating": "2.2 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 1.26335,
+                        "fmt": "1.26%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576152,
+                        "fmt": "4:55PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 342.74,
+                        "fmt": "342.74"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.051860627,
+                        "fmt": "0.05%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 4.33002,
+                        "fmt": "4.33"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 378657000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 347.07,
+                        "fmt": "347.07"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 347.25,
+                        "fmt": "347.25"
+                    },
+                    "quoteSourceName": "Delayed Quote",
+                    "postMarketChange": {
+                        "raw": 0.17999268,
+                        "fmt": "0.18"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Rockwell Automation, Inc.",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Rockwell Automation, Inc."
+                },
+                "LCID": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "LCID",
+                    "averageAnalystRating": "3.1 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 5.36586,
+                        "fmt": "5.37%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576364,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 2.05,
+                        "fmt": "2.0500"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.458327,
+                        "fmt": "0.46%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.11,
+                        "fmt": "0.1100"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1600435800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 2.16,
+                        "fmt": "2.1600"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 2.1699,
+                        "fmt": "2.1699"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.00989985,
+                        "fmt": "0.01"
+                    },
+                    "priceHint": 4,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Lucid Group, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Lucid Group, Inc."
+                },
+                "LAUR": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "LAUR",
+                    "averageAnalystRating": "2.0 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.68143,
+                        "fmt": "0.68%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751562246,
+                        "fmt": "1:04PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 23.48,
+                        "fmt": "23.48"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0,
+                        "fmt": "0.00%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.16,
+                        "fmt": "0.16"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1485959400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 23.64,
+                        "fmt": "23.64"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 23.64,
+                        "fmt": "23.64"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0,
+                        "fmt": "0.00"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Laureate Education, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Laureate Education, Inc."
+                },
+                "APA": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "APA",
+                    "averageAnalystRating": "2.9 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562000,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.205238,
+                        "fmt": "0.21%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575513,
+                        "fmt": "4:45PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 19.49,
+                        "fmt": "19.49"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.0768018,
+                        "fmt": "0.08%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.0400009,
+                        "fmt": "0.04"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 295623000000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 19.53,
+                        "fmt": "19.53"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 19.545,
+                        "fmt": "19.55"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.0149994,
+                        "fmt": "0.01"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "APA Corporation",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "APA Corporation"
+                },
+                "LEN": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "LEN",
+                    "averageAnalystRating": "2.5 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -4.08501,
+                        "fmt": "-4.09%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576230,
+                        "fmt": "4:57PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 114.81,
+                        "fmt": "114.81"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.333727,
+                        "fmt": "0.33%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -4.68999,
+                        "fmt": "-4.69"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 322151400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 110.12,
+                        "fmt": "110.12"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 110.488,
+                        "fmt": "110.49"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.3675,
+                        "fmt": "0.37"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Lennar Corporation",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Lennar Corporation"
+                },
+                "INTC": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "INTC",
+                    "averageAnalystRating": "3.0 - Hold",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 2.78794,
+                        "fmt": "2.79%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576399,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 21.88,
+                        "fmt": "21.88"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.266783,
+                        "fmt": "-0.27%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.610001,
+                        "fmt": "0.61"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 322151400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 22.49,
+                        "fmt": "22.49"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 22.43,
+                        "fmt": "22.43"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0599995,
+                        "fmt": "-0.06"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Intel Corporation",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Intel Corporation"
+                },
+                "DECK": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "DECK",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -0.0564702,
+                        "fmt": "-0.06%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576348,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 106.26,
+                        "fmt": "106.26"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.0942539,
+                        "fmt": "-0.09%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -0.0600052,
+                        "fmt": "-0.06"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 750691800000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 106.2,
+                        "fmt": "106.20"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 106.1,
+                        "fmt": "106.10"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.100098,
+                        "fmt": "-0.10"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Deckers Outdoor Corporation",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Deckers Outdoor Corporation"
+                },
+                "TMO": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "TMO",
+                    "averageAnalystRating": "1.6 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.367023,
+                        "fmt": "0.37%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751575433,
+                        "fmt": "4:43PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 427.76,
+                        "fmt": "427.76"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": 0.153729,
+                        "fmt": "0.15%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 1.56998,
+                        "fmt": "1.57"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 322151400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 429.33,
+                        "fmt": "429.33"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 429.99,
+                        "fmt": "429.99"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": 0.660004,
+                        "fmt": "0.66"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Thermo Fisher Scientific Inc",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Thermo Fisher Scientific Inc."
+                },
+                "HPE": {
+                    "fullExchangeName": "NYSE",
+                    "symbol": "HPE",
+                    "averageAnalystRating": "1.9 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562002,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": 0.42353,
+                        "fmt": "0.42%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576359,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 21.25,
+                        "fmt": "21.25"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.140584,
+                        "fmt": "-0.14%"
+                    },
+                    "regularMarketChange": {
+                        "raw": 0.0900002,
+                        "fmt": "0.09"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1445261400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "LOW",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 21.34,
+                        "fmt": "21.34"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 21.31,
+                        "fmt": "21.31"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.0300007,
+                        "fmt": "-0.03"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NYQ",
+                    "shortName": "Hewlett Packard Enterprise Comp",
+                    "region": "US",
+                    "triggerable": false,
+                    "longName": "Hewlett Packard Enterprise Company"
+                },
+                "HOOD": {
+                    "fullExchangeName": "NasdaqGS",
+                    "symbol": "HOOD",
+                    "averageAnalystRating": "2.0 - Buy",
+                    "gmtOffSetMilliseconds": -14400000,
+                    "language": "en-US",
+                    "regularMarketTime": {
+                        "raw": 1751562001,
+                        "fmt": "1:00PM EDT"
+                    },
+                    "regularMarketChangePercent": {
+                        "raw": -3.65381,
+                        "fmt": "-3.65%"
+                    },
+                    "quoteType": "EQUITY",
+                    "typeDisp": "Equity",
+                    "tradeable": false,
+                    "postMarketTime": {
+                        "raw": 1751576387,
+                        "fmt": "4:59PM EDT"
+                    },
+                    "regularMarketPreviousClose": {
+                        "raw": 97.98,
+                        "fmt": "97.98"
+                    },
+                    "exchangeTimezoneName": "America/New_York",
+                    "postMarketChangePercent": {
+                        "raw": -0.391952,
+                        "fmt": "-0.39%"
+                    },
+                    "regularMarketChange": {
+                        "raw": -3.58,
+                        "fmt": "-3.58"
+                    },
+                    "cryptoTradeable": false,
+                    "exchangeDataDelayedBy": 0,
+                    "firstTradeDateMilliseconds": 1627565400000,
+                    "exchangeTimezoneShortName": "EDT",
+                    "hasPrePostMarketData": true,
+                    "customPriceAlertConfidence": "HIGH",
+                    "marketState": "CLOSED",
+                    "regularMarketPrice": {
+                        "raw": 94.4,
+                        "fmt": "94.40"
+                    },
+                    "market": "us_market",
+                    "postMarketPrice": {
+                        "raw": 94.03,
+                        "fmt": "94.03"
+                    },
+                    "quoteSourceName": "Nasdaq Real Time Price",
+                    "postMarketChange": {
+                        "raw": -0.370003,
+                        "fmt": "-0.37"
+                    },
+                    "priceHint": 2,
+                    "sourceInterval": 15,
+                    "exchange": "NMS",
+                    "shortName": "Robinhood Markets, Inc.",
+                    "region": "US",
+                    "triggerable": true,
+                    "longName": "Robinhood Markets, Inc."
+                }
+            }
+        },
+        "error": null
+    }
+}

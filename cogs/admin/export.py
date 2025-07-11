@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from utils.logger import logger
-from utils.message_handler import get_message_handler
+from discord_utils.message_handler import get_message_handler
 
 class ExportCommands(commands.Cog):
     def __init__(self, bot):
@@ -72,12 +72,12 @@ class ExportCommands(commands.Cog):
         await ctx.send(f"Exporting messages from #{channel.name} for the last {hours} hours (filtering by: {', '.join(user_names)})...")
         
         try:
-            # Create message handler with the parsed settings
+            # Create message handler
             user_ids = [user.id for user in user_list] if user_list else None
-            message_handler = get_message_handler(self.bot, hours_back=hours, user_ids=user_ids)
+            message_handler = get_message_handler(self.bot)
             
-            # Export using the simplified method
-            filepath = await message_handler.export_channel_to_text(channel.id)
+            # Export using the new method with parameters
+            filepath = await message_handler.export_channel_to_text(channel.id, hours_back=hours, user_ids=user_ids)
             
             if filepath:
                 filter_text = f" (filtered by: {', '.join(user_names)})" if user_list else ""

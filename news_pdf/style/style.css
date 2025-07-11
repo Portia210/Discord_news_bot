@@ -1,0 +1,399 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+    padding: 20px;
+    direction: rtl;
+    text-align: right;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+    direction: rtl;
+    /* Keep header together */
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: row-reverse;
+}
+
+.theme-icon {
+    font-size: 3rem;
+    opacity: 0.9;
+    transition: transform 0.3s ease;
+}
+
+.theme-icon:hover {
+    transform: scale(1.1);
+}
+
+.header-text {
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.header .subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.content {
+    padding: 30px;
+    /* Ensure content flows properly */
+    page-break-before: auto;
+    break-before: auto;
+}
+
+/* Price Symbols Section */
+.price-symbols {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 15px 20px;
+    border-bottom: 1px solid #dee2e6;
+    /* Keep symbols section together */
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+.symbols-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    max-width: 100%;
+}
+
+.symbol-item {
+    background: white;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #e9ecef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 70px;
+}
+
+.symbol-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.symbol-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.symbol-info {
+    text-align: left;
+    flex: 1;
+}
+
+.symbol-ticker {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 1px;
+}
+
+.symbol-company {
+    font-size: 0.7rem;
+    color: #6c757d;
+    line-height: 1.1;
+    margin-bottom: 0;
+}
+
+.symbol-price-section {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    direction: ltr;
+}
+
+.symbol-price {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 2px;
+}
+
+.symbol-change {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.7rem;
+}
+
+.change-amount {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.change-percent {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.change-arrow {
+    font-size: 0.9rem;
+    margin-top: 1px;
+}
+
+.change-amount.positive,
+.change-percent.positive {
+    color: #28a745;
+}
+
+.change-amount.negative,
+.change-percent.negative {
+    color: #dc3545;
+}
+
+.change-arrow {
+    font-weight: bold;
+}
+
+.change-arrow.up {
+    color: #28a745;
+}
+
+.change-arrow.down {
+    color: #dc3545;
+}
+
+/* Responsive design for symbols */
+@media (max-width: 768px) {
+    .symbols-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .price-symbols {
+        padding: 12px 15px;
+    }
+    
+    .symbol-item {
+        padding: 8px;
+        min-height: 60px;
+    }
+    
+    .symbol-ticker {
+        font-size: 0.9rem;
+    }
+    
+    .symbol-company {
+        font-size: 0.65rem;
+    }
+    
+    .symbol-price {
+        font-size: 0.85rem;
+    }
+    
+    .symbol-change {
+        font-size: 0.65rem;
+        gap: 2px;
+    }
+    
+    .change-amount,
+    .change-percent {
+        font-size: 0.7rem;
+    }
+    
+    .change-arrow {
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .symbols-container {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .symbol-item {
+        min-height: 55px;
+    }
+}
+
+.news-item {
+    border-right: 4px solid #667eea;
+    margin-bottom: 25px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px 0 0 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    /* PDF page break control */
+    page-break-inside: avoid;
+    break-inside: avoid;
+    orphans: 2;
+    widows: 2;
+}
+
+.news-item:hover {
+    transform: translateX(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-direction: row-reverse;
+    /* Keep header with content */
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+.news-time {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-message {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #2c3e50;
+    /* Prevent orphaned lines */
+    orphans: 3;
+    widows: 3;
+}
+
+.news-link {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 3px 8px;
+    background-color: rgba(102, 126, 234, 0.1);
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.news-link:hover {
+    background-color: rgba(102, 126, 234, 0.2);
+    text-decoration: underline;
+}
+
+.footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    direction: rtl;
+    /* Keep footer together */
+    page-break-inside: avoid;
+    break-inside: avoid;
+    page-break-before: avoid;
+    break-before: avoid;
+}
+
+@media print {
+    body {
+        background-color: white;
+        padding: 0;
+    }
+    
+    .container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .news-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    /* Enhanced page break control for printing */
+    .news-item {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 15px;
+    }
+    
+    .news-header {
+        page-break-after: avoid !important;
+        break-after: avoid !important;
+    }
+    
+    .news-message {
+        orphans: 3 !important;
+        widows: 3 !important;
+    }
+    
+    /* Ensure headers and footers stay together */
+    .header, .footer {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+    
+    /* Add some spacing between news items for better readability */
+    .news-item + .news-item {
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header-content {
+        gap: 15px;
+    }
+    
+    .theme-icon {
+        font-size: 2.5rem;
+    }
+    
+    .content {
+        padding: 20px;
+    }
+    
+    .stats {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .news-message {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,1055 @@
+{
+    "finance": {
+        "result": [
+            {
+                "count": 21,
+                "quotes": [
+                    {
+                        "fullExchangeName": "CCC",
+                        "symbol": "XRP-USD",
+                        "coinImageUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/52.png",
+                        "gmtOffSetMilliseconds": 0,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751803800,
+                            "fmt": "12:10PM UTC"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 1.9240336,
+                            "fmt": "1.92%"
+                        },
+                        "quoteType": "CRYPTOCURRENCY",
+                        "typeDisp": "Cryptocurrency",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 2.2184777,
+                            "fmt": "2.22"
+                        },
+                        "exchangeTimezoneName": "UTC",
+                        "regularMarketChange": {
+                            "raw": 0.04271674,
+                            "fmt": "0.04"
+                        },
+                        "trendingScore": {
+                            "raw": 12.451458996882945,
+                            "fmt": "1,245.15%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1510185600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "UTC",
+                        "logoUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/52.png",
+                        "hasPrePostMarketData": false,
+                        "marketState": "REGULAR",
+                        "regularMarketPrice": {
+                            "raw": 2.262877,
+                            "fmt": "2.26"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "ccc_market",
+                        "quoteSourceName": "CoinMarketCap",
+                        "sourceInterval": 15,
+                        "exchange": "CCC",
+                        "region": "US",
+                        "shortName": "XRP USD",
+                        "triggerable": false,
+                        "longName": "XRP USD"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "TSLA",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562000,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": -0.0950381,
+                            "fmt": "-0.10%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "companyLogoUrl": "https://s.yimg.com/lb/brands/150x150_tesla.png",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 315.65,
+                            "fmt": "315.65"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": -0.299988,
+                            "fmt": "-0.30"
+                        },
+                        "trendingScore": {
+                            "raw": 10.064080105369378,
+                            "fmt": "1,006.41%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1277818200000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "logoUrl": "https://s.yimg.com/lb/brands/150x150_tesla.png",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 315.35,
+                            "fmt": "315.35"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "Tesla, Inc.",
+                        "triggerable": true,
+                        "longName": "Tesla, Inc."
+                    },
+                    {
+                        "fullExchangeName": "OTC Markets OTCPK",
+                        "symbol": "LKNCY",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751500800,
+                            "fmt": "8:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 1.31614,
+                            "fmt": "1.32%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 37.99,
+                            "fmt": "37.99"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 0.5,
+                            "fmt": "0.50"
+                        },
+                        "trendingScore": {
+                            "raw": 7.87989489901871,
+                            "fmt": "787.99%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1558099800000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": false,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 38.49,
+                            "fmt": "38.49"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "PNK",
+                        "region": "US",
+                        "shortName": "Luckin Coffee Inc.",
+                        "triggerable": false,
+                        "longName": "Luckin Coffee Inc."
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "STZ",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": -0.891464,
+                            "fmt": "-0.89%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 173.87,
+                            "fmt": "173.87"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": -1.54999,
+                            "fmt": "-1.55"
+                        },
+                        "trendingScore": {
+                            "raw": 6.98052061431247,
+                            "fmt": "698.05%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 700842600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 172.32,
+                            "fmt": "172.32"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "Constellation Brands, Inc.",
+                        "triggerable": false,
+                        "longName": "Constellation Brands, Inc."
+                    },
+                    {
+                        "fullExchangeName": "CCC",
+                        "symbol": "BONK-USD",
+                        "coinImageUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/23095.png",
+                        "gmtOffSetMilliseconds": 0,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751803740,
+                            "fmt": "12:09PM UTC"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 20.070847,
+                            "fmt": "20.07%"
+                        },
+                        "quoteType": "CRYPTOCURRENCY",
+                        "typeDisp": "Cryptocurrency",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 1.8946484e-05,
+                            "fmt": "0.00"
+                        },
+                        "exchangeTimezoneName": "UTC",
+                        "regularMarketChange": {
+                            "raw": 3.614181e-06,
+                            "fmt": "0.00"
+                        },
+                        "trendingScore": {
+                            "raw": 6.883571762674289,
+                            "fmt": "688.36%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1672358400000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "UTC",
+                        "logoUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/23095.png",
+                        "hasPrePostMarketData": false,
+                        "marketState": "REGULAR",
+                        "regularMarketPrice": {
+                            "raw": 2.1621296e-05,
+                            "fmt": "0.00"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "ccc_market",
+                        "quoteSourceName": "CoinMarketCap",
+                        "sourceInterval": 15,
+                        "exchange": "CCC",
+                        "region": "US",
+                        "shortName": "Bonk USD",
+                        "triggerable": false,
+                        "longName": "Bonk USD"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGM",
+                        "symbol": "SOUN",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562000,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": -1.42222,
+                            "fmt": "-1.42%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 11.25,
+                            "fmt": "11.25"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": -0.16,
+                            "fmt": "-0.16"
+                        },
+                        "trendingScore": {
+                            "raw": 3.3083186682955072,
+                            "fmt": "330.83%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1651152600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 11.09,
+                            "fmt": "11.09"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NGM",
+                        "region": "US",
+                        "shortName": "SoundHound AI, Inc.",
+                        "triggerable": false,
+                        "longName": "SoundHound AI, Inc."
+                    },
+                    {
+                        "fullExchangeName": "CCC",
+                        "symbol": "XRP-CAD",
+                        "coinImageUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/52.png",
+                        "gmtOffSetMilliseconds": 0,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751803861,
+                            "fmt": "12:11PM UTC"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 1.9240336,
+                            "fmt": "1.92%"
+                        },
+                        "quoteType": "CRYPTOCURRENCY",
+                        "typeDisp": "Cryptocurrency",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 3.0199027,
+                            "fmt": "3.02"
+                        },
+                        "exchangeTimezoneName": "UTC",
+                        "regularMarketChange": {
+                            "raw": 0.058148146,
+                            "fmt": "0.06"
+                        },
+                        "trendingScore": {
+                            "raw": 3.1033802565520694,
+                            "fmt": "310.34%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1510358400000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "UTC",
+                        "logoUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/52.png",
+                        "hasPrePostMarketData": false,
+                        "marketState": "REGULAR",
+                        "regularMarketPrice": {
+                            "raw": 3.080341,
+                            "fmt": "3.08"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "ccc_market",
+                        "quoteSourceName": "CoinMarketCap",
+                        "sourceInterval": 15,
+                        "exchange": "CCC",
+                        "region": "US",
+                        "shortName": "XRP CAD",
+                        "triggerable": false,
+                        "longName": "XRP CAD"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "DDOG",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562001,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 14.9174,
+                            "fmt": "14.92%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 135.01,
+                            "fmt": "135.01"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 20.14,
+                            "fmt": "20.14"
+                        },
+                        "trendingScore": {
+                            "raw": 2.093844370338865,
+                            "fmt": "209.38%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1568899800000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 155.15,
+                            "fmt": "155.15"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "Datadog, Inc.",
+                        "triggerable": true,
+                        "longName": "Datadog, Inc."
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "ANET",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 1.37447,
+                            "fmt": "1.37%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 101.13,
+                            "fmt": "101.13"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 1.39,
+                            "fmt": "1.39"
+                        },
+                        "trendingScore": {
+                            "raw": 1.8814220026966373,
+                            "fmt": "188.14%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1402061400000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 102.52,
+                            "fmt": "102.52"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "Arista Networks, Inc.",
+                        "triggerable": false,
+                        "longName": "Arista Networks Inc"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "MU",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562001,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 0.451785,
+                            "fmt": "0.45%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 121.74,
+                            "fmt": "121.74"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 0.550003,
+                            "fmt": "0.55"
+                        },
+                        "trendingScore": {
+                            "raw": 1.3806885764104875,
+                            "fmt": "138.07%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 454944600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 122.29,
+                            "fmt": "122.29"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "Micron Technology, Inc.",
+                        "triggerable": true,
+                        "longName": "Micron Technology, Inc."
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "APLD",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562001,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": -1.04167,
+                            "fmt": "-1.04%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 10.56,
+                            "fmt": "10.56"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": -0.110001,
+                            "fmt": "-0.11"
+                        },
+                        "trendingScore": {
+                            "raw": 1.0158916215557199,
+                            "fmt": "101.59%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1649856600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 10.45,
+                            "fmt": "10.45"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "Applied Digital Corporation",
+                        "triggerable": true,
+                        "longName": "Applied Digital Corporation"
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "IBM",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 1.50183,
+                            "fmt": "1.50%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "companyLogoUrl": "https://s.yimg.com/lb/brands/150x150_ibm.png",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 287.65,
+                            "fmt": "287.65"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 4.32001,
+                            "fmt": "4.32"
+                        },
+                        "trendingScore": {
+                            "raw": 0.9048456279218063,
+                            "fmt": "90.48%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": -252322200000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "logoUrl": "https://s.yimg.com/lb/brands/150x150_ibm.png",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 291.97,
+                            "fmt": "291.97"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "International Business Machines",
+                        "triggerable": false,
+                        "longName": "International Business Machines Corporation"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "SOFI",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562000,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 2.48344,
+                            "fmt": "2.48%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "companyLogoUrl": "https://s.yimg.com/lb/brands/150x150_sofi.png",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 18.12,
+                            "fmt": "18.12"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 0.449999,
+                            "fmt": "0.45"
+                        },
+                        "trendingScore": {
+                            "raw": 0.7816314624976092,
+                            "fmt": "78.16%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1609770600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "logoUrl": "https://s.yimg.com/lb/brands/150x150_sofi.png",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 18.57,
+                            "fmt": "18.57"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "SoFi Technologies, Inc.",
+                        "triggerable": true,
+                        "longName": "SoFi Technologies, Inc."
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "VRT",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 2.82313,
+                            "fmt": "2.82%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 124.33,
+                            "fmt": "124.33"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 3.50999,
+                            "fmt": "3.51"
+                        },
+                        "trendingScore": {
+                            "raw": 0.6895435241298217,
+                            "fmt": "68.95%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1533216600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 127.84,
+                            "fmt": "127.84"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "Vertiv Holdings, LLC",
+                        "triggerable": false,
+                        "longName": "Vertiv Holdings Co"
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "BRK-B",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 0.940724,
+                            "fmt": "0.94%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 480.48,
+                            "fmt": "480.48"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 4.51999,
+                            "fmt": "4.52"
+                        },
+                        "trendingScore": {
+                            "raw": 0.6406530353328074,
+                            "fmt": "64.07%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 831648600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 485.0,
+                            "fmt": "485.00"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "Berkshire Hathaway Inc. New",
+                        "triggerable": false,
+                        "longName": "Berkshire Hathaway Inc."
+                    },
+                    {
+                        "fullExchangeName": "CCC",
+                        "symbol": "DOGE-USD",
+                        "coinImageUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png",
+                        "gmtOffSetMilliseconds": 0,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751803800,
+                            "fmt": "12:10PM UTC"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 0.79762095,
+                            "fmt": "0.80%"
+                        },
+                        "quoteType": "CRYPTOCURRENCY",
+                        "typeDisp": "Cryptocurrency",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 0.16427724,
+                            "fmt": "0.16"
+                        },
+                        "exchangeTimezoneName": "UTC",
+                        "regularMarketChange": {
+                            "raw": 0.0013068467,
+                            "fmt": "0.00"
+                        },
+                        "trendingScore": {
+                            "raw": 0.5947903418691347,
+                            "fmt": "59.48%"
+                        },
+                        "cryptoTradeable": true,
+                        "firstTradeDateMilliseconds": 1510185600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "UTC",
+                        "logoUrl": "https://s2.coinmarketcap.com/static/img/coins/64x64/74.png",
+                        "hasPrePostMarketData": false,
+                        "marketState": "REGULAR",
+                        "regularMarketPrice": {
+                            "raw": 0.16515002,
+                            "fmt": "0.17"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "ccc_market",
+                        "quoteSourceName": "CoinMarketCap",
+                        "sourceInterval": 15,
+                        "exchange": "CCC",
+                        "region": "US",
+                        "shortName": "Dogecoin USD",
+                        "triggerable": false,
+                        "longName": "Dogecoin USD"
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGS",
+                        "symbol": "NBIS",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562000,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 0.560334,
+                            "fmt": "0.56%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 49.97,
+                            "fmt": "49.97"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 0.279999,
+                            "fmt": "0.28"
+                        },
+                        "trendingScore": {
+                            "raw": 0.42298992289879317,
+                            "fmt": "42.30%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1729517400000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 50.25,
+                            "fmt": "50.25"
+                        },
+                        "customPriceAlertConfidence": "HIGH",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NMS",
+                        "region": "US",
+                        "shortName": "Nebius Group N.V.",
+                        "triggerable": true
+                    },
+                    {
+                        "fullExchangeName": "NasdaqGM",
+                        "symbol": "TQQQ",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562000,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 2.8,
+                            "fmt": "2.80%"
+                        },
+                        "quoteType": "ETF",
+                        "typeDisp": "ETF",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 82.5,
+                            "fmt": "82.50"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 2.31,
+                            "fmt": "2.31"
+                        },
+                        "trendingScore": {
+                            "raw": 0.2723093711339253,
+                            "fmt": "27.23%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1265898600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 84.81,
+                            "fmt": "84.81"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NGM",
+                        "region": "US",
+                        "shortName": "ProShares UltraPro QQQ",
+                        "triggerable": false,
+                        "longName": "ProShares UltraPro QQQ"
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "IONQ",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": -0.804471,
+                            "fmt": "-0.80%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 44.75,
+                            "fmt": "44.75"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": -0.360001,
+                            "fmt": "-0.36"
+                        },
+                        "trendingScore": {
+                            "raw": 0.156909257132631,
+                            "fmt": "15.69%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1609770600000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 44.39,
+                            "fmt": "44.39"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "IonQ, Inc.",
+                        "triggerable": false,
+                        "longName": "IonQ, Inc."
+                    },
+                    {
+                        "fullExchangeName": "NYSE",
+                        "symbol": "QBTS",
+                        "gmtOffSetMilliseconds": -14400000,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1751562002,
+                            "fmt": "1:00PM EDT"
+                        },
+                        "regularMarketChangePercent": {
+                            "raw": 5.06884,
+                            "fmt": "5.07%"
+                        },
+                        "quoteType": "EQUITY",
+                        "typeDisp": "Equity",
+                        "tradeable": false,
+                        "regularMarketPreviousClose": {
+                            "raw": 15.98,
+                            "fmt": "15.98"
+                        },
+                        "exchangeTimezoneName": "America/New_York",
+                        "regularMarketChange": {
+                            "raw": 0.810001,
+                            "fmt": "0.81"
+                        },
+                        "trendingScore": {
+                            "raw": 0.031791187536433285,
+                            "fmt": "3.18%"
+                        },
+                        "cryptoTradeable": false,
+                        "firstTradeDateMilliseconds": 1607697000000,
+                        "exchangeDataDelayedBy": 0,
+                        "exchangeTimezoneShortName": "EDT",
+                        "hasPrePostMarketData": true,
+                        "marketState": "CLOSED",
+                        "regularMarketPrice": {
+                            "raw": 16.79,
+                            "fmt": "16.79"
+                        },
+                        "customPriceAlertConfidence": "LOW",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "priceHint": 2,
+                        "sourceInterval": 15,
+                        "exchange": "NYQ",
+                        "region": "US",
+                        "shortName": "D-Wave Quantum Inc.",
+                        "triggerable": false,
+                        "longName": "D-Wave Quantum Inc."
+                    },
+                    {
+                        "fullExchangeName": "YHD",
+                        "exchangeTimezoneName": "America/New_York",
+                        "symbol": "TEST",
+                        "trendingScore": {
+                            "raw": 0.0,
+                            "fmt": "0.00%"
+                        },
+                        "cryptoTradeable": false,
+                        "gmtOffSetMilliseconds": -14400000,
+                        "firstTradeDateMilliseconds": 1528810200000,
+                        "exchangeDataDelayedBy": 0,
+                        "language": "en-US",
+                        "regularMarketTime": {
+                            "raw": 1561759658,
+                            "fmt": "6:07PM EDT"
+                        },
+                        "exchangeTimezoneShortName": "EDT",
+                        "quoteType": "MUTUALFUND",
+                        "hasPrePostMarketData": false,
+                        "marketState": "CLOSED",
+                        "customPriceAlertConfidence": "NONE",
+                        "market": "us_market",
+                        "quoteSourceName": "Delayed Quote",
+                        "typeDisp": "Fund",
+                        "priceHint": 2,
+                        "tradeable": false,
+                        "sourceInterval": 15,
+                        "exchange": "YHD",
+                        "region": "US",
+                        "triggerable": false
+                    }
+                ],
+                "jobTimestamp": 0,
+                "startInterval": 0
+            }
+        ],
+        "error": null
+    }
+}

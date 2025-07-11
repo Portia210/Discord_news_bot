@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News Report</title>
+    <title>News Report - Test</title>
     <!-- Main styles -->
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style.css">
     <!-- Theme overrides -->
-    <link rel="stylesheet" href="style/morning.css" id="morning-theme">
-    <link rel="stylesheet" href="style/evening.css" id="evening-theme" disabled>
+    <link rel="stylesheet" href="morning.css" id="morning-theme">
+    <link rel="stylesheet" href="evening.css" id="evening-theme" disabled>
 </head>
 <body>
     <div class="container">
@@ -18,6 +18,9 @@
                 <div class="header-text">
                     <h1>דוח חדשות</h1>
                     <div class="subtitle">עדכוני שוק ופיננסים אחרונים</div>
+                </div>
+                <div class="theme-switcher">
+                    <button id="theme-toggle" class="theme-toggle-btn">החלף ערכת נושא</button>
                 </div>
             </div>
         </div>
@@ -30,8 +33,8 @@
                         <div class="symbol-price-section">
                             <div class="symbol-price">$150.25</div>
                             <div class="symbol-change">
-                                <span class="change-amount">+2.15</span>
-                                <span class="change-percent">(+1.45%)</span>
+                                <span class="change-amount positive">+2.15</span>
+                                <span class="change-percent positive">(+1.45%)</span>
                                 <span class="change-arrow">↗</span>
                             </div>
                         </div>
@@ -46,8 +49,8 @@
                         <div class="symbol-price-section">
                             <div class="symbol-price">$2,850.75</div>
                             <div class="symbol-change">
-                                <span class="change-amount">-15.30</span>
-                                <span class="change-percent">(-0.53%)</span>
+                                <span class="change-amount negative">-15.30</span>
+                                <span class="change-percent negative">(-0.53%)</span>
                                 <span class="change-arrow">↘</span>
                             </div>
                         </div>
@@ -62,8 +65,8 @@
                         <div class="symbol-price-section">
                             <div class="symbol-price">$380.50</div>
                             <div class="symbol-change">
-                                <span class="change-amount">+5.75</span>
-                                <span class="change-percent">(+1.54%)</span>
+                                <span class="change-amount positive">+5.75</span>
+                                <span class="change-percent positive">(+1.54%)</span>
                                 <span class="change-arrow">↗</span>
                             </div>
                         </div>
@@ -78,8 +81,8 @@
                         <div class="symbol-price-section">
                             <div class="symbol-price">$245.80</div>
                             <div class="symbol-change">
-                                <span class="change-amount">-8.20</span>
-                                <span class="change-percent">(-3.23%)</span>
+                                <span class="change-amount negative">-8.20</span>
+                                <span class="change-percent negative">(-3.23%)</span>
                                 <span class="change-arrow">↘</span>
                             </div>
                         </div>
@@ -94,7 +97,20 @@
         
         <div class="content">
             <div id="news-container">
-                <!-- News items will be inserted here -->
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-time">14:30</div>
+                        <a href="#" class="news-link" target="_blank">צפה במקור</a>
+                    </div>
+                    <div class="news-message">Apple reports strong Q4 earnings with iPhone sales exceeding expectations. The company's revenue grew 8% year-over-year, driven by strong demand in emerging markets.</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-header">
+                        <div class="news-time">13:45</div>
+                        <a href="#" class="news-link" target="_blank">צפה במקור</a>
+                    </div>
+                    <div class="news-message">Federal Reserve signals potential interest rate cuts in the coming months, causing market volatility. Investors are closely watching for further guidance on monetary policy.</div>
+                </div>
             </div>
         </div>
         
@@ -103,111 +119,206 @@
         </div>
     </div>
 
-    <script>
-        // This will be populated by the Python script
-        const newsData = [
-  {
-    "date": "10/07/2025",
-    "time": "morning",
-    "message": "הנשיא טראמפ הודיע כי ריבית הפד צריכה להיות נמוכה לפחות בשלוש נקודות. הוא מבקש להוריד את הריבית, בציינו שארה\"ב צריכה להוביל בריביות הנמוכות."
-  },
-  {
-    "date": "09/07/2025",
-    "time": "evening",
-    "message": "טראמפ הודיע על הטלת מכסים של 25% על הפיליפינים, מולדובה ו-30% על עיראק ולוב. ההחלטה צפויה להתחיל ב-1 באוגוסט, והיא נובעת מכוונות לשנות את מדיניות המסחר."
-  },
-  {
-    "date": "09/07/2025",
-    "time": "noon",
-    "message": "לינדה יקרינו עזבה את תפקידה כמנכ\"לית X. אלון מאסק הודה ליקרינו על תרומתה. עזיבתה מהווה התפתחות משמעותית לחברה."
-  },
-  {
-    "date": "09/07/2025",
-    "time": "night",
-    "message": "טראמפ מכריז על מכסים של 50% על ברזיל, מה שגרם לריאל הברזילאי לאבד 1.6% מערכו. זהו צעד נוסף במדיניות המסחר האסטרטגית שלו."
-  },
-  {
-    "date": "10/07/2025",
-    "time": "afternoon",
-    "message": "חברת Microsoft מתחייבת להשקיע 4 מיליארד דולר בחינוך AI. הצעד מראה על המשך התמיכה בחינוך טכנולוגי והתקדמות בתחום הבינה המלאכותית."
-  }
-];
-        const reportTime = "evening"; // morning or evening
-        const priceSymbols = [
-  {
-    "ticker": "ES=F",
-    "company": "S&P Futures",
-    "price": "6,290.25",
-    "changeAmount": "-34.00",
-    "changePercent": "-0.54%",
-    "isPositive": false
-  },
-  {
-    "ticker": "YM=F",
-    "company": "Dow Futures",
-    "price": "44,676.00",
-    "changeAmount": "-232.00",
-    "changePercent": "-0.52%",
-    "isPositive": false
-  },
-  {
-    "ticker": "NQ=F",
-    "company": "Nasdaq Futures",
-    "price": "22,890.50",
-    "changeAmount": "-122.75",
-    "changePercent": "-0.53%",
-    "isPositive": false
-  },
-  {
-    "ticker": "RTY=F",
-    "company": "Russell 2000 Futures",
-    "price": "2,262.40",
-    "changeAmount": "-17.60",
-    "changePercent": "-0.77%",
-    "isPositive": false
-  }
-]; // New data for price symbols
+    <style>
+        .theme-switcher {
+            margin-right: 20px;
+        }
         
-        function setTheme() {
+        .theme-toggle-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        
+        .theme-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
+        }
+        
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Evening theme button styles */
+        body[data-theme="evening"] .theme-toggle-btn {
+            background: rgba(224, 224, 224, 0.2);
+            border-color: rgba(224, 224, 224, 0.3);
+        }
+        
+        body[data-theme="evening"] .theme-toggle-btn:hover {
+            background: rgba(224, 224, 224, 0.3);
+            border-color: rgba(224, 224, 224, 0.5);
+        }
+        
+        /* Price symbols layout styles */
+        .symbols-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 100%;
+        }
+
+        .symbol-item {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 70px;
+        }
+
+        .symbol-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .symbol-info {
+            text-align: left;
+            flex: 1;
+        }
+
+        .symbol-ticker {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1px;
+        }
+
+        .symbol-company {
+            font-size: 0.7rem;
+            color: #6c757d;
+            line-height: 1.1;
+            margin-bottom: 0;
+        }
+
+        .symbol-price-section {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            direction: ltr;
+        }
+
+        .symbol-price {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .symbol-change {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.7rem;
+        }
+        
+        .change-arrow {
+            font-weight: bold;
+        }
+        
+        .change-arrow.up {
+            color: #28a745;
+        }
+        
+        .change-arrow.down {
+            color: #dc3545;
+        }
+    </style>
+
+    <script>
+        // Test data
+        const newsData = [
+            {
+                time: "14:30",
+                link: "#",
+                message: "Apple reports strong Q4 earnings with iPhone sales exceeding expectations. The company's revenue grew 8% year-over-year, driven by strong demand in emerging markets."
+            },
+            {
+                time: "13:45", 
+                link: "#",
+                message: "Federal Reserve signals potential interest rate cuts in the coming months, causing market volatility. Investors are closely watching for further guidance on monetary policy."
+            }
+        ];
+        const reportTime = "morning"; // Test with morning theme
+        const priceSymbols = [
+            {
+                ticker: "AAPL",
+                company: "Apple Inc.",
+                price: "$150.25",
+                changeAmount: "+2.15",
+                changePercent: "+1.45%",
+                isPositive: true
+            },
+            {
+                ticker: "GOOGL",
+                company: "Alphabet Inc.",
+                price: "$2,850.75",
+                changeAmount: "-15.30",
+                changePercent: "-0.53%",
+                isPositive: false
+            },
+            {
+                ticker: "MSFT",
+                company: "Microsoft Corp.",
+                price: "$380.50",
+                changeAmount: "+5.75",
+                changePercent: "+1.54%",
+                isPositive: true
+            },
+            {
+                ticker: "TSLA",
+                company: "Tesla Inc.",
+                price: "$245.80",
+                changeAmount: "-8.20",
+                changePercent: "-3.23%",
+                isPositive: false
+            }
+        ];
+        
+        let currentTheme = 'morning'; // Track current theme
+        
+        function setTheme(theme = 'morning') {
             const morningTheme = document.getElementById('morning-theme');
             const eveningTheme = document.getElementById('evening-theme');
             const themeIcon = document.getElementById('theme-icon');
             
-            if (reportTime === 'morning') {
+            if (theme === 'morning') {
                 // Morning theme
                 morningTheme.disabled = false;
                 eveningTheme.disabled = true;
                 document.body.setAttribute('data-theme', 'morning');
                 themeIcon.textContent = '☀️';
-            } else if (reportTime === 'evening') {
+                currentTheme = 'morning';
+            } else if (theme === 'evening') {
                 // Evening theme
                 morningTheme.disabled = true;
                 eveningTheme.disabled = false;
                 document.body.setAttribute('data-theme', 'evening');
                 themeIcon.textContent = '🌙';
-            } else {
-                // Auto-detect based on current time
-                const now = new Date();
-                const hour = now.getHours();
-                
-                if (hour >= 6 && hour < 18) {
-                    // Morning theme
-                    morningTheme.disabled = false;
-                    eveningTheme.disabled = true;
-                    document.body.setAttribute('data-theme', 'morning');
-                    themeIcon.textContent = '☀️';
-                } else {
-                    // Evening theme
-                    morningTheme.disabled = true;
-                    eveningTheme.disabled = false;
-                    document.body.setAttribute('data-theme', 'evening');
-                    themeIcon.textContent = '🌙';
-                }
+                currentTheme = 'evening';
             }
         }
         
+        function toggleTheme() {
+            const newTheme = currentTheme === 'morning' ? 'evening' : 'morning';
+            setTheme(newTheme);
+        }
+        
         function formatTime(timeStr) {
-            // Just return the time string as-is, no parsing needed
             return timeStr;
         }
         
@@ -271,10 +382,16 @@
         
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
-            setTheme();
+            setTheme('morning'); // Start with morning theme
             populatePriceSymbols();
             populateNews();
+            
+            // Add theme toggle functionality
+            const themeToggle = document.getElementById('theme-toggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
         });
     </script>
 </body>
-</html> 
+</html>

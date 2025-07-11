@@ -1,0 +1,97 @@
+/* Evening Theme - Color Overrides Only */
+
+body {
+    color: #e0e0e0;
+    background-color: #1a1a1a;
+}
+
+.container {
+    background-color: #2d2d2d;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+/* Price Symbols - Evening Theme */
+.price-symbols {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+    border-bottom-color: #404040;
+}
+
+.symbol-item {
+    background-color: #3a3a3a;
+    border-color: #404040;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.symbol-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    background-color: #404040;
+}
+
+.symbol-ticker {
+    color: #e0e0e0;
+}
+
+.symbol-company {
+    color: #b0b0b0;
+}
+
+.symbol-price {
+    color: #e0e0e0;
+}
+
+.symbol-change {
+    border-top-color: #404040;
+}
+
+.change-amount.positive,
+.change-percent.positive {
+    color: #2ecc71;
+}
+
+.change-amount.negative,
+.change-percent.negative {
+    color: #e74c3c;
+}
+
+.change-arrow.up {
+    color: #2ecc71;
+}
+
+.change-arrow.down {
+    color: #e74c3c;
+}
+
+.news-item {
+    border-right-color: #3498db;
+    background-color: #3a3a3a;
+}
+
+.news-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    background-color: #404040;
+}
+
+.news-time {
+    color: #3498db;
+}
+
+.news-message {
+    color: #e0e0e0;
+}
+
+.news-link {
+    color: #3498db;
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.news-link:hover {
+    background-color: rgba(52, 152, 219, 0.3);
+}
+
+.footer {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+} 

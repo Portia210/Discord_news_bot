@@ -1,0 +1,100 @@
+{
+    "result": {
+        "premiumTierFeatureMappings": {
+            "workspace": [
+                6
+            ],
+            "communityInsights": [
+                4,
+                5,
+                6
+            ],
+            "technicalEventsTeaser": [
+                0,
+                3,
+                4,
+                5,
+                6
+            ],
+            "stockPicks": [
+                5,
+                6
+            ],
+            "researchReportsList": [
+                5,
+                6
+            ],
+            "premiumDashboard": [
+                5,
+                6
+            ],
+            "technicalEvents": [
+                6
+            ],
+            "researchReports": [
+                5,
+                6
+            ],
+            "companyOutlook": [
+                5,
+                6
+            ],
+            "significantDevelopments": [
+                5,
+                6
+            ],
+            "historicalTranscripts": [
+                5,
+                6
+            ],
+            "corporateEvents": [
+                6
+            ],
+            "historicalFinancials": [
+                6
+            ],
+            "premiumNews": [
+                5,
+                6
+            ],
+            "portfolioAnalytics": [
+                4,
+                5,
+                6
+            ],
+            "unlimitedPriceAlerts": [
+                4,
+                5,
+                6
+            ],
+            "screenersDownload": [
+                6
+            ],
+            "adLite": [
+                3,
+                4,
+                5,
+                6
+            ],
+            "fairValue": [
+                5,
+                6
+            ],
+            "premiumScreeners": [
+                6
+            ],
+            "historicalStatistics": [
+                6
+            ],
+            "investmentIdeas": [
+                6
+            ]
+        },
+        "tierRanking": [
+            3,
+            4,
+            5,
+            6
+        ]
+    }
+}
