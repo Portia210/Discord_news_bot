@@ -18,7 +18,7 @@ class Config:
     def __init__(self):
         self.channel_ids = ChannelIds()
         self.user_ids = UserIds()
-        self.market_timezone = pytz.timezone('America/New_York')
+        self.eastern_timezone = pytz.timezone('America/New_York')
         self.israel_timezone = pytz.timezone('Asia/Jerusalem')
         self.app_timezone = self.israel_timezone
 

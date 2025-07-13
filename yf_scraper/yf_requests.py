@@ -2,9 +2,7 @@ from yf_scraper.headers import headers
 import requests
 from yf_scraper.qoute_fields import QouteFields as qf
 import json
-
-
-
+from utils.timezones_convertor import convert_to_my_timezone
 
 
 
@@ -104,9 +102,19 @@ class YfRequests:
         return self.make_request()
 
 
-yfr = YfRequests()
+if __name__ == "__main__":
+    yfr = YfRequests()
 
-res = yfr.get_market_summary()
-print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
-# for result in res["marketSummaryResponse"]["result"]:
-#     print(result["shortName"], result["symbol"])
+    res = yfr.get_market_summary()
+    # print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
+    res = yfr.get_market_time()
+    print(json.dumps(res, indent=4))
+    time = res["finance"]["marketTimes"][0]["marketTime"][0]["time"]
+    app_timezone = convert_to_my_timezone(time)
+    print(app_timezone)
+
+
+
+
+
+

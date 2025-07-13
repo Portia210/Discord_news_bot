@@ -1,13 +1,13 @@
 import discord
 from utils.logger import logger
 
-async def send_pdf_to_discord(bot: discord.Client, channel_id: int, file_path: str, message: str, filename_on_discord: str):
+async def sendpdf(bot: discord.Client, channel_id: int, input_file_path: str, message: str, filename_on_discord: str):
     channel = bot.get_channel(channel_id)
     
     if channel:
         try:
             # Send the PDF file
-            with open(file_path, "rb") as pdf_file:
+            with open(input_file_path, "rb") as pdf_file:
                 await channel.send(
                     content=message,
                     file=discord.File(pdf_file, filename=filename_on_discord)

@@ -3,8 +3,9 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 from utils.logger import logger
-from discord_utils.process_news import process_and_send_news_report
-
+from news_pdf.pdf_report_generator import PdfReportGenerator
+from discord_utils.send_pdf import sendpdf
+from config import config
 
 # Load environment variables
 load_dotenv()
@@ -37,8 +38,11 @@ async def on_ready():
     except Exception as e:
         logger.error(f"Failed to sync commands: {e}")
     
-    # Process and send daily news report
-    await process_and_send_news_report(bot) 
+    # # Process and send daily news report
+    # pdf_generator = PdfReportGenerator(bot)
+    # pdf_success = await pdf_generator.generate_pdf_report()
+    # if pdf_success:
+    #     await sendpdf(bot, config.channel_ids.python_bot, "news_pdf/output.pdf", "Daily News Report", "daily_news_report.pdf")
 
 
 
@@ -50,7 +54,8 @@ async def load_cogs():
         "cogs.slash.sync",
         "cogs.slash.test",
         "cogs.text.greet",
-        "cogs.admin.export"
+        "cogs.admin.export",
+        "cogs.admin.clean_messages"
     ]
     
     loaded_cogs = []

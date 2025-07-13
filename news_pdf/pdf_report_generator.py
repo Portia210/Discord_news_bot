@@ -69,8 +69,28 @@ class PdfReportGenerator:
         
         if missing_files:
             raise FileNotFoundError(f"Required files not found: {', '.join(missing_files)}")
-    
-    def _load_news_data(self, hours_back: int = 24) -> list:
+
+
+    def get_theme_info(self, report_time: str = 'auto') -> dict:
+        """
+        Get information about the current theme.
+        
+        Args:
+            report_time (str): Theme preference
+            
+        Returns:
+            dict: Theme information including name and icon
+        """
+        theme = self._determine_theme(report_time)
+        return {
+            'theme': theme,
+            'name': self.THEMES[theme]['name'],
+            'icon': self.THEMES[theme]['icon']
+        }
+
+
+
+    async def _load_news_data(self, hours_back: int = 24) -> list:
         """
         Load news data from Discord channel.
         
@@ -81,7 +101,7 @@ class PdfReportGenerator:
             list: List of news items
         """
         try:
-            news_list = process_news_to_list(
+            news_list = await process_news_to_list(
                 discord_bot=self.discord_bot, 
                 hours_back=hours_back
             )
@@ -91,7 +111,8 @@ class PdfReportGenerator:
             logger.error(f"❌ Error loading news data: {e}")
             return []
 
-    def _load_market_summary(self) -> list:
+
+    async def _load_market_summary(self) -> list:
         """
         Load and transform price data from market summary.
         
@@ -119,6 +140,7 @@ class PdfReportGenerator:
             logger.error(f"❌ Error loading market summary: {e}")
             return []
     
+
     def _process_company_data(self, company: dict) -> dict:
         """
         Process individual company data from market summary.
@@ -130,24 +152,25 @@ class PdfReportGenerator:
             dict: Processed symbol data or None if invalid
         """
         try:
-            change_amount = company.get(qf.REGULAR_MARKET_CHANGE, 0)
-            
+            change_amount = company.get(qf.REGULAR_MARKET_CHANGE)["fmt"]
+
             symbol_data = {
-                "ticker": company.get("symbol", "N/A"),
+                # remove signs such as $ / ! ^ etc.
+                "ticker": company.get("symbol", "N/A").replace(r"[^a-zA-Z0-9]", ""),
                 "company": company.get(qf.SHORT_NAME, "N/A"),
-                "price": company.get(qf.REGULAR_MARKET_PRICE),
+                "price": company.get(qf.REGULAR_MARKET_PRICE)["fmt"],
                 "changeAmount": change_amount,
-                "changePercent": company.get(qf.REGULAR_MARKET_CHANGE_PERCENT),
-                "isPositive": change_amount > 0
+                "changePercent": company.get(qf.REGULAR_MARKET_CHANGE_PERCENT)["fmt"],
+                "isPositive": float(change_amount) > 0
             }
             
-            logger.debug(f"✅ Processed {symbol_data['ticker']}: {symbol_data['price']} ({change_amount})")
             return symbol_data
             
         except Exception as e:
             logger.error(f"❌ Error processing company data: {e}")
             return None
     
+
     def _determine_theme(self, report_time: str = 'auto') -> str:
         """
         Determine the appropriate theme based on time or override.
@@ -169,7 +192,7 @@ class PdfReportGenerator:
         else:
             return 'evening'
     
-    def _merge_data_to_template(self, template: str, news_data: list, prices_data: list, report_time: str = 'auto') -> str:
+    def _generate_html_report(self, template: str, news_data: list, prices_data: list, report_time: str = 'auto') -> str:
         """
         Merge news data, price symbols, and theme into the HTML template.
         
@@ -201,56 +224,7 @@ class PdfReportGenerator:
         except Exception as e:
             logger.error(f"❌ Error merging data: {e}")
             return None
-    
-    def generate_html_report(self, input_json: str = None, output_file: str = "news_pdf/output.html", 
-                           report_time: str = 'auto', hours_back: int = 24) -> str:
-        """
-        Generate an HTML report from news data with price symbols.
-        
-        Args:
-            input_json (str): Path to JSON file with news data (optional)
-            output_file (str): Path for the output HTML file
-            report_time (str): Theme preference ('morning', 'evening', 'auto')
-            hours_back (int): Number of hours to look back for news
-            
-        Returns:
-            str: Path to generated HTML file, or None if failed
-        """
-        try:
-            # Load news data
-            if input_json and os.path.exists(input_json):
-                news_data = read_json_file(input_json)
-                logger.info(f"📰 Loaded news data from file: {input_json}")
-            else:
-                news_data = self._load_news_data(hours_back)
-                logger.info(f"📰 Loaded news data from Discord channel")
-            
-            if not news_data:
-                logger.error("❌ No news data available")
-                return None
-            
-            # Load price data
-            price_symbols = self._load_market_summary()
-            
-            # Read template
-            template = read_text_file(self.template_file)
-            if template is None:
-                logger.error(f"❌ No template found in {self.template_file}")
-                return None
-            
-            # Merge data into template
-            merged_html = self._merge_data_to_template(template, news_data, price_symbols, report_time)
-            if merged_html is None:
-                return None
-            
-            # Save the generated HTML
-            write_text_file(output_file, merged_html)
-            logger.info(f"📄 HTML report saved to: {output_file}")
-            return output_file
-            
-        except Exception as e:
-            logger.error(f"❌ Error generating HTML report: {e}")
-            return None
+ 
     
     async def _convert_html_to_pdf(self, html_file_path: str, pdf_file_path: str) -> bool:
         """
@@ -295,14 +269,14 @@ class PdfReportGenerator:
             logger.error(f"❌ Error converting HTML to PDF: {e}")
             return False
     
-    async def generate_pdf_report(self, input_json: str = None, output_file: str = "news_pdf/output.html", 
+    async def generate_pdf_report(self, output_file: str = "news_pdf/output.html", 
                                 pdf_file: str = "news_pdf/output.pdf", report_time: str = 'auto', 
                                 hours_back: int = 24) -> bool:
         """
         Generate a complete PDF report from news data with price symbols.
+        This is the main method for generating reports.
         
         Args:
-            input_json (str): Path to JSON file with news data (optional)
             output_file (str): Path for the output HTML file
             pdf_file (str): Path for the output PDF file
             report_time (str): Theme preference ('morning', 'evening', 'auto')
@@ -312,33 +286,50 @@ class PdfReportGenerator:
             bool: True if successful, False otherwise
         """
         try:
-            # Generate HTML first
-            html_result = self.generate_html_report(input_json, output_file, report_time, hours_back)
-            if not html_result:
+            logger.info("🚀 Starting PDF report generation...")
+            
+            # Step 1: Load news data
+            news_data = await self._load_news_data(hours_back)
+            if not news_data:
+                logger.warning("⚠️ No news data loaded, continuing with empty news list")
+            
+            # Step 2: Load market summary data
+            prices_data = await self._load_market_summary()
+            if not prices_data:
+                logger.warning("⚠️ No market data loaded, continuing with empty price list")
+            
+            # Step 3: Load HTML template
+            try:
+                template = read_text_file(self.template_file)
+                logger.info("✅ HTML template loaded successfully")
+            except Exception as e:
+                logger.error(f"❌ Error loading HTML template: {e}")
                 return False
             
-            # Convert to PDF
-            return await self._convert_html_to_pdf(output_file, pdf_file)
+            # Step 4: Generate HTML content
+            html_content = self._generate_html_report(template, news_data, prices_data, report_time)
+            if not html_content:
+                logger.error("❌ Failed to generate HTML content")
+                return False
+            
+            # Step 5: Save HTML file
+            try:
+                write_text_file(output_file, html_content)
+                logger.info(f"✅ HTML file saved: {output_file}")
+            except Exception as e:
+                logger.error(f"❌ Error saving HTML file: {e}")
+                return False
+            
+            # Step 6: Convert to PDF
+            pdf_success = await self._convert_html_to_pdf(output_file, pdf_file)
+            if not pdf_success:
+                logger.error("❌ Failed to convert HTML to PDF")
+                return False
+            
+            logger.info(f"🎉 PDF report generated successfully: {pdf_file}")
+            return True
             
         except Exception as e:
             logger.error(f"❌ Error generating PDF report: {e}")
             return False
     
-    def get_theme_info(self, report_time: str = 'auto') -> dict:
-        """
-        Get information about the current theme.
-        
-        Args:
-            report_time (str): Theme preference
-            
-        Returns:
-            dict: Theme information including name and icon
-        """
-        theme = self._determine_theme(report_time)
-        return {
-            'theme': theme,
-            'name': self.THEMES[theme]['name'],
-            'icon': self.THEMES[theme]['icon']
-        }
-
-
