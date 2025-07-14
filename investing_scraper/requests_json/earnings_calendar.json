@@ -2,7 +2,11 @@
     "url": "https://il.investing.com/earnings-calendar/Service/getCalendarFilteredData",
     "method": "post",
     "payload": {
-        "country[]": "5",
+        "country[]": ["5"],
+        "importance[]": [
+            "2",
+            "3"
+        ],
         "timeZone": "17",
         "timeFilter": "timeOnly",
         "currentTab": "thisWeek",

@@ -6,6 +6,8 @@ from utils.logger import logger
 from news_pdf.pdf_report_generator import PdfReportGenerator
 from discord_utils.send_pdf import sendpdf
 from config import config
+from scheduler import Scheduler, CalendarManager
+from scheduler.custom_tasks import CustomTasks
 
 # Load environment variables
 load_dotenv()
@@ -17,6 +19,11 @@ intents.message_content = True
 intents.members = True
 intents.messages = True
 bot = commands.Bot(command_prefix="!", intents=intents)
+
+# Initialize scheduler and calendar manager
+scheduler = Scheduler()
+calendar_manager = CalendarManager(bot, config.channel_ids.investing_bot)
+custom_tasks = CustomTasks(calendar_manager)
 
 @bot.event
 async def on_ready():
@@ -37,6 +44,23 @@ async def on_ready():
         logger.info(f"Available text commands: {text_commands}")
     except Exception as e:
         logger.error(f"Failed to sync commands: {e}")
+    
+    # Initialize and start the scheduler
+    try:
+        logger.info("✅ Calendar manager initialized successfully!")
+        
+        # Add custom tasks to the scheduler
+        custom_task_list = custom_tasks.get_custom_tasks()
+        for task in custom_task_list:
+            scheduler.add_task(task)
+        logger.info(f"✅ Added {len(custom_task_list)} custom tasks to scheduler")
+        
+        # Start the scheduler background task
+        bot.loop.create_task(scheduler.start())
+        logger.info("✅ Scheduler background task started!")
+        
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize scheduler: {e}")
     
     # # Process and send daily news report
     # pdf_generator = PdfReportGenerator(bot)
@@ -70,6 +94,15 @@ async def load_cogs():
     logger.info(f"Successfully loaded {len(loaded_cogs)}/{len(cogs)} cogs")
     return loaded_cogs
 
+async def cleanup():
+    """Cleanup function to stop scheduler gracefully"""
+    try:
+        if scheduler:
+            await scheduler.stop()
+            logger.info("✅ Scheduler stopped gracefully")
+    except Exception as e:
+        logger.error(f"❌ Error stopping scheduler: {e}")
+
 def main():
     """Main entry point"""
     if not TOKEN:
@@ -81,6 +114,15 @@ def main():
     except KeyboardInterrupt:
         logger.info("Bot shutdown requested by user (Ctrl+C)")
         logger.info("Shutting down gracefully...")
+        # Run cleanup in the event loop
+        import asyncio
+        try:
+            asyncio.run(cleanup())
+        except RuntimeError:
+            # If there's already a running event loop, use it
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                loop.create_task(cleanup())
     except Exception as e:
         logger.error(f"Bot error: {e}")
     finally:

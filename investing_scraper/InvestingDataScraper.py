@@ -9,7 +9,9 @@ from config import config
 from utils.read_write import read_json_file
 from utils.safe_update_dict import safe_update_dict
 import json
-from investing_scraper.investing_variables import investing_variables
+from investing_scraper.investing_variables import InvestingVariables
+from utils.read_write import write_json_file
+import asyncio
 
 
 class InvestingDataScraper:
@@ -29,21 +31,20 @@ class InvestingDataScraper:
         return None
 
 
-    async def _fetch_table(self, page_name, payload_update: dict = {}):
+    async def _fetch_table(self, page_name, payload: dict ):
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
-        safe_update_dict(request_json["payload"], payload_update)
         
         async with aiohttp.ClientSession() as session:
-            async with session.post(request_json['url'], headers=self.headers, data=request_json["payload"]) as response:
+            async with session.post(request_json['url'], headers=self.headers, data=payload) as response:
+                # logger.debug(f"Request body: {payload}")
                 if response.status != 200:
                     logger.error(f"Failed to fetch page. Status code: {response.status}")
                     return None
                 try:
                     json_response = await response.read()
                     table_html = json.loads(json_response).get("data", '') 
-
                     return table_html
                 except Exception as e:
                     logger.error(f"Error parsing JSON: {str(e)}")
@@ -102,28 +103,78 @@ class InvestingDataScraper:
 
 
 
+    def flatten_data(self, data):
+        flat_data = []
+        for date, events in data.items():
+            for event in events:
+                event['date'] = date
+                flat_data.append(event)
+        return flat_data
 
-    def _save_data(self, page_name, date, data):
+    def _save_data(self, file_name, data):
         output_dir = os.path.join("data", "investing_scraper")
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         df = pd.DataFrame(data)
-        df.to_csv(os.path.join(output_dir, f"{page_name}_{date}.csv"), index=False)
+        df.to_csv(os.path.join(output_dir, f"{file_name}.csv"), index=False)
+
 
 
 
 
     
-    async def run(self, page_name, payload_update: dict = {}, save_data: bool = False):
-        table_html = await self._fetch_table(page_name, payload_update)
+    async def run(self, page_name, payload: dict, save_data: bool = False):
+        table_html = await self._fetch_table(page_name, payload)
         if not table_html:
             logger.error(f"Failed to fetch table data for {page_name}")
             return None
         events_by_dates = self._process_table_data(page_name, table_html)
+        write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
         if events_by_dates == {}:
             logger.error(f"No events found for {page_name}")
             return 
-
+        
+        flat_data = self.flatten_data(events_by_dates)
         if save_data:
-            for date, events in events_by_dates.items():
-                self._save_data(page_name, date, events)
+            self._save_data(f"{page_name}_{datetime.now().strftime('%Y-%m-%d')}", flat_data)
+
+        return flat_data
+    
+
+        
+    async def get_calendar(
+            self,
+            calendar_name: str,
+            current_tab: str=InvestingVariables.TIME_RANGES.TODAY, 
+            importance: list[str]=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH], 
+            countries: list[str]=[InvestingVariables.COUNTRIES.UNITED_STATES], 
+            time_zone: str=config.app_timezone, 
+            date_from: str = None, 
+            date_to: str = None, 
+            save_data: bool = False):
+        
+        payload = {
+            "currentTab": current_tab,
+            "importance[]": importance,
+            "country[]": countries,
+            "timeZone": time_zone,
+        }
+        if date_from:
+            payload["dateFrom"] = date_from
+        if date_to:
+            payload["dateTo"] = date_to
+        return await self.run(calendar_name, payload, save_data)
+    
+
+if __name__ == "__main__":
+    investing_scraper = InvestingDataScraper()
+    for value in InvestingVariables.IMPORTANCE:
+
+        result = asyncio.run(investing_scraper.get_calendar(
+            calendar_name= InvestingVariables.CALENDARS.HOLIDAY_CALENDAR,
+            current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
+            importance=[value],
+            date_from="2025-07-01",
+            date_to="2025-08-23",
+            save_data=True))
+        print(f"count: {result}")
