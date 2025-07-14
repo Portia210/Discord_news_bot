@@ -6,8 +6,7 @@ from utils.logger import logger
 from news_pdf.pdf_report_generator import PdfReportGenerator
 from discord_utils.send_pdf import sendpdf
 from config import config
-from scheduler import Scheduler, CalendarManager
-from scheduler.custom_tasks import CustomTasks
+from scheduler_v2 import DiscordScheduler, CalendarManager, TaskDefinitions
 
 # Load environment variables
 load_dotenv()
@@ -20,10 +19,10 @@ intents.members = True
 intents.messages = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Initialize scheduler and calendar manager
-scheduler = Scheduler()
-calendar_manager = CalendarManager(bot, config.channel_ids.investing_bot)
-custom_tasks = CustomTasks(calendar_manager)
+# Initialize new scheduler components
+discord_scheduler = None
+calendar_manager = None
+task_definitions = None
 
 @bot.event
 async def on_ready():
@@ -45,22 +44,42 @@ async def on_ready():
     except Exception as e:
         logger.error(f"Failed to sync commands: {e}")
     
-    # Initialize and start the scheduler
+    # Initialize and start the new scheduler
     try:
-        logger.info("✅ Calendar manager initialized successfully!")
+        global discord_scheduler, calendar_manager, task_definitions
         
-        # Add custom tasks to the scheduler
-        custom_task_list = custom_tasks.get_custom_tasks()
-        for task in custom_task_list:
-            scheduler.add_task(task)
-        logger.info(f"✅ Added {len(custom_task_list)} custom tasks to scheduler")
+        # Initialize scheduler components
+        discord_scheduler = DiscordScheduler(bot, config.channel_ids.investing_bot)
+        calendar_manager = CalendarManager(discord_scheduler)
+        task_definitions = TaskDefinitions(discord_scheduler, calendar_manager)
         
-        # Start the scheduler background task
-        bot.loop.create_task(scheduler.start())
-        logger.info("✅ Scheduler background task started!")
+        logger.info("✅ Scheduler components initialized successfully!")
+        
+        # Setup all tasks
+        task_definitions.setup_all_tasks()
+        logger.info("✅ All tasks setup completed")
+        
+        # Start the scheduler
+        discord_scheduler.start()
+        logger.info("✅ APScheduler started successfully!")
+        
+        # Send startup message
+        await discord_scheduler.send_alert(
+            "🚀 **Bot Started Successfully**\n"
+            f"📅 Scheduler active with {discord_scheduler.get_job_count()} tasks\n"
+            "🔔 All alerts will be sent to this channel",
+            0x00ff00,
+            "🤖 Bot Status"
+        )
         
     except Exception as e:
         logger.error(f"❌ Failed to initialize scheduler: {e}")
+        if discord_scheduler:
+            await discord_scheduler.send_alert(
+                f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
+                0xff0000,
+                "🤖 Bot Status"
+            )
     
     # # Process and send daily news report
     # pdf_generator = PdfReportGenerator(bot)
@@ -97,9 +116,9 @@ async def load_cogs():
 async def cleanup():
     """Cleanup function to stop scheduler gracefully"""
     try:
-        if scheduler:
-            await scheduler.stop()
-            logger.info("✅ Scheduler stopped gracefully")
+        if discord_scheduler:
+            discord_scheduler.stop()
+            logger.info("✅ APScheduler stopped gracefully")
     except Exception as e:
         logger.error(f"❌ Error stopping scheduler: {e}")
 
