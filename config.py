@@ -6,6 +6,7 @@ class ChannelIds:
         self.tweeter_trade_alerts = 1229499082884518016
         self.investing_bot = 1389349923962491061
         self.python_bot = 1389360754200936538
+        self.dev_alerts = 1394602221206769734
 
 class UserIds:
     def __init__(self):

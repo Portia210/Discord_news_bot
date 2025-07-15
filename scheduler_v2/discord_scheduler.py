@@ -14,15 +14,18 @@ from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.executors.asyncio import AsyncIOExecutor
 from utils.logger import logger
 from config import config
-
+import pytz
+from .job_summary import JobSummary
 
 class DiscordScheduler:
     """APScheduler-based scheduler with Discord integration"""
     
-    def __init__(self, bot: discord.Client, alert_channel_id: int):
+    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = config.app_timezone):
         self.bot = bot
         self.alert_channel_id = alert_channel_id
-        self.timezone = config.app_timezone
+        self.dev_channel_id = dev_channel_id or config.channel_ids.dev_alerts
+        self.timezone = timezone
+        self.job_summary = JobSummary(timezone)
         
         # Configure APScheduler
         jobstores = {
@@ -46,7 +49,7 @@ class DiscordScheduler:
         self.running = False
     
     async def send_alert(self, message: str, color: int = 0x00ff00, title: str = "📅 Scheduler Alert"):
-        """Send alert to Discord channel"""
+        """Send alert to the main alert channel (for actual data/messages)"""
         try:
             channel = self.bot.get_channel(self.alert_channel_id)
             if channel:
@@ -61,6 +64,23 @@ class DiscordScheduler:
                 logger.error(f"Alert channel {self.alert_channel_id} not found")
         except Exception as e:
             logger.error(f"Error sending alert: {e}")
+    
+    async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
+        """Send alert to the dev channel (for scheduler status, errors, etc.)"""
+        try:
+            channel = self.bot.get_channel(self.dev_channel_id)
+            if channel:
+                embed = discord.Embed(
+                    title=title,
+                    description=message,
+                    color=color,
+                    timestamp=datetime.now(self.timezone)
+                )
+                await channel.send(embed=embed)
+            else:
+                logger.error(f"Dev channel {self.dev_channel_id} not found")
+        except Exception as e:
+            logger.error(f"Error sending dev alert: {e}")
     
     def add_cron_job(self, 
                      func: Callable, 
@@ -95,7 +115,7 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
                     logger.info(f"✅ Job completed: {job_id}")
                     return result
@@ -105,16 +125,22 @@ class DiscordScheduler:
                     logger.error(f"Job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_alert(error_msg, 0xff0000)
+                        await self.send_dev_alert(error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
-                CronTrigger.from_crontab(cron_expression),
+                CronTrigger.from_crontab(cron_expression, timezone=self.timezone),
                 id=job_id,
                 replace_existing=True
             )
             
-            logger.info(f"📅 Added cron job: {job_id} with expression: {cron_expression}")
+            # Track the job for summary
+            self.job_summary.add_job({
+                'id': job_id,
+                'type': 'cron',
+                'expression': cron_expression,
+                'timezone': str(self.timezone)
+            })
             return True
             
         except Exception as e:
@@ -154,7 +180,7 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
                     logger.info(f"✅ One-time job completed: {job_id}")
                     return result
@@ -164,7 +190,7 @@ class DiscordScheduler:
                     logger.error(f"One-time job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_alert(error_msg, 0xff0000)
+                        await self.send_dev_alert(error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -173,7 +199,13 @@ class DiscordScheduler:
                 replace_existing=True
             )
             
-            logger.info(f"📅 Added one-time job: {job_id} for {run_date}")
+            # Track the job for summary
+            self.job_summary.add_job({
+                'id': job_id,
+                'type': 'date',
+                'run_date': str(run_date),
+                'timezone': str(self.timezone)
+            })
             return True
             
         except Exception as e:
@@ -213,7 +245,7 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
                     logger.info(f"✅ Interval job completed: {job_id}")
                     return result
@@ -223,7 +255,7 @@ class DiscordScheduler:
                     logger.error(f"Interval job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_alert(error_msg, 0xff0000)
+                        await self.send_dev_alert(error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -232,7 +264,13 @@ class DiscordScheduler:
                 replace_existing=True
             )
             
-            logger.info(f"📅 Added interval job: {job_id} every {seconds} seconds")
+            # Track the job for summary
+            self.job_summary.add_job({
+                'id': job_id,
+                'type': 'interval',
+                'seconds': seconds,
+                'timezone': str(self.timezone)
+            })
             return True
             
         except Exception as e:
@@ -257,9 +295,7 @@ class DiscordScheduler:
         """Get all jobs"""
         return self.scheduler.get_jobs()
     
-    def get_job_count(self) -> int:
-        """Get number of scheduled jobs"""
-        return len(self.scheduler.get_jobs())
+
     
     def start(self):
         """Start the scheduler"""
@@ -268,11 +304,14 @@ class DiscordScheduler:
             self.running = True
             logger.info("🚀 Discord Scheduler started")
             
-            # Send startup alert
-            asyncio.create_task(self.send_alert(
-                "🚀 **Scheduler Started**\nAll tasks are now active and monitoring.",
+            # Generate and send job summary to dev channel
+            summary = self.generate_job_summary()
+            logger.info(f"📋 Job Summary:\n{summary}")
+            
+            asyncio.create_task(self.send_dev_alert(
+                summary,
                 0x00ff00,
-                "📅 Scheduler Status"
+                "🔧 Scheduler Started"
             ))
     
     def stop(self):
@@ -291,6 +330,14 @@ class DiscordScheduler:
         """Resume the scheduler"""
         self.scheduler.resume()
         logger.info("▶️ Discord Scheduler resumed")
+    
+    def generate_job_summary(self) -> str:
+        """Generate a summary of all scheduled jobs using JobSummary class"""
+        return self.job_summary.generate_summary()
+    
+    def get_job_count(self) -> int:
+        """Get number of tracked jobs"""
+        return self.job_summary.get_job_count()
     
     def get_status(self) -> dict:
         """Get scheduler status"""

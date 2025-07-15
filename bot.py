@@ -49,7 +49,7 @@ async def on_ready():
         global discord_scheduler, calendar_manager, task_definitions
         
         # Initialize scheduler components
-        discord_scheduler = DiscordScheduler(bot, config.channel_ids.investing_bot)
+        discord_scheduler = DiscordScheduler(bot, config.channel_ids.python_bot, config.channel_ids.dev_alerts)
         calendar_manager = CalendarManager(discord_scheduler)
         task_definitions = TaskDefinitions(discord_scheduler, calendar_manager)
         
@@ -63,11 +63,11 @@ async def on_ready():
         discord_scheduler.start()
         logger.info("✅ APScheduler started successfully!")
         
-        # Send startup message
-        await discord_scheduler.send_alert(
+        # Send bot startup message to dev channel
+        await discord_scheduler.send_dev_alert(
             "🚀 **Bot Started Successfully**\n"
-            f"📅 Scheduler active with {discord_scheduler.get_job_count()} tasks\n"
-            "🔔 All alerts will be sent to this channel",
+            "🔔 Dev alerts will be sent to this channel\n"
+            "📊 Data alerts will be sent to the main channel",
             0x00ff00,
             "🤖 Bot Status"
         )
@@ -75,7 +75,7 @@ async def on_ready():
     except Exception as e:
         logger.error(f"❌ Failed to initialize scheduler: {e}")
         if discord_scheduler:
-            await discord_scheduler.send_alert(
+            await discord_scheduler.send_dev_alert(
                 f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
                 0xff0000,
                 "🤖 Bot Status"
