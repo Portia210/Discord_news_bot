@@ -269,16 +269,15 @@ class PdfReportGenerator:
             logger.error(f"❌ Error converting HTML to PDF: {e}")
             return False
     
-    async def generate_pdf_report(self, output_file: str = "news_pdf/output.html", 
-                                pdf_file: str = "news_pdf/output.pdf", report_time: str = 'auto', 
+    async def generate_pdf_report(self, output_pdf: str = "news_pdf/output.pdf", report_time: str = 'auto', 
                                 hours_back: int = 24) -> bool:
         """
         Generate a complete PDF report from news data with price symbols.
         This is the main method for generating reports.
         
         Args:
-            output_file (str): Path for the output HTML file
-            pdf_file (str): Path for the output PDF file
+            output_html (str): Path for the output HTML file
+            output_pdf (str): Path for the output PDF file
             report_time (str): Theme preference ('morning', 'evening', 'auto')
             hours_back (int): Number of hours to look back for news
             
@@ -314,19 +313,20 @@ class PdfReportGenerator:
             
             # Step 5: Save HTML file
             try:
-                write_text_file(output_file, html_content)
-                logger.info(f"✅ HTML file saved: {output_file}")
+                html_file_path = "news_pdf/output.html"
+                write_text_file(html_file_path, html_content)
+                logger.info(f"✅ HTML file saved: {html_file_path}")
             except Exception as e:
                 logger.error(f"❌ Error saving HTML file: {e}")
                 return False
             
             # Step 6: Convert to PDF
-            pdf_success = await self._convert_html_to_pdf(output_file, pdf_file)
+            pdf_success = await self._convert_html_to_pdf(html_file_path, output_pdf)
             if not pdf_success:
                 logger.error("❌ Failed to convert HTML to PDF")
                 return False
             
-            logger.info(f"🎉 PDF report generated successfully: {pdf_file}")
+            logger.info(f"🎉 PDF report generated successfully: {output_pdf}")
             return True
             
         except Exception as e:

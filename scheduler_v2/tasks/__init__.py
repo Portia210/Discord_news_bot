@@ -2,35 +2,30 @@
 Individual Task Functions - Easy to test and edit independently
 """
 
-from .daily_tasks import (
-    daily_schedule_task,
-    market_open_check_task,
-    daily_report_task,
-    morning_greeting_task,
-    evening_summary_task,
-    system_health_check_task,
-    news_check_task,
-    schedule_future_events_task
+from .news_report import (
+    morning_news_report_task,
+    evening_news_report_task
+)
+
+from .economic_calendar_tasks import (
+    get_economic_calendar_task,
+    economic_warning_task,
+    economic_update_task
 )
 
 from .weekly_tasks import (
     weekly_backup_task
 )
 
-# from .custom_tasks import (
-#     # Add your custom tasks here
-# )
-
 __all__ = [
     # Daily tasks
-    'daily_schedule_task',
-    'market_open_check_task', 
-    'daily_report_task',
-    'morning_greeting_task',
-    'evening_summary_task',
-    'system_health_check_task',
-    'news_check_task',
-    'schedule_future_events_task',
+    'morning_news_report_task',
+    'evening_news_report_task',
+    
+    # Economic calendar tasks
+    'get_economic_calendar_task',
+    'economic_warning_task',
+    'economic_update_task',
     
     # Weekly tasks
     'weekly_backup_task',

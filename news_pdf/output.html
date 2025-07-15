@@ -105,147 +105,56 @@
 
     <script>
         // This will be populated by the Python script
-        const newsData = [
-  {
-    "date": "03/07/2025",
-    "time": "14:07:30",
-    "message": "הפנטגון דוחק ביפן ואוסטרליה להבהיר את תפקידן במידה שארצות הברית וסין יילחמו על טייוואן, כך על פי ה-Financial Times.",
-    "link": "https://twitter.com/DeItaone/status/1943986676298396159"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "15:36:00",
-    "message": "טראמפ: מכס של 30% על מוצרים מהאיחוד האירופי.",
-    "link": "https://twitter.com/DeItaone/status/1944013102728536361"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "15:37:00",
-    "message": "טראמפ מודיע על הטלת מכס של 30% על האיחוד האירופי ומקסיקו החל מה-1 באוגוסט.",
-    "link": "https://twitter.com/DeItaone/status/1944013204411109856"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "15:37:00",
-    "message": "טראמפ במכתב לשיינבאום: אם תבחר להעלות את המכסים שלך, כל סכום שתבחר יתווסף ל-30% שלנו.",
-    "link": "https://twitter.com/DeItaone/status/1944013350897430707"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "16:35:00",
-    "message": "איום המכסים של טראמפ על מוצרים מהאיחוד האירופי הוא טקטיקת מיקוח, כך אומרים שלושה פקידים מאיחוד האירופי.",
-    "link": "https://twitter.com/DeItaone/status/1944027863579341092"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "16:37:00",
-    "message": "נשיאת הנציבות האירופית פון דר ליין: ננקוט בכל הצעדים הנדרשים להגן על אינטרסים של האיחוד האירופי, כולל נקיטת צעדי נגד במקרה הצורך.",
-    "link": "https://twitter.com/DeItaone/status/1944028264441557498"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "17:09:00",
-    "message": "דובר האיחוד האירופי: ארה\"ב יידעה את האיחוד האירופי מבעוד מועד על ההודעה על מכסים של 30% על מוצרים מהאיחוד האירופי החל מה-1 באוגוסט.",
-    "link": "https://twitter.com/DeItaone/status/1944036271132643361"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "17:35:00",
-    "message": "משרד הכלכלה המקסיקני: 'מקסיקו נמצאת במשא ומתן'.",
-    "link": "https://twitter.com/DeItaone/status/1944042978722664504"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "18:29:00",
-    "message": "BGA של גרמניה: המסחר העולמי נמצא בכאוס מאז ההצהרות הראשונות של טראמפ על מכסים באפריל.",
-    "link": "https://twitter.com/DeItaone/status/1944056450470314147"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "21:42:00",
-    "message": "משרד הביטחון הלאומי של Noem: שיחות עם חמש מדינות בשליטת הרפובליקנים לבניית אתר מעצר חדש בהשראת \"אלקטרז של התנינים\".",
-    "link": "https://twitter.com/DeItaone/status/1944105026256777279"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "21:48:00",
-    "message": "נשיא מקסיקו, שיינבאום, אומר כי הריבונות של מקסיקו אינה נתונה למשא ומתן.",
-    "link": "https://twitter.com/DeItaone/status/1944106696881975578"
-  },
-  {
-    "date": "03/07/2025",
-    "time": "22:25:00",
-    "message": "@Cokauvinh מאחל לך חג שמח גם לך, אחי! תשמור על עצמך.",
-    "link": "https://twitter.com/DeItaone/status/1944116007444111839"
-  },
-  {
-    "date": "04/07/2025",
-    "time": "00:16:00",
-    "message": "קוריאה הצפונית ורוסיה מבטיחות לשתף פעולה ולשמור על שלמותה הטריטוריאלית של כל אחת.",
-    "link": "https://twitter.com/DeItaone/status/1944143730078101669"
-  },
-  {
-    "date": "04/07/2025",
-    "time": "01:31:00",
-    "message": "SpaceX תשקיע 2 מיליארד דולר ב-X.AI של אלון מאסק לפי WSJ.",
-    "link": "https://twitter.com/DeItaone/status/1944162683080912920"
-  },
-  {
-    "date": "04/07/2025",
-    "time": "13:03:00",
-    "message": "$NVDA - מנכ\"ל Nvidia, Jensen Huang, יקיים תדרוך עיתונאי בבייג׳ינג ב-16 ביולי, כך נמסר מנציג החברה.",
-    "link": "https://twitter.com/DeItaone/status/1944336905946173500"
-  }
-];
+        const newsData = [];
         const reportTime = "morning"; // morning or evening
         const priceSymbols = [
   {
     "ticker": "^GSPC",
     "company": "S&P 500",
-    "price": "6,259.75",
-    "changeAmount": "-20.71",
-    "changePercent": "-0.33%",
-    "isPositive": false
+    "price": "6,281.53",
+    "changeAmount": "12.97",
+    "changePercent": "0.21%",
+    "isPositive": true
   },
   {
     "ticker": "^DJI",
     "company": "Dow 30",
-    "price": "44,371.51",
-    "changeAmount": "-279.13",
-    "changePercent": "-0.63%",
+    "price": "44,324.39",
+    "changeAmount": "-135.26",
+    "changePercent": "-0.30%",
     "isPositive": false
   },
   {
     "ticker": "^IXIC",
     "company": "Nasdaq",
-    "price": "20,585.53",
-    "changeAmount": "-45.14",
-    "changePercent": "-0.22%",
-    "isPositive": false
+    "price": "20,793.49",
+    "changeAmount": "153.16",
+    "changePercent": "0.74%",
+    "isPositive": true
   },
   {
     "ticker": "^RUT",
     "company": "Russell 2000",
-    "price": "2,234.83",
-    "changeAmount": "-28.58",
-    "changePercent": "-1.26%",
+    "price": "2,241.51",
+    "changeAmount": "-8.22",
+    "changePercent": "-0.37%",
     "isPositive": false
   },
   {
     "ticker": "^VIX",
     "company": "VIX",
-    "price": "16.40",
-    "changeAmount": "0.62",
-    "changePercent": "3.93%",
-    "isPositive": true
+    "price": "16.89",
+    "changeAmount": "-0.31",
+    "changePercent": "-1.80%",
+    "isPositive": false
   },
   {
     "ticker": "GC=F",
     "company": "Gold",
-    "price": "3,364.00",
-    "changeAmount": "38.30",
-    "changePercent": "1.15%",
-    "isPositive": true
+    "price": "3,355.10",
+    "changeAmount": "-4.00",
+    "changePercent": "-0.12%",
+    "isPositive": false
   }
 ]; // New data for price symbols
         

@@ -4,9 +4,9 @@ from discord.ext import commands
 from dotenv import load_dotenv
 from utils.logger import logger
 from news_pdf.pdf_report_generator import PdfReportGenerator
-from discord_utils.send_pdf import sendpdf
+from discord_utils.send_pdf import send_pdf
 from config import config
-from scheduler_v2 import DiscordScheduler, CalendarManager, TaskDefinitions
+from scheduler_v2 import DiscordScheduler, TaskDefinitions
 
 # Load environment variables
 load_dotenv()
@@ -50,8 +50,7 @@ async def on_ready():
         
         # Initialize scheduler components
         discord_scheduler = DiscordScheduler(bot, config.channel_ids.python_bot, config.channel_ids.dev_alerts)
-        calendar_manager = CalendarManager(discord_scheduler)
-        task_definitions = TaskDefinitions(discord_scheduler, calendar_manager)
+        task_definitions = TaskDefinitions(discord_scheduler)
         
         logger.info("✅ Scheduler components initialized successfully!")
         

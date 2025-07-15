@@ -39,4 +39,4 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None):
     return logger
 
 # Create default logger instance
-logger = setup_logger()
+logger = setup_logger(name="logger", level=logging.DEBUG, log_file="logger.log")

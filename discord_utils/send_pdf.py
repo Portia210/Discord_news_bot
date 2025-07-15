@@ -1,7 +1,9 @@
 import discord
 from utils.logger import logger
 
-async def sendpdf(bot: discord.Client, channel_id: int, input_file_path: str, message: str, filename_on_discord: str):
+
+
+async def send_pdf(bot: discord.Client, channel_id: int, input_file_path: str, message: str, filename_on_discord: str):
     channel = bot.get_channel(channel_id)
     
     if channel:

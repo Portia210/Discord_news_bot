@@ -7,7 +7,7 @@ from datetime import datetime
 from utils.logger import logger
 
 
-async def weekly_backup_task(discord_scheduler=None, calendar_manager=None):
+async def weekly_backup_task(discord_scheduler=None):
     """Weekly backup task - runs on Sunday at 9:00 AM"""
     try:
         logger.info("💾 Starting weekly backup...")

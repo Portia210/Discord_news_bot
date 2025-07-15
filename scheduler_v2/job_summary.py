@@ -58,6 +58,17 @@ class JobSummary:
             return f"{hour.zfill(2)}:{minute.zfill(2)}"
         return "00:00"
     
+    def _format_date_time(self, date_str: str) -> str:
+        """Format date string to readable time without microseconds"""
+        try:
+            # Parse the datetime string
+            dt = datetime.fromisoformat(date_str.replace('Z', '+00:00'))
+            # Format without microseconds
+            return dt.strftime('%Y-%m-%d %H:%M:%S')
+        except Exception as e:
+            logger.error(f"Error formatting date: {e}")
+            return date_str
+    
     def generate_summary(self) -> str:
         """Generate a comprehensive summary of all scheduled jobs"""
         if not self.jobs_added:
@@ -86,7 +97,8 @@ class JobSummary:
         if date_jobs:
             summary += "📅 **One-time Jobs (sorted by date):**\n"
             for job in date_jobs:
-                summary += f"  • `{job['id']}` - `{job['run_date']}`\n"
+                formatted_date = self._format_date_time(job['run_date'])
+                summary += f"  • `{job['id']}` - `{formatted_date}`\n"
             summary += "\n"
         
         # Format interval jobs section

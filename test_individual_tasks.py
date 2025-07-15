@@ -19,7 +19,7 @@ async def test_specific_task(task_name: str):
     
     try:
         # Import all task modules
-        from scheduler_v2.tasks.daily_tasks import (
+        from scheduler_v2.tasks.news_report import (
             daily_report_task,
             daily_schedule_task,
             evening_summary_task,
