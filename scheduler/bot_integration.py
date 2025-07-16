@@ -5,9 +5,8 @@ Bot Integration - Simple integration with Discord bot
 import discord
 from discord.ext import commands
 from utils.logger import logger
-from config import config
+from config import Config
 from scheduler.core import Scheduler
-from scheduler.calendar_manager import CalendarManager
 from scheduler.task_definitions import TaskDefinitions
 
 
@@ -16,7 +15,7 @@ class BotScheduler:
     
     def __init__(self, bot: discord.Client, alert_channel_id: int = None):
         self.bot = bot
-        self.alert_channel_id = alert_channel_id or config.channel_ids.tweeter_news
+        self.alert_channel_id = alert_channel_id or Config.CHANNEL_IDS.TWEETER_NEWS
         
         # Initialize components
         self.calendar_manager = CalendarManager(bot, self.alert_channel_id)
@@ -129,36 +128,3 @@ class SchedulerCommands(commands.Cog):
             await ctx.send("📅 No economic events scheduled for today")
 
 
-# Example usage in your bot
-"""
-# In your bot.py file:
-
-from scheduler.bot_integration import BotScheduler, SchedulerCommands
-
-class YourBot(commands.Bot):
-    def __init__(self):
-        super().__init__(command_prefix='!', intents=discord.Intents.all())
-        self.bot_scheduler = None
-    
-    async def setup_hook(self):
-        # Initialize scheduler
-        self.bot_scheduler = BotScheduler(
-            bot=self,
-            alert_channel_id=YOUR_ALERT_CHANNEL_ID
-        )
-        
-        # Start scheduler
-        await self.bot_scheduler.start()
-        
-        # Add commands
-        await self.add_cog(SchedulerCommands(self.bot_scheduler))
-    
-    async def close(self):
-        if self.bot_scheduler:
-            await self.bot_scheduler.stop()
-        await super().close()
-
-# Usage:
-bot = YourBot()
-bot.run('YOUR_BOT_TOKEN')
-""" 

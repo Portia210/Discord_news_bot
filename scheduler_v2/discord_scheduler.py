@@ -13,17 +13,17 @@ from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.executors.asyncio import AsyncIOExecutor
 from utils.logger import logger
-from config import config
+from config import Config
 import pytz
 from .job_summary import JobSummary
 
 class DiscordScheduler:
     """APScheduler-based scheduler with Discord integration"""
     
-    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = config.app_timezone, post_event_delay: int = 3):
+    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), post_event_delay: int = 3):
         self.bot = bot
         self.alert_channel_id = alert_channel_id
-        self.dev_channel_id = dev_channel_id or config.channel_ids.dev_alerts
+        self.dev_channel_id = dev_channel_id or Config.CHANNEL_IDS.DEV
         self.timezone = timezone
         self.post_event_delay = post_event_delay  # Delay in seconds for post-event updates
         self.job_summary = JobSummary(timezone)

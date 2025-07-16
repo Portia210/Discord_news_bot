@@ -5,8 +5,9 @@ Test script to verify modular task structure
 
 import asyncio
 from datetime import datetime
-from config import config
+from config import Config
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
+import pytz
 
 class MockBot:
     def get_channel(self, channel_id):
@@ -30,7 +31,7 @@ async def test_modular_tasks():
         bot=mock_bot,
         alert_channel_id=987654321,
         dev_channel_id=123456789,
-        timezone=config.app_timezone,
+        timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE),
         post_event_delay=3  # Configurable delay for post-event updates
     )
     

@@ -1,7 +1,8 @@
 import discord
 from datetime import datetime, timezone, timedelta
 from utils.logger import logger
-from config import config
+import pytz
+from config import Config
 import os
 
 class MessageHandler:
@@ -28,7 +29,7 @@ class MessageHandler:
     
     def _get_timestamp(self):
         """Get current timestamp in milliseconds"""
-        return int(datetime.now(config.app_timezone).timestamp() * 1000)
+        return int(datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).timestamp() * 1000)
     
     def _get_user_names(self, user_ids: list) -> list:
         """Get user names from user IDs"""
@@ -126,7 +127,7 @@ class MessageHandler:
             # Write messages to file
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(f"Channel: {channel_name}\n")
-                f.write(f"Exported: {datetime.now(config.app_timezone).strftime('%Y-%m-%d %H:%M:%S')}\n")
+                f.write(f"Exported: {datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).strftime('%Y-%m-%d %H:%M:%S')}\n")
                 f.write(f"Messages from last {hours_back} hours\n")
                 f.write(f"Written by: {user_names}\n")
                 f.write("=" * 50 + "\n\n")

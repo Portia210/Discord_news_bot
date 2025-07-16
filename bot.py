@@ -1,16 +1,12 @@
 import os
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 from utils.logger import logger
 from news_pdf.pdf_report_generator import PdfReportGenerator
 from discord_utils.send_pdf import send_pdf
-from config import config
+from config import Config
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
 
-# Load environment variables
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Set up bot with intents
 intents = discord.Intents.default()
@@ -49,7 +45,7 @@ async def on_ready():
         global discord_scheduler, calendar_manager, task_definitions
         
         # Initialize scheduler components
-        discord_scheduler = DiscordScheduler(bot, config.channel_ids.python_bot, config.channel_ids.dev_alerts)
+        discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
         task_definitions = TaskDefinitions(discord_scheduler)
         
         logger.info("✅ Scheduler components initialized successfully!")
@@ -79,13 +75,6 @@ async def on_ready():
                 0xff0000,
                 "🤖 Bot Status"
             )
-    
-    # # Process and send daily news report
-    # pdf_generator = PdfReportGenerator(bot)
-    # pdf_success = await pdf_generator.generate_pdf_report()
-    # if pdf_success:
-    #     await sendpdf(bot, config.channel_ids.python_bot, "news_pdf/output.pdf", "Daily News Report", "daily_news_report.pdf")
-
 
 
 async def load_cogs():
@@ -123,12 +112,12 @@ async def cleanup():
 
 def main():
     """Main entry point"""
-    if not TOKEN:
+    if not Config.TOKENS.DISCORD:
         raise ValueError("No Discord token found. Please check your .env file.")
     
     try:
         # Use bot.run() instead of asyncio.run() to avoid loop conflicts
-        bot.run(TOKEN)
+        bot.run(Config.TOKENS.DISCORD)
     except KeyboardInterrupt:
         logger.info("Bot shutdown requested by user (Ctrl+C)")
         logger.info("Shutting down gracefully...")

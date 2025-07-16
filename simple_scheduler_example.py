@@ -11,8 +11,9 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from apscheduler.triggers.date import DateTrigger
 from apscheduler.triggers.interval import IntervalTrigger
-from config import config
+from config import Config
 from scheduler_v2 import DiscordScheduler
+import pytz
 
 # ============================================================================
 # STEP 1: Basic APScheduler Example (No Discord)
@@ -24,11 +25,11 @@ async def basic_apscheduler_example():
     print("=" * 50)
     
     # Create a simple scheduler
-    scheduler = AsyncIOScheduler(timezone=config.app_timezone)
+    scheduler = AsyncIOScheduler(timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
     
     # Task 1: Simple function that prints current time
     async def print_time():
-        now = datetime.now(config.app_timezone)
+        now = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
         print(f"🕐 Current time: {now.strftime('%H:%M:%S')}")
     
     # Task 2: Function that counts executions
@@ -64,7 +65,7 @@ async def basic_apscheduler_example():
     print("✅ Added: Count executions every 30 seconds")
     
     # Job 3: Run in 1 minute (one-time)
-    future_time = datetime.now(config.app_timezone) + timedelta(minutes=1)
+    future_time = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)) + timedelta(minutes=1)
     scheduler.add_job(
         show_message,
         DateTrigger(run_date=future_time),
@@ -95,11 +96,11 @@ async def cron_jobs_example():
     print("🔍 Cron Jobs Example")
     print("=" * 50)
     
-    scheduler = AsyncIOScheduler(timezone=config.app_timezone)
+    scheduler = AsyncIOScheduler(timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
     
     # Task: Print current time and day
     async def print_time_and_day():
-        now = datetime.now(config.app_timezone)
+        now = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
         day_name = now.strftime('%A')
         print(f"📅 {day_name} at {now.strftime('%H:%M:%S')}")
     
@@ -109,7 +110,7 @@ async def cron_jobs_example():
     # Job 1: Every minute (for demonstration)
     scheduler.add_job(
         print_time_and_day,
-        CronTrigger.from_crontab("* * * * *", timezone=config.app_timezone),
+        CronTrigger.from_crontab("* * * * *", timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)),
         id="every_minute",
         replace_existing=True
     )
@@ -118,18 +119,18 @@ async def cron_jobs_example():
     # Job 2: Every 2 minutes
     scheduler.add_job(
         lambda: print("🔄 Every 2 minutes task"),
-        CronTrigger.from_crontab("*/2 * * * *", timezone=config.app_timezone),
+        CronTrigger.from_crontab("*/2 * * * *", timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)),
         id="every_2_minutes",
         replace_existing=True
     )
     print("✅ Added: Every 2 minutes")
     
     # Job 3: At specific times (if current minute is 0, 15, 30, or 45)
-    current_minute = datetime.now(config.app_timezone).minute
+    current_minute = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).minute
     if current_minute in [0, 15, 30, 45]:
         scheduler.add_job(
             lambda: print("🎯 Quarter-hour task"),
-            CronTrigger.from_crontab("0,15,30,45 * * * *", timezone=config.app_timezone),
+            CronTrigger.from_crontab("0,15,30,45 * * * *", timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)),
             id="quarter_hour",
             replace_existing=True
         )
@@ -170,7 +171,7 @@ async def discord_scheduler_example():
     scheduler = DiscordScheduler(
         bot=mock_bot,
         dev_channel_id=123456789,
-        timezone=config.app_timezone
+        timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
     )
     
     # Task 1: Simple greeting
@@ -220,7 +221,7 @@ async def discord_scheduler_example():
     print("✅ Added: Weather check every 3 minutes")
     
     # Job 3: Reminder in 1 minute
-    future_time = datetime.now(config.app_timezone) + timedelta(minutes=1)
+    future_time = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)) + timedelta(minutes=1)
     scheduler.add_date_job(
         reminder_task,
         run_date=future_time,
@@ -251,11 +252,11 @@ async def interactive_example():
     print("🔍 Interactive Example")
     print("=" * 50)
     
-    scheduler = AsyncIOScheduler(timezone=config.app_timezone)
+    scheduler = AsyncIOScheduler(timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
     
     # Task that shows job information
     async def show_job_info(job_name):
-        now = datetime.now(config.app_timezone)
+        now = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
         print(f"🎯 {job_name} executed at {now.strftime('%H:%M:%S')}")
     
     # Add jobs with different timing
@@ -264,7 +265,7 @@ async def interactive_example():
     # Immediate job (runs in 5 seconds)
     scheduler.add_job(
         lambda: show_job_info("Immediate"),
-        DateTrigger(run_date=datetime.now(config.app_timezone) + timedelta(seconds=5)),
+        DateTrigger(run_date=datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)) + timedelta(seconds=5)),
         id="immediate_job"
     )
     print("✅ Added: Immediate job (5 seconds)")

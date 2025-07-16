@@ -7,7 +7,7 @@ import pytz
 from datetime import datetime, time, timedelta
 from typing import Dict, List, Optional
 from utils.logger import logger
-from config import config
+from config import Config
 from scheduler.tasks import Task
 
 
@@ -15,7 +15,7 @@ class Scheduler:
     """Main scheduler class for managing tasks"""
     
     def __init__(self, timezone: pytz.timezone = None):
-        self.timezone = timezone or config.app_timezone
+        self.timezone = timezone or pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         self.tasks: Dict[str, Task] = {}
         self.running = False
         self.task_handles: Dict[str, asyncio.Task] = {}

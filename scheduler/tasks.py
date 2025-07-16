@@ -6,7 +6,7 @@ import pytz
 from datetime import datetime, time, timedelta
 from typing import Callable, List, Optional
 from utils.logger import logger
-from config import config
+from config import Config
 
 
 class TaskCondition:
@@ -45,7 +45,7 @@ class Task:
         self.time_str = time_str
         self.days = days or ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
         self.conditions = conditions or []
-        self.timezone = timezone or config.app_timezone
+        self.timezone = timezone or pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         self.is_running = False
         
         # Parse time

@@ -5,7 +5,8 @@ from datetime import datetime, timedelta
 from utils.logger import logger
 import os
 import pandas as pd
-from config import config
+import pytz
+from config import Config
 from utils.read_write import read_json_file
 from utils.safe_update_dict import safe_update_dict
 import json
@@ -148,7 +149,7 @@ class InvestingDataScraper:
             current_tab: str=InvestingVariables.TIME_RANGES.TODAY, 
             importance: list[str]=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH], 
             countries: list[str]=[InvestingVariables.COUNTRIES.UNITED_STATES], 
-            time_zone: str=config.app_timezone, 
+            time_zone: str=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), 
             date_from: str = None, 
             date_to: str = None, 
             save_data: bool = False):

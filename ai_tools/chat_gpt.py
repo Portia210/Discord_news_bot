@@ -2,14 +2,13 @@ import os
 from openai import OpenAI
 from utils.logger import logger
 from utils.read_write import read_text_file, write_json_file
-from dotenv import load_dotenv
 import re
 import json
-load_dotenv(override=True)
+from config import Config
 
 class AIInterpreter:
     def __init__(self):
-        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+        self.openai_api_key = Config.TOKENS.OPENAI
         if not self.openai_api_key:
             logger.error("OpenAI API key not found in environment variables")
         
@@ -65,9 +64,18 @@ class AIInterpreter:
 
 if __name__ == "__main__":
     ai_interpreter = AIInterpreter()
-    messages = read_text_file("data/messages export/twitter-news_last_24_hours_filtered_1users_1751553550546.txt")
+    messages = """
+    message 1: this morning the US CPI data was released and it was higher than expected.
+    message 2: the US Fed is expected to raise interest rates by 0.25% next week.
+    message 3: the US unemployment rate is expected to remain at 3.7%.
+    message 4: the US GDP is expected to grow by 2.5% next year.
+    message 5: the US inflation rate is expected to remain at 2.5% next year.
+    message 6: the US unemployment rate is expected to remain at 3.7%.
+    message 7: the US GDP is expected to grow by 2.5% next year.
+    message 8: the US inflation rate is expected to remain at 2.5% next year.
+"""
     
 
-    news_summary_prompt = read_text_file("ai_tools/prompts/news_to_json_summary_prompt.txt") + messages
+    news_summary_prompt = read_text_file("ai_tools/prompts/news_summary_hebrew.txt") + messages
     response = ai_interpreter.get_json_response(news_summary_prompt)
     write_json_file("news_pdf/news_data.json", response)

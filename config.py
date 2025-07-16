@@ -1,26 +1,42 @@
-import pytz
+import os
+from enum import StrEnum, IntEnum
+from dotenv import load_dotenv
 
-class ChannelIds:
-    def __init__(self):
-        self.tweeter_news = 1328615279697330227
-        self.tweeter_trade_alerts = 1229499082884518016
-        self.investing_bot = 1389349923962491061
-        self.python_bot = 1389360754200936538
-        self.dev_alerts = 1394602221206769734
+# Load environment variables from .env file
+load_dotenv()
 
-class UserIds:
-    def __init__(self):
-        self.ifitt_bot = 832731781231804447
-        self.python_bot = 1358545327551942887
-        self.admin = 949994517774364682
+class Tokens(StrEnum):
+    DISCORD = os.getenv("DISCORD_TOKEN")
+    OPENAI = os.getenv("OPENAI_API_KEY")
 
+class ChannelIds(IntEnum):
+    TWEETER_NEWS = 1328615279697330227
+    TWEETER_TRADE_ALERTS = 1229499082884518016
+    INVESTING_BOT = 1389349923962491061
+    PYTHON_BOT = 1389360754200936538
+    DEV = 1394602221206769734
+
+class UserIds(IntEnum):
+    IFITT_BOT = 832731781231804447
+    PYTHON_BOT = 1358545327551942887
+    ADMIN = 949994517774364682
+
+class Proxy(StrEnum):
+    HOST = os.getenv("PROXY_HOST", "brd.superproxy.io")
+    PORT = os.getenv("PROXY_PORT", "33335")
+    CUSTOMER_ID = os.getenv("PROXY_CUSTOMER_ID", "hl_9884942f")
+    ZONE = os.getenv("PROXY_ZONE", "isp_proxy1")
+    PASSWORD = os.getenv("PROXY_PASSWORD", "ky8psv0nqmev")
+
+class Timezones(StrEnum):
+    EASTERN_US = "America/New_York"
+    ISRAEL = "Asia/Jerusalem"
+    APP_TIMEZONE = ISRAEL
 
 class Config:
-    def __init__(self):
-        self.channel_ids = ChannelIds()
-        self.user_ids = UserIds()
-        self.eastern_timezone = pytz.timezone('America/New_York')
-        self.israel_timezone = pytz.timezone('Asia/Jerusalem')
-        self.app_timezone = self.israel_timezone
+    CHANNEL_IDS = ChannelIds
+    USER_IDS = UserIds
+    PROXY = Proxy
+    TIMEZONES = Timezones
+    TOKENS = Tokens
 
-config = Config()

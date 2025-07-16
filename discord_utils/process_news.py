@@ -2,13 +2,13 @@ from utils.logger import logger
 from discord_utils.message_handler import get_message_handler
 from ai_tools.chat_gpt import AIInterpreter
 from utils.read_write import read_text_file, write_json_file
-from config import config
+from config import Config
 import discord
 from datetime import datetime
 
 
 
-async def process_news_to_list(discord_bot: discord.Client, hours_back: int = 24, news_channel_id: int = config.channel_ids.tweeter_news, list_of_users: list = [config.user_ids.ifitt_bot]):
+async def process_news_to_list(discord_bot: discord.Client, hours_back: int = 24, news_channel_id: int = Config.CHANNEL_IDS.TWEETER_NEWS, list_of_users: list = [Config.USER_IDS.IFITT_BOT]):
     """
     Complete pipeline to process news messages and send PDF report to Discord.
     Handles: message export → AI processing → PDF generation → Discord sending

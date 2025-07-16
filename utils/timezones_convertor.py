@@ -1,9 +1,9 @@
 from dateutil import parser
 import pytz
-from config import config
+from config import Config
 from datetime import datetime
 
-def convert_to_my_timezone(timestamp_str, my_timezone=config.eastern_timezone):
+def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZONES.EASTERN_US)):
     """
     Convert any ISO timestamp to your timezone
     
@@ -48,5 +48,5 @@ if __name__ == "__main__":
 
     # Convert to Eastern Time
     for ts in timestamps:
-        eastern_time = convert_to_my_timezone(ts, config.eastern_timezone)
+        eastern_time = convert_to_my_timezone(ts, pytz.timezone(Config.TIMEZONES.EASTERN_US))
         print(f"{ts} -> Eastern: {eastern_time}")

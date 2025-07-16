@@ -14,7 +14,7 @@ from .tasks.news_report import (
 from .tasks.economic_calendar_tasks import get_economic_calendar_task
 from .tasks.weekly_tasks import weekly_backup_task
 from time import time
-from config import config
+from config import Config
 
 class TaskDefinitions:
     """Task definitions using APScheduler with cron expressions"""

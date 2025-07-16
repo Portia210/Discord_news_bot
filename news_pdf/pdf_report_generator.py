@@ -13,7 +13,8 @@ from utils.logger import logger
 from utils.read_write import read_text_file, write_text_file, read_json_file
 from yf_scraper.yf_requests import YfRequests
 from yf_scraper.qoute_fields import QouteFields as qf
-from config import config
+import pytz
+from config import Config
 import discord
 from discord_utils.process_news import process_news_to_list
 
@@ -185,7 +186,7 @@ class PdfReportGenerator:
             return report_time
         
         # Auto-detect based on current time
-        current_hour = datetime.now(config.app_timezone).hour
+        current_hour = datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).hour
         
         if 6 <= current_hour < 18:
             return 'morning'
