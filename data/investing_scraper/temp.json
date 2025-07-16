@@ -1,70 +1,43 @@
 {
-    "יום שלישי, 15 ביולי, 2025": [
+    "יום רביעי, 16 ביולי, 2025": [
         {
-            "time": "14:00",
+            "time": "15:30",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
-            "description": "הדוח החודשי של אופ“ק",
+            "description": "מדד המחירים ליצרן - ליבה (חודשי)  (יוני)",
             "actual": null,
-            "forecast": null,
-            "previous": null
-        },
-        {
-            "time": "15:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מדד המחירים לצרכן - ליבה (שנתי)  (יוני)",
-            "actual": "2.9%",
-            "forecast": "3.0%",
-            "previous": "2.8%"
-        },
-        {
-            "time": "15:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מדד המחירים לצרכן - ליבה (חודשי)  (יוני)",
-            "actual": "0.2%",
-            "forecast": "0.3%",
+            "forecast": "0.2%",
             "previous": "0.1%"
         },
         {
             "time": "15:30",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מדד המחירים לצרכן (שנתי)  (יוני)",
-            "actual": "2.7%",
-            "forecast": "2.6%",
-            "previous": "2.4%"
-        },
-        {
-            "time": "15:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מדד המחירים לצרכן (חודשי)  (יוני)",
-            "actual": "0.3%",
-            "forecast": "0.3%",
+            "description": "מדד המחירים ליצרן (חודשי)  (יוני)",
+            "actual": null,
+            "forecast": "0.2%",
             "previous": "0.1%"
-        },
-        {
-            "time": "15:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מדד הייצור של האמפייר סטייט  (יולי)",
-            "actual": "5.50",
-            "forecast": "-8.30",
-            "previous": "-16.00"
         },
         {
             "time": "16:15",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
-            "description": "חברת ועדת השוק הפתוח באומן נושאת דברים",
+            "description": "ייצור תעשייתי (חודשי)  (יוני)",
             "actual": null,
-            "forecast": null,
-            "previous": null
+            "forecast": "0.1%",
+            "previous": "-0.2%"
         },
         {
-            "time": "19:45",
+            "time": "16:15",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "ייצור תעשייתי (שנתי)  (יוני)",
+            "actual": null,
+            "forecast": null,
+            "previous": "0.60%"
+        },
+        {
+            "time": "17:00",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
             "description": "סגן יו\"ר הפד לענייני פיקוח באר נושא דברים",
@@ -73,13 +46,40 @@
             "previous": null
         },
         {
+            "time": "17:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מלאי נפט גולמי",
+            "actual": null,
+            "forecast": "-1.800M",
+            "previous": "7.070M"
+        },
+        {
+            "time": "17:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מלאי נפט גולמי קושינג אוקלהומה",
+            "actual": null,
+            "forecast": null,
+            "previous": "0.464M"
+        },
+        {
+            "time": "21:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "ספר הבז'",
+            "actual": null,
+            "forecast": null,
+            "previous": null
+        },
+        {
             "time": "23:30",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
-            "description": "מלאי נפט שבועי - API",
+            "description": "חבר הוועדה הפדרלית לשוק פתוח וויליאמס נואם",
             "actual": null,
-            "forecast": "-2.000M",
-            "previous": "7.100M"
+            "forecast": null,
+            "previous": null
         }
     ]
 }

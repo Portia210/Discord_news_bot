@@ -1,0 +1,33 @@
+2025-07-16 08:21:58 - logger - INFO - [bot.py:29] - python_bot#6430 has connected to Discord!
+2025-07-16 08:21:58 - logger - INFO - [bot.py:30] - Bot is in 1 guilds
+2025-07-16 08:21:58 - logger - INFO - [bot.py:112] - Successfully loaded 7/7 cogs
+2025-07-16 08:21:59 - logger - INFO - [bot.py:38] - Commands synced successfully!
+2025-07-16 08:21:59 - logger - INFO - [bot.py:42] - Available slash commands: []
+2025-07-16 08:21:59 - logger - INFO - [bot.py:43] - Available text commands: ['clean', 'test', 'greet', 'help', 'ping', 'sync', 'export', 'hello']
+2025-07-16 08:21:59 - logger - INFO - [bot.py:55] - ✅ Scheduler components initialized successfully!
+2025-07-16 08:21:59 - logger - INFO - [task_definitions.py:27] - 📅 Setting up all scheduled tasks...
+2025-07-16 08:21:59 - logger - INFO - [task_definitions.py:44] - ✅ All tasks setup completed
+2025-07-16 08:21:59 - logger - INFO - [bot.py:59] - ✅ All tasks setup completed
+2025-07-16 08:21:59 - logger - INFO - [discord_scheduler.py:306] - 🚀 Discord Scheduler started
+2025-07-16 08:21:59 - logger - INFO - [discord_scheduler.py:310] - 📋 Job Summary:
+📋 **Scheduled Jobs Summary** (5 total)
+
+🕐 **Cron Jobs (sorted by time):**
+  • `08:00` - `economic_calendar_check` - `0 8 * * 1-5`
+  • `09:00` - `weekly_backup` - `0 9 * * 0`
+  • `16:00` - `morning_news_report` - `0 16 * * *`
+  • `23:00` - `evening_news_report` - `0 23 * * *`
+
+📅 **One-time Jobs (sorted by date):**
+  • `economic_calendar_startup` - `2025-07-16 11:22:04`
+
+🌍 **Timezone:** Asia/Jerusalem
+2025-07-16 08:21:59 - logger - INFO - [bot.py:63] - ✅ APScheduler started successfully!
+2025-07-16 08:22:04 - logger - INFO - [discord_scheduler.py:172] - 🚀 Executing one-time job: economic_calendar_startup
+2025-07-16 08:22:04 - logger - INFO - [economic_calendar_tasks.py:18] - 📊 Fetching economic calendar...
+2025-07-16 08:22:04 - logger - DEBUG - [InvestingDataScraper.py:20] - Initialized investing scraper
+2025-07-16 08:22:04 - logger - DEBUG - [InvestingDataScraper.py:36] - Fetching table data for economic_calendar
+2025-07-16 08:22:04 - logger - ERROR - [InvestingDataScraper.py:43] - Failed to fetch page. Status code: 403
+2025-07-16 08:22:04 - logger - ERROR - [InvestingDataScraper.py:129] - Failed to fetch table data for economic_calendar
+2025-07-16 08:22:04 - logger - WARNING - [economic_calendar_tasks.py:34] - ⚠️ No economic calendar data received
+2025-07-16 08:22:04 - logger - INFO - [discord_scheduler.py:186] - ✅ One-time job completed: economic_calendar_startup

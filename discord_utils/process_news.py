@@ -26,7 +26,7 @@ async def process_news_to_list(discord_bot: discord.Client, hours_back: int = 24
         """
         try:
             ai_interpreter = AIInterpreter()
-            news_summary_prompt = read_text_file("ai_tools/prompts/news_to_hebrew_json_prompt.txt") + "\n".join(messages)
+            news_summary_prompt = read_text_file("ai_tools/prompts/news_summary_hebrew.txt") + "\n".join(messages)
             response = ai_interpreter.get_json_response(news_summary_prompt)
             return response
         except Exception as e:

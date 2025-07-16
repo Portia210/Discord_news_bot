@@ -1,7 +1,10 @@
 import logging
 from logging.handlers import RotatingFileHandler
+import pytz
+from datetime import datetime
+from config import config
 
-def setup_logger(name="logger", level=logging.DEBUG, log_file=None):
+def setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone=None):
     """
     Sets up a logger with both console and file handlers.
     
@@ -17,8 +20,21 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None):
     logger.setLevel(level)
 
     if not logger.hasHandlers():
+        # Custom formatter class for timezone support
+        class TimezoneFormatter(logging.Formatter):
+            def formatTime(self, record, datefmt=None):
+                # Convert float timestamp time, by default as the local timezone
+                dt = datetime.fromtimestamp(record.created)
+                # Convert to app timezone if provided
+                if app_timezone:
+                    dt = dt.astimezone(app_timezone)
+                if datefmt:
+                    return dt.strftime(datefmt)
+                else:
+                    return dt.strftime("%Y-%m-%d %H:%M:%S")
+
         # Formatter with filename and line number
-        formatter = logging.Formatter(
+        formatter = TimezoneFormatter(
             "%(asctime)s - %(name)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s",
             datefmt="%Y-%m-%d %H:%M:%S"
         )
@@ -39,4 +55,8 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None):
     return logger
 
 # Create default logger instance
-logger = setup_logger(name="logger", level=logging.DEBUG, log_file="logger.log")
+logger = setup_logger(name="logger", level=logging.DEBUG, log_file="logger.log", app_timezone=config.app_timezone)
+
+
+if __name__ == "__main__":
+    logger.info("Hello, world!")
