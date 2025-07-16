@@ -9,7 +9,7 @@ PROXY_CUSTOMER_ID = Config.PROXY.CUSTOMER_ID
 PROXY_ZONE = Config.PROXY.ZONE
 PROXY_PASSWORD = Config.PROXY.PASSWORD
 # TARGET_URL must be set manually, as config.urls does not exist
-TARGET_URL = "https://example.com"  # <-- Set your target URL here
+TARGET_URL = "https://investing.com/news/stock-market-news"  # <-- Set your target URL here
 
 proxy_user = f"brd-customer-{PROXY_CUSTOMER_ID}-zone-{PROXY_ZONE}"
 proxy_pass = PROXY_PASSWORD

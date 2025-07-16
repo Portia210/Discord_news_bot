@@ -1,85 +1,16 @@
 {
-    "יום רביעי, 16 ביולי, 2025": [
+    "03.07.2025": [
         {
-            "time": "15:30",
             "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מדד המחירים ליצרן - ליבה (חודשי)  (יוני)",
-            "actual": null,
-            "forecast": "0.2%",
-            "previous": "0.1%"
-        },
+            "exchange_name": "בורסת המניות של ניו יורק",
+            "holiday": "יום העצמאות - שעת סגירה מוקדמת - 13:00"
+        }
+    ],
+    "04.07.2025": [
         {
-            "time": "15:30",
             "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מדד המחירים ליצרן (חודשי)  (יוני)",
-            "actual": null,
-            "forecast": "0.2%",
-            "previous": "0.1%"
-        },
-        {
-            "time": "16:15",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ייצור תעשייתי (חודשי)  (יוני)",
-            "actual": null,
-            "forecast": "0.1%",
-            "previous": "-0.2%"
-        },
-        {
-            "time": "16:15",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ייצור תעשייתי (שנתי)  (יוני)",
-            "actual": null,
-            "forecast": null,
-            "previous": "0.60%"
-        },
-        {
-            "time": "17:00",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "סגן יו\"ר הפד לענייני פיקוח באר נושא דברים",
-            "actual": null,
-            "forecast": null,
-            "previous": null
-        },
-        {
-            "time": "17:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מלאי נפט גולמי",
-            "actual": null,
-            "forecast": "-1.800M",
-            "previous": "7.070M"
-        },
-        {
-            "time": "17:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מלאי נפט גולמי קושינג אוקלהומה",
-            "actual": null,
-            "forecast": null,
-            "previous": "0.464M"
-        },
-        {
-            "time": "21:00",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ספר הבז'",
-            "actual": null,
-            "forecast": null,
-            "previous": null
-        },
-        {
-            "time": "23:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "חבר הוועדה הפדרלית לשוק פתוח וויליאמס נואם",
-            "actual": null,
-            "forecast": null,
-            "previous": null
+            "exchange_name": "בורסת המניות של ניו יורק",
+            "holiday": "יום העצמאות"
         }
     ]
 }

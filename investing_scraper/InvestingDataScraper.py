@@ -13,12 +13,16 @@ import json
 from investing_scraper.investing_variables import InvestingVariables
 from utils.read_write import write_json_file
 import asyncio
+from utils.proxy_decorator import ProxyConfig, create_proxy_session
 
 
 class InvestingDataScraper:
-    def __init__(self):
+    def __init__(self, proxy_config: ProxyConfig = None):
         self.headers = read_json_file(f'investing_scraper/headers.json')
+        self.proxy_config = proxy_config
         logger.debug(f"Initialized investing scraper")
+        if proxy_config:
+            logger.info(f"Using proxy: {proxy_config.proxy_url}")
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):
@@ -37,7 +41,9 @@ class InvestingDataScraper:
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
         
-        async with aiohttp.ClientSession() as session:
+        # Use proxy session if configured
+        session = create_proxy_session(self.proxy_config)
+        async with session as session:
             async with session.post(request_json['url'], headers=self.headers, data=payload) as response:
                 # logger.debug(f"Request body: {payload}")
                 if response.status != 200:
@@ -168,9 +174,18 @@ class InvestingDataScraper:
     
 
 if __name__ == "__main__":
+    # Example with proxy (uncomment and configure as needed)
+    # proxy_config = ProxyConfig(
+    #     proxy_url="your-proxy-server.com:8080",
+    #     proxy_username="your_username",
+    #     proxy_password="your_password"
+    # )
+    # investing_scraper = InvestingDataScraper(proxy_config=proxy_config)
+    
+    # Without proxy (default)
     investing_scraper = InvestingDataScraper()
+    
     for value in InvestingVariables.IMPORTANCE:
-
         result = asyncio.run(investing_scraper.get_calendar(
             calendar_name= InvestingVariables.CALENDARS.HOLIDAY_CALENDAR,
             current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
