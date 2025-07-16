@@ -11,6 +11,7 @@ from investing_scraper.InvestingDataScraper import InvestingDataScraper
 from investing_scraper.investing_variables import InvestingVariables
 from config import Config
 import pytz
+from utils.proxy_decorator import ProxyConfig
 
 
 async def get_economic_calendar_task(discord_scheduler=None):
@@ -18,8 +19,16 @@ async def get_economic_calendar_task(discord_scheduler=None):
     try:
         logger.info("📊 Fetching economic calendar...")
         
-        # Get calendar data using InvestingDataScraper
-        scraper = InvestingDataScraper()
+        proxy_config = ProxyConfig(
+            proxy_url=Config.PROXY.HOST,
+            proxy_username=Config.PROXY.CUSTOMER_ID,
+            proxy_password=Config.PROXY.PASSWORD,
+            proxy_type="http"
+        )
+    
+        # Test with proxy
+        scraper = InvestingDataScraper(proxy_config=proxy_config)
+    
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,

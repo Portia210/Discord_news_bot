@@ -136,12 +136,12 @@ class InvestingDataScraper:
             logger.error(f"Failed to fetch table data for {page_name}")
             return None
         events_by_dates = self._process_table_data(page_name, table_html)
-        write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
         if events_by_dates == {}:
             logger.error(f"No events found for {page_name}")
             return 
         
         flat_data = self.flatten_data(events_by_dates)
+        write_json_file(f"data/investing_scraper/temp.json", flat_data)
         if save_data:
             self._save_data(f"{page_name}_{datetime.now().strftime('%Y-%m-%d')}", flat_data)
 
@@ -174,23 +174,36 @@ class InvestingDataScraper:
     
 
 if __name__ == "__main__":
-    # Example with proxy (uncomment and configure as needed)
-    # proxy_config = ProxyConfig(
-    #     proxy_url="your-proxy-server.com:8080",
-    #     proxy_username="your_username",
-    #     proxy_password="your_password"
-    # )
-    # investing_scraper = InvestingDataScraper(proxy_config=proxy_config)
+    # Test with proxy configuration from config.py
+    from config import Config
     
-    # Without proxy (default)
-    investing_scraper = InvestingDataScraper()
+
+    print(f"Testing InvestingDataScraper with proxy:")
+
+    proxy_config = ProxyConfig(
+        proxy_url=Config.PROXY.HOST,
+        proxy_username=Config.PROXY.CUSTOMER_ID,
+        proxy_password=Config.PROXY.PASSWORD,
+        proxy_type="http"
+    )
     
-    for value in InvestingVariables.IMPORTANCE:
+    # Test with proxy
+    investing_scraper = InvestingDataScraper(proxy_config=proxy_config)
+    
+    try:
         result = asyncio.run(investing_scraper.get_calendar(
-            calendar_name= InvestingVariables.CALENDARS.HOLIDAY_CALENDAR,
-            current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
-            importance=[value],
-            date_from="2025-07-01",
-            date_to="2025-08-23",
+            calendar_name=InvestingVariables.CALENDARS.EARNINGS_CALENDAR,
+            current_tab=InvestingVariables.TIME_RANGES.TODAY,
+            importance=[InvestingVariables.IMPORTANCE.HIGH],
             save_data=True))
-        print(f"count: {result}")
+        
+        if result:
+            print(f"✅ Success! Fetched {len(result)} earnings events with proxy")
+            print(f"First event: {result[0] if result else 'No events'}")
+        else:
+            print("❌ No data returned")
+            
+    except Exception as e:
+        print(f"❌ Error with proxy: {str(e)}")
+        print("Trying without proxy...")
+   
