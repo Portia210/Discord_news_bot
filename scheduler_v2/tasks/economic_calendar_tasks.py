@@ -9,45 +9,44 @@ import pandas as pd
 from utils.logger import logger
 from investing_scraper.InvestingDataScraper import InvestingDataScraper
 from investing_scraper.investing_variables import InvestingVariables
+from investing_scraper.economic_calendar_to_text import economic_calendar_to_text
+from scheduler_v2.discord_scheduler import DiscordScheduler
 from config import Config
 import pytz
 
 
-async def get_economic_calendar_task(discord_scheduler=None):
+async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None):
     """Get economic calendar and schedule alerts for unique times"""
     try:
         logger.info("📊 Fetching economic calendar...")
         
         # Get calendar data using InvestingDataScraper
-        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY)
+        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
             importance=[
                 InvestingVariables.IMPORTANCE.HIGH,
-                InvestingVariables.IMPORTANCE.MEDIUM
             ],
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
             time_zone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         )
         
-        if not calendar_data:
+        # Handle None or empty DataFrame
+        if calendar_data is None or calendar_data.empty:
             logger.warning("⚠️ No economic calendar data received")
             return
         
-        today_events = calendar_data
-        
         # Send initial summary to alert channel (not dev)
         if discord_scheduler:
-            await send_initial_calendar_summary_to_alert(discord_scheduler, today_events)
+            await send_initial_calendar_summary_to_alert(discord_scheduler, calendar_data)
         
-        # Extract unique times
+        # Extract unique times from DataFrame
         unique_times: Set[str] = set()
-        for event in today_events:
-            if 'time' in event:
-                unique_times.add(event['time'])
+        if 'time' in calendar_data.columns:
+            unique_times = set(calendar_data['time'].dropna().unique())
         
-        logger.info(f"📊 Found {len(today_events)} events with {len(unique_times)} unique times: {sorted(unique_times)}")
+        logger.info(f"📊 Found {len(calendar_data)} events with {len(unique_times)} unique times: {sorted(unique_times)}")
         
         # Remove existing economic event jobs to avoid duplicates
         if discord_scheduler:
@@ -60,7 +59,7 @@ async def get_economic_calendar_task(discord_scheduler=None):
         scheduled_jobs = []
         if discord_scheduler:
             for time_str in sorted(unique_times):
-                jobs = await schedule_economic_alert_at_time(discord_scheduler, time_str, today_events)
+                jobs = await schedule_economic_alert_at_time(discord_scheduler, time_str, calendar_data)
                 scheduled_jobs.extend(jobs)
         
         # After all jobs are scheduled, send a single job summary to dev channel
@@ -75,35 +74,20 @@ async def get_economic_calendar_task(discord_scheduler=None):
         logger.error(f"❌ Error in economic calendar task: {e}")
 
 
-async def send_initial_calendar_summary_to_alert(discord_scheduler, today_events):
+async def send_initial_calendar_summary_to_alert(discord_scheduler, calendar_data: pd.DataFrame):
     """Send initial calendar summary to alert channel"""
     try:
-        # Convert to DataFrame and then to CSV
-        df = pd.DataFrame(today_events)
-        
-        # Reorder columns for better readability
-        column_order = ['time', 'description', 'volatility', 'forecast', 'previous', 'actual', 'country']
-        df = df.reindex(columns=[col for col in column_order if col in df.columns])
-        
-        # Convert to CSV string
-        csv_data = df.to_csv(index=False)
-        
-        # Create summary message
-        summary_msg = "📊 **Important economic events for today:**\n\n"
-        summary_msg += f"Total events: {len(today_events)}\n"
-        summary_msg += "```csv\n"
-        summary_msg += csv_data
-        summary_msg += "```"
+        summary_msg = economic_calendar_to_text(calendar_data)
         
         # Send to alert channel
-        await discord_scheduler.send_alert(summary_msg, 0x00ff00, "📊 Economic Calendar Summary")
-        logger.info(f"📊 Sent initial calendar summary to alert channel with {len(today_events)} events")
+        await discord_scheduler.send_alert(summary_msg, 0x00ff00, "Economic Events For Today")
+        logger.info(f"📊 Sent initial calendar summary to alert channel")
         
     except Exception as e:
         logger.error(f"❌ Error sending initial calendar summary: {e}")
 
 
-async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, today_events):
+async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, calendar_data: pd.DataFrame):
     """Schedule economic alerts for a specific time. Returns list of job dicts for summary."""
     jobs_added = []
     try:
@@ -113,8 +97,8 @@ async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, toda
         today = datetime.now(tz).date()
         event_datetime = datetime.combine(today, time_obj, tzinfo=tz)
         
-        # Get events for this specific time
-        time_events = [event for event in today_events if event.get('time') == time_str]
+        # Get events for this specific time from DataFrame
+        time_events = calendar_data[calendar_data['time'] == time_str]
         
         # Schedule 5-minute warning (only if not already scheduled)
         warning_time = event_datetime - timedelta(minutes=5)
@@ -139,7 +123,7 @@ async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, toda
                         'timezone': str(discord_scheduler.timezone)
                     })
                 else:
-                    logger.de(f"📅 Warning job already exists for {time_str}")
+                    logger.debug(f"📅 Warning job already exists for {time_str}")
         
         # Schedule post-event update (only if not already scheduled)
         update_time = event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)
@@ -173,14 +157,14 @@ async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, toda
     return jobs_added
 
 
-async def economic_warning_task(time_str: str, time_events, discord_scheduler=None):
+async def economic_warning_task(time_str: str, time_events: pd.DataFrame, discord_scheduler=None):
     """Send 5-minute warning for economic events"""
     try:
         logger.info(f"⚠️ Sending 5-minute warning for {time_str}")
         
-        if time_events and discord_scheduler:
-            # Create warning message
-            event_names = [event.get('description', 'Unknown Event') for event in time_events]
+        if not time_events.empty and discord_scheduler:
+            # Create warning message from DataFrame
+            event_names = time_events['description'].fillna('Unknown Event').tolist()
             warning_msg = f"⚠️ **Events coming in 5 minutes at {time_str}:**\n"
             warning_msg += ", ".join(event_names)
             
@@ -206,49 +190,33 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         logger.info(f"📊 Sending post-event update for {time_str}")
         
         # Fetch updated calendar data
-        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY)
+        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
             importance=[
                 InvestingVariables.IMPORTANCE.HIGH,
-                InvestingVariables.IMPORTANCE.MEDIUM
             ],
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
             time_zone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         )
         
-        if not calendar_data:
+        if calendar_data is None or calendar_data.empty:
             logger.warning("⚠️ No economic calendar data for update")
             return
         
-        # Get today's events
-        today_key = list(calendar_data.keys())[0]
-        today_events = calendar_data[today_key]
+        # Filter events for the specific time from DataFrame
+        time_events = calendar_data[calendar_data['time'] == time_str]
         
-        # Filter events for the specific time
-        time_events = [event for event in today_events if event.get('time') == time_str]
-        
-        if time_events and discord_scheduler:
-            # Convert to DataFrame and then to CSV
-            df = pd.DataFrame(time_events)
-            
-            # Reorder columns for better readability
-            column_order = ['time', 'description', 'volatility', 'forecast', 'previous', 'actual', 'country']
-            df = df.reindex(columns=[col for col in column_order if col in df.columns])
-            
-            # Convert to CSV string
-            csv_data = df.to_csv(index=False)
+        if not time_events.empty and discord_scheduler:
+            summary_msg = economic_calendar_to_text(time_events)
             
             # Create update message
-            update_msg = f"📊 **Economic Events Update for {time_str}:**\n\n"
-            update_msg += f"Events: {len(time_events)}\n"
-            update_msg += "```csv\n"
-            update_msg += csv_data
-            update_msg += "```"
+            update_msg = f"📊 **Economic Events Update for {time_str}:**\n"
+            update_msg += summary_msg
             
             # Send to alert channel
-            await discord_scheduler.send_alert(update_msg, 0x00ff00, "📊 Economic Events Update")
+            await discord_scheduler.send_alert(update_msg, 0x00ff00, "Economic Events Update")
             logger.info(f"📊 Post-event update sent for {len(time_events)} events at {time_str}")
         else:
             logger.info(f"📊 No events found for time {time_str}")

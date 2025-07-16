@@ -17,7 +17,7 @@ import pytz
 from config import Config
 import discord
 from discord_utils.process_news import process_news_to_list
-
+from utils.html_convertor import html_to_pdf
 
 class PdfReportGenerator:
     """
@@ -227,48 +227,7 @@ class PdfReportGenerator:
             return None
  
     
-    async def _convert_html_to_pdf(self, html_file_path: str, pdf_file_path: str) -> bool:
-        """
-        Convert HTML file to PDF using Playwright.
-        
-        Args:
-            html_file_path (str): Path to the HTML file
-            pdf_file_path (str): Path for the output PDF file
-            
-        Returns:
-            bool: True if successful, False otherwise
-        """
-        try:
-            async with async_playwright() as p:
-                # Launch browser
-                browser = await p.chromium.launch()
-                page = await browser.new_page()
-                
-                # Convert file path to file URL
-                file_url = f"file://{os.path.abspath(html_file_path)}"
-                
-                # Navigate to the HTML file
-                await page.goto(file_url)
-                
-                # Wait for content to load
-                await page.wait_for_load_state('networkidle')
-                
-                # Generate PDF with RTL support and better page break handling
-                await page.pdf(
-                    path=pdf_file_path,
-                    format='A4',
-                    print_background=True,
-                    prefer_css_page_size=True
-                )
-                
-                await browser.close()
-            
-            logger.info(f"✅ Successfully converted HTML to PDF: {pdf_file_path}")
-            return True
-            
-        except Exception as e:
-            logger.error(f"❌ Error converting HTML to PDF: {e}")
-            return False
+ 
     
     async def generate_pdf_report(self, output_pdf: str = "news_pdf/output.pdf", report_time: str = 'auto', 
                                 hours_back: int = 24) -> bool:
@@ -322,7 +281,7 @@ class PdfReportGenerator:
                 return False
             
             # Step 6: Convert to PDF
-            pdf_success = await self._convert_html_to_pdf(html_file_path, output_pdf)
+            pdf_success = await html_to_pdf(html_file_path, output_pdf)
             if not pdf_success:
                 logger.error("❌ Failed to convert HTML to PDF")
                 return False

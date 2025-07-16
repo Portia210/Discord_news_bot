@@ -1,85 +1,40 @@
 {
-    "יום רביעי, 16 ביולי, 2025": [
+    "יום חמישי, 17 ביולי, 2025": [
         {
             "time": "15:30",
             "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מדד המחירים ליצרן - ליבה (חודשי)  (יוני)",
-            "actual": "0.0%",
-            "forecast": "0.2%",
-            "previous": "0.4%"
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מכירות קמעונאיות - ליבה (חודשי)  (יוני)",
+            "actual": null,
+            "forecast": "0.3%",
+            "previous": "-0.3%"
         },
         {
             "time": "15:30",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מדד המחירים ליצרן (חודשי)  (יוני)",
-            "actual": "0.0%",
-            "forecast": "0.2%",
-            "previous": "0.3%"
+            "description": "תביעות ראשוניות לדמי אבטלה",
+            "actual": null,
+            "forecast": "233K",
+            "previous": "227K"
         },
         {
-            "time": "16:15",
+            "time": "15:30",
             "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ייצור תעשייתי (שנתי)  (יוני)",
-            "actual": "0.73%",
-            "forecast": null,
-            "previous": "0.66%"
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מדד הייצור - הפד של פילדלפיה  (יולי)",
+            "actual": null,
+            "forecast": "-1.2",
+            "previous": "-4.0"
         },
         {
-            "time": "16:15",
+            "time": "15:30",
             "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ייצור תעשייתי (חודשי)  (יוני)",
-            "actual": "0.3%",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מכירות קמעונאיות (חודשי)  (יוני)",
+            "actual": null,
             "forecast": "0.1%",
-            "previous": "0.0%"
-        },
-        {
-            "time": "17:00",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "סגן יו\"ר הפד לענייני פיקוח באר נושא דברים",
-            "actual": null,
-            "forecast": null,
-            "previous": null
-        },
-        {
-            "time": "17:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות גבוהה",
-            "description": "מלאי נפט גולמי",
-            "actual": "-3.859M",
-            "forecast": "-1.800M",
-            "previous": "7.070M"
-        },
-        {
-            "time": "17:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "מלאי נפט גולמי קושינג אוקלהומה",
-            "actual": "0.213M",
-            "forecast": null,
-            "previous": "0.464M"
-        },
-        {
-            "time": "21:00",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ספר הבז'",
-            "actual": null,
-            "forecast": null,
-            "previous": null
-        },
-        {
-            "time": "23:30",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "חבר הוועדה הפדרלית לשוק פתוח וויליאמס נואם",
-            "actual": null,
-            "forecast": null,
-            "previous": null
+            "previous": "-0.9%"
         }
     ]
 }

@@ -13,6 +13,7 @@ import json
 from investing_scraper.investing_variables import InvestingVariables
 from utils.read_write import write_json_file
 import asyncio
+from investing_scraper.economic_calendar_to_text import economic_calendar_to_text
 
 class InvestingDataScraper:
     def __init__(self, proxy=None):
@@ -111,12 +112,11 @@ class InvestingDataScraper:
                 flat_data.append(event)
         return flat_data
 
-    def _save_data(self, file_name, data):
+    def _save_data(self, file_name, data: pd.DataFrame):
         output_dir = os.path.join("data", "investing_scraper")
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
-        df = pd.DataFrame(data)
-        df.to_csv(os.path.join(output_dir, f"{file_name}.csv"), index=False)
+        data.to_csv(os.path.join(output_dir, f"{file_name}.csv"), index=False)
 
 
 
@@ -129,17 +129,21 @@ class InvestingDataScraper:
             logger.error(f"Failed to fetch table data for {page_name}")
             return None
         events_by_dates = self._process_table_data(page_name, table_html)
-        write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
-        if events_by_dates == {}:
-            logger.error(f"No events found for {page_name}")
-            return 
-        
-        flat_data = self.flatten_data(events_by_dates)
-        if save_data:
-            self._save_data(f"{page_name}_{datetime.now().strftime('%Y-%m-%d')}", flat_data)
+        try:
+            write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
+            if events_by_dates == {}:
+                logger.error(f"No events found for {page_name}")
+                return 
+            
+            flat_data = self.flatten_data(events_by_dates)
+            df = pd.DataFrame(flat_data)
+            if save_data:
+                self._save_data(f"{page_name}_{datetime.now().strftime('%Y-%m-%d')}", df)
 
-        return flat_data
-    
+            return df
+        except Exception as e:
+            logger.error(f"Error running {page_name}: {str(e)}")
+            return None
 
         
     async def get_calendar(
@@ -168,14 +172,14 @@ class InvestingDataScraper:
 
 if __name__ == "__main__":
 
-    scrapers = [InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY), InvestingDataScraper(proxy=None)]
+    proxy_scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
+    no_proxy_scraper = InvestingDataScraper(proxy=None)
 
-    for scraper in scrapers:
-        result = asyncio.run(scraper.get_calendar(
-            calendar_name= InvestingVariables.CALENDARS.HOLIDAY_CALENDAR,
-            current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
+    result = asyncio.run(no_proxy_scraper.get_calendar(
+            calendar_name= InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
+            current_tab= InvestingVariables.TIME_RANGES.TODAY,
             importance=[InvestingVariables.IMPORTANCE.HIGH],
-            date_from="2025-07-01",
-            date_to="2025-08-23",
             save_data=True))
-        print(f"count: {result}")
+    text = economic_calendar_to_text(result)
+    print(text)
+

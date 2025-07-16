@@ -40,6 +40,7 @@ class ProxyDetails(StrEnum):
     ZONE = os.getenv("PROXY_ZONE")
     PASSWORD = os.getenv("PROXY_PASSWORD")
     FULL_PROXY = f"http://brd-customer-{CUSTOMER_ID}-zone-{ZONE}:{PASSWORD}@{HOST}:{PORT}"
+    APP_PROXY = FULL_PROXY
 
 class Config:
     CHANNEL_IDS = ChannelIds
