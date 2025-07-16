@@ -33,10 +33,18 @@ class Timezones(StrEnum):
     ISRAEL = "Asia/Jerusalem"
     APP_TIMEZONE = ISRAEL
 
+class ProxyDetails(StrEnum):
+    HOST = os.getenv("PROXY_HOST")
+    PORT = os.getenv("PROXY_PORT")
+    CUSTOMER_ID = os.getenv("PROXY_CUSTOMER_ID")
+    ZONE = os.getenv("PROXY_ZONE")
+    PASSWORD = os.getenv("PROXY_PASSWORD")
+    FULL_PROXY = f"http://brd-customer-{CUSTOMER_ID}-zone-{ZONE}:{PASSWORD}@{HOST}:{PORT}"
+
 class Config:
     CHANNEL_IDS = ChannelIds
     USER_IDS = UserIds
     PROXY = Proxy
     TIMEZONES = Timezones
     TOKENS = Tokens
-
+    PROXY_DETAILS = ProxyDetails

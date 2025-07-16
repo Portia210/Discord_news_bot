@@ -14,11 +14,11 @@ from investing_scraper.investing_variables import InvestingVariables
 from utils.read_write import write_json_file
 import asyncio
 
-
 class InvestingDataScraper:
-    def __init__(self):
+    def __init__(self, proxy=None):
         self.headers = read_json_file(f'investing_scraper/headers.json')
-        logger.debug(f"Initialized investing scraper")
+        self.proxy = proxy
+        logger.debug(f"Initialized investing scraper" + f" with proxy: {self.proxy}" if self.proxy else "")
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):
@@ -31,14 +31,13 @@ class InvestingDataScraper:
                 return value
         return None
 
-
     async def _fetch_table(self, page_name, payload: dict ):
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
         
         async with aiohttp.ClientSession() as session:
-            async with session.post(request_json['url'], headers=self.headers, data=payload) as response:
+            async with session.post(request_json['url'], headers=self.headers, data=payload, proxy=self.proxy) as response:
                 # logger.debug(f"Request body: {payload}")
                 if response.status != 200:
                     logger.error(f"Failed to fetch page. Status code: {response.status}")
@@ -168,13 +167,14 @@ class InvestingDataScraper:
     
 
 if __name__ == "__main__":
-    investing_scraper = InvestingDataScraper()
-    for value in InvestingVariables.IMPORTANCE:
 
-        result = asyncio.run(investing_scraper.get_calendar(
+    scrapers = [InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY), InvestingDataScraper(proxy=None)]
+
+    for scraper in scrapers:
+        result = asyncio.run(scraper.get_calendar(
             calendar_name= InvestingVariables.CALENDARS.HOLIDAY_CALENDAR,
             current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
-            importance=[value],
+            importance=[InvestingVariables.IMPORTANCE.HIGH],
             date_from="2025-07-01",
             date_to="2025-08-23",
             save_data=True))

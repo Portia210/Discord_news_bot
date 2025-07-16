@@ -1,39 +1,32 @@
-import urllib.request
-import ssl
+import asyncio
+import aiohttp
 from config import Config
+from utils.timer import measure_time
+from utils.logger import logger
 
-# Get proxy configuration from config
-PROXY_HOST = Config.PROXY.HOST
-PROXY_PORT = Config.PROXY.PORT
-PROXY_CUSTOMER_ID = Config.PROXY.CUSTOMER_ID
-PROXY_ZONE = Config.PROXY.ZONE
-PROXY_PASSWORD = Config.PROXY.PASSWORD
-# TARGET_URL must be set manually, as config.urls does not exist
-TARGET_URL = "https://example.com"  # <-- Set your target URL here
+proxy = f"http://brd-customer-{Config.PROXY_DETAILS.CUSTOMER_ID}-zone-{Config.PROXY_DETAILS.ZONE}:{Config.PROXY_DETAILS.PASSWORD}@{Config.PROXY_DETAILS.HOST}:{Config.PROXY_DETAILS.PORT}"
+url = 'https://geo.brdtest.com/mygeo.json'
 
-proxy_user = f"brd-customer-{PROXY_CUSTOMER_ID}-zone-{PROXY_ZONE}"
-proxy_pass = PROXY_PASSWORD
-proxy_url = f"http://{proxy_user}:{proxy_pass}@{PROXY_HOST}:{PROXY_PORT}"
+@measure_time
+async def fetch_data(with_proxy: bool = True):
+    async with aiohttp.ClientSession() as session:
+        try:
+            # Use proxy only if it's enabled
+            if with_proxy:
+                async with session.get(url, proxy=proxy) as response:
+                    text = await response.text()
+                    print(text)
+            else:
+                # Make request without proxy
+                async with session.get(url) as response:
+                    text = await response.text()
+                    print(text)
+        except aiohttp.ClientError as e:
+            print(e)
 
-proxy_handler = urllib.request.ProxyHandler({
-    "http": proxy_url,
-    "https": proxy_url,
-})
-
-# Create SSL context to ignore SSL certificate errors
-ssl_context = ssl.create_default_context()
-ssl_context.check_hostname = False
-ssl_context.verify_mode = ssl.CERT_NONE
-
-opener = urllib.request.build_opener(proxy_handler, urllib.request.HTTPSHandler(context=ssl_context))
-urllib.request.install_opener(opener)
-
-req = urllib.request.Request(TARGET_URL)
-req.add_header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36")
-
-try:
-    with urllib.request.urlopen(req, context=ssl_context) as response:
-        html = response.read()
-        print(html.decode("utf-8"))
-except Exception as e:
-    print("Error:", e)
+# Run the async function
+if __name__ == "__main__":
+    logger.info("with proxy")
+    asyncio.run(fetch_data(with_proxy=True))
+    logger.info("without proxy")
+    asyncio.run(fetch_data(with_proxy=False))

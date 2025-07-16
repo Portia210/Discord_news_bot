@@ -19,7 +19,7 @@ async def get_economic_calendar_task(discord_scheduler=None):
         logger.info("📊 Fetching economic calendar...")
         
         # Get calendar data using InvestingDataScraper
-        scraper = InvestingDataScraper()
+        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
@@ -206,7 +206,7 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         logger.info(f"📊 Sending post-event update for {time_str}")
         
         # Fetch updated calendar data
-        scraper = InvestingDataScraper()
+        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.FULL_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,

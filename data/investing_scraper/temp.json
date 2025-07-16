@@ -5,36 +5,36 @@
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
             "description": "מדד המחירים ליצרן - ליבה (חודשי)  (יוני)",
-            "actual": null,
+            "actual": "0.0%",
             "forecast": "0.2%",
-            "previous": "0.1%"
+            "previous": "0.4%"
         },
         {
             "time": "15:30",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות גבוהה",
             "description": "מדד המחירים ליצרן (חודשי)  (יוני)",
-            "actual": null,
+            "actual": "0.0%",
             "forecast": "0.2%",
-            "previous": "0.1%"
-        },
-        {
-            "time": "16:15",
-            "country": "ארצות הברית",
-            "volatility": "צפויה תנודתיות בינונית",
-            "description": "ייצור תעשייתי (חודשי)  (יוני)",
-            "actual": null,
-            "forecast": "0.1%",
-            "previous": "-0.2%"
+            "previous": "0.3%"
         },
         {
             "time": "16:15",
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
             "description": "ייצור תעשייתי (שנתי)  (יוני)",
-            "actual": null,
+            "actual": "0.73%",
             "forecast": null,
-            "previous": "0.60%"
+            "previous": "0.66%"
+        },
+        {
+            "time": "16:15",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "ייצור תעשייתי (חודשי)  (יוני)",
+            "actual": "0.3%",
+            "forecast": "0.1%",
+            "previous": "0.0%"
         },
         {
             "time": "17:00",
@@ -50,7 +50,7 @@
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות גבוהה",
             "description": "מלאי נפט גולמי",
-            "actual": null,
+            "actual": "-3.859M",
             "forecast": "-1.800M",
             "previous": "7.070M"
         },
@@ -59,7 +59,7 @@
             "country": "ארצות הברית",
             "volatility": "צפויה תנודתיות בינונית",
             "description": "מלאי נפט גולמי קושינג אוקלהומה",
-            "actual": null,
+            "actual": "0.213M",
             "forecast": null,
             "previous": "0.464M"
         },
