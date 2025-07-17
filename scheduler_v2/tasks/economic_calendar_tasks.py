@@ -28,9 +28,7 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
-            importance=[
-                InvestingVariables.IMPORTANCE.HIGH,
-            ],
+            importance=InvestingVariables.IMPORTANCE.APP_IMPORTANCES,
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
             time_zone=timezone_to_use
         )
@@ -215,9 +213,7 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
-            importance=[
-                InvestingVariables.IMPORTANCE.HIGH,
-            ],
+            importance=InvestingVariables.IMPORTANCE.APP_IMPORTANCES,
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
             time_zone=timezone_to_use
         )

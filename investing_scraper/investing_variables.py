@@ -1,27 +1,26 @@
-from enum import StrEnum
 
-
-class Calendars(StrEnum):
+class Calendars():
     EARNINGS_CALENDAR = "earnings_calendar"
     HOLIDAY_CALENDAR = "holiday_calendar"
     ECONOMIC_CALENDAR = "economic_calendar"
 
-class TimeRanges(StrEnum):
+class TimeRanges():
     TODAY = "today"
     THIS_WEEK = "thisWeek"
     CUSTOM = "custom"
 
-class Countries(StrEnum):
+class Countries():
     UNITED_STATES = "5"
 
-class TimeZones(StrEnum):
+class TimeZones():
     ISRAEL = "17"
     EASTERN_US = "8"
 
-class Importance(StrEnum):
+class Importance():
     LOW = "1"
     MEDIUM = "2"
     HIGH = "3"
+    APP_IMPORTANCES = [LOW, MEDIUM, HIGH]
 
 class InvestingVariables():
     CALENDARS = Calendars

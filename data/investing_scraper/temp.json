@@ -1,0 +1,283 @@
+{
+    "יום חמישי, 17 ביולי, 2025": [
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "תביעות חוזרות לדמי אבטלה",
+            "actual": "1,956K",
+            "forecast": "1,970K",
+            "previous": "1,954K"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מכירות קמעונאיות - ליבה (חודשי)  (יוני)",
+            "actual": "0.5%",
+            "forecast": "0.3%",
+            "previous": "-0.2%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מדד מחירי ייצוא (חודשי)  (יוני)",
+            "actual": "0.5%",
+            "forecast": "0.0%",
+            "previous": "-0.6%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מדד מחירי היצוא (שנתי)  (יוני)",
+            "actual": "2.8%",
+            "forecast": null,
+            "previous": "1.9%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מדד מחירי הייבוא (חודשי)  (יוני)",
+            "actual": "0.1%",
+            "forecast": "0.3%",
+            "previous": "-0.4%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מדד מחירי היבוא (שנתי)  (יוני)",
+            "actual": "-0.2%",
+            "forecast": null,
+            "previous": "-0.2%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "תביעות ראשוניות לדמי אבטלה",
+            "actual": "221K",
+            "forecast": "233K",
+            "previous": "228K"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "תביעות דמי אבטלה - ממוצע 4-שבועות",
+            "actual": "229.50K",
+            "forecast": null,
+            "previous": "235.75K"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מדד הייצור - הפד של פילדלפיה  (יולי)",
+            "actual": "15.9",
+            "forecast": "-1.2",
+            "previous": "-4.0"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מצב העסקים - הפד של פילדלפיה  (יולי)",
+            "actual": "21.5",
+            "forecast": null,
+            "previous": "18.3"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מדד ההוצאה ההונית - הפד של פילדלפיה  (יולי)",
+            "actual": "17.10",
+            "forecast": null,
+            "previous": "14.50"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מצב התעסוקה - הפד של פילדלפיה  (יולי)",
+            "actual": "10.3",
+            "forecast": null,
+            "previous": "-9.8"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "הזמנות חדשות - הפד של פילדלפיה  (יולי)",
+            "actual": "18.4",
+            "forecast": null,
+            "previous": "2.3"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מדד המחירים ששולמו בתעשייה - הפד של פילדלפיה  (יולי)",
+            "actual": "58.80",
+            "forecast": null,
+            "previous": "41.40"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מדד קבוצת הבקרה הקמעונאית (חודשי)  (יוני)",
+            "actual": "0.5%",
+            "forecast": "0.3%",
+            "previous": "0.2%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות גבוהה",
+            "description": "מכירות קמעונאיות (חודשי)  (יוני)",
+            "actual": "0.6%",
+            "forecast": "0.1%",
+            "previous": "-0.9%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מכירות קמעונאיות (שנתי)  (יוני)",
+            "actual": "3.92%",
+            "forecast": null,
+            "previous": "3.29%"
+        },
+        {
+            "time": "15:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מכירות קמעונאיות בניכוי דלק ומכוניות (חודשי)  (יוני)",
+            "actual": "0.6%",
+            "forecast": null,
+            "previous": "0.0%"
+        },
+        {
+            "time": "17:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "מלאי העסקים (חודשי)  (מאי)",
+            "actual": "0.0%",
+            "forecast": "0.0%",
+            "previous": "0.0%"
+        },
+        {
+            "time": "17:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מדד שוק הדיור של איגוד הבנאים (NAHB)  (יולי)",
+            "actual": "33",
+            "forecast": "33",
+            "previous": "32"
+        },
+        {
+            "time": "17:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "המלאי הקמעונאי למעט כלי רכב  (מאי)",
+            "actual": "0.2%",
+            "forecast": "0.2%",
+            "previous": "0.2%"
+        },
+        {
+            "time": "17:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "אחסון גז טבעי",
+            "actual": "46B",
+            "forecast": "44B",
+            "previous": "53B"
+        },
+        {
+            "time": "18:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מכרז אג\"ח ל-4 שבועות",
+            "actual": null,
+            "forecast": null,
+            "previous": "4.235%"
+        },
+        {
+            "time": "18:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "מכרז אג\"ח ל-8 שבועות",
+            "actual": null,
+            "forecast": null,
+            "previous": "4.275%"
+        },
+        {
+            "time": "19:45",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "חברת ועדת השוק הפתוח דיילי נושאת דברים",
+            "actual": null,
+            "forecast": null,
+            "previous": null
+        },
+        {
+            "time": "20:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "GDPNow מהפד של אטלנטה  (ר2)",
+            "actual": null,
+            "forecast": "2.6%",
+            "previous": "2.6%"
+        },
+        {
+            "time": "20:30",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "נגידת הפד קוק נושאת דברים",
+            "actual": null,
+            "forecast": null,
+            "previous": null
+        },
+        {
+            "time": "23:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "רכישות אג\"ח זר ע\"י ארה\"ב  (מאי)",
+            "actual": null,
+            "forecast": null,
+            "previous": "-40.80B"
+        },
+        {
+            "time": "23:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "תזרים הון כולל נטו  (מאי)",
+            "actual": null,
+            "forecast": null,
+            "previous": "-14.20B"
+        },
+        {
+            "time": "23:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות בינונית",
+            "description": "רכישת ניירות ערך אמריקנים ע\"י זרים  (מאי)",
+            "actual": null,
+            "forecast": null,
+            "previous": "-7.8B"
+        },
+        {
+            "time": "23:00",
+            "country": "ארצות הברית",
+            "volatility": "צפויה תנודתיות נמוכה",
+            "description": "רכישות אג\"ח ע\"י זרים כולל עסקאות החלף  (מאי)",
+            "actual": null,
+            "forecast": "48.30B",
+            "previous": "-7.80B"
+        }
+    ]
+}
