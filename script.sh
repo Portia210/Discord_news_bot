@@ -168,6 +168,7 @@ update_and_run() {
     # Update code and dependencies
     ssh -T -i "$KEY_PAIR" "$USER@$HOST" << EOF
         cd $REMOTE_DIR
+        git stash
         git checkout master
         git pull origin master
         source $VENV_PATH/bin/activate

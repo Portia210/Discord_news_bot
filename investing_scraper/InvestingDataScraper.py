@@ -13,7 +13,6 @@ import json
 from investing_scraper.investing_variables import InvestingVariables
 from utils.read_write import write_json_file
 import asyncio
-from investing_scraper.economic_calendar_to_text import economic_calendar_to_text
 
 class InvestingDataScraper:
     def __init__(self, proxy=None):
@@ -138,7 +137,8 @@ class InvestingDataScraper:
             flat_data = self.flatten_data(events_by_dates)
             df = pd.DataFrame(flat_data)
             if save_data:
-                self._save_data(f"{page_name}_{datetime.now().strftime('%Y-%m-%d')}", df)
+                now_timestamp = datetime.now().timestamp()
+                self._save_data(f"{page_name}_{now_timestamp}", df)
 
             return df
         except Exception as e:
@@ -170,16 +170,32 @@ class InvestingDataScraper:
         return await self.run(calendar_name, payload, save_data)
     
 
-if __name__ == "__main__":
 
+
+if __name__ == "__main__":
     proxy_scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
     no_proxy_scraper = InvestingDataScraper(proxy=None)
 
-    result = asyncio.run(no_proxy_scraper.get_calendar(
-            calendar_name= InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
-            current_tab= InvestingVariables.TIME_RANGES.TODAY,
-            importance=[InvestingVariables.IMPORTANCE.HIGH],
-            save_data=True))
-    text = economic_calendar_to_text(result)
-    print(text)
+    all_months = [f"0{i}" if i < 10 else f"{i}" for i in range(1, 13)]
+    days_ranges = ["01", "10", "20"]
+    for month_index, month in enumerate(all_months):
+        for day_index, day in enumerate(days_ranges):
+            # Calculate the next date in a cleaner way
+            if day_index < len(days_ranges) - 1:
+                # Next day in same month
+                date_to = f"2025-{month}-{days_ranges[day_index+1]}"
+            elif month_index < len(all_months) - 1:
+                # First day of next month
+                date_to = f"2025-{all_months[month_index+1]}-{days_ranges[0]}"
+            else:
+                # First day of next year
+                date_to = "2026-01-01"
+
+            result = asyncio.run(no_proxy_scraper.get_calendar(
+                    calendar_name= InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
+                    current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
+                    importance=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH],
+                    date_from=f"2025-{month}-{day}",
+                    date_to=date_to,
+                    save_data=True))
 

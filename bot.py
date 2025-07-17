@@ -2,8 +2,6 @@ import os
 import discord
 from discord.ext import commands
 from utils.logger import logger
-from news_pdf.pdf_report_generator import PdfReportGenerator
-from discord_utils.send_pdf import send_pdf
 from config import Config
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
 
@@ -19,6 +17,8 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 discord_scheduler = None
 calendar_manager = None
 task_definitions = None
+
+
 
 @bot.event
 async def on_ready():
@@ -42,7 +42,7 @@ async def on_ready():
     
     # Initialize and start the new scheduler
     try:
-        global discord_scheduler, calendar_manager, task_definitions
+        global discord_scheduler, task_definitions
         
         # Initialize scheduler components
         discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
