@@ -124,9 +124,9 @@
                                                 ],
                                                 "articles": [
                                                     {
-                                                        "id": 108173033,
-                                                        "headline": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data",
-                                                        "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
+                                                        "id": 108173600,
+                                                        "headline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                        "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
                                                         "__typename": "article"
                                                     }
                                                 ],
@@ -259,9 +259,9 @@
                                                 ],
                                                 "articles": [
                                                     {
-                                                        "id": 108173033,
-                                                        "headline": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data",
-                                                        "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
+                                                        "id": 108173600,
+                                                        "headline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                        "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
                                                         "__typename": "article"
                                                     }
                                                 ],
@@ -543,15 +543,15 @@
                                         "name": "quickLinks",
                                         "quickLinksData": [
                                             {
-                                                "title": "Europe market moves",
-                                                "url": "https://www.cnbc.com/2025/07/17/european-markets-on-thurs-july-17-stoxx-600-dax-cac-ftse.html",
-                                                "href": "https://www.cnbc.com/2025/07/17/european-markets-on-thurs-july-17-stoxx-600-dax-cac-ftse.html",
+                                                "title": "U.S. futures",
+                                                "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
+                                                "href": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
                                                 "__typename": "webresource"
                                             },
                                             {
-                                                "title": "U.S. futures",
-                                                "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
-                                                "href": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
+                                                "title": "Europe market moves",
+                                                "url": "https://www.cnbc.com/2025/07/17/european-markets-on-thurs-july-17-stoxx-600-dax-cac-ftse.html",
+                                                "href": "https://www.cnbc.com/2025/07/17/european-markets-on-thurs-july-17-stoxx-600-dax-cac-ftse.html",
                                                 "__typename": "webresource"
                                             },
                                             {
@@ -806,7 +806,7 @@
                                                 "headline": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data",
                                                 "shorterDescription": null,
                                                 "coverageEndDate": "2025-07-17T20:15:29+0000",
-                                                "dateLastPublished": "2025-07-17T21:34:31+0000",
+                                                "dateLastPublished": "2025-07-17T21:53:11+0000",
                                                 "creatorOverwrite": null,
                                                 "author": [
                                                     {
@@ -827,12 +827,28 @@
                                                 },
                                                 "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
                                                 "promoImage": {
-                                                    "id": 108162817,
-                                                    "url": "https://image.cnbcfm.com/api/v1/image/108162817-17507108802025-06-23t203035z_862152983_rc2k8fae6tc1_rtrmadp_0_usa-stocks.jpeg?v=1750711030",
+                                                    "id": 108134886,
+                                                    "url": "https://image.cnbcfm.com/api/v1/image/108134886-17453401622025-04-22t155153z_101730075_rc223ea1v1do_rtrmadp_0_usa-stocks.jpeg?v=1745433363",
                                                     "__typename": "infographic"
                                                 },
-                                                "dateLastPublishedSixHr": "2 min ago",
-                                                "packageItems": [],
+                                                "dateLastPublishedSixHr": "an hour ago",
+                                                "packageItems": [
+                                                    {
+                                                        "id": 108173600,
+                                                        "type": "live_story",
+                                                        "brand": "cnbc",
+                                                        "premium": false,
+                                                        "contentClassification": [],
+                                                        "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
+                                                        "dateLastPublished": "2025-07-17T22:32:43+0000",
+                                                        "dateLastPublishedSixHr": "42 min ago",
+                                                        "coverageEndDate": "2025-07-18T20:00:04+0000",
+                                                        "title": "Stock futures are little changed after earnings, economic data lift S&P 500 to records: Live updates",
+                                                        "headline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                        "eyebrow": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                        "__typename": "live_story"
+                                                    }
+                                                ],
                                                 "__typename": "live_story"
                                             },
                                             {
@@ -868,7 +884,7 @@
                                                     "url": "https://image.cnbcfm.com/api/v1/image/108132343-1744747597151-gettyimages-2210177787-img_6486.jpeg?v=1752763334",
                                                     "__typename": "infographic"
                                                 },
-                                                "dateLastPublishedSixHr": "9 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "packageItems": [],
                                                 "__typename": "cnbcnewsstory"
                                             },
@@ -959,6 +975,50 @@
                                         "name": "latestNews",
                                         "assets": [
                                             {
+                                                "id": 108173625,
+                                                "url": "https://www.cnbc.com/2025/07/17/powell-trump-vought-renovation.html",
+                                                "title": "Fed Chair Powell responds to White House questions about HQ renovation",
+                                                "headline": "Fed Chair Powell responds to White House questions about HQ renovation",
+                                                "shorterHeadline": "Fed Chair Powell responds to White House questions about HQ renovation",
+                                                "brand": "cnbc",
+                                                "type": "cnbcnewsstory",
+                                                "section": {
+                                                    "liveURL": "/politics/",
+                                                    "title": "Politics",
+                                                    "__typename": "franchise"
+                                                },
+                                                "datePublished": "2025-07-17T23:02:13+0000",
+                                                "dateLastPublishedSixHr": "13 min ago",
+                                                "coverageEndDate": null,
+                                                "liveURL": "/2025/07/17/powell-trump-vought-renovation.html",
+                                                "premium": false,
+                                                "contentClassification": [
+                                                    "isDeveloping"
+                                                ],
+                                                "__typename": "cnbcnewsstory"
+                                            },
+                                            {
+                                                "id": 108173600,
+                                                "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
+                                                "title": "Stock futures are little changed after earnings, economic data lift S&P 500 to records: Live updates",
+                                                "headline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                "shorterHeadline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                "brand": "cnbc",
+                                                "type": "live_story",
+                                                "section": {
+                                                    "liveURL": "/markets/",
+                                                    "title": "Markets",
+                                                    "__typename": "franchise"
+                                                },
+                                                "datePublished": "2025-07-17T22:02:07+0000",
+                                                "dateLastPublishedSixHr": "42 min ago",
+                                                "coverageEndDate": "2025-07-18T20:00:04+0000",
+                                                "liveURL": "/2025/07/17/stock-market-today-live-updates.html",
+                                                "premium": false,
+                                                "contentClassification": [],
+                                                "__typename": "live_story"
+                                            },
+                                            {
                                                 "id": 108172992,
                                                 "url": "https://www.cnbc.com/2025/07/17/ai-cant-replace-human-relationships-especially-not-a-therapist.html",
                                                 "title": "AI can't be your therapist: 'These bots basically tell people exactly what they want to hear,' psychologist says",
@@ -972,7 +1032,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T21:00:19+0000",
-                                                "dateLastPublishedSixHr": "36 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/ai-cant-replace-human-relationships-especially-not-a-therapist.html",
                                                 "premium": false,
@@ -993,7 +1053,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T20:52:30+0000",
-                                                "dateLastPublishedSixHr": "44 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/solar-wind-permit-interior-department-burgum-trump.html",
                                                 "premium": false,
@@ -1014,7 +1074,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T20:36:55+0000",
-                                                "dateLastPublishedSixHr": "an hour ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/how-much-1000-invested-in-netflix-10-years-ago-would-be-worth-now.html",
                                                 "premium": false,
@@ -1035,7 +1095,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T20:25:48+0000",
-                                                "dateLastPublishedSixHr": "an hour ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/trump-jeffrey-epstein-special-prosecutor.html",
                                                 "premium": false,
@@ -1058,7 +1118,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T20:02:21+0000",
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/the-us-consumer-is-pushing-back-against-recession-fears-once-again.html",
                                                 "premium": true,
@@ -1081,7 +1141,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T19:52:40+0000",
-                                                "dateLastPublishedSixHr": "an hour ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/trump-medical-chronic-venous-insufficiency.html",
                                                 "premium": false,
@@ -1104,7 +1164,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T19:49:38+0000",
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/stocks-that-could-benefit-if-trump-expands-private-markets-access-in-401k.html",
                                                 "premium": true,
@@ -1127,7 +1187,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T19:09:36+0000",
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "4 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/nearly-half-of-employees-my-boss-doesnt-understand-me-or-my-job-survey.html",
                                                 "premium": false,
@@ -1148,7 +1208,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T18:51:52+0000",
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "4 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/trump-bondi-california-jail-deportation.html",
                                                 "premium": false,
@@ -1171,7 +1231,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T18:37:08+0000",
-                                                "dateLastPublishedSixHr": "3 hours ago",
+                                                "dateLastPublishedSixHr": "5 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/bristol-myers-goes-dtc-on-a-blockbuster-drug-heres-our-take.html",
                                                 "premium": false,
@@ -1195,7 +1255,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:56:46+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "5 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/abbott-stock-fell-victim-to-an-old-earnings-season-truth-its-all-about-the-guidance.html",
                                                 "premium": false,
@@ -1219,7 +1279,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:46:49+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "5 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/one-wall-street-stock-bucking-the-weak-trend-according-to-the-charts.html",
                                                 "premium": true,
@@ -1242,7 +1302,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:43:08+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "6 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/trump-tariffs-affect-walmart-prices.html",
                                                 "premium": false,
@@ -1263,7 +1323,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:30:39+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "6 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/banks-thriving-so-far-trump-economy-markets-consumer.html",
                                                 "premium": false,
@@ -1284,7 +1344,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:29:51+0000",
-                                                "dateLastPublishedSixHr": "3 hours ago",
+                                                "dateLastPublishedSixHr": "4 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/epstein-comey-trump-tyrant.html",
                                                 "premium": false,
@@ -1307,7 +1367,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:19:37+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "6 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/hadrian-funding-round-thiel-founders-fund.html",
                                                 "premium": false,
@@ -1328,7 +1388,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T17:13:38+0000",
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/heres-where-jim-cramer-sees-nvidia-shares-going-next-and-his-defense-of-starbucks.html",
                                                 "premium": false,
@@ -1352,7 +1412,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:46:01+0000",
-                                                "dateLastPublishedSixHr": "5 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/wall-street-says-mcdonalds-snack-wrap-revival-is-a-hit-so-buy-the-stock.html",
                                                 "premium": true,
@@ -1375,7 +1435,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:30:18+0000",
-                                                "dateLastPublishedSixHr": "32 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/stocks-making-the-biggest-moves-midday-lcid-elv-alb-pep-more.html",
                                                 "premium": false,
@@ -1398,7 +1458,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:14:41+0000",
-                                                "dateLastPublishedSixHr": "5 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/bond-vigilantes-take-aim-at-japan-market-ahead-of-critical-election.html",
                                                 "premium": true,
@@ -1421,7 +1481,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:10:10+0000",
-                                                "dateLastPublishedSixHr": "3 hours ago",
+                                                "dateLastPublishedSixHr": "an hour ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/amazon-web-services-has-some-layoffs.html",
                                                 "premium": false,
@@ -1442,7 +1502,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:03:26+0000",
-                                                "dateLastPublishedSixHr": "6 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/best-stocks-a-company-thats-indispensable-to-its-customers-with-a-stock-in-a-pristine-uptrend.html",
                                                 "premium": true,
@@ -1465,7 +1525,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:00:21+0000",
-                                                "dateLastPublishedSixHr": "3 hours ago",
+                                                "dateLastPublishedSixHr": "4 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/elizabeth-warren-targets-price-gouging-with-tariff-costs-inflation-up.html",
                                                 "premium": false,
@@ -1486,7 +1546,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T16:00:02+0000",
-                                                "dateLastPublishedSixHr": "9 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/netflix-nflx-earnings-q2-2025.html",
                                                 "premium": false,
@@ -1509,7 +1569,7 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T15:47:48+0000",
-                                                "dateLastPublishedSixHr": "6 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/bristol-myers-squibb-pfizer-to-sell-eliquis-at-40percent-discount.html",
                                                 "premium": false,
@@ -1575,55 +1635,11 @@
                                                     "__typename": "franchise"
                                                 },
                                                 "datePublished": "2025-07-17T15:19:45+0000",
-                                                "dateLastPublishedSixHr": "6 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "coverageEndDate": null,
                                                 "liveURL": "/2025/07/17/taiwan-semi-tsmc-stock-chip-production.html",
                                                 "premium": false,
                                                 "contentClassification": [],
-                                                "__typename": "cnbcnewsstory"
-                                            },
-                                            {
-                                                "id": 108173366,
-                                                "url": "https://www.cnbc.com/2025/07/17/elon-musk-more-time-sec-twitter-suit.html",
-                                                "title": "Elon Musk gets more time to respond to SEC suit over Twitter disclosure",
-                                                "headline": "Elon Musk gets more time to respond to SEC suit over Twitter disclosure",
-                                                "shorterHeadline": "Elon Musk gets more time to respond to SEC suit over Twitter disclosure",
-                                                "brand": "cnbc",
-                                                "type": "cnbcnewsstory",
-                                                "section": {
-                                                    "liveURL": "/technology/",
-                                                    "title": "Tech",
-                                                    "__typename": "franchise"
-                                                },
-                                                "datePublished": "2025-07-17T15:13:49+0000",
-                                                "dateLastPublishedSixHr": "",
-                                                "coverageEndDate": null,
-                                                "liveURL": "/2025/07/17/elon-musk-more-time-sec-twitter-suit.html",
-                                                "premium": false,
-                                                "contentClassification": [],
-                                                "__typename": "cnbcnewsstory"
-                                            },
-                                            {
-                                                "id": 108173244,
-                                                "url": "https://www.cnbc.com/2025/07/17/hsbc-says-coreweave-shares-will-drop-more-than-70percent-on-concerns-about-customer-base.html",
-                                                "title": "HSBC says CoreWeave shares will drop more than 70% on concerns about customer base",
-                                                "headline": "HSBC says CoreWeave shares will drop more than 70% on concerns about customer base",
-                                                "shorterHeadline": "HSBC says CoreWeave shares will drop more than 70% on concerns about customer base",
-                                                "brand": "cnbc",
-                                                "type": "cnbcnewsstory",
-                                                "section": {
-                                                    "liveURL": "/pro/analyst-stock-picks/",
-                                                    "title": "Analyst Calls",
-                                                    "__typename": "franchise"
-                                                },
-                                                "datePublished": "2025-07-17T14:59:53+0000",
-                                                "dateLastPublishedSixHr": "",
-                                                "coverageEndDate": null,
-                                                "liveURL": "/2025/07/17/hsbc-says-coreweave-shares-will-drop-more-than-70percent-on-concerns-about-customer-base.html",
-                                                "premium": true,
-                                                "contentClassification": [
-                                                    "premium"
-                                                ],
                                                 "__typename": "cnbcnewsstory"
                                             }
                                         ],
@@ -1927,7 +1943,7 @@
                                                         "__typename": "creator"
                                                     }
                                                 ],
-                                                "dateLastPublishedSixHr": "6 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "promoImage": {
                                                     "id": 107415761,
                                                     "url": "https://image.cnbcfm.com/api/v1/image/107415761-1715849415594-gettyimages-2151337123-UK_SOUTHEND.jpeg?v=1752739706",
@@ -2508,6 +2524,28 @@
                                         ],
                                         "assets": [
                                             {
+                                                "id": 108173600,
+                                                "headline": "Stock futures are little changed after earnings, economic data lift S&P 500 to records",
+                                                "slug": "Stock futures are little changed after earnings, economic data lift S&P 500 to records: Live updates",
+                                                "url": "https://www.cnbc.com/2025/07/17/stock-market-today-live-updates.html",
+                                                "datePublished": "2025-07-17T22:02:07+0000",
+                                                "coverageEndDate": "2025-07-18T20:00:04+0000",
+                                                "contentClassification": [],
+                                                "dateLastPublishedSixHr": "42 min ago",
+                                                "type": "live_story",
+                                                "author": [
+                                                    {
+                                                        "id": 107179625,
+                                                        "name": "Sean Conlon",
+                                                        "url": "https://www.cnbc.com/sean-conlon/",
+                                                        "__typename": "creator"
+                                                    }
+                                                ],
+                                                "title": "Stock futures are little changed after earnings, economic data lift S&P 500 to records: Live updates",
+                                                "premium": false,
+                                                "__typename": "live_story"
+                                            },
+                                            {
                                                 "id": 108173511,
                                                 "headline": "Trump targets solar and wind with tighter federal permitting in another blow to renewable industry",
                                                 "slug": "Trump targets solar and wind with tighter federal permitting in another blow to renewable industry",
@@ -2515,7 +2553,7 @@
                                                 "datePublished": "2025-07-17T20:52:30+0000",
                                                 "coverageEndDate": null,
                                                 "contentClassification": [],
-                                                "dateLastPublishedSixHr": "44 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "type": "cnbcnewsstory",
                                                 "author": [
                                                     {
@@ -2539,7 +2577,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "type": "cnbcnewsstory",
                                                 "author": [
                                                     {
@@ -2554,34 +2592,6 @@
                                                 "__typename": "cnbcnewsstory"
                                             },
                                             {
-                                                "id": 108173033,
-                                                "headline": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data",
-                                                "slug": "Han futures 261707 EC",
-                                                "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
-                                                "datePublished": "2025-07-16T22:03:53+0000",
-                                                "coverageEndDate": "2025-07-17T20:15:29+0000",
-                                                "contentClassification": [],
-                                                "dateLastPublishedSixHr": "2 min ago",
-                                                "type": "live_story",
-                                                "author": [
-                                                    {
-                                                        "id": 106893858,
-                                                        "name": "Pia Singh",
-                                                        "url": "https://www.cnbc.com/pia-singh/",
-                                                        "__typename": "creator"
-                                                    },
-                                                    {
-                                                        "id": 107296395,
-                                                        "name": "Lisa Kailai Han",
-                                                        "url": "https://www.cnbc.com/lisa-kailai-han/",
-                                                        "__typename": "creator"
-                                                    }
-                                                ],
-                                                "title": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data: Live updates",
-                                                "premium": false,
-                                                "__typename": "live_story"
-                                            },
-                                            {
                                                 "id": 108172727,
                                                 "headline": "'Bond vigilantes' are taking aim at Japan market ahead of critical election",
                                                 "slug": "'Bond vigilantes' Cox 250717 EC",
@@ -2591,7 +2601,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "5 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "type": "cnbcnewsstory",
                                                 "author": [
                                                     {
@@ -4429,6 +4439,13 @@
                                                 "__typename": "cnbcnewsstory"
                                             },
                                             {
+                                                "title": "34-year-old turned Fiverr side hustle into full-time business—it brings in $40,000 a month and lets him work from anywhere",
+                                                "url": "https://www.cnbc.com/2025/07/16/lawyer-turned-fiverr-side-hustle-into-business-bringing-in-40000-dollars-a-month.html",
+                                                "linkHeadline": "34-year-old turned Fiverr side hustle into full-time business—it brings in $40,000 a month",
+                                                "contentClassification": [],
+                                                "__typename": "cnbcnewsstory"
+                                            },
+                                            {
                                                 "title": "I'm a psychologist who studies couples: People in the happiest relationships do 5 things during weekdays—that most neglect",
                                                 "url": "https://www.cnbc.com/2025/07/13/psychologist-people-in-the-happiest-relationships-do-5-things-during-weekdays.html",
                                                 "linkHeadline": "Psychologist: People in the happiest relationships do 5 things during weekdays—that most neglect",
@@ -4445,18 +4462,11 @@
                                                 "__typename": "cnbcnewsstory"
                                             },
                                             {
-                                                "title": "34-year-old turned Fiverr side hustle into full-time business—it brings in $40,000 a month and lets him work from anywhere",
-                                                "url": "https://www.cnbc.com/2025/07/16/lawyer-turned-fiverr-side-hustle-into-business-bringing-in-40000-dollars-a-month.html",
-                                                "linkHeadline": "34-year-old turned Fiverr side hustle into full-time business—it brings in $40,000 a month",
+                                                "title": "Amazon cuts some jobs in cloud computing unit as layoffs continue",
+                                                "url": "https://www.cnbc.com/2025/07/17/amazon-web-services-has-some-layoffs.html",
+                                                "linkHeadline": "Amazon cuts some jobs in cloud computing unit as layoffs continue",
                                                 "contentClassification": [],
                                                 "__typename": "cnbcnewsstory"
-                                            },
-                                            {
-                                                "title": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data: Live updates",
-                                                "url": "https://www.cnbc.com/2025/07/16/stock-market-today-live-updates.html",
-                                                "linkHeadline": "S&P 500 rises to new closing record, boosted by solid earnings and U.S. economic data",
-                                                "contentClassification": [],
-                                                "__typename": "live_story"
                                             }
                                         ],
                                         "__typename": "trendingNowBreaker"
@@ -4519,7 +4529,7 @@
                                                 "datePublished": "2025-07-17T20:57:30+0000",
                                                 "coverageEndDate": null,
                                                 "contentClassification": [],
-                                                "dateLastPublishedSixHr": "30 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10464,7 +10474,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10505,7 +10515,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10546,7 +10556,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "5 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10587,7 +10597,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "4 hours ago",
+                                                "dateLastPublishedSixHr": "5 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10675,7 +10685,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "6 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -10716,7 +10726,7 @@
                                                 "contentClassification": [
                                                     "premium"
                                                 ],
-                                                "dateLastPublishedSixHr": "5 hours ago",
+                                                "dateLastPublishedSixHr": "",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -11170,7 +11180,7 @@
                                                 "datePublished": "2025-07-17T21:00:19+0000",
                                                 "coverageEndDate": null,
                                                 "contentClassification": [],
-                                                "dateLastPublishedSixHr": "36 min ago",
+                                                "dateLastPublishedSixHr": "2 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -11209,7 +11219,7 @@
                                                 "datePublished": "2025-07-17T20:36:55+0000",
                                                 "coverageEndDate": null,
                                                 "contentClassification": [],
-                                                "dateLastPublishedSixHr": "an hour ago",
+                                                "dateLastPublishedSixHr": "3 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -11248,7 +11258,7 @@
                                                 "datePublished": "2025-07-17T19:09:36+0000",
                                                 "coverageEndDate": null,
                                                 "contentClassification": [],
-                                                "dateLastPublishedSixHr": "2 hours ago",
+                                                "dateLastPublishedSixHr": "4 hours ago",
                                                 "dateLastPublishedFormattedWithoutTime": "Thu, Jul 17th 2025",
                                                 "sourceOrganization": [
                                                     {
@@ -16061,7 +16071,7 @@
             "creatorOverwrite": null,
             "creatorOverwriteFormatted": "NA",
             "dateFirstPublished": "2013-05-10T14:41:50+0000",
-            "dateLastPublished": "2025-07-17T20:28:24+0000",
+            "dateLastPublished": "2025-07-17T22:10:05+0000",
             "datePublished": "2016-09-27T13:00:09+0000",
             "description": "CNBC International is the world leader for news on business, technology, China, trade, oil prices, the Middle East and markets.",
             "expires": null,
@@ -16262,6 +16272,38 @@
                                 "label": "U.S. Markets",
                                 "host": "",
                                 "path": "/us-markets/",
+                                "items": []
+                            },
+                            {
+                                "name": "europe_markets",
+                                "label": "Europe Markets",
+                                "host": "",
+                                "path": "/markets-europe/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "china_markets",
+                                "label": "China Markets",
+                                "host": "",
+                                "path": "/china-markets/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia_markets",
+                                "label": "Asia Markets",
+                                "host": "",
+                                "path": "/markets-asia-pacific/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "world_markets",
+                                "label": "World Markets",
+                                "host": "",
+                                "path": "/world-markets/",
+                                "region": "WORLD",
                                 "items": []
                             },
                             {
@@ -16618,6 +16660,38 @@
                                 "host": "",
                                 "path": "/expanding-opportunity/",
                                 "items": []
+                            },
+                            {
+                                "name": "europe",
+                                "label": "Europe Politics",
+                                "host": "",
+                                "path": "/europe-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "china",
+                                "label": "China Politics",
+                                "host": "",
+                                "path": "/china-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia",
+                                "label": "Asia Politics",
+                                "host": "",
+                                "path": "/asia-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "world",
+                                "label": "World Politics",
+                                "host": "",
+                                "path": "/world-politics/",
+                                "region": "WORLD",
+                                "items": []
                             }
                         ]
                     },
@@ -16639,7 +16713,6 @@
                                 "label": "Full Episodes",
                                 "host": "",
                                 "path": "/live-tv/full-episodes/",
-                                "region": "USA",
                                 "items": []
                             },
                             {
@@ -16647,7 +16720,13 @@
                                 "label": "Livestream",
                                 "host": "",
                                 "path": "/live-tv/",
-                                "region": "USA",
+                                "items": []
+                            },
+                            {
+                                "name": "top_video",
+                                "label": "Top Video",
+                                "host": "",
+                                "path": "/top-video/",
                                 "items": []
                             },
                             {
@@ -16658,10 +16737,19 @@
                                 "items": []
                             },
                             {
-                                "name": "live_tv_schedule",
-                                "label": "Live TV Schedule",
+                                "name": "europe_tv",
+                                "label": "Europe TV",
                                 "host": "",
-                                "path": "/live-tv/schedule/",
+                                "path": "/europe-television/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia_tv",
+                                "label": "Asia TV",
+                                "host": "",
+                                "path": "/asia-business-day/",
+                                "region": "WORLD",
                                 "items": []
                             },
                             {
@@ -16676,14 +16764,6 @@
                                 "label": "CEO Interviews",
                                 "host": "",
                                 "path": "/video-ceo-interviews/",
-                                "items": []
-                            },
-                            {
-                                "name": "documentaries",
-                                "label": "CNBC Documentaries",
-                                "host": "",
-                                "path": "/documentaries/",
-                                "region": "USA",
                                 "items": []
                             },
                             {
@@ -16776,20 +16856,6 @@
                                 "label": "Pro News",
                                 "host": "",
                                 "path": "/pro/news/",
-                                "items": []
-                            },
-                            {
-                                "name": "josh_brown",
-                                "label": "Josh Brown",
-                                "host": "",
-                                "path": "/josh-brown/",
-                                "items": []
-                            },
-                            {
-                                "name": "pro_portfolio",
-                                "label": "My Portfolio",
-                                "host": "",
-                                "path": "/my-portfolio/",
                                 "items": []
                             },
                             {
@@ -17950,6 +18016,38 @@
                                 "items": []
                             },
                             {
+                                "name": "europe_markets",
+                                "label": "Europe Markets",
+                                "host": "",
+                                "path": "/markets-europe/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "china_markets",
+                                "label": "China Markets",
+                                "host": "",
+                                "path": "/china-markets/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia_markets",
+                                "label": "Asia Markets",
+                                "host": "",
+                                "path": "/markets-asia-pacific/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "world_markets",
+                                "label": "World Markets",
+                                "host": "",
+                                "path": "/world-markets/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
                                 "name": "currencies",
                                 "label": "Currencies",
                                 "host": "",
@@ -18267,6 +18365,38 @@
                                 "host": "",
                                 "path": "/expanding-opportunity/",
                                 "items": []
+                            },
+                            {
+                                "name": "europe",
+                                "label": "Europe Politics",
+                                "host": "",
+                                "path": "/europe-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "china",
+                                "label": "China Politics",
+                                "host": "",
+                                "path": "/china-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia",
+                                "label": "Asia Politics",
+                                "host": "",
+                                "path": "/asia-politics/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "world",
+                                "label": "World Politics",
+                                "host": "",
+                                "path": "/world-politics/",
+                                "region": "WORLD",
+                                "items": []
                             }
                         ]
                     },
@@ -18288,7 +18418,6 @@
                                 "label": "Full Episodes",
                                 "host": "",
                                 "path": "/live-tv/full-episodes/",
-                                "region": "USA",
                                 "items": []
                             },
                             {
@@ -18296,7 +18425,13 @@
                                 "label": "Livestream",
                                 "host": "",
                                 "path": "/live-tv/",
-                                "region": "USA",
+                                "items": []
+                            },
+                            {
+                                "name": "top_video",
+                                "label": "Top Video",
+                                "host": "",
+                                "path": "/top-video/",
                                 "items": []
                             },
                             {
@@ -18307,10 +18442,19 @@
                                 "items": []
                             },
                             {
-                                "name": "live_tv_schedule",
-                                "label": "Live TV Schedule",
+                                "name": "europe_tv",
+                                "label": "Europe TV",
                                 "host": "",
-                                "path": "/live-tv/schedule/",
+                                "path": "/europe-television/",
+                                "region": "WORLD",
+                                "items": []
+                            },
+                            {
+                                "name": "asia_tv",
+                                "label": "Asia TV",
+                                "host": "",
+                                "path": "/asia-business-day/",
+                                "region": "WORLD",
                                 "items": []
                             },
                             {
@@ -18325,14 +18469,6 @@
                                 "label": "CEO Interviews",
                                 "host": "",
                                 "path": "/video-ceo-interviews/",
-                                "items": []
-                            },
-                            {
-                                "name": "documentaries",
-                                "label": "CNBC Documentaries",
-                                "host": "",
-                                "path": "/documentaries/",
-                                "region": "USA",
                                 "items": []
                             },
                             {
@@ -18432,20 +18568,6 @@
                                 "label": "Pro News",
                                 "host": "",
                                 "path": "/pro/news/",
-                                "items": []
-                            },
-                            {
-                                "name": "josh_brown",
-                                "label": "Josh Brown",
-                                "host": "",
-                                "path": "/josh-brown/",
-                                "items": []
-                            },
-                            {
-                                "name": "pro_portfolio",
-                                "label": "My Portfolio",
-                                "host": "",
-                                "path": "/my-portfolio/",
                                 "items": []
                             },
                             {
@@ -19212,7 +19334,9 @@
         }
     },
     "request": {
-        "cookies": {},
+        "cookies": {
+            "region": "WORLD"
+        },
         "hostname": "web.cnbc.com",
         "query": {},
         "headers": {

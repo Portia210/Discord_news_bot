@@ -4,10 +4,10 @@
       
 
       {
-        "name": "Run investing_scraper/main.py as module",
+        "name": "Run cnbc_scraper/cnbc_scraper.py as module",
         "type": "debugpy",
         "request": "launch",
-        "module": "investing_scraper.main",
+        "module": "cnbc_scraper.cnbc_scraper",
         "cwd": "${workspaceFolder}",
         "envFile": "${workspaceFolder}/.env",
         "console": "integratedTerminal"

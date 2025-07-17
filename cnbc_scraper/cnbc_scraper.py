@@ -36,7 +36,7 @@ def extract_s_data_dict_from_html(html_content: str) -> dict:
                     json_str = match.group(1)
                     # Parse the JSON string
                     data_dict = json.loads(json_str)
-                    logger.info(f"✅ Successfully extracted window.__s_data dictionary")
+                    # logger.debug(f"✅ Successfully extracted window.__s_data dictionary")
                     return data_dict
         
         logger.warning("⚠️ window.__s_data not found in HTML")
@@ -104,15 +104,69 @@ async def get_cnbc_world_assets(region: str = "us", proxy: str = None) -> dict[s
     clean_assets = get_clean_assets(all_modules, wanted_modules, ["datePublished", "description"])
     return clean_assets
 
+async def get_article_body(title: str, url: str, proxy: str = None) -> str:
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url, headers=headers, proxy=proxy) as response:
+            html_content = await response.text()
+    
+    script_json = extract_s_data_dict_from_html(html_content)
+    if script_json:
+        try:
+            modules = []
+            for layout_item in script_json["page"]["page"]["layout"]:
+                layout_item_modules = layout_item["columns"][0]["modules"]
+                modules.extend(layout_item_modules)
+
+            try:
+                module_names = [module["name"] for module in modules]
+                # logger.debug(f"✅ {module_names}")
+                if "articleBody" in module_names:
+                    logger.debug(f"✅ articleBody found")
+                elif "liveBlogBody" in module_names:
+                    logger.debug(f"✅ liveBlogBody found")
+                    return None
+                else:
+                    logger.debug(f"❌ articleBody or liveBlogBody not found {module_names}\nPage url: {url}")
+                    return None
+            except Exception as e:
+                logger.error(f"❌ Error extracting module types: {e}")
+
+            for module in modules:
+                if module["name"] == "articleBody":
+                    article_body = module["data"]["articleBodyText"]
+                    return {"title": title, "body": article_body}
+        except Exception as e:
+            logger.error(f"❌ Error extracting article body: {e}")
+            return None
+    return None
+
 # Example usage
 async def main():
 
     output_dir = "data/cnbc"
     os.makedirs(output_dir, exist_ok=True)
     clean_assets = await get_cnbc_world_assets(proxy=Config.PROXY_DETAILS.APP_PROXY, region="world")
+    
+    tasks = []
     for module_name, assets in clean_assets.items():
         write_json_file(f"{output_dir}/{module_name}.json", assets)
+        counter = 0
+        for id, asset in assets.items():
+            if counter > 2:
+                break
+            counter += 1
+            tasks.append(get_article_body(asset["title"], asset["url"], proxy=Config.PROXY_DETAILS.APP_PROXY))
+
+    results = await asyncio.gather(*tasks)
+    for result in results:
+        if result is not None:
+            safe_file_name = re.sub(r'[\\/:*?"<>|]', '', result["title"])
+            articles_dir = f"{output_dir}/articles"
+            os.makedirs(articles_dir, exist_ok=True)
+            write_json_file(f"{articles_dir}/{safe_file_name}.json", result)
+
 
 
 if __name__ == "__main__":
+    # asyncio.run(main())
     asyncio.run(main())
