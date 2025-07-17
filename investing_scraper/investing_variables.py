@@ -20,7 +20,7 @@ class Importance():
     LOW = "1"
     MEDIUM = "2"
     HIGH = "3"
-    APP_IMPORTANCES = [LOW, MEDIUM, HIGH]
+    APP_IMPORTANCES = [MEDIUM, HIGH]
 
 class InvestingVariables():
     CALENDARS = Calendars

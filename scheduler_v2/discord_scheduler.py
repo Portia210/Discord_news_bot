@@ -49,39 +49,92 @@ class DiscordScheduler:
         
         self.running = False
     
+    def _split_long_message(self, message: str, max_length: int = 1900) -> list:
+        """
+        Split a long message into chunks that fit within Discord's limits
+        
+        Args:
+            message: The message to split
+            max_length: Maximum length per chunk (default 1900 to leave room for formatting)
+        
+        Returns:
+            List of message chunks
+        """
+        if len(message) <= max_length:
+            return [message]
+        
+        chunks = []
+        current_chunk = ""
+        
+        # Split by lines to avoid breaking in the middle of content
+        lines = message.split('\n')
+        
+        for line in lines:
+            # If adding this line would exceed the limit, start a new chunk
+            if len(current_chunk) + len(line) + 1 > max_length:
+                if current_chunk:
+                    chunks.append(current_chunk.strip())
+                    current_chunk = line
+                else:
+                    # Single line is too long, split it
+                    while len(line) > max_length:
+                        chunks.append(line[:max_length])
+                        line = line[max_length:]
+                    current_chunk = line
+            else:
+                current_chunk += '\n' + line if current_chunk else line
+        
+        # Add the last chunk if it has content
+        if current_chunk.strip():
+            chunks.append(current_chunk.strip())
+        
+        return chunks
+
+    async def _send_message(self, channel_id: int, message: str, color: int, title: str, error_context: str):
+        """
+        Internal method to send a message to a specific channel with splitting support
+        
+        Args:
+            channel_id: Discord channel ID to send to
+            message: Message content
+            color: Embed color
+            title: Embed title
+            error_context: Context for error logging
+        """
+        try:
+            channel = self.bot.get_channel(channel_id)
+            if channel:
+                # Split message if it's too long
+                message_chunks = self._split_long_message(message)
+                
+                for i, chunk in enumerate(message_chunks):
+                    # Add part indicator if message was split
+                    part_indicator = f" (Part {i+1}/{len(message_chunks)})" if len(message_chunks) > 1 else ""
+                    current_title = title + part_indicator
+                    
+                    embed = discord.Embed(
+                        title=current_title,
+                        description=chunk,
+                        color=color,
+                        timestamp=datetime.now(self.timezone)
+                    )
+                    await channel.send(embed=embed)
+                    
+                    # Small delay between messages to avoid rate limiting
+                    if len(message_chunks) > 1 and i < len(message_chunks) - 1:
+                        await asyncio.sleep(0.5)
+            else:
+                logger.error(f"{error_context} channel {channel_id} not found")
+        except Exception as e:
+            logger.error(f"Error sending {error_context.lower()}: {e}")
+
     async def send_alert(self, message: str, color: int = 0x00ff00, title: str = "📅 Scheduler Alert"):
         """Send alert to the main alert channel (for actual data/messages)"""
-        try:
-            channel = self.bot.get_channel(self.alert_channel_id)
-            if channel:
-                embed = discord.Embed(
-                    title=title,
-                    description=message,
-                    color=color,
-                    timestamp=datetime.now(self.timezone)
-                )
-                await channel.send(embed=embed)
-            else:
-                logger.error(f"Alert channel {self.alert_channel_id} not found")
-        except Exception as e:
-            logger.error(f"Error sending alert: {e}")
+        await self._send_message(self.alert_channel_id, message, color, title, "Alert")
     
     async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
         """Send alert to the dev channel (for scheduler status, errors, etc.)"""
-        try:
-            channel = self.bot.get_channel(self.dev_channel_id)
-            if channel:
-                embed = discord.Embed(
-                    title=title,
-                    description=message,
-                    color=color,
-                    timestamp=datetime.now(self.timezone)
-                )
-                await channel.send(embed=embed)
-            else:
-                logger.error(f"Dev channel {self.dev_channel_id} not found")
-        except Exception as e:
-            logger.error(f"Error sending dev alert: {e}")
+        await self._send_message(self.dev_channel_id, message, color, title, "Dev")
     
     def add_cron_job(self, 
                      func: Callable, 

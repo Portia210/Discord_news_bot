@@ -182,6 +182,10 @@ update_and_run() {
         cd $REMOTE_DIR
         git stash
         git checkout master
+        
+        # Clean up untracked files that might conflict with pull
+        git clean -fd
+        
         git pull origin master
         source $VENV_PATH/bin/activate
         pip install -r requirements.txt > /dev/null 2>&1
