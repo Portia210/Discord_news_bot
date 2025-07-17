@@ -1,15 +1,15 @@
-2025-07-17 01:55:56 - logger - INFO - [bot.py:25] - python_bot#6430 has connected to Discord!
-2025-07-17 01:55:56 - logger - INFO - [bot.py:26] - Bot is in 1 guilds
-2025-07-17 01:55:56 - logger - INFO - [bot.py:101] - Successfully loaded 7/7 cogs
-2025-07-17 01:55:56 - logger - INFO - [bot.py:34] - Commands synced successfully!
-2025-07-17 01:55:56 - logger - INFO - [bot.py:38] - Available slash commands: []
-2025-07-17 01:55:56 - logger - INFO - [bot.py:39] - Available text commands: ['test', 'greet', 'clean', 'ping', 'help', 'sync', 'hello', 'export']
-2025-07-17 01:55:56 - logger - INFO - [bot.py:51] - ✅ Scheduler components initialized successfully!
-2025-07-17 01:55:56 - logger - INFO - [task_definitions.py:27] - 📅 Setting up all scheduled tasks...
-2025-07-17 01:55:56 - logger - INFO - [task_definitions.py:44] - ✅ All tasks setup completed
-2025-07-17 01:55:56 - logger - INFO - [bot.py:55] - ✅ All tasks setup completed
-2025-07-17 01:55:56 - logger - INFO - [discord_scheduler.py:306] - 🚀 Discord Scheduler started
-2025-07-17 01:55:56 - logger - INFO - [discord_scheduler.py:310] - 📋 Job Summary:
+2025-07-17 14:00:57 - logger - INFO - [bot.py:25] - python_bot#6430 has connected to Discord!
+2025-07-17 14:00:57 - logger - INFO - [bot.py:26] - Bot is in 1 guilds
+2025-07-17 14:00:57 - logger - INFO - [bot.py:101] - Successfully loaded 7/7 cogs
+2025-07-17 14:00:57 - logger - INFO - [bot.py:34] - Commands synced successfully!
+2025-07-17 14:00:57 - logger - INFO - [bot.py:38] - Available slash commands: []
+2025-07-17 14:00:57 - logger - INFO - [bot.py:39] - Available text commands: ['sync', 'ping', 'export', 'greet', 'test', 'hello', 'help', 'clean']
+2025-07-17 14:00:57 - logger - INFO - [bot.py:51] - ✅ Scheduler components initialized successfully!
+2025-07-17 14:00:57 - logger - INFO - [task_definitions.py:27] - 📅 Setting up all scheduled tasks...
+2025-07-17 14:00:57 - logger - INFO - [task_definitions.py:44] - ✅ All tasks setup completed
+2025-07-17 14:00:57 - logger - INFO - [bot.py:55] - ✅ All tasks setup completed
+2025-07-17 14:00:57 - logger - INFO - [discord_scheduler.py:306] - 🚀 Discord Scheduler started
+2025-07-17 14:00:57 - logger - INFO - [discord_scheduler.py:310] - 📋 Job Summary:
 📋 **Scheduled Jobs Summary** (5 total)
 
 🕐 **Cron Jobs (sorted by time):**
@@ -19,30 +19,15 @@
   • `23:00` - `evening_news_report` - `0 23 * * *`
 
 📅 **One-time Jobs (sorted by date):**
-  • `economic_calendar_startup` - `2025-07-17 01:56:01`
+  • `economic_calendar_startup` - `2025-07-17 14:01:02`
 
 🌍 **Timezone:** Asia/Jerusalem
-2025-07-17 01:55:56 - logger - INFO - [bot.py:59] - ✅ APScheduler started successfully!
-2025-07-17 01:56:01 - logger - INFO - [discord_scheduler.py:172] - 🚀 Executing one-time job: economic_calendar_startup
-2025-07-17 01:56:01 - logger - INFO - [economic_calendar_tasks.py:21] - 📊 Fetching economic calendar...
-2025-07-17 01:56:01 - logger - DEBUG - [InvestingDataScraper.py:22] - Initialized investing scraper with proxy: http://brd-customer-hl_9884942f-zone-isp_proxy1:ky8psv0nqmev@brd.superproxy.io:33335
-2025-07-17 01:56:01 - logger - DEBUG - [InvestingDataScraper.py:37] - Fetching table data for economic_calendar
-2025-07-17 01:56:02 - logger - INFO - [economic_calendar_tasks.py:84] - 📊 Sent initial calendar summary to alert channel
-2025-07-17 01:56:02 - logger - INFO - [economic_calendar_tasks.py:49] - 📊 Found 4 events with 1 unique times: ['15:30']
-2025-07-17 01:56:02 - logger - INFO - [discord_scheduler.py:285] - 🗑️ Removed job: economic_calendar_check
-2025-07-17 01:56:02 - logger - INFO - [economic_calendar_tasks.py:68] - 📋 Economic Event Jobs updated: 📋 **Scheduled Jobs Summary** (7 total)
-
-🕐 **Cron Jobs (sorted by time):**
-  • `08:00` - `economic_calendar_check` - `0 8 * * 1-5`
-  • `09:00` - `weekly_backup` - `0 9 * * 0`
-  • `16:00` - `morning_news_report` - `0 16 * * *`
-  • `23:00` - `evening_news_report` - `0 23 * * *`
-
-📅 **One-time Jobs (sorted by date):**
-  • `economic_calendar_startup` - `2025-07-17 01:56:01`
-  • `economic_warning_15_30` - `2025-07-17 15:25:00`
-  • `economic_update_15_30` - `2025-07-17 15:30:03`
-
-🌍 **Timezone:** Asia/Jerusalem
-2025-07-17 01:56:02 - logger - INFO - [economic_calendar_tasks.py:71] - ✅ Economic calendar processing completed
-2025-07-17 01:56:02 - logger - INFO - [discord_scheduler.py:186] - ✅ One-time job completed: economic_calendar_startup
+2025-07-17 14:00:57 - logger - INFO - [bot.py:59] - ✅ APScheduler started successfully!
+2025-07-17 14:01:02 - logger - INFO - [discord_scheduler.py:172] - 🚀 Executing one-time job: economic_calendar_startup
+2025-07-17 14:01:02 - logger - INFO - [economic_calendar_tasks.py:21] - 📊 Fetching economic calendar...
+2025-07-17 14:01:02 - logger - DEBUG - [InvestingDataScraper.py:21] - 
+2025-07-17 14:01:02 - logger - DEBUG - [InvestingDataScraper.py:36] - Fetching table data for economic_calendar
+2025-07-17 14:01:02 - logger - ERROR - [InvestingDataScraper.py:43] - Failed to fetch page. Status code: 403
+2025-07-17 14:01:02 - logger - ERROR - [InvestingDataScraper.py:128] - Failed to fetch table data for economic_calendar
+2025-07-17 14:01:02 - logger - WARNING - [economic_calendar_tasks.py:37] - ⚠️ No economic calendar data received
+2025-07-17 14:01:02 - logger - INFO - [discord_scheduler.py:186] - ✅ One-time job completed: economic_calendar_startup
