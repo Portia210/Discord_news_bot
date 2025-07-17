@@ -30,13 +30,14 @@ show_menu() {
     print_status $BLUE "================================"
     echo "1) SSH into server"
     echo "2) Pull nohup.out from server"
-    echo "3) Update remote and run bot"
-    echo "4) Kill remote bot"
-    echo "5) View remote bot status"
-    echo "6) Restart EC2 instance"
-    echo "7) Exit"
+    echo "3) Copy .env file to server"
+    echo "4) Update remote and run bot"
+    echo "5) Kill remote bot"
+    echo "6) View remote bot status"
+    echo "7) Restart EC2 instance"
+    echo "8) Exit"
     echo ""
-    echo -n "Choose an option (1-7): "
+    echo -n "Choose an option (1-8): "
 }
 
 # Function to handle SSH connection
@@ -53,6 +54,17 @@ pull_nohup() {
         print_status $GREEN "✅ Successfully copied nohup.out"
     else
         print_status $RED "❌ Failed to copy nohup.out"
+    fi
+}
+
+
+copy_env_file_to_server() {
+    print_status $BLUE "📥 Copying .env file to server..."
+    scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_DIR"
+    if [ $? -eq 0 ]; then
+        print_status $GREEN "✅ Successfully copied .env file"
+    else
+        print_status $RED "❌ Failed to copy .env file"
     fi
 }
 
@@ -220,19 +232,22 @@ while true; do
             pull_nohup
             ;;
         3)
-            update_and_run
+            copy_env_file_to_server
             ;;
         4)
-            kill_bot
+            update_and_run
             ;;
         5)
-            check_status
+            kill_bot
             ;;
         6)
-                restart_ec2
-                ;;
-            7)
-                print_status $GREEN "👋 Goodbye!"
+            check_status
+            ;;
+        7)
+            restart_ec2
+            ;;
+        8)
+            print_status $GREEN "👋 Goodbye!"
             exit 0
             ;;
         *)

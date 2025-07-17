@@ -18,7 +18,7 @@ class InvestingDataScraper:
     def __init__(self, proxy=None):
         self.headers = read_json_file(f'investing_scraper/headers.json')
         self.proxy = proxy
-        logger.debug(f"Initialized investing scraper" + f" with proxy: {self.proxy}" if self.proxy else "")
+        logger.debug(f"Initialized investing scraper" + f" with proxy" if self.proxy else "")
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):
@@ -169,6 +169,24 @@ class InvestingDataScraper:
             payload["dateTo"] = date_to
         return await self.run(calendar_name, payload, save_data)
     
+    # this is test function to test the scheduler
+    # async def get_calendar(
+    #         self,
+    #         calendar_name: str,
+    #         current_tab: str=InvestingVariables.TIME_RANGES.TODAY, 
+    #         importance: list[str]=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH], 
+    #         countries: list[str]=[InvestingVariables.COUNTRIES.UNITED_STATES], 
+    #         time_zone: str=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), 
+    #         date_from: str = None, 
+    #         date_to: str = None, 
+    #         save_data: bool = False):
+        
+    #     df = pd.read_csv(f"data/investing_scraper/economic_test.csv")
+    #     # change value of df time[1] to next minutes 
+    #     next_minutes = (datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)) + timedelta(minutes=1)).strftime("%H:%M")
+    #     df.loc[0, "time"] = next_minutes
+    #     return df
+    
 
 
 
@@ -176,26 +194,39 @@ if __name__ == "__main__":
     proxy_scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
     no_proxy_scraper = InvestingDataScraper(proxy=None)
 
-    all_months = [f"0{i}" if i < 10 else f"{i}" for i in range(1, 13)]
-    days_ranges = ["01", "10", "20"]
-    for month_index, month in enumerate(all_months):
-        for day_index, day in enumerate(days_ranges):
-            # Calculate the next date in a cleaner way
-            if day_index < len(days_ranges) - 1:
-                # Next day in same month
-                date_to = f"2025-{month}-{days_ranges[day_index+1]}"
-            elif month_index < len(all_months) - 1:
-                # First day of next month
-                date_to = f"2025-{all_months[month_index+1]}-{days_ranges[0]}"
-            else:
-                # First day of next year
-                date_to = "2026-01-01"
+    async def get_todays_data(scraper):
+        return await scraper.get_calendar(
+            calendar_name= InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
+            current_tab= InvestingVariables.TIME_RANGES.TODAY,
+            importance=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH],
+            save_data=True)
 
-            result = asyncio.run(no_proxy_scraper.get_calendar(
+    
+    df = asyncio.run(get_todays_data(no_proxy_scraper))
+    print(df)
+    
+    # async def get_all_year_data(scraper):
+    async def get_all_year_data(scraper):
+        all_months = [f"0{i}" if i < 10 else f"{i}" for i in range(1, 13)]
+        days_ranges = ["01", "10", "20"]
+        for month_index, month in enumerate(all_months):
+            for day_index, day in enumerate(days_ranges):
+                # Calculate the next date in a cleaner way
+                if day_index < len(days_ranges) - 1:
+                    # Next day in same month
+                    date_to = f"2025-{month}-{days_ranges[day_index+1]}"
+                elif month_index < len(all_months) - 1:
+                    # First day of next month
+                    date_to = f"2025-{all_months[month_index+1]}-{days_ranges[0]}"
+                else:
+                    # First day of next year
+                    date_to = "2026-01-01"
+
+                await scraper.get_calendar(
                     calendar_name= InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
                     current_tab= InvestingVariables.TIME_RANGES.CUSTOM,
                     importance=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH],
                     date_from=f"2025-{month}-{day}",
                     date_to=date_to,
-                    save_data=True))
+                    save_data=True)
 

@@ -20,6 +20,9 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
     try:
         logger.info("📊 Fetching economic calendar...")
         
+        # Use DiscordScheduler's timezone if available, otherwise fall back to config
+        timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
+        
         # Get calendar data using InvestingDataScraper
         scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
         calendar_data = await scraper.get_calendar(
@@ -29,7 +32,7 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
                 InvestingVariables.IMPORTANCE.HIGH,
             ],
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
-            time_zone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
+            time_zone=timezone_to_use
         )
         
         # Handle None or empty DataFrame
@@ -87,22 +90,36 @@ async def send_initial_calendar_summary_to_alert(discord_scheduler, calendar_dat
         logger.error(f"❌ Error sending initial calendar summary: {e}")
 
 
-async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, calendar_data: pd.DataFrame):
+async def schedule_economic_alert_at_time(discord_scheduler: DiscordScheduler, time_str: str, calendar_data: pd.DataFrame):
     """Schedule economic alerts for a specific time. Returns list of job dicts for summary."""
     jobs_added = []
     try:
-        # Parse time and create datetime for today
+        # Use DiscordScheduler's timezone consistently
+        scheduler_tz = discord_scheduler.timezone
+        
+        # Parse time and create datetime for today using scheduler timezone
         time_obj = datetime.strptime(time_str, '%H:%M').time()
-        tz = pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
-        today = datetime.now(tz).date()
-        event_datetime = datetime.combine(today, time_obj, tzinfo=tz)
+        today = datetime.now(scheduler_tz).date()
+        
+        # Create timezone-aware datetime using the scheduler's timezone
+        event_datetime = scheduler_tz.localize(datetime.combine(today, time_obj))
         
         # Get events for this specific time from DataFrame
         time_events = calendar_data[calendar_data['time'] == time_str]
         
         # Schedule 5-minute warning (only if not already scheduled)
         warning_time = event_datetime - timedelta(minutes=5)
-        if warning_time > datetime.now(tz):
+        current_time = datetime.now(scheduler_tz)
+        
+        # Debug logging to verify timezone fix
+        logger.info(f"🔍 DEBUG - Scheduling for {time_str}:")
+        logger.info(f"   Scheduler timezone: {scheduler_tz}")
+        logger.info(f"   Event datetime: {event_datetime}")
+        logger.info(f"   Current time: {current_time}")
+        logger.info(f"   Warning time: {warning_time}")
+        logger.info(f"   Update time: {event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)}")
+        
+        if warning_time > current_time:
             warning_job_id = f"economic_warning_{time_str.replace(':', '_')}"
             
             # Check if job already exists
@@ -120,14 +137,15 @@ async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, cale
                         'id': warning_job_id,
                         'type': 'date',
                         'run_date': str(warning_time),
-                        'timezone': str(discord_scheduler.timezone)
+                        'timezone': str(scheduler_tz)
                     })
                 else:
                     logger.debug(f"📅 Warning job already exists for {time_str}")
         
         # Schedule post-event update (only if not already scheduled)
         update_time = event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)
-        if update_time > datetime.now(tz):
+        
+        if update_time > current_time:
             update_job_id = f"economic_update_{time_str.replace(':', '_')}"
             
             # Check if job already exists
@@ -145,7 +163,7 @@ async def schedule_economic_alert_at_time(discord_scheduler, time_str: str, cale
                         'id': update_job_id,
                         'type': 'date',
                         'run_date': str(update_time),
-                        'timezone': str(discord_scheduler.timezone)
+                        'timezone': str(scheduler_tz)
                     })
                 else:
                     logger.debug(f"📅 Update job already exists for {time_str}")
@@ -189,6 +207,9 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
     try:
         logger.info(f"📊 Sending post-event update for {time_str}")
         
+        # Use DiscordScheduler's timezone if available, otherwise fall back to config
+        timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
+        
         # Fetch updated calendar data
         scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
         calendar_data = await scraper.get_calendar(
@@ -198,7 +219,7 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
                 InvestingVariables.IMPORTANCE.HIGH,
             ],
             countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
-            time_zone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
+            time_zone=timezone_to_use
         )
         
         if calendar_data is None or calendar_data.empty:
