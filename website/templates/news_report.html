@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title|default('News Report') }}</title>
+    <!-- Main styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news_report.css') }}">
+    <!-- Theme overrides -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news_report_morning.css') }}" id="morning-theme">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/news_report_evening.css') }}" id="evening-theme" disabled>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="theme-icon" id="theme-icon">☀️</div>
+                <div class="header-text">
+                    <h1>{{ report_title|default('דוח חדשות') }}</h1>
+                    <div class="subtitle">{{ report_subtitle|default('עדכוני שוק ופיננסים אחרונים') }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Price Symbols Section -->
+        {% if price_symbols %}
+        <div class="price-symbols">
+            <div class="symbols-container">
+                {% for symbol in price_symbols %}
+                <div class="symbol-item" id="symbol-{{ loop.index }}">
+                    <div class="symbol-main">
+                        <div class="symbol-price-section">
+                            <div class="symbol-price">{{ symbol.price|default('$0.00') }}</div>
+                            <div class="symbol-change">
+                                <span class="change-amount {{ 'positive' if symbol.is_positive else 'negative' }}">{{ symbol.change_amount|default('0.00') }}</span>
+                                <span class="change-percent {{ 'positive' if symbol.is_positive else 'negative' }}">({{ symbol.change_percent|default('0.00%') }})</span>
+                                <span class="change-arrow {{ 'up' if symbol.is_positive else 'down' }}">{{ '↗' if symbol.is_positive else '↘' }}</span>
+                            </div>
+                        </div>
+                        <div class="symbol-info">
+                            <div class="symbol-ticker">{{ symbol.ticker|default('N/A') }}</div>
+                            <div class="symbol-company">{{ symbol.company|default('N/A') }}</div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="content">
+            <div id="news-container">
+                {% if news_data %}
+                    {% for item in news_data %}
+                    <div class="news-item">
+                        <div class="news-header">
+                            <div class="news-time">{{ item.time|default('') }}</div>
+                            {% if item.link %}
+                            <a href="{{ item.link }}" class="news-link" target="_blank">צפה במקור</a>
+                            {% endif %}
+                        </div>
+                        <div class="news-message">{{ item.message|default('') }}</div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="no-news">
+                        <p>אין חדשות זמינות כרגע</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>נוצר ב- <span id="generation-time">{{ generation_time|default('') }}</span></p>
+        </div>
+    </div>
+
+    <!-- Pass data from template to JavaScript -->
+    <script>
+        // Set global variables from template
+        window.reportTime = "{{ report_time|default('auto') }}";
+    </script>
+    
+    <!-- Load external JavaScript -->
+    <script src="{{ url_for('static', filename='js/news_report.js') }}"></script>
+</body>
+</html> 

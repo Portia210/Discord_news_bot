@@ -18,9 +18,10 @@ def write_text_file(file_path, data):
         with open(file_path, "w", encoding="utf-8") as f:
             f.write(data)
         logger.debug(f"File written to {file_path}")
+        return True
     except Exception as e:
         logger.error(f"Error in write_text_file: {str(e)} ({get_function_and_caller_info()})")
-        return None
+        return False
 
 def read_json_file(file_path):
     try:
@@ -40,12 +41,14 @@ def write_json_file(file_path, data, indent=4):
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=indent, ensure_ascii=False)
+        logger.debug(f"JSON file written to {file_path}")
+        return True
     except json.JSONDecodeError:
         logger.error(f"JSONDecodeError in write_json_file: {file_path} ({get_function_and_caller_info()})")
-        return None
+        return False
     except Exception as e:
         logger.error(f"Error in write_json_file: {str(e)} ({get_function_and_caller_info()})")
-        return None
+        return False
 
 def write_binary_file(file_path, data):
     try:
