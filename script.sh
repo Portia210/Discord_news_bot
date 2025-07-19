@@ -4,7 +4,10 @@
 KEY_PAIR="my_key_pair.pem"
 USER="ubuntu"
 HOST="54.165.14.238"
-REMOTE_DIR="~/discord/Discord_news_bot"
+REMOTE_VENV_DIR="~/discord/venv"
+REMOTE_MAIN_DIR="~/discord/Discord_news_bot"
+REMOTE_BOT_DIR="~/discord/Discord_news_bot/bot"
+REMOTE_WEBSITE_DIR="~/discord/Discord_news_bot/website"
 VENV_PATH="~/discord/venv"
 BOT_NAME="bot.py"
 LOCAL_DIR="."
@@ -51,20 +54,20 @@ ssh_connect() {
 }
 
 # Function to pull nohup.out
-pull_nohup() {
+pull_bot_nohup() {
     print_status $BLUE "📥 Copying nohup.out from server to local..."
-    scp -i "$KEY_PAIR" "$USER@$HOST":"$REMOTE_DIR/nohup.out" "$LOCAL_DIR"
+    scp -i "$KEY_PAIR" "$USER@$HOST":"$REMOTE_BOT_DIR/bot_nohup.out" "$LOCAL_DIR"
     if [ $? -eq 0 ]; then
-        print_status $GREEN "✅ Successfully copied nohup.out"
+        print_status $GREEN "✅ Successfully copied bot_nohup.out"
     else
-        print_status $RED "❌ Failed to copy nohup.out"
+        print_status $RED "❌ Failed to copy bot_nohup.out"
     fi
 }
 
 # Function to pull website nohup.out
 pull_website_nohup() {
     print_status $BLUE "📥 Copying nohup_website.out from server to local..."
-    scp -i "$KEY_PAIR" "$USER@$HOST":"$REMOTE_DIR/nohup_website.out" "$LOCAL_DIR"
+    scp -i "$KEY_PAIR" "$USER@$HOST":"$REMOTE_WEBSITE_DIR/nohup_website.out" "$LOCAL_DIR"
     if [ $? -eq 0 ]; then
         print_status $GREEN "✅ Successfully copied nohup_website.out"
     else
@@ -74,9 +77,9 @@ pull_website_nohup() {
 
 copy_env_file_to_server() {
     print_status $BLUE "📥 Copying .env file to server..."
-    scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_DIR"
+    scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_BOT_DIR"
     if [ $? -eq 0 ]; then
-        print_status $GREEN "✅ Successfully copied .env file"
+        print_status $GREEN "✅ Successfully copied .env file to bot directory"
     else
         print_status $RED "❌ Failed to copy .env file"
     fi
@@ -199,7 +202,7 @@ update_project() {
     
     # Update code and dependencies
     ssh -T -i "$KEY_PAIR" "$USER@$HOST" << EOF
-        cd $REMOTE_DIR
+        cd $REMOTE_MAIN_DIR
         git stash
         git checkout master
         
@@ -208,6 +211,13 @@ update_project() {
         
         git pull origin master
         source $VENV_PATH/bin/activate
+        
+        # Install bot requirements
+        cd $REMOTE_BOT_DIR
+        pip install -r requirements.txt > /dev/null 2>&1
+        
+        # Install website requirements
+        cd $REMOTE_WEBSITE_DIR
         pip install -r requirements.txt > /dev/null 2>&1
 EOF
     
@@ -225,6 +235,7 @@ update_and_run_process() {
     local display_name=$2
     local start_command=$3
     local log_file=$4
+    local working_dir=$5
     
     update_project
     if [ $? -ne 0 ]; then
@@ -239,7 +250,7 @@ update_and_run_process() {
     # Start the process
     print_status $BLUE "🚀 Starting $display_name..."
     ssh -T -i "$KEY_PAIR" "$USER@$HOST" << EOF
-        cd $REMOTE_DIR
+        cd $working_dir
         source $VENV_PATH/bin/activate
         rm -f $log_file
         $start_command
@@ -260,8 +271,9 @@ update_and_run_bot() {
     update_and_run_process \
         "bot.py" \
         "bot" \
-        "nohup python bot.py > nohup.out 2>&1 &" \
-        "nohup.out"
+        "nohup python bot.py > bot_nohup.out 2>&1 &" \
+        "bot_nohup.out" \
+        "$REMOTE_BOT_DIR"
 }
 
 # Function to update and run server
@@ -269,8 +281,9 @@ update_and_run_server() {
     update_and_run_process \
         "gunicorn" \
         "server" \
-        "nohup gunicorn website.server:app --bind 0.0.0.0:8000 --workers 2 --timeout 120 --keep-alive 5 --max-requests 1000 --max-requests-jitter 100 --access-logfile - --error-logfile - --log-level info > nohup_website.out 2>&1 &" \
-        "nohup_website.out"
+        "nohup gunicorn server:app --bind 0.0.0.0:8000 --workers 2 --timeout 120 --keep-alive 5 --max-requests 1000 --max-requests-jitter 100 --access-logfile - --error-logfile - --log-level info > nohup_website.out 2>&1 &" \
+        "nohup_website.out" \
+        "$REMOTE_WEBSITE_DIR"
 }
 
 # Function to kill bot (using generic function)
@@ -304,7 +317,7 @@ while true; do
             ssh_connect
             ;;
         2)
-            pull_nohup
+            pull_bot_nohup
             ;;
         3)
             pull_website_nohup
