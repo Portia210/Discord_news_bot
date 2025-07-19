@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discord Bot Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">Discord Bot Dashboard</h1>
+            <p class="subtitle">Welcome to your Discord bot management interface</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="card">
+                <h2>Bot Status</h2>
+                <div class="status-indicator">
+                    <span class="status-dot online"></span>
+                    <span class="status-text">Online</span>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Quick Actions</h2>
+                <div class="action-buttons">
+                    <button class="btn btn-primary">View Logs</button>
+                    <button class="btn btn-secondary">Settings</button>
+                    <button class="btn btn-outline">Documentation</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Recent Activity</h2>
+                <div class="activity-list">
+                    <div class="activity-item">
+                        <span class="activity-time">2 min ago</span>
+                        <span class="activity-text">News report generated</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-time">5 min ago</span>
+                        <span class="activity-text">Economic calendar updated</span>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-time">10 min ago</span>
+                        <span class="activity-text">Bot restarted successfully</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>&copy; 2024 Discord Bot Dashboard. Built with Flask.</p>
+        </footer>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

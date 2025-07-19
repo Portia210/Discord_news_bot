@@ -32,12 +32,15 @@ show_menu() {
     echo "2) Pull nohup.out from server"
     echo "3) Copy .env file to server"
     echo "4) Update remote and run bot"
-    echo "5) Kill remote bot"
-    echo "6) View remote bot status"
-    echo "7) Restart EC2 instance"
-    echo "8) Exit"
+    echo "5) Update remote and run server"
+    echo "6) Kill remote bot"
+    echo "7) Kill remote server"
+    echo "8) View remote bot status"
+    echo "9) View remote server status"
+    echo "10) Restart EC2 instance"
+    echo "11) Exit"
     echo ""
-    echo -n "Choose an option (1-8): "
+    echo -n "Choose an option (1-11): "
 }
 
 # Function to handle SSH connection
@@ -57,7 +60,6 @@ pull_nohup() {
     fi
 }
 
-
 copy_env_file_to_server() {
     print_status $BLUE "📥 Copying .env file to server..."
     scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_DIR"
@@ -68,56 +70,63 @@ copy_env_file_to_server() {
     fi
 }
 
-# Function to check if bot is running
-check_bot_running() {
-    ssh -T -i "$KEY_PAIR" "$USER@$HOST" "ps aux | grep -v grep | grep -q bot.py"
+# Generic function to check if a process is running
+check_process_running() {
+    local process_name=$1
+    ssh -T -i "$KEY_PAIR" "$USER@$HOST" "ps aux | grep -v grep | grep -q $process_name"
     return $?
 }
 
-# Function to kill remote bot
-kill_bot() {
-    print_status $YELLOW "🛑 Killing bot process on remote server..."
-    ssh -T -i "$KEY_PAIR" "$USER@$HOST" "pkill -f bot.py"
+# Generic function to kill a process
+kill_process() {
+    local process_name=$1
+    local display_name=$2
+    print_status $YELLOW "🛑 Killing $display_name process on remote server..."
+    ssh -T -i "$KEY_PAIR" "$USER@$HOST" "pkill -f $process_name"
     if [ $? -eq 0 ]; then
-        print_status $GREEN "✅ Bot process killed"
+        print_status $GREEN "✅ $display_name process killed"
         # Wait a moment for process to fully terminate
         sleep 2
     else
-        print_status $YELLOW "⚠️  No bot process found to kill"
+        print_status $YELLOW "⚠️  No $display_name process found to kill"
     fi
 }
 
-# Function to check bot status
+# Generic function to check process status
 check_status() {
-    print_status $BLUE "📊 Checking remote bot status..."
-    local is_running=$(ssh -T -i "$KEY_PAIR" "$USER@$HOST" "ps aux | grep bot.py | grep -v grep")
+    local process_name=$1
+    local display_name=$2
+    print_status $BLUE "📊 Checking remote $display_name status..."
+    local is_running=$(ssh -T -i "$KEY_PAIR" "$USER@$HOST" "ps aux | grep $process_name | grep -v grep")
     if [ -n "$is_running" ]; then
-        print_status $GREEN "✅ Bot is running:"
+        print_status $GREEN "✅ $display_name is running:"
         echo "$is_running"
         return 0
     else
-        print_status $RED "❌ Bot is not running"
+        print_status $RED "❌ $display_name is not running"
         return 1
     fi
 }
 
-# Function to wait and verify bot is running
-wait_for_bot() {
-    print_status $BLUE "⏳ Waiting for bot to start..."
+# Generic function to wait and verify process is running
+wait_for_process() {
+    local process_name=$1
+    local display_name=$2
+    print_status $BLUE "⏳ Waiting for $display_name to start..."
     local attempts=0
     local max_attempts=3
     
     while [ $attempts -lt $max_attempts ]; do
-        if check_bot_running; then
-            print_status $GREEN "✅ Bot is now running successfully!"
+        if check_process_running "$process_name"; then
+            print_status $GREEN "✅ $display_name is now running successfully!"
             return 0
         fi
-        print_status $YELLOW "⏳ Attempt $((attempts + 1))/$max_attempts - Bot not ready yet..."
+        print_status $YELLOW "⏳ Attempt $((attempts + 1))/$max_attempts - $display_name not ready yet..."
         sleep 3
         ((attempts++))
     done
     
-    print_status $RED "❌ Bot failed to start after $max_attempts attempts"
+    print_status $RED "❌ $display_name failed to start after $max_attempts attempts"
     return 1
 }
 
@@ -173,8 +182,7 @@ restart_ec2() {
     fi
 }
 
-# Function to update and run bot
-update_and_run() {
+update_project() {
     print_status $BLUE "🔄 Updating EC2..."
     
     # Update code and dependencies
@@ -197,29 +205,80 @@ EOF
         print_status $RED "❌ Update failed"
         return 1
     fi
+}
 
-    # Kill existing bot if running
-    if check_bot_running; then
-        kill_bot
+# Generic function to update and run a process
+update_and_run_process() {
+    local process_name=$1
+    local display_name=$2
+    local start_command=$3
+    local log_file=$4
+    
+    update_project
+    if [ $? -ne 0 ]; then
+        return 1
     fi
 
-    # Start the bot
-    print_status $BLUE "🚀 Starting bot..."
+    # Kill existing process if running
+    if check_process_running "$process_name"; then
+        kill_process "$process_name" "$display_name"
+    fi
+
+    # Start the process
+    print_status $BLUE "🚀 Starting $display_name..."
     ssh -T -i "$KEY_PAIR" "$USER@$HOST" << EOF
         cd $REMOTE_DIR
-        rm -f nohup.out
         source $VENV_PATH/bin/activate
-        nohup python bot.py > nohup.out 2>&1 &
+        rm -f $log_file
+        $start_command
 EOF
 
     if [ $? -eq 0 ]; then
-        print_status $GREEN "✅ Bot start command executed"
-        # Wait and verify bot is actually running
-        wait_for_bot
+        print_status $GREEN "✅ $display_name start command executed"
+        # Wait and verify process is actually running
+        wait_for_process "$process_name" "$display_name"
     else
-        print_status $RED "❌ Failed to start bot"
+        print_status $RED "❌ Failed to start $display_name"
         return 1
     fi
+}
+
+# Function to update and run bot
+update_and_run_bot() {
+    update_and_run_process \
+        "bot.py" \
+        "bot" \
+        "nohup python bot.py > nohup.out 2>&1 &" \
+        "nohup.out"
+}
+
+# Function to update and run server
+update_and_run_server() {
+    update_and_run_process \
+        "gunicorn" \
+        "server" \
+        "nohup gunicorn website.server:app --bind 0.0.0.0:8000 --workers 4 > nohup_website.out 2>&1 &" \
+        "nohup_website.out"
+}
+
+# Function to kill bot (using generic function)
+kill_bot() {
+    kill_process "bot.py" "bot"
+}
+
+# Function to kill server (using generic function)
+kill_server() {
+    kill_process "gunicorn" "server"
+}
+
+# Function to check bot status (using generic function)
+check_bot_status() {
+    check_status "bot.py" "bot"
+}
+
+# Function to check server status (using generic function)
+check_server_status() {
+    check_status "gunicorn" "server"
 }
 
 # Main interactive loop
@@ -239,23 +298,32 @@ while true; do
             copy_env_file_to_server
             ;;
         4)
-            update_and_run
+            update_and_run_bot
             ;;
         5)
-            kill_bot
+            update_and_run_server
             ;;
         6)
-            check_status
+            kill_bot
             ;;
         7)
-            restart_ec2
+            kill_server
             ;;
         8)
+            check_bot_status
+            ;;
+        9)
+            check_server_status
+            ;;
+        10)
+            restart_ec2
+            ;;
+        11)
             print_status $GREEN "👋 Goodbye!"
             exit 0
             ;;
         *)
-                print_status $RED "❌ Invalid option. Please choose 1-7."
+            print_status $RED "❌ Invalid option. Please choose 1-11."
             ;;
     esac
     
