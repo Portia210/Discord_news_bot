@@ -30,17 +30,18 @@ show_menu() {
     print_status $BLUE "================================"
     echo "1) SSH into server"
     echo "2) Pull nohup.out from server"
-    echo "3) Copy .env file to server"
-    echo "4) Update remote and run bot"
-    echo "5) Update remote and run server"
-    echo "6) Kill remote bot"
-    echo "7) Kill remote server"
-    echo "8) View remote bot status"
-    echo "9) View remote server status"
-    echo "10) Restart EC2 instance"
-    echo "11) Exit"
+    echo "3) Pull website nohup.out from server"
+    echo "4) Copy .env file to server"
+    echo "5) Update remote and run bot"
+    echo "6) Update remote and run server"
+    echo "7) Kill remote bot"
+    echo "8) Kill remote server"
+    echo "9) View remote bot status"
+    echo "10) View remote server status"
+    echo "11) Restart EC2 instance"
+    echo "12) Exit"
     echo ""
-    echo -n "Choose an option (1-11): "
+    echo -n "Choose an option (1-12): "
 }
 
 # Function to handle SSH connection
@@ -57,6 +58,17 @@ pull_nohup() {
         print_status $GREEN "✅ Successfully copied nohup.out"
     else
         print_status $RED "❌ Failed to copy nohup.out"
+    fi
+}
+
+# Function to pull website nohup.out
+pull_website_nohup() {
+    print_status $BLUE "📥 Copying nohup_website.out from server to local..."
+    scp -i "$KEY_PAIR" "$USER@$HOST":"$REMOTE_DIR/nohup_website.out" "$LOCAL_DIR"
+    if [ $? -eq 0 ]; then
+        print_status $GREEN "✅ Successfully copied nohup_website.out"
+    else
+        print_status $RED "❌ Failed to copy nohup_website.out"
     fi
 }
 
@@ -257,7 +269,7 @@ update_and_run_server() {
     update_and_run_process \
         "gunicorn" \
         "server" \
-        "nohup gunicorn website.server:app --bind 0.0.0.0:8000 --workers 4 > nohup_website.out 2>&1 &" \
+        "nohup gunicorn website.server:app --bind 0.0.0.0:8000 --workers 2 --timeout 120 --keep-alive 5 --max-requests 1000 --max-requests-jitter 100 --access-logfile - --error-logfile - --log-level info > nohup_website.out 2>&1 &" \
         "nohup_website.out"
 }
 
@@ -295,35 +307,38 @@ while true; do
             pull_nohup
             ;;
         3)
-            copy_env_file_to_server
+            pull_website_nohup
             ;;
         4)
-            update_and_run_bot
+            copy_env_file_to_server
             ;;
         5)
-            update_and_run_server
+            update_and_run_bot
             ;;
         6)
-            kill_bot
+            update_and_run_server
             ;;
         7)
-            kill_server
+            kill_bot
             ;;
         8)
-            check_bot_status
+            kill_server
             ;;
         9)
-            check_server_status
+            check_bot_status
             ;;
         10)
-            restart_ec2
+            check_server_status
             ;;
         11)
+            restart_ec2
+            ;;
+        12)
             print_status $GREEN "👋 Goodbye!"
             exit 0
             ;;
         *)
-            print_status $RED "❌ Invalid option. Please choose 1-11."
+            print_status $RED "❌ Invalid option. Please choose 1-12."
             ;;
     esac
     

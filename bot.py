@@ -4,9 +4,6 @@ from discord.ext import commands
 from utils.logger import logger
 from config import Config
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
-import threading
-from website.server import start_web_server
-
 
 # Set up bot with intents
 intents = discord.Intents.default()
@@ -20,19 +17,10 @@ discord_scheduler = None
 calendar_manager = None
 task_definitions = None
 
-
-
 @bot.event
 async def on_ready():
     logger.info(f'{bot.user} has connected to Discord!')
     logger.info(f'Bot is in {len(bot.guilds)} guilds')
-    
-    # Start the web server in a background thread
-    try:
-        web_server_thread = start_web_server(host='0.0.0.0', port=5000, debug=False)
-        logger.info("✅ Web server started successfully in background thread!")
-    except Exception as e:
-        logger.error(f"❌ Failed to start web server: {e}")
     
     # Load command cogs
     await load_cogs()
@@ -71,8 +59,7 @@ async def on_ready():
         await discord_scheduler.send_dev_alert(
             "🚀 **Bot Started Successfully**\n"
             "🔔 Dev alerts will be sent to this channel\n"
-            "📊 Data alerts will be sent to the main channel\n"
-            "🌐 Web server running on port 5000",
+            "📊 Data alerts will be sent to the main channel",
             0x00ff00,
             "🤖 Bot Status"
         )
@@ -85,7 +72,6 @@ async def on_ready():
                 0xff0000,
                 "🤖 Bot Status"
             )
-
 
 async def load_cogs():
     """Load all command cogs"""
