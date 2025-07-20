@@ -18,7 +18,7 @@ async def morning_news_report_task(discord_scheduler: DiscordScheduler):
         
         # Generate PDF report
         news_report = NewsReport(discord_scheduler.bot, timezone=discord_scheduler.timezone)
-        response = await news_report.send_report_to_server(report_time="morning", hours_back=17, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:8000/api/news-report", headers={"Authorization": Config.SERVER.API_TOKEN, "Content-Type": "application/json"}, proxy=Config.PROXY.APP_PROXY)
+        response = await news_report.send_report_to_server(report_time="morning", hours_back=17, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:8000/api/news-report", headers={"Authorization": "your-secret-token", "Content-Type": "application/json"})
         
         if response:
             link_to_report = response.get("link_to_report")
@@ -38,7 +38,7 @@ async def evening_news_report_task(discord_scheduler: DiscordScheduler):
         
         # Generate PDF report
         news_report = NewsReport(discord_scheduler.bot, timezone=discord_scheduler.timezone)
-        response = await news_report.send_report_to_server(report_time="evening", hours_back=7, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/api/news-report", headers={"Authorization": Config.SERVER.API_TOKEN, "Content-Type": "application/json"}, proxy=Config.PROXY.APP_PROXY)
+        response = await news_report.send_report_to_server(report_time="evening", hours_back=7, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/api/news-report", headers={"Authorization": Config.SERVER.API_TOKEN, "Content-Type": "application/json"})
         
         if response:
             link_to_report = response.get("link_to_report")

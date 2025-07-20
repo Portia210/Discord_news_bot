@@ -138,7 +138,7 @@ class NewsReport:
             "prices_data": prices_data,
         }
     
-    async def send_report_to_server(self, report_time: str, hours_back: int, url: str, headers: dict = None, proxy: str = None):
+    async def send_report_to_server(self, report_time: str, hours_back: int, url: str, headers: dict = None):
         """
         Send the report to the server.
         """
@@ -147,15 +147,9 @@ class NewsReport:
         logger.info(f"🔍 Report time: {report_time}")
         logger.info(f"🔍 Hours back: {hours_back}")
         logger.info(f"🔍 Headers: {headers}")
-        logger.info(f"🔍 Proxy: {proxy}")
         logger.info(f"🔍 Report: {len(report)}")
         try:
-            # Convert proxy string to dict format if provided
-            proxies = None
-            if proxy:
-                proxies = {"http": proxy, "https": proxy}
-            
-            response = requests.post(url, headers=headers, json=report, proxies=proxies)
+            response = requests.post(url, headers=headers, json=report)
             if response.status_code != 201:
                 logger.error(f"❌ Error sending report to server: {response.status_code}")
                 logger.error(f"❌ Response text: {response.text}")
