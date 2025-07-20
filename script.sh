@@ -37,12 +37,13 @@ show_menu() {
     echo "4) Copy .env file to server"
     echo "5) Update remote and run bot"
     echo "6) Update remote and run server"
-    echo "7) Kill remote bot"
-    echo "8) Kill remote server"
-    echo "9) View remote bot status"
-    echo "10) View remote server status"
-    echo "11) Restart EC2 instance"
-    echo "12) Exit"
+    echo "7) Update remote and run all"
+    echo "8) Kill remote bot"
+    echo "9) Kill remote server"
+    echo "10) View remote bot status"
+    echo "11) View remote server status"
+    echo "12) Restart EC2 instance"
+    echo "13) Exit"
     echo ""
     echo -n "Choose an option (1-12): "
 }
@@ -77,7 +78,7 @@ pull_website_nohup() {
 
 copy_env_file_to_server() {
     print_status $BLUE "📥 Copying .env file to server..."
-    scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_BOT_DIR"
+    scp -i "$KEY_PAIR" "$LOCAL_DIR/.env" "$USER@$HOST":"$REMOTE_MAIN_DIR"
     if [ $? -eq 0 ]; then
         print_status $GREEN "✅ Successfully copied .env file to bot directory"
     else
@@ -287,8 +288,8 @@ update_and_run_server() {
 }
 
 update_and_run_all() {
-    update_and_run_bot
     update_and_run_server
+    update_and_run_bot
 }
 
 # Function to kill bot (using generic function)

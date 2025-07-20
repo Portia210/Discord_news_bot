@@ -143,7 +143,12 @@ class NewsReport:
         Send the report to the server.
         """
         report = await self._generate_full_json_report(report_time, hours_back)
-
+        logger.info(f"🔍 Sending report to server: {url}")
+        logger.info(f"🔍 Report time: {report_time}")
+        logger.info(f"🔍 Hours back: {hours_back}")
+        logger.info(f"🔍 Headers: {headers}")
+        logger.info(f"🔍 Proxy: {proxy}")
+        logger.info(f"🔍 Report: {len(report)}")
         try:
             # Convert proxy string to dict format if provided
             proxies = None
