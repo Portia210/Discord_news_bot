@@ -30,13 +30,13 @@ def news_report():
     
     return render_template('news_report.html', **sample_data)
 
-@views_bp.route('/news-report/<date>')
-def news_report_by_date(date):
+@views_bp.route('/<report_time>-news-report/<date>')
+def news_report_by_date(report_time, date):
     """Display news report for a specific date"""
     try:
         # Look for the file in data directory
         data_dir = Config.DATA_DIR
-        filename = f'news_report_{date}.json'
+        filename = f'{report_time}_news_report_{date}.json'
         filepath = os.path.join(data_dir, filename)
         
         if os.path.exists(filepath):

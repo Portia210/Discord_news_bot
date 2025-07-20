@@ -43,20 +43,21 @@ def create_news_report():
         # Generate date from current time or use provided date
         date = data.get('date', datetime.now().strftime('%Y-%m-%d'))
         
+        report_time = data.get('report_time', 'auto')
         # Prepare the complete data structure
         news_data = {
             'date': date,
             'title': data.get('title', f'דוח חדשות פיננסיות - {date}'),
             'report_title': data.get('report_title', 'דוח חדשות'),
             'report_subtitle': data.get('report_subtitle', 'עדכוני שוק ופיננסים אחרונים'),
-            'report_time': data.get('report_time', 'auto'),
+            'report_time': report_time,
             'generation_time': data.get('generation_time', datetime.now().strftime('%Y-%m-%d %H:%M:%S')),
             'news_data': data['news_data'],
             'price_symbols': data.get('price_symbols', [])
         }
         
         # Save to file
-        filename = f'news_report_{date}.json'
+        filename = f'{report_time}_news_report_{date}.json'
         filepath = os.path.join(Config.DATA_DIR, filename)
         
         success = write_json_file(filepath, news_data)
@@ -67,7 +68,7 @@ def create_news_report():
                 'message': f'News report created for date {date}',
                 'file': filename,
                 'date': date,
-                'link_to_report': f'http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/news-report/{date}'
+                'link_to_report': f'http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/{report_time}-news-report/{date}'
             }, 201
         else:
             logger.error(f"❌ Failed to save news report for date {date}")
