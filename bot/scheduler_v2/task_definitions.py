@@ -35,11 +35,19 @@ class TaskDefinitions:
         # Custom tasks
         self._setup_custom_tasks()
         
-        self.discord_scheduler.add_date_job(
-            func=lambda: get_economic_calendar_task(self.discord_scheduler),
-            run_date=datetime.now(self.discord_scheduler.timezone) + timedelta(seconds=5),
-            job_id="economic_calendar_startup"
-        )
+        # Conditional startup task - only run if after 8:00 AM
+        current_time = datetime.now(self.discord_scheduler.timezone)
+        current_hour = current_time.hour
+        
+        if current_hour >= 8:
+            logger.info("🌅 After 8:00 AM - Running economic calendar startup task")
+            self.discord_scheduler.add_date_job(
+                func=lambda: get_economic_calendar_task(self.discord_scheduler),
+                run_date=current_time + timedelta(seconds=5),
+                job_id="economic_calendar_startup"
+            )
+        else:
+            logger.info("🌙 Before 8:00 AM - Skipping startup task, waiting for daily cron job")
         
         logger.info("✅ All tasks setup completed")
     
@@ -71,12 +79,13 @@ class TaskDefinitions:
         """Setup weekly recurring tasks"""
         
         # Weekly backup (Sunday 9:00 AM)
-        self.discord_scheduler.add_cron_job(
-            func=lambda: weekly_backup_task(self.discord_scheduler),
-            cron_expression="0 9 * * 0",  # 9:00 AM Sunday
-            job_id="weekly_backup"
-        )
-    
+        # self.discord_scheduler.add_cron_job(
+        #     func=lambda: weekly_backup_task(self.discord_scheduler),
+        #     cron_expression="0 9 * * 0",  # 9:00 AM Sunday
+        #     job_id="weekly_backup"
+        # )
+        pass
+
     def _setup_custom_tasks(self):
         """Setup custom tasks with specific dates"""
         

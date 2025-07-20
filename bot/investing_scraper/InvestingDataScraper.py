@@ -18,7 +18,7 @@ class InvestingDataScraper:
     def __init__(self, proxy=None):
         self.headers = read_json_file(f'investing_scraper/headers.json')
         self.proxy = proxy
-        logger.debug(f"Initialized investing scraper" + f" with proxy" if self.proxy else "")
+        logger.debug(f"Initialized investing scraper" + (" with proxy" if self.proxy else ""))
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):

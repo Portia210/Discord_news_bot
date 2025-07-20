@@ -37,7 +37,8 @@ class DiscordScheduler:
         }
         job_defaults = {
             'coalesce': False,
-            'max_instances': 3
+            'max_instances': 3,  # Allow more concurrent jobs
+            'misfire_grace_time': 180  # Allow jobs to run up to 180 seconds late
         }
         
         self.scheduler = AsyncIOScheduler(
@@ -46,6 +47,9 @@ class DiscordScheduler:
             job_defaults=job_defaults,
             timezone=self.timezone
         )
+        
+        # Add job listeners for better monitoring
+        self.scheduler.add_listener(self._job_listener, mask=1 | 2 | 4096)  # Only listen to specific events
         
         self.running = False
     
@@ -157,8 +161,6 @@ class DiscordScheduler:
         try:
             async def wrapped_func():
                 try:
-                    logger.info(f"🚀 Executing job: {job_id}")
-                    
                     if args and kwargs:
                         result = await func(*args, **kwargs)
                     elif args:
@@ -222,8 +224,6 @@ class DiscordScheduler:
         try:
             async def wrapped_func():
                 try:
-                    logger.info(f"🚀 Executing one-time job: {job_id}")
-                    
                     if args and kwargs:
                         result = await func(*args, **kwargs)
                     elif args:
@@ -236,7 +236,7 @@ class DiscordScheduler:
                     if send_alert:
                         await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
-                    logger.info(f"✅ One-time job completed: {job_id}")
+                    logger.info(f"✅ Job completed: {job_id}")
                     return result
                     
                 except Exception as e:
@@ -287,8 +287,6 @@ class DiscordScheduler:
         try:
             async def wrapped_func():
                 try:
-                    logger.info(f"🚀 Executing interval job: {job_id}")
-                    
                     if args and kwargs:
                         result = await func(*args, **kwargs)
                     elif args:
@@ -301,7 +299,7 @@ class DiscordScheduler:
                     if send_alert:
                         await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
-                    logger.info(f"✅ Interval job completed: {job_id}")
+                    logger.info(f"✅ Job completed: {job_id}")
                     return result
                     
                 except Exception as e:
@@ -407,4 +405,42 @@ class DiscordScheduler:
                 }
                 for job in jobs
             ]
-        } 
+        }
+    
+    def _job_listener(self, event):
+        """Handle job events for monitoring"""
+        try:
+            event_code = getattr(event, 'code', None)
+            
+            # Only process job execution events
+            if event_code == 1:  # EVENT_JOB_EXECUTED
+                # Get job ID from the job object
+                job_id = 'unknown'
+                if hasattr(event, 'job') and event.job and hasattr(event.job, 'id'):
+                    job_id = event.job.id
+                
+                # Only log if we have a valid job ID
+                if job_id != 'unknown':
+                    logger.info(f"🚀 Starting job: {job_id}")
+                
+            elif event_code == 2:  # EVENT_JOB_ERROR
+                job_id = 'unknown'
+                if hasattr(event, 'job') and event.job and hasattr(event.job, 'id'):
+                    job_id = event.job.id
+                exception = getattr(event, 'exception', 'unknown error')
+                logger.error(f"❌ Job failed: {job_id} - {exception}")
+                
+            elif event_code == 4096:  # EVENT_JOB_MISSED
+                job_id = 'unknown'
+                if hasattr(event, 'job') and event.job and hasattr(event.job, 'id'):
+                    job_id = event.job.id
+                scheduled_time = getattr(event, 'scheduled_run_time', 'unknown')
+                # Only log significant delays (more than 30 seconds)
+                current_time = datetime.now(self.timezone)
+                if hasattr(scheduled_time, 'replace'):
+                    delay = (current_time - scheduled_time.replace(tzinfo=self.timezone)).total_seconds()
+                    if delay > 30:
+                        logger.warning(f"⚠️ Job significantly delayed: {job_id} - {delay:.1f}s late")
+                
+        except Exception as e:
+            logger.debug(f"Error in job listener: {e}") 

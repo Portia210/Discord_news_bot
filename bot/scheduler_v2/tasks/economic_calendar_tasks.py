@@ -49,11 +49,11 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
         
         logger.info(f"📊 Found {len(calendar_data)} events with {len(unique_times)} unique times: {sorted(unique_times)}")
         
-        # Remove existing economic event jobs to avoid duplicates
+        # Remove existing economic event jobs to avoid duplicates (but keep the daily cron job)
         if discord_scheduler:
             existing_jobs = discord_scheduler.get_jobs()
             for job in existing_jobs:
-                if job.id.startswith('economic_'):
+                if job.id.startswith('economic_') and not job.id == 'economic_calendar_check':
                     discord_scheduler.remove_job(job.id)
         
         # Schedule alerts for each unique time, track jobs for summary
