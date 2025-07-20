@@ -286,6 +286,11 @@ update_and_run_server() {
         "$REMOTE_WEBSITE_DIR"
 }
 
+update_and_run_all() {
+    update_and_run_bot
+    update_and_run_server
+}
+
 # Function to kill bot (using generic function)
 kill_bot() {
     kill_process "bot.py" "bot"
@@ -332,26 +337,29 @@ while true; do
             update_and_run_server
             ;;
         7)
-            kill_bot
+            update_and_run_all
             ;;
         8)
-            kill_server
+            kill_bot
             ;;
         9)
-            check_bot_status
+            kill_server
             ;;
         10)
+            check_bot_status
+            ;;  
+        11)
             check_server_status
             ;;
-        11)
+        12)
             restart_ec2
             ;;
-        12)
+        13)
             print_status $GREEN "👋 Goodbye!"
             exit 0
             ;;
         *)
-            print_status $RED "❌ Invalid option. Please choose 1-12."
+            print_status $RED "❌ Invalid option. Please choose 1-13."
             ;;
     esac
     

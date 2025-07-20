@@ -6,6 +6,7 @@ from utils.read_write import read_json_file, write_json_file
 from functools import wraps
 from config import Config
 
+
 # Create Blueprint for API routes
 api_bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -65,7 +66,8 @@ def create_news_report():
                 'status': 'success',
                 'message': f'News report created for date {date}',
                 'file': filename,
-                'date': date
+                'date': date,
+                'link_to_report': f'http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/news-report/{date}'
             }, 201
         else:
             logger.error(f"❌ Failed to save news report for date {date}")

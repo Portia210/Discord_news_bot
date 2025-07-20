@@ -1,15 +1,14 @@
 from dateutil import parser
 import pytz
-from config import Config
 from datetime import datetime
 
-def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZONES.EASTERN_US)):
+def convert_iso_timestamp_to_timezone(timestamp_str, timezone:pytz.timezone):
     """
     Convert any ISO timestamp to your timezone
     
     Args:
         timestamp_str: ISO timestamp (handles Z, +/-HH:MM, military letters, etc.)
-        my_timezone: Your target timezone (default: Eastern Time)
+        my_timezone: Your target timezone
     
     Returns:
         Formatted string in your timezone
@@ -33,20 +32,7 @@ def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZ
     
     # Parse the timestamp (handles all formats automatically)
     dt = parser.parse(timestamp_str)
-    converted_time = dt.astimezone(my_timezone)
+    converted_time = dt.astimezone(timezone)
     
     return converted_time
 
-
-if __name__ == "__main__":
-    # Usage examples
-    timestamps = [
-        "2025-07-13T09:23:18Z",           # UTC with Z
-        "2025-07-13T09:23:18A",           # Alpha time (UTC+1)
-        "2025-07-13T09:23:18B",           # Bravo time (UTC+2)
-    ]
-
-    # Convert to Eastern Time
-    for ts in timestamps:
-        eastern_time = convert_to_my_timezone(ts, pytz.timezone(Config.TIMEZONES.EASTERN_US))
-        print(f"{ts} -> Eastern: {eastern_time}")

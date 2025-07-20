@@ -2,25 +2,26 @@
 My Utils - A collection of reusable utility functions
 """
 
-from .logger import logger
-from .timer import Timer
-from .html_convertor import HTMLConverter
-from .timezones_convertor import TimezoneConverter
-from .parse_hebrew_date import HebrewDateParser
-from .read_write import FileHandler
-from .safe_update_dict import SafeDictUpdater
-from .caller_info import get_caller_info
+from .safe_update_dict import safe_update_dict
+from .setup_logger import setup_logger, get_app_logger
+from .timer import measure_time
+from .timezones_convertor import convert_iso_timestamp_to_timezone
+from .read_write import read_text_file, write_text_file, read_json_file, write_json_file, write_binary_file
+from .caller_info import get_function_and_caller_info
 
 __version__ = "1.0.0"
-__author__ = "Your Name"
+__author__ = "Portia210"
 
 __all__ = [
-    "logger",
-    "Timer", 
-    "HTMLConverter",
-    "TimezoneConverter",
-    "HebrewDateParser",
-    "FileHandler",
-    "SafeDictUpdater",
-    "get_caller_info",
+    "setup_logger",
+    "get_app_logger",
+    "measure_time",
+    "convert_iso_timestamp_to_timezone",
+    "read_text_file",
+    "write_text_file", 
+    "read_json_file",
+    "write_json_file",
+    "write_binary_file",
+    "safe_update_dict",
+    "get_function_and_caller_info",
 ] 

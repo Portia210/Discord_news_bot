@@ -5,21 +5,24 @@ Daily Task Functions - News Reports
 import asyncio
 from datetime import datetime
 from utils.logger import logger
-from news_pdf.pdf_report_generator import PdfReportGenerator
+from news_pdf.news_report import NewsReport
 from discord_utils.send_pdf import send_pdf
+from config import Config
+from scheduler_v2.discord_scheduler import DiscordScheduler
 
 
-async def morning_news_report_task(discord_scheduler=None):
+async def morning_news_report_task(discord_scheduler: DiscordScheduler):
     """Morning news report task - runs at 16:00"""
     try:
         logger.info("📰 Generating morning news report...")
         
         # Generate PDF report
-        pdf_generator = PdfReportGenerator(discord_scheduler.bot if discord_scheduler else None)
-        success = await pdf_generator.generate_pdf_report(output_pdf="news_pdf/morning_report.pdf", report_time="morning", hours_back=17)
+        news_report = NewsReport(discord_scheduler.bot, timezone=discord_scheduler.timezone)
+        response = await news_report.send_report_to_server(report_time="morning", hours_back=17, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:8000/api/news-report", headers={"Authorization": Config.SERVER.API_TOKEN, "Content-Type": "application/json"}, proxy=Config.PROXY.APP_PROXY)
         
-        if success and discord_scheduler:
-            await send_pdf(discord_scheduler.bot, discord_scheduler.alert_channel_id, "news_pdf/morning_report.pdf", "📰 **Morning News Report**\nMorning news summary is ready!", "morning_report.pdf")
+        if response:
+            link_to_report = response.get("link_to_report")
+            await discord_scheduler.send_alert(f"📰 **Morning News Report**\nMorning news summary is ready!\n{link_to_report}")
         
         logger.info("✅ Morning news report completed")
         
@@ -28,17 +31,18 @@ async def morning_news_report_task(discord_scheduler=None):
 
 
 
-async def evening_news_report_task(discord_scheduler=None):
+async def evening_news_report_task(discord_scheduler: DiscordScheduler):
     """Evening news report task - runs at 23:00:03"""
     try:
         logger.info("📰 Generating evening news report...")
         
         # Generate PDF report
-        pdf_generator = PdfReportGenerator(discord_scheduler.bot if discord_scheduler else None)
-        success = await pdf_generator.generate_pdf_report(output_pdf="news_pdf/evening_report.pdf", report_time="evening", hours_back=7)
+        news_report = NewsReport(discord_scheduler.bot, timezone=discord_scheduler.timezone)
+        response = await news_report.send_report_to_server(report_time="evening", hours_back=7, url=f"http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/api/news-report", headers={"Authorization": Config.SERVER.API_TOKEN, "Content-Type": "application/json"}, proxy=Config.PROXY.APP_PROXY)
         
-        if success and discord_scheduler:
-            await send_pdf(discord_scheduler.bot, discord_scheduler.alert_channel_id, "news_pdf/evening_report.pdf", "📰 **Evening News Report**\nEnd of day news summary is ready!", "evening_report.pdf")
+        if response:
+            link_to_report = response.get("link_to_report")
+            await discord_scheduler.send_alert(f"📰 **Evening News Report**\nEnd of day news summary is ready!\n{link_to_report}")
         
         logger.info("✅ Evening news report completed")
         

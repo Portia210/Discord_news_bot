@@ -2,7 +2,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 import pytz
 from datetime import datetime
-from config import Config
+
+# Global variable to store the logger
+_app_logger = None
 
 def setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone=None):
     """
@@ -12,10 +14,13 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone
         name (str): Name of the logger
         level (int): Logging level (default: DEBUG)
         log_file (str, optional): Log file name
+        app_timezone: Timezone for log timestamps
     
     Returns:
         logging.Logger: Configured logger
     """
+    global _app_logger
+    
     logger = logging.getLogger(name)
     logger.setLevel(level)
 
@@ -52,11 +57,14 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone
             file_handler.setFormatter(formatter)
             logger.addHandler(file_handler)
 
+    # Store the logger globally
+    _app_logger = logger 
     return logger
 
-# Create default logger instance
-logger = setup_logger(name="logger", level=logging.DEBUG, log_file="logger.log", app_timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
-
-
-if __name__ == "__main__":
-    logger.info("Hello, world!")
+def get_app_logger():
+    """Get the logger that was created by setup_logger()"""
+    global _app_logger
+    if _app_logger is None:
+        # Create default logger if setup_logger wasn't called
+        _app_logger = setup_logger()
+    return _app_logger

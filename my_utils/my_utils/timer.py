@@ -1,12 +1,13 @@
 import time
 import functools
 import asyncio
-from utils.logger import logger
+from .setup_logger import get_app_logger
 
 
 def measure_time(func):
     @functools.wraps(func)
     async def async_wrapper(*args, **kwargs):
+        logger = get_app_logger()
         start_time = time.time()
         logger.debug(f"Starting {func.__name__}")
         try:
@@ -23,6 +24,7 @@ def measure_time(func):
 
     @functools.wraps(func)
     def sync_wrapper(*args, **kwargs):
+        logger = get_app_logger()
         start_time = time.time()
         logger.debug(f"Starting {func.__name__}")
         try:

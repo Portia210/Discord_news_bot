@@ -154,7 +154,7 @@ class PdfReportGenerator:
         """
         try:
             change_amount = company.get(qf.REGULAR_MARKET_CHANGE)["fmt"]
-
+    
             symbol_data = {
                 # remove signs such as $ / ! ^ etc.
                 "ticker": company.get("symbol", "N/A").replace(r"[^a-zA-Z0-9]", ""),

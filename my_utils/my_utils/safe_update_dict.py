@@ -1,5 +1,5 @@
-from utils.logger import logger
-from utils.caller_info import get_function_and_caller_info
+from .setup_logger import get_app_logger
+from .caller_info import get_function_and_caller_info
 
 def safe_update_dict(original_dict, update_dict, prevent_type_mismatch: bool = True):
     """
@@ -13,6 +13,7 @@ def safe_update_dict(original_dict, update_dict, prevent_type_mismatch: bool = T
     Returns:
         dict: The updated dictionary.
     """
+    logger = get_app_logger()
     for key, value in update_dict.items():
         if key in original_dict:
             # If both values are dictionaries, recursively update
