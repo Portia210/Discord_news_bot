@@ -40,18 +40,18 @@ class TaskDefinitions:
         current_hour = current_time.hour
         
         if current_hour >= 8:
-            # logger.info("🌅 After 8:00 AM - Running economic calendar startup task")
-            # self.discord_scheduler.add_date_job(
-            #     func=lambda: get_economic_calendar_task(self.discord_scheduler),
-            #     run_date=current_time + timedelta(seconds=5),
-            #     job_id="economic_calendar_startup"
-            # )
-            logger.info("🌅 news report startup task")
+            logger.info("🌅 After 8:00 AM - Running economic calendar startup task")
             self.discord_scheduler.add_date_job(
-                func=lambda: morning_news_report_task(self.discord_scheduler),
+                func=lambda: get_economic_calendar_task(self.discord_scheduler),
                 run_date=current_time + timedelta(seconds=5),
-                job_id="morning_news_report_startup"
+                job_id="economic_calendar_startup"
             )
+            # logger.info("🌅 news report startup task")
+            # self.discord_scheduler.add_date_job(
+            #     func=lambda: morning_news_report_task(self.discord_scheduler),
+            #     run_date=current_time + timedelta(seconds=5),
+            #     job_id="morning_news_report_startup"
+            # )
         else:
             logger.info("🌙 Before 8:00 AM - Skipping startup task, waiting for daily cron job")
         
