@@ -106,13 +106,10 @@ if __name__ == "__main__":
     yfr = YfRequests()
 
     res = yfr.get_market_summary()
-    # print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
-    res = yfr.get_market_time()
+    print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
+    # res = yfr.get_market_time()
     print(json.dumps(res, indent=4))
-    time = res["finance"]["marketTimes"][0]["marketTime"][0]["time"]
-    app_timezone = convert_to_my_timezone(time)
-    print(app_timezone)
-
+    # time = res["finance"]["marketTimes"][0]["marketTime"][0]["time"]
 
 
 

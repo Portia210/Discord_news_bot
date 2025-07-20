@@ -14,6 +14,7 @@ from config import Config
 import discord
 from discord_utils.process_news import process_news_to_list
 import requests
+import asyncio
 
 class NewsReport:
     THEMES = ["morning", "evening"]
@@ -135,7 +136,7 @@ class NewsReport:
             "generation_time": datetime.now(self.timezone).strftime("%Y-%m-%d %H:%M:%S"),
             "report_time": report_time,
             "news_data": news_data,
-            "prices_data": prices_data,
+            "price_symbols": prices_data,
         }
     
     async def send_report_to_server(self, report_time: str, hours_back: int, url: str, headers: dict = None):
@@ -160,3 +161,7 @@ class NewsReport:
             return None
     
     
+if __name__ == "__main__":
+    news_report = NewsReport(discord_bot=None, timezone=pytz.timezone("Asia/Jerusalem"))
+    res = asyncio.run(news_report._generate_full_json_report())
+    print(json.dumps(res, indent=4))
