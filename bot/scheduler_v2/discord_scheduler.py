@@ -224,6 +224,9 @@ class DiscordScheduler:
         try:
             async def wrapped_func():
                 try:
+                    # Remove one-time jobs from summary when they start
+                    self._remove_date_job_from_summary(job_id)
+                    
                     if args and kwargs:
                         result = await func(*args, **kwargs)
                     elif args:
@@ -237,6 +240,8 @@ class DiscordScheduler:
                         await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
                     logger.info(f"✅ Job completed: {job_id}")
+                    
+                    
                     return result
                     
                 except Exception as e:
@@ -338,6 +343,14 @@ class DiscordScheduler:
         except Exception as e:
             logger.error(f"❌ Failed to remove job {job_id}: {e}")
             return False
+    
+    def _remove_date_job_from_summary(self, job_id: str):
+        """Remove a date job from the summary after completion"""
+        try:
+            self.job_summary.remove_job(job_id)
+            logger.info(f"🗑️ Removed date job from summary: {job_id}")
+        except Exception as e:
+            logger.debug(f"Error removing date job from summary: {e}")
     
     def get_job(self, job_id: str):
         """Get job by ID"""

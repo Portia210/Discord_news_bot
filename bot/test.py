@@ -1,14 +1,5 @@
-from cnbc_scraper.cnbc_scraper import extract_s_data_dict_from_html
-from utils.read_write import *
-import requests
-from yf_scraper.headers import headers
+dict1 = {1: "a", 2: "b", 3: "c"}
+dict2 = {4: "d", 5: "e", 6: "f"}
 
-url = "https://www.cnbc.com/2025/07/17/solar-wind-permit-interior-department-burgum-trump.html"
-
-response = requests.get(url, headers=headers)
-html = response.text
-
-script = extract_s_data_dict_from_html(html)
-write_json_file("temp.json", script)
-
-print(script)
+dict3 = dict1 | dict2
+print(dict3)

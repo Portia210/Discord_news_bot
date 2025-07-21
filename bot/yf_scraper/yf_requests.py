@@ -103,15 +103,30 @@ class YfRequests:
 
 
 if __name__ == "__main__":
+    from news_pdf.news_report import NewsReport
     yfr = YfRequests()
 
-    res = yfr.get_market_summary()
-    print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
+    # res = yfr.get_market_summary()
+    # print(json.dumps(res["marketSummaryResponse"]["result"][0], indent=4))
     # res = yfr.get_market_time()
-    print(json.dumps(res, indent=4))
+    # print(json.dumps(res, indent=4))
     # time = res["finance"]["marketTimes"][0]["marketTime"][0]["time"]
+    # indexes_futures = ["ES=F", "NQ=F", "RTY=F", "^VIX"]
+    # indexes = ["^GSPC", "^IXIC", "^DJI", "^RUT"]
+    # commodities = ["GC=F", "SI-F", "CL=F", "CG=F"] 
+    # crypto = ["BTC-USD", "ETH-USD", "SOL-USD", "XRP-USD", "DOGE-USD"]
+    only_nasdaq = ["^IXIC"]
+    res = yfr.get_quote(symbols=only_nasdaq)
+    news_report = NewsReport(discord_bot=None, timezone=None)
+    symbols_data = []
+    symbols = res["quoteResponse"]["result"]
+    # for symbol in symbols:
+    #     try:
+    #         data_processed = news_report._process_company_data(symbol)
+    #         if data_processed is not None:
+    #             symbols_data.append(data_processed)
+    #     except Exception as e:
+    #         print(f"Error processing symbol {symbol.keys()}")
 
-
-
-
-
+    print(symbols)
+    

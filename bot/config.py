@@ -2,10 +2,12 @@ import os
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
-load_dotenv()
+load_dotenv(override=True)
 
-IS_APP_REMOTE = True if os.getenv("IS_APP_REMOTE") == "true" else False
-print("IS APP REMOTE?", IS_APP_REMOTE)
+REMOTE_SERVER = True if os.getenv("REMOTE_SERVER") == "true" else False
+ENABLE_PROXY = True if os.getenv("ENABLE_PROXY") == "true" else False
+print(f"REMOTE_SERVER? {REMOTE_SERVER}")
+print(f"ENABLE_PROXY? {ENABLE_PROXY}")
 
 class Tokens():
     DISCORD = os.getenv("DISCORD_TOKEN")
@@ -30,7 +32,7 @@ class Proxy():
     ZONE = os.getenv("PROXY_ZONE", "isp_proxy1")
     PASSWORD = os.getenv("PROXY_PASSWORD", "ky8psv0nqmev")
     FULL_PROXY = f"http://brd-customer-{CUSTOMER_ID}-zone-{ZONE}:{PASSWORD}@{HOST}:{PORT}"
-    APP_PROXY = FULL_PROXY if IS_APP_REMOTE else None
+    APP_PROXY = FULL_PROXY if REMOTE_SERVER else None
 
 class Timezones():
     EASTERN_US = "America/New_York"
@@ -41,7 +43,7 @@ class Timezones():
 class Server():
     LOCAL_SERVER_IP = "127.0.0.1"
     PUBLIC_SERVER_IP = "54.165.14.238"
-    CURRENT_SERVER_IP = PUBLIC_SERVER_IP if IS_APP_REMOTE else LOCAL_SERVER_IP
+    CURRENT_SERVER_IP = PUBLIC_SERVER_IP if REMOTE_SERVER else LOCAL_SERVER_IP
     API_TOKEN = os.getenv("SERVER_API_TOKEN")
     PORT = 8000
 

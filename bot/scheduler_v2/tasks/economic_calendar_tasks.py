@@ -24,7 +24,7 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
         timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         
         # Get calendar data using InvestingDataScraper
-        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
+        scraper = InvestingDataScraper(proxy=Config.PROXY.APP_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,
@@ -69,7 +69,6 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
             logger.info(f"📋 Economic Event Jobs updated: {summary}")
             await discord_scheduler.send_dev_alert(summary, 0x00ff00, "📋 Economic Event Jobs Scheduled")
         
-        logger.info("✅ Economic calendar processing completed")
         
     except Exception as e:
         logger.error(f"❌ Error in economic calendar task: {e}")
@@ -110,12 +109,12 @@ async def schedule_economic_alert_at_time(discord_scheduler: DiscordScheduler, t
         current_time = datetime.now(scheduler_tz)
         
         # Debug logging to verify timezone fix
-        logger.info(f"🔍 DEBUG - Scheduling for {time_str}:")
-        logger.info(f"   Scheduler timezone: {scheduler_tz}")
-        logger.info(f"   Event datetime: {event_datetime}")
-        logger.info(f"   Current time: {current_time}")
-        logger.info(f"   Warning time: {warning_time}")
-        logger.info(f"   Update time: {event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)}")
+        # logger.info(f"🔍 DEBUG - Scheduling for {time_str}:")
+        # logger.info(f"   Scheduler timezone: {scheduler_tz}")
+        # logger.info(f"   Event datetime: {event_datetime}")
+        # logger.info(f"   Current time: {current_time}")
+        # logger.info(f"   Warning time: {warning_time}")
+        # logger.info(f"   Update time: {event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)}")
         
         if warning_time > current_time:
             warning_job_id = f"economic_warning_{time_str.replace(':', '_')}"
@@ -209,7 +208,7 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         
         # Fetch updated calendar data
-        scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
+        scraper = InvestingDataScraper(proxy=Config.PROXY.APP_PROXY)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingVariables.TIME_RANGES.TODAY,

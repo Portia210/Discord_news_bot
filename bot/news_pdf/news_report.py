@@ -71,28 +71,29 @@ class NewsReport:
             list: List of price symbol data for the template
         """
         try:
-            response = self.yf_requests.get_market_summary()
-            price_symbols = []
-            
-            for company in response["marketSummaryResponse"]["result"]:
+            yfr = YfRequests()
+            indexes_futures = {"ES=F": "S&P 500", "NQ=F": "NASDAQ", "YM=F": "Dow Jones", "RTY=F": "Russell 2000", "^VIX": "VIX"}
+            indexes = {"^GSPC": "S&P 500", "^IXIC": "NASDAQ", "^DJI": "Dow Jones", "^RUT": "Russell 2000"}
+            commodities = {"GC=F": "Gold", "SI-F": "Silver", "CL=F": "Crude Oil", "NG=F": "Natural Gas"} 
+            crypto = {"BTC-USD": "Bitcoin", "ETH-USD": "Ethereum", "SOL-USD": "Solana", "XRP-USD": "XRP", "DOGE-USD": "Dogecoin"}
+
+            all_symbols = indexes_futures | indexes | commodities | crypto
+            res = yfr.get_quote(symbols= all_symbols)
+            symbols_data = []
+            for symbol_result in res["quoteResponse"]["result"]:
                 try:
-                    symbol_data = self._process_company_data(company)
-                    if symbol_data:
-                        price_symbols.append(symbol_data)
-                        
+                    data_processed = self._process_company_data(symbol_result, all_symbols)
+                    if data_processed is not None:
+                        symbols_data.append(data_processed)
                 except Exception as e:
-                    logger.error(f"❌ Error processing company data: {e}")
-                    continue
-            
-            logger.info(f"✅ Loaded {len(price_symbols)} price symbols from market summary")
-            return price_symbols
-            
+                    print(f"Error processing symbol {symbol_result}: {e}")
+            return symbols_data
         except Exception as e:
             logger.error(f"❌ Error loading market summary: {e}")
             return []
-    
+            
 
-    def _process_company_data(self, company: dict) -> dict:
+    def _process_company_data(self, company: dict, all_symbols: dict) -> dict:
         """
         Process individual company data from market summary.
         
@@ -106,7 +107,7 @@ class NewsReport:
             symbol_data = {
                 # remove signs such as $ / ! ^ etc.
                 "ticker": company.get("symbol", "N/A").replace(r"[^a-zA-Z0-9]", ""),
-                "company": company.get(qf.SHORT_NAME, "N/A"),
+                "company": all_symbols.get(company.get("symbol", "N/A"), "N/A"),
                 "price": company.get(qf.REGULAR_MARKET_PRICE)["fmt"],
                 "change_amount": company.get(qf.REGULAR_MARKET_CHANGE)["fmt"],
                 "change_percent": company.get(qf.REGULAR_MARKET_CHANGE_PERCENT)["fmt"],

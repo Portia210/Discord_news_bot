@@ -35,20 +35,23 @@ class InvestingDataScraper:
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
-        
-        async with aiohttp.ClientSession() as session:
-            async with session.post(request_json['url'], headers=self.headers, data=payload, proxy=self.proxy) as response:
-                # logger.debug(f"Request body: {payload}")
-                if response.status != 200:
-                    logger.error(f"Failed to fetch page. Status code: {response.status}")
-                    return None
-                try:
-                    json_response = await response.read()
-                    table_html = json.loads(json_response).get("data", '') 
-                    return table_html
-                except Exception as e:
-                    logger.error(f"Error parsing JSON: {str(e)}")
-                    return None 
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.post(request_json['url'], headers=self.headers, data=payload, proxy=self.proxy) as response:
+                    # logger.debug(f"Request body: {payload}")
+                    if response.status != 200:
+                        logger.error(f"Failed to fetch page. Status code: {response.status}")
+                        return None
+                    try:
+                        json_response = await response.read()
+                        table_html = json.loads(json_response).get("data", '') 
+                        return table_html
+                    except Exception as e:
+                        logger.error(f"Error parsing JSON: {str(e)}")
+                        return None 
+        except Exception as e:
+            logger.error(f"Error fetching table: {str(e)}")
+            return None
 
 
     def _process_table_data(self, page_name, table_html):
@@ -191,7 +194,7 @@ class InvestingDataScraper:
 
 
 if __name__ == "__main__":
-    proxy_scraper = InvestingDataScraper(proxy=Config.PROXY_DETAILS.APP_PROXY)
+    proxy_scraper = InvestingDataScraper(proxy=Config.PROXY.APP_PROXY)
     no_proxy_scraper = InvestingDataScraper(proxy=None)
 
     async def get_todays_data(scraper):

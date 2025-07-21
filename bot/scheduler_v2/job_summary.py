@@ -18,6 +18,10 @@ class JobSummary:
         """Add a job to the summary tracking"""
         self.jobs_added.append(job_data)
     
+    def remove_job(self, job_id: str):
+        """Remove a job from the summary tracking by job ID"""
+        self.jobs_added = [job for job in self.jobs_added if job.get('id') != job_id]
+    
     def clear_jobs(self):
         """Clear all tracked jobs"""
         self.jobs_added.clear()

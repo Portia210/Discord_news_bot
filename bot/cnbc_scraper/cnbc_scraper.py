@@ -145,7 +145,7 @@ async def main():
 
     output_dir = "data/cnbc"
     os.makedirs(output_dir, exist_ok=True)
-    clean_assets = await get_cnbc_world_assets(proxy=Config.PROXY_DETAILS.APP_PROXY, region="world")
+    clean_assets = await get_cnbc_world_assets(proxy=Config.PROXY.APP_PROXY, region="world")
     
     tasks = []
     for module_name, assets in clean_assets.items():
@@ -155,7 +155,7 @@ async def main():
             if counter > 2:
                 break
             counter += 1
-            tasks.append(get_article_body(asset["title"], asset["url"], proxy=Config.PROXY_DETAILS.APP_PROXY))
+            tasks.append(get_article_body(asset["title"], asset["url"], proxy=Config.PROXY.APP_PROXY))
 
     results = await asyncio.gather(*tasks)
     for result in results:
