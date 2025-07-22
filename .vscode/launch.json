@@ -4,11 +4,29 @@
       
 
       {
+        "name": "Run bot.py",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "bot.py",
+        "cwd": "${workspaceFolder}/bot",
+        "envFile": "${workspaceFolder}/.env",
+        "console": "integratedTerminal"
+      },
+      {
         "name": "Run cnbc_scraper/cnbc_scraper.py as module",
         "type": "debugpy",
         "request": "launch",
         "module": "cnbc_scraper.cnbc_scraper",
-        "cwd": "${workspaceFolder}",
+        "cwd": "${workspaceFolder}/bot",
+        "envFile": "${workspaceFolder}/.env",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run news_report.py as module",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "news_pdf.news_report",
+        "cwd": "${workspaceFolder}/bot",
         "envFile": "${workspaceFolder}/.env",
         "console": "integratedTerminal"
       }

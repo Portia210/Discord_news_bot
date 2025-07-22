@@ -71,7 +71,7 @@ class TaskDefinitions:
         # Evening news report (23:00 daily)
         self.discord_scheduler.add_cron_job(
             func=lambda: evening_news_report_task(self.discord_scheduler),
-            cron_expression="0 23 * * *",  # 11:00 PM daily
+            cron_expression="1 23 * * *",  # 11:01 PM daily
             job_id="evening_news_report"
         )
         

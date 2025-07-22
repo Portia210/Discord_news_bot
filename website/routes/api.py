@@ -68,7 +68,7 @@ def create_news_report():
                 'message': f'News report created for date {date}',
                 'file': filename,
                 'date': date,
-                'link_to_report': f'http://{Config.SERVER.CURRENT_SERVER_IP}:{Config.SERVER.PORT}/{report_time}-news-report/{date}'
+                'link_to_report': f'http://{Config.SERVER.APP_SERVER_IP}:{Config.SERVER.PORT}/{report_time}-news-report/{date}'
             }, 201
         else:
             logger.error(f"❌ Failed to save news report for date {date}")

@@ -32,7 +32,7 @@ show_menu() {
     print_status $BLUE "🤖 Discord Bot Management Script"
     print_status $BLUE "================================"
     echo "1) SSH into server"
-    echo "2) Pull nohup.out from server"
+    echo "2) Pull bot nohup.out from server"
     echo "3) Pull website nohup.out from server"
     echo "4) Copy .env file to server"
     echo "5) Update remote and run bot"
