@@ -3,19 +3,76 @@ import discord
 from discord.ext import commands
 from utils.logger import logger
 from config import Config
+import asyncio
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
+
 
 # Set up bot with intents
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
 intents.messages = True
+intents.guilds = True  # Required for slash commands
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Initialize new scheduler components
 discord_scheduler = None
 calendar_manager = None
 task_definitions = None
+notification_manager = None
+
+
+@bot.event
+async def on_application_command_error(ctx, error):
+    logger.error(f"❌ Error in command {ctx.command.name}: {error}")
+    await ctx.send(f"❌ Error: {error}")
+
+@bot.event
+async def on_disconnect():
+    logger.warning("🔌 Bot disconnected")
+
+@bot.event
+async def on_resumed():
+    logger.warning("🔄 Bot resumed")
+
+# Add comprehensive monitoring
+@bot.event
+async def on_application_command(ctx):
+    # logger.info(f"🎯 Slash command used: /{ctx.command.name} by {ctx.author}")
+    # logger.info(f"📊 Commands available before: {[cmd.name for cmd in bot.application_commands]}")
+    pass
+
+@bot.event
+async def on_application_command_completion(ctx):
+    logger.info(f"✅ Command /{ctx.command.name} completed successfully")
+    # logger.info(f"📊 Commands available after: {[cmd.name for cmd in bot.application_commands]}")
+    
+    # Check bot permissions after command
+    # guild = ctx.guild
+    # bot_permissions = guild.me.guild_permissions
+    # logger.info(f"🔐 Bot permissions - Use App Commands: {bot_permissions.use_application_commands}")
+    # logger.info(f"🔐 Bot permissions - Manage Roles: {bot_permissions.manage_roles}")
+    # logger.info(f"👑 Bot top role: {guild.me.top_role.name} (position: {guild.me.top_role.position})")
+
+@bot.event
+async def on_guild_update(before, after):
+    logger.warning(f"🏠 Guild updated: {after.name}")
+    logger.info(f"📊 Bot role position: {after.me.top_role.position}")
+    logger.info(f"📊 Commands still available: {[cmd.name for cmd in bot.application_commands]}")
+
+@bot.event
+async def on_member_update(before, after):
+    if after.id == bot.user.id:  # Bot itself was updated
+        logger.warning(f"🤖 Bot member updated - roles changed!")
+        logger.info(f"📊 Bot roles before: {[r.name for r in before.roles]}")
+        logger.info(f"📊 Bot roles after: {[r.name for r in after.roles]}")
+
+@bot.event
+async def on_error(event, *args, **kwargs):
+    logger.error(f"❌ Bot error in event {event}: {args}")
+    import traceback
+    logger.error(f"❌ Full traceback: {traceback.format_exc()}")
+
 
 @bot.event
 async def on_ready():
@@ -25,25 +82,36 @@ async def on_ready():
     # Load command cogs
     await load_cogs()
     
-    # Sync slash commands globally using pycord method
+    # Sync slash commands to specific guilds for faster updates
     try:
-        await bot.sync_commands()
-        logger.info("Commands synced successfully!")
-        # Print the available slash commands for debugging
+        logger.info(f"📦 Loaded cogs: {[cog for cog in bot.cogs.keys()]}")
+        
+        bot_guild_ids = [guild.id for guild in bot.guilds]
+        await bot.sync_commands(guild_ids=bot_guild_ids)
+        logger.info("✅ Commands synced to guilds successfully!")
+        
         slash_commands = [cmd.name for cmd in bot.application_commands]
         text_commands = [cmd.name for cmd in bot.commands]
-        logger.info(f"Available slash commands: {slash_commands}")
-        logger.info(f"Available text commands: {text_commands}")
+        logger.info(f"🔧 Available slash commands: {slash_commands}")
+        logger.info(f"🔧 Available text commands: {text_commands}")
+        
+        if slash_commands:
+            logger.info("🎉 Slash commands are now available in Discord!")
+            logger.info("💡 Guild sync is instant - commands should be visible immediately!")
+        else:
+            logger.warning("⚠️  No slash commands found - check your cogs!")
+            
     except Exception as e:
-        logger.error(f"Failed to sync commands: {e}")
+        logger.error(f"❌ Failed to sync commands: {e}")
     
-    # Initialize and start the new scheduler
     try:
         global discord_scheduler, task_definitions
         
         # Initialize scheduler components
         discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
         task_definitions = TaskDefinitions(discord_scheduler)
+        
+
         
         logger.info("✅ Scheduler components initialized successfully!")
         
@@ -75,22 +143,24 @@ async def on_ready():
 
 async def load_cogs():
     """Load all command cogs"""
+    logger.info("🔄 load_cogs() called!")
+    logger.info(f"📦 Currently loaded cogs: {list(bot.cogs.keys())}")
+    
     cogs = [
-        "cogs.slash.hello",
-        "cogs.slash.ping", 
-        "cogs.slash.sync",
-        "cogs.slash.test",
-        "cogs.text.greet",
-        "cogs.admin.export",
-        "cogs.admin.clean_messages"
+        "cogs.slash.test_slash",
+        "cogs.slash.role_manager",
+        "cogs.text.hello",
     ]
     
     loaded_cogs = []
     for cog in cogs:
         try:
+            if cog.split('.')[-1] in [c.__class__.__name__.lower() for c in bot.cogs.values()]:
+                logger.warning(f"⚠️  Cog {cog} already loaded! Skipping...")
+                continue
             bot.load_extension(cog)
             loaded_cogs.append(cog)
-            # logger.info(f"✅ Loaded cog: {cog}")
+            logger.info(f"✅ Loaded cog: {cog}")
         except Exception as e:
             logger.error(f"❌ Failed to load cog {cog}: {e}")
     
@@ -117,8 +187,6 @@ def main():
     except KeyboardInterrupt:
         logger.info("Bot shutdown requested by user (Ctrl+C)")
         logger.info("Shutting down gracefully...")
-        # Run cleanup in the event loop
-        import asyncio
         try:
             asyncio.run(cleanup())
         except RuntimeError:
