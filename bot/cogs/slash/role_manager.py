@@ -36,27 +36,44 @@ class RoleManager(commands.Cog):
         # Use the module-level notification types
         self.notification_types = NOTIFICATION_TYPES
     
-    # Create a slash command group for notifications
-    notifications = discord.SlashCommandGroup("notifications", "Manage notification roles")
+    @discord.slash_command(name="notifications", description="Manage your notification preferences")
+    async def notifications_main(self, ctx,
+                                 action: str = discord.Option(str, "Choose an action", choices=["subscribe", "unsubscribe", "list", "info"]),
+                                 types: str = discord.Option(str, "Notification types (space-separated)", required=False, autocomplete=notification_autocomplete)):
+        """Main notifications command with subactions"""
+        if action == "info":
+            await self._show_info(ctx)
+        elif action == "list":
+            await self._list_roles(ctx)
+        elif action == "subscribe":
+            if not types:
+                await ctx.respond("❌ Please specify notification types to subscribe to!", ephemeral=True)
+                return
+            await self._subscribe(ctx, types)
+        elif action == "unsubscribe":
+            if not types:
+                await ctx.respond("❌ Please specify notification types to unsubscribe from!", ephemeral=True)
+                return
+            await self._unsubscribe(ctx, types)
     
-    @notifications.command(name="info", description="Show notification help")
-    async def info(self, ctx):
+    async def _show_info(self, ctx):
+        """Show notification help"""
         embed = discord.Embed(
             title="🔔 Notification Role Manager",
-            description="Use these commands to manage your notification roles:",
+            description="Use the `/notifications` command to manage your notification roles:",
             color=0x0099ff
         )
         embed.add_field(
             name="Subscribe", 
-            value="`/notifications subscribe types: live_news news_report`\n*You can specify multiple types separated by spaces*", 
+            value="`/notifications action:subscribe types:live_news news_report`\n*You can specify multiple types separated by spaces*", 
             inline=False
         )
         embed.add_field(
             name="Unsubscribe", 
-            value="`/notifications unsubscribe types: live_news economic_events`\n*You can specify multiple types separated by spaces*", 
+            value="`/notifications action:unsubscribe types:live_news economic_events`\n*You can specify multiple types separated by spaces*", 
             inline=False
         )
-        embed.add_field(name="List", value="`/notifications list`", inline=False)
+        embed.add_field(name="List", value="`/notifications action:list`", inline=False)
         embed.add_field(
             name="Available Types", 
             value="**live_news**, **news_report**, **economic_events**", 
@@ -64,7 +81,7 @@ class RoleManager(commands.Cog):
         )
         embed.add_field(
             name="Examples", 
-            value="• `/notifications subscribe types: live_news`\n• `/notifications subscribe types: live_news news_report`\n• `/notifications unsubscribe types: economic_events`", 
+            value="• `/notifications action:subscribe types:live_news`\n• `/notifications action:subscribe types:live_news news_report`\n• `/notifications action:unsubscribe types:economic_events`", 
             inline=False
         )
         embed.add_field(
@@ -75,10 +92,7 @@ class RoleManager(commands.Cog):
         
         await ctx.respond(embed=embed, ephemeral=True)
     
-    @notifications.command(name="subscribe", description="Subscribe to notification role(s)")
-    async def subscribe(self, ctx, 
-                       types: str = discord.Option(str, "Notification types (space-separated): live_news news_report economic_events", 
-                                                   autocomplete=notification_autocomplete)):
+    async def _subscribe(self, ctx, types: str):
         """Subscribe to one or more notification roles"""
         try:
             if not ctx.guild:
@@ -147,10 +161,7 @@ class RoleManager(commands.Cog):
             print(f"Error in subscribe command: {e}")
             await ctx.respond("❌ An error occurred while processing your request.", ephemeral=False)
     
-    @notifications.command(name="unsubscribe", description="Unsubscribe from notification role(s)")
-    async def unsubscribe(self, ctx, 
-                         types: str = discord.Option(str, "Notification types (space-separated): live_news news_report economic_events",
-                                                     autocomplete=notification_autocomplete)):
+    async def _unsubscribe(self, ctx, types: str):
         """Unsubscribe from one or more notification roles"""
         try:
             if not ctx.guild:
@@ -208,8 +219,7 @@ class RoleManager(commands.Cog):
             print(f"Error in unsubscribe command: {e}")
             await ctx.respond("❌ An error occurred while processing your request.", ephemeral=False)
     
-    @notifications.command(name="list", description="List your notification roles")
-    async def list_roles(self, ctx):
+    async def _list_roles(self, ctx):
         """List user's notification roles"""
         if not ctx.guild:
             await ctx.respond("❌ This command can only be used in a server!", ephemeral=True)
