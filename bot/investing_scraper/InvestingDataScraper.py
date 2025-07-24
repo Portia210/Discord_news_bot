@@ -31,7 +31,7 @@ class InvestingDataScraper:
                 return value
         return None
 
-    async def _fetch_table(self, page_name, payload: dict ):
+    async def _fetch_table(self, page_name, payload: dict):
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')

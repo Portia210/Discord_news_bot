@@ -1,0 +1,212 @@
+{
+  "notification_types": {
+    "live_news": {
+      "en": "📰 Live News",
+      "he": "📰 חדשות חיות"
+    },
+    "news_report": {
+      "en": "📊 News Report",
+      "he": "📊 דוח חדשות"
+    },
+    "economic_events": {
+      "en": "📈 Economic Events",
+      "he": "📈 אירועים כלכליים"
+    }
+  },
+  "commands": {
+    "description": {
+      "en": "Manage your notification preferences",
+      "he": "נהל את העדפות ההתראות שלך"
+    },
+    "server_only": {
+      "en": "❌ This command can only be used in a server!",
+      "he": "❌ הפקודה הזו יכולה לשמש רק בשרת!"
+    },
+    "permission_error": {
+      "en": "❌ I need 'Manage Roles' permission!",
+      "he": "❌ אני צריך הרשאה 'נהל תפקידים'!"
+    },
+    "invalid_types": {
+      "en": "❌ Invalid types: {invalid_types}\nAvailable: {available_types}",
+      "he": "❌ סוגים לא חוקיים: {invalid_types}\nזמינים: {available_types}"
+    },
+    "error_occurred": {
+      "en": "❌ An error occurred while processing your request.",
+      "he": "❌ אירעה שגיאה בעת עיבוד הבקשה שלך."
+    }
+  },
+  "info": {
+    "title": {
+      "en": "🔔 How Notification Roles work?",
+      "he": "🔔 איך עובדים תפקידי התראות?"
+    },
+    "description": {
+      "en": "Use the `/notifications` command to add or remove your notification roles, for each notification role you have, the bot will mention you when notification of that type is posted.",
+      "he": "השתמש בפקודה `/notifications` כדי להוסיף או להסיר את תפקידי ההתראות שלך, עבור כל תפקיד התראה שיש לך, הבוט יציין אותך כאשר התראה מסוג זה תפורסם."
+    },
+    "subscribe": {
+      "en": "Subscribe",
+      "he": "הרשמה"
+    },
+    "subscribe_desc": {
+      "en": "`/notifications action:subscribe`\n*Toggle buttons will appear to select notification types*",
+      "he": "`/notifications action:subscribe`\n*כפתורי החלפה יופיעו לבחירת סוגי התראות*"
+    },
+    "unsubscribe": {
+      "en": "Unsubscribe",
+      "he": "ביטול הרשמה"
+    },
+    "unsubscribe_desc": {
+      "en": "`/notifications action:unsubscribe`\n*Toggle buttons will appear to select notification types*",
+      "he": "`/notifications action:unsubscribe`\n*כפתורי החלפה יופיעו לבחירת סוגי התראות*"
+    },
+    "list": {
+      "en": "List",
+      "he": "רשימה"
+    },
+    "list_desc": {
+      "en": "`/notifications action:list`",
+      "he": "`/notifications action:list`"
+    },
+    "available_types": {
+      "en": "Available Types",
+      "he": "סוגים זמינים"
+    },
+    "available_types_desc": {
+      "en": "**live_news**, **news_report**, **economic_events**",
+      "he": "**live_news**, **news_report**, **economic_events**"
+    },
+    "examples": {
+      "en": "Examples",
+      "he": "דוגמאות"
+    },
+    "examples_desc": {
+      "en": "• `/notifications action:subscribe` → Click toggle buttons\n• `/notifications action:unsubscribe` → Click toggle buttons\n• `/notifications action:list` → See your current roles",
+      "he": "• `/notifications action:subscribe` → לחץ על כפתורי החלפה\n• `/notifications action:unsubscribe` → לחץ על כפתורי החלפה\n• `/notifications action:list` → ראה את התפקידים הנוכחיים שלך"
+    },
+    "pro_tips": {
+      "en": "💡 Pro Tips",
+      "he": "💡 טיפים מקצועיים"
+    },
+    "pro_tips_desc": {
+      "en": "• **Toggle buttons**: Click buttons to select/deselect types (they turn green when selected)\n• **Visual feedback**: Selected buttons show ✓ and turn green\n• **Confirm when ready**: Click the confirm button when you're happy with your selection!",
+      "he": "• **כפתורי החלפה**: לחץ על כפתורים לבחירה/ביטול בחירה של סוגים (הם הופכים לירוקים כאשר נבחרים)\n• **משוב חזותי**: כפתורים נבחרים מציגים ✓ והופכים לירוקים\n• **אשר כשמוכן**: לחץ על כפתור האישור כשאתה מרוצה מהבחירה שלך!"
+    }
+  },
+  "selector": {
+    "title": {
+      "en": "🔔 {action} Notifications",
+      "he": "🔔 {action} התראות"
+    },
+    "description": {
+      "en": "Click the buttons to select notification types you want to {action}:",
+      "he": "לחץ על הכפתורים לבחירת סוגי התראות שברצונך {action}:"
+    },
+    "how_to_use": {
+      "en": "💡 How to Use",
+      "he": "💡 איך להשתמש"
+    },
+    "how_to_use_desc": {
+      "en": "Click the buttons above to select/deselect notification types, then click confirm!",
+      "he": "לחץ על הכפתורים למעלה לבחירה/ביטול בחירה של סוגי התראות, ואז לחץ על אישור!"
+    }
+  },
+  "buttons": {
+    "confirm_select": {
+      "en": "Select types to {action}",
+      "he": "בחר סוגים ל{action}"
+    },
+    "confirm_enabled": {
+      "en": "✅ Confirm {action} ({count} selected)",
+      "he": "✅ אשר {action} ({count} נבחרו)"
+    },
+    "confirm_disabled": {
+      "en": "Select types to {action}",
+      "he": "בחר סוגים ל{action}"
+    },
+    "only_command_user": {
+      "en": "❌ Only the command user can use this menu!",
+      "he": "❌ רק משתמש הפקודה יכול להשתמש בתפריט זה!"
+    }
+  },
+  "processing": {
+    "title": {
+      "en": "🔄 Processing {action}...",
+      "he": "🔄 מעבד {action}..."
+    },
+    "description": {
+      "en": "Working on {count} notification types:",
+      "he": "עובד על {count} סוגי התראות:"
+    },
+    "processing_field": {
+      "en": "📝 Processing",
+      "he": "📝 מעבד"
+    }
+  },
+  "subscribe": {
+    "summary": {
+      "en": "🔔 **Processed {count} notification types:**",
+      "he": "🔔 **עובד {count} סוגי התראות:**"
+    },
+    "added": {
+      "en": "✅ **Added ({count}):** {roles}",
+      "he": "✅ **נוספו ({count}):** {roles}"
+    },
+    "already_had": {
+      "en": "ℹ️ **Already had ({count}):** {roles}",
+      "he": "ℹ️ **כבר היו ({count}):** {roles}"
+    },
+    "failed": {
+      "en": "❌ **Failed ({count}):** {roles}",
+      "he": "❌ **נכשלו ({count}):** {roles}"
+    },
+    "no_roles": {
+      "en": "❌ No roles were processed.",
+      "he": "❌ לא עובדו תפקידים."
+    }
+  },
+  "unsubscribe": {
+    "summary": {
+      "en": "🔔 **Processed {count} notification types:**",
+      "he": "🔔 **עובד {count} סוגי התראות:**"
+    },
+    "removed": {
+      "en": "✅ **Removed ({count}):** {roles}",
+      "he": "✅ **הוסרו ({count}):** {roles}"
+    },
+    "didnt_have": {
+      "en": "ℹ️ **Didn't have ({count}):** {roles}",
+      "he": "ℹ️ **לא היו ({count}):** {roles}"
+    },
+    "missing_role": {
+      "en": "⚠️ **Role doesn't exist ({count}):** {roles}",
+      "he": "⚠️ **התפקיד לא קיים ({count}):** {roles}"
+    },
+    "failed": {
+      "en": "❌ **Failed ({count}):** {roles}",
+      "he": "❌ **נכשלו ({count}):** {roles}"
+    },
+    "no_roles": {
+      "en": "❌ No roles were processed.",
+      "he": "❌ לא עובדו תפקידים."
+    }
+  },
+  "list": {
+    "title": {
+      "en": "🔔 Your Notification Roles",
+      "he": "🔔 תפקידי ההתראות שלך"
+    },
+    "description": {
+      "en": "Here are your current notification roles:",
+      "he": "הנה תפקידי ההתראות הנוכחיים שלך:"
+    },
+    "subscribed": {
+      "en": "✅ {role_name}",
+      "he": "✅ {role_name}"
+    },
+    "not_subscribed": {
+      "en": "❌ {role_name}",
+      "he": "❌ {role_name}"
+    }
+  }
+} 

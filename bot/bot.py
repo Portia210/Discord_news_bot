@@ -2,10 +2,14 @@ import os
 import discord
 from discord.ext import commands
 from utils.logger import logger
-from config import Config
+from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
 from scheduler_v2 import DiscordScheduler, TaskDefinitions
 
+
+
+logger.info(f"REMOTE_SERVER? {REMOTE_SERVER}")
+logger.info(f"ENABLE_PROXY? {ENABLE_PROXY}")
 
 # Set up bot with intents
 intents = discord.Intents.default()
@@ -148,7 +152,7 @@ async def load_cogs():
     
     cogs = [
         "cogs.slash.test_slash",
-        "cogs.slash.role_manager",
+        "cogs.slash.notification",
         "cogs.text.hello",
     ]
     
@@ -160,7 +164,6 @@ async def load_cogs():
                 continue
             bot.load_extension(cog)
             loaded_cogs.append(cog)
-            logger.info(f"✅ Loaded cog: {cog}")
         except Exception as e:
             logger.error(f"❌ Failed to load cog {cog}: {e}")
     

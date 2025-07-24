@@ -20,7 +20,7 @@ from .job_summary import JobSummary
 class DiscordScheduler:
     """APScheduler-based scheduler with Discord integration"""
     
-    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), post_event_delay: int = 3):
+    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), post_event_delay: int = 7):
         self.bot = bot
         self.alert_channel_id = alert_channel_id
         self.dev_channel_id = dev_channel_id or Config.CHANNEL_IDS.DEV
@@ -139,6 +139,21 @@ class DiscordScheduler:
     async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
         """Send alert to the dev channel (for scheduler status, errors, etc.)"""
         await self._send_message(self.dev_channel_id, message, color, title, "Dev")
+    
+    async def send_mention_text(self, notification_role):
+        """Send a role mention as a separate text message to trigger notifications"""
+        try:
+            from discord_utils.role_utils import get_role_mention
+            
+            channel = self.bot.get_channel(self.alert_channel_id)
+            if channel:
+                role_mention = await get_role_mention(self.bot, notification_role.full_name)
+                await channel.send(role_mention)
+                logger.info(f"📢 Sent role mention for {notification_role.name}")
+            else:
+                logger.error(f"Alert channel {self.alert_channel_id} not found")
+        except Exception as e:
+            logger.error(f"Error sending role mention for {notification_role.name}: {e}")
     
     def add_cron_job(self, 
                      func: Callable, 

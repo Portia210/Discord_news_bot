@@ -39,8 +39,8 @@ class TaskDefinitions:
         current_time = datetime.now(self.discord_scheduler.timezone)
         current_hour = current_time.hour
         
-        # if current_hour >= 8:
-        if False:
+        if current_hour >= 8:
+        # if False:
             logger.info("🌅 After 8:00 AM - Running economic calendar startup task")
             self.discord_scheduler.add_date_job(
                 func=lambda: get_economic_calendar_task(self.discord_scheduler),

@@ -12,6 +12,7 @@ from investing_scraper.investing_variables import InvestingVariables
 from investing_scraper.economic_calendar_to_text import economic_calendar_to_text
 from scheduler_v2.discord_scheduler import DiscordScheduler
 from config import Config
+from discord_utils.role_utils import get_role_mention
 import pytz
 
 
@@ -81,8 +82,12 @@ async def send_initial_calendar_summary_to_alert(discord_scheduler, calendar_dat
         
         # Send to alert channel
         await discord_scheduler.send_alert(summary_msg, 0x00ff00, "Economic Events For Today")
-        logger.info(f"📊 Sent initial calendar summary to alert channel")
         
+        # Send role mention as separate text message
+        economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
+        await discord_scheduler.send_mention_text(economic_role)
+
+        logger.info(f"📊 Sent initial calendar summary to alert channel")
     except Exception as e:
         logger.error(f"❌ Error sending initial calendar summary: {e}")
 
@@ -180,11 +185,16 @@ async def economic_warning_task(time_str: str, time_events: pd.DataFrame, discor
         if not time_events.empty and discord_scheduler:
             # Create warning message from DataFrame
             event_names = time_events['description'].fillna('Unknown Event').tolist()
+            
             warning_msg = f"⚠️ **Events coming in 5 minutes at {time_str}:**\n"
             warning_msg += ", ".join(event_names)
             
             # Send to alert channel
             await discord_scheduler.send_alert(warning_msg, 0xffa500, "⚠️ Economic Events Warning")
+            
+            # Send role mention as separate text message
+            economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
+            await discord_scheduler.send_mention_text(economic_role)
             logger.info(f"⚠️ 5-minute warning sent for {len(time_events)} events at {time_str}")
         else:
             logger.info(f"⚠️ No events found for time {time_str}")
@@ -233,6 +243,10 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
             
             # Send to alert channel
             await discord_scheduler.send_alert(update_msg, 0x00ff00, "Economic Events Update")
+            
+            # Send role mention as separate text message
+            economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
+            await discord_scheduler.send_mention_text(economic_role)
             logger.info(f"📊 Post-event update sent for {len(time_events)} events at {time_str}")
         else:
             logger.info(f"📊 No events found for time {time_str}")

@@ -9,6 +9,7 @@ from news_pdf.news_report import NewsReport
 from discord_utils.send_pdf import send_pdf
 from config import Config
 from scheduler_v2.discord_scheduler import DiscordScheduler
+from discord_utils.role_utils import get_role_mention
 
 
 async def morning_news_report_task(discord_scheduler: DiscordScheduler):
@@ -22,13 +23,17 @@ async def morning_news_report_task(discord_scheduler: DiscordScheduler):
         
         if response:
             link_to_report = response.get("link_to_report")
+            
             await discord_scheduler.send_alert(f"📰 **Morning News Report**\nMorning news summary is ready!\n{link_to_report}")
+            
+            # Send role mention as separate text message
+            news_role = Config.NOTIFICATION_ROLES.NEWS_REPORT
+            await discord_scheduler.send_mention_text(news_role)
         
         logger.info("✅ Morning news report completed")
         
     except Exception as e:
         logger.error(f"❌ Error in morning news report: {e}")
-
 
 
 async def evening_news_report_task(discord_scheduler: DiscordScheduler):
@@ -42,7 +47,12 @@ async def evening_news_report_task(discord_scheduler: DiscordScheduler):
         
         if response:
             link_to_report = response.get("link_to_report")
+            
             await discord_scheduler.send_alert(f"📰 **Evening News Report**\nEnd of day news summary is ready!\n{link_to_report}")
+            
+            # Send role mention as separate text message
+            news_role = Config.NOTIFICATION_ROLES.NEWS_REPORT
+            await discord_scheduler.send_mention_text(news_role)
         
         logger.info("✅ Evening news report completed")
         
