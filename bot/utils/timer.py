@@ -1,7 +1,7 @@
 import time
 import functools
 import asyncio
-from utils.logger import logger
+from .logger import logger
 
 
 def measure_time(func):

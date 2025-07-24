@@ -1,7 +1,6 @@
 from dateutil import parser
 import pytz
 from config import Config
-from datetime import datetime
 
 def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZONES.EASTERN_US)):
     """

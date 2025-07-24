@@ -4,7 +4,7 @@ from discord.ext import commands
 from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
-from scheduler_v2 import DiscordScheduler, TaskDefinitions
+from scheduler_v2 import DiscordScheduler, TasksManager
 
 
 
@@ -113,7 +113,7 @@ async def on_ready():
         
         # Initialize scheduler components
         discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
-        task_definitions = TaskDefinitions(discord_scheduler)
+        task_definitions = TasksManager(discord_scheduler)
         
 
         

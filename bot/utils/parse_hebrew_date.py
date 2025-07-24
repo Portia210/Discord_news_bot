@@ -1,6 +1,6 @@
 from datetime import datetime
 import re
-from utils.logger import logger
+from .logger import logger
 
 def parse_hebrew_date(hebrew_date_str):
     """Convert Hebrew date string to datetime object"""

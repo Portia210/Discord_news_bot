@@ -1,6 +1,6 @@
 import os
 from playwright.async_api import async_playwright
-from utils.logger import logger
+from .logger import logger
 
 
 async def html_to_pdf(html_file_path: str, pdf_file_path: str) -> bool:

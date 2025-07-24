@@ -2,17 +2,13 @@
 Economic Calendar Task Functions
 """
 
-import asyncio
 from datetime import datetime, timedelta
-from typing import List, Set
+from typing import Set
 import pandas as pd
 from utils.logger import logger
-from investing_scraper.InvestingDataScraper import InvestingDataScraper
-from investing_scraper.investing_variables import InvestingVariables
-from investing_scraper.economic_calendar_to_text import economic_calendar_to_text
+from scrapers import InvestingScraper, InvestingParams, economic_calendar_to_text
 from scheduler_v2.discord_scheduler import DiscordScheduler
 from config import Config
-from discord_utils.role_utils import get_role_mention
 import pytz
 
 
@@ -25,12 +21,12 @@ async def get_economic_calendar_task(discord_scheduler: DiscordScheduler = None)
         timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         
         # Get calendar data using InvestingDataScraper
-        scraper = InvestingDataScraper(proxy=Config.PROXY.APP_PROXY)
+        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
         calendar_data = await scraper.get_calendar(
-            calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
-            current_tab=InvestingVariables.TIME_RANGES.TODAY,
-            importance=InvestingVariables.IMPORTANCE.APP_IMPORTANCES,
-            countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
+            calendar_name=InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
+            current_tab=InvestingParams.TIME_RANGES.TODAY,
+            importance=InvestingParams.IMPORTANCE.APP_IMPORTANCES,
+            countries=[InvestingParams.COUNTRIES.UNITED_STATES],
             time_zone=timezone_to_use
         )
         
@@ -218,12 +214,12 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         
         # Fetch updated calendar data
-        scraper = InvestingDataScraper(proxy=Config.PROXY.APP_PROXY)
+        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
         calendar_data = await scraper.get_calendar(
-            calendar_name=InvestingVariables.CALENDARS.ECONOMIC_CALENDAR,
-            current_tab=InvestingVariables.TIME_RANGES.TODAY,
-            importance=InvestingVariables.IMPORTANCE.APP_IMPORTANCES,
-            countries=[InvestingVariables.COUNTRIES.UNITED_STATES],
+            calendar_name=InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
+            current_tab=InvestingParams.TIME_RANGES.TODAY,
+            importance=InvestingParams.IMPORTANCE.APP_IMPORTANCES,
+            countries=[InvestingParams.COUNTRIES.UNITED_STATES],
             time_zone=timezone_to_use
         )
         

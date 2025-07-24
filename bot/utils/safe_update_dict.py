@@ -1,5 +1,5 @@
-from utils.logger import logger
-from utils.caller_info import get_function_and_caller_info
+from .logger import logger
+from .caller_info import get_function_and_caller_info
 
 def safe_update_dict(original_dict, update_dict, prevent_type_mismatch: bool = True):
     """

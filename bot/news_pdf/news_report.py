@@ -7,12 +7,11 @@ A class-based system for generating HTML and PDF news reports with theme support
 import json
 from datetime import datetime
 from utils.logger import logger
-from yf_scraper.yf_requests import YfRequests
-from yf_scraper.qoute_fields import QouteFields as qf
+from scrapers import YfScraper, QouteFields as qf
 import pytz
 from config import Config
 import discord
-from discord_utils.process_news import process_news_to_list
+from ai_tools.process_discord_news import process_news_to_list
 import requests
 import asyncio
 
@@ -29,7 +28,7 @@ class NewsReport:
         """
         self.discord_bot = discord_bot
         self.timezone = timezone
-        self.yf_requests = YfRequests()
+        self.yf_requests = YfScraper()
     
    
 
@@ -71,7 +70,7 @@ class NewsReport:
             list: List of price symbol data for the template
         """
         try:
-            yfr = YfRequests()
+            yfr = YfScraper()
             indexes_futures = {"ES=F": "S&P 500", "NQ=F": "NASDAQ", "YM=F": "Dow Jones", "RTY=F": "Russell 2000", "^VIX": "VIX"}
             indexes = {"^GSPC": "S&P 500", "^IXIC": "NASDAQ", "^DJI": "Dow Jones", "^RUT": "Russell 2000"}
             commodities = {"GC=F": "Gold", "SI-F": "Silver", "CL=F": "Crude Oil", "NG=F": "Natural Gas"} 

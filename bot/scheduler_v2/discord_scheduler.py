@@ -12,7 +12,7 @@ from apscheduler.triggers.date import DateTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.executors.asyncio import AsyncIOExecutor
-from utils.logger import logger
+from utils import logger
 from config import Config
 import pytz
 from .job_summary import JobSummary

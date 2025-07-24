@@ -2,7 +2,7 @@
 Individual Task Functions - Easy to test and edit independently
 """
 
-from .news_report import (
+from .news_report_tasks import (
     morning_news_report_task,
     evening_news_report_task
 )

@@ -16,7 +16,7 @@ from yf_scraper.qoute_fields import QouteFields as qf
 import pytz
 from config import Config
 import discord
-from discord_utils.process_news import process_news_to_list
+from bot.ai_tools.process_discord_news import process_news_to_list
 from utils.html_convertor import html_to_pdf
 
 class PdfReportGenerator:

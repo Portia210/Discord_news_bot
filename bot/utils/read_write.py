@@ -1,6 +1,6 @@
 import json
-from utils.logger import logger
-from utils.caller_info import get_function_and_caller_info
+from .logger import logger
+from .caller_info import get_function_and_caller_info
 
 def read_text_file(file_path):
     try:
