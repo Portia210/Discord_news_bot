@@ -5,6 +5,7 @@ Economic Calendar Task Functions
 from datetime import datetime, timedelta
 from typing import Set
 import pandas as pd
+import asyncio
 from utils.logger import logger
 from scrapers import InvestingScraper, InvestingParams, economic_calendar_to_text
 from scheduler_v2.discord_scheduler import DiscordScheduler
@@ -205,7 +206,7 @@ async def economic_warning_task(time_str: str, time_events: pd.DataFrame, discor
             )
 
 
-async def economic_update_task(time_str: str, discord_scheduler=None):
+async def economic_update_task(time_str: str, discord_scheduler=DiscordScheduler):
     """Send post-event update for economic events"""
     try:
         logger.info(f"📊 Sending post-event update for {time_str}")
@@ -213,25 +214,47 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
         # Use DiscordScheduler's timezone if available, otherwise fall back to config
         timezone_to_use = discord_scheduler.timezone if discord_scheduler else pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)
         
-        # Fetch updated calendar data
+        # Initialize scraper once
         scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
-        calendar_data = await scraper.get_calendar(
-            calendar_name=InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
-            current_tab=InvestingParams.TIME_RANGES.TODAY,
-            importance=InvestingParams.IMPORTANCE.APP_IMPORTANCES,
-            countries=[InvestingParams.COUNTRIES.UNITED_STATES],
-            time_zone=timezone_to_use
-        )
         
-        if calendar_data is None or calendar_data.empty:
-            logger.warning("⚠️ No economic calendar data for update")
-            return
+        # Wait for event data to be published (max 30 seconds)
+        max_wait_time = 30
+        wait_time = discord_scheduler.post_event_delay
+        poll_interval = 1
         
-        # Filter events for the specific time from DataFrame
-        time_events = calendar_data[calendar_data['time'] == time_str]
+        while wait_time < max_wait_time:
+            calendar_data = await scraper.get_calendar(
+                calendar_name=InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
+                current_tab=InvestingParams.TIME_RANGES.TODAY,
+                importance=InvestingParams.IMPORTANCE.APP_IMPORTANCES,
+                countries=[InvestingParams.COUNTRIES.UNITED_STATES],
+                time_zone=timezone_to_use
+            )
+            
+            if calendar_data is None or calendar_data.empty:
+                logger.warning("⚠️ No economic calendar data for update")
+                return
+            
+            # Get events for this time and check if any still need data
+            current_events = calendar_data[calendar_data['time'] == time_str]
+            unupdated_events = current_events[
+                (current_events['previous'].notna()) & 
+                (current_events['actual'].isna())
+            ]
+            
+            if unupdated_events.empty:
+                logger.info(f"✅ Data updated after {wait_time} seconds")
+                break
+                
+            # Log waiting status and continue polling
+            logger.info(f"⏳ theres a {len(unupdated_events)} events needs to update...\n{unupdated_events}")
+            wait_time += poll_interval
+            await asyncio.sleep(poll_interval)
+        else:
+            logger.warning(f"⏰ Timeout reached ({max_wait_time}s) waiting for event data update")
         
-        if not time_events.empty and discord_scheduler:
-            summary_msg = economic_calendar_to_text(time_events)
+        if not current_events.empty:
+            summary_msg = economic_calendar_to_text(current_events)
             
             # Create update message
             update_msg = f"📊 **Economic Events Update for {time_str}:**\n"
@@ -243,7 +266,7 @@ async def economic_update_task(time_str: str, discord_scheduler=None):
             # Send role mention as separate text message
             economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
             await discord_scheduler.send_mention_text(economic_role)
-            logger.info(f"📊 Post-event update sent for {len(time_events)} events at {time_str}")
+            logger.info(f"📊 Post-event update sent for {len(current_events)} events at {time_str}")
         else:
             logger.info(f"📊 No events found for time {time_str}")
             

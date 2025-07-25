@@ -31,7 +31,7 @@ class InvestingScraper:
     async def _fetch_table(self, page_name, payload: dict):
         """Fetch and parse the webpage asynchronously"""
         logger.debug(f"Fetching table data for {page_name}")
-        request_json = read_json_file(f'investing_scraper/requests_json/{page_name}.json')
+        request_json = read_json_file(f'scrapers/investing/requests_json/{page_name}.json')
         try:
             async with aiohttp.ClientSession() as session:
                 async with session.post(request_json['url'], headers=self.headers, data=payload, proxy=self.proxy) as response:
@@ -53,7 +53,7 @@ class InvestingScraper:
 
     def _process_table_data(self, page_name, table_html):
         """Process all rows in the table"""
-        table_structure = read_json_file(f'investing_scraper/tables_stucture.json')[page_name]
+        table_structure = read_json_file(f'scrapers/investing/tables_stucture.json')[page_name]
         table_selectors = table_structure["table_selectors"]
 
         def proccess_tr(tr, table_selectors):
@@ -132,12 +132,12 @@ class InvestingScraper:
             write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
             if events_by_dates == {}:
                 logger.error(f"No events found for {page_name}")
-                return 
+                return None
             
             flat_data = self.flatten_data(events_by_dates)
             df = pd.DataFrame(flat_data)
             if save_data:
-                now_timestamp = datetime.now().timestamp()
+                now_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f") # with microseconds
                 self._save_data(f"{page_name}_{now_timestamp}", df)
 
             return df
@@ -169,78 +169,30 @@ class InvestingScraper:
             payload["dateTo"] = date_to
         return await self.run(calendar_name, payload, save_data)
     
-    # this is test function to test the scheduler
-    # async def get_calendar(
-    #         self,
-    #         calendar_name: str,
-    #         current_tab: str=InvestingVariables.TIME_RANGES.TODAY, 
-    #         importance: list[str]=[InvestingVariables.IMPORTANCE.LOW, InvestingVariables.IMPORTANCE.MEDIUM, InvestingVariables.IMPORTANCE.HIGH], 
-    #         countries: list[str]=[InvestingVariables.COUNTRIES.UNITED_STATES], 
-    #         time_zone: str=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), 
-    #         date_from: str = None, 
-    #         date_to: str = None, 
-    #         save_data: bool = False):
-        
-    #     df = pd.read_csv(f"data/investing_scraper/economic_test.csv")
-    #     # change value of df time[1] to next minutes 
-    #     next_minutes = (datetime.now(pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)) + timedelta(minutes=1)).strftime("%H:%M")
-    #     df.loc[0, "time"] = next_minutes
-    #     return df
-    
 
 
 
 if __name__ == "__main__":
     import time
-    proxy_scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
-    no_proxy_scraper = InvestingScraper(proxy=None)
-
+    scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
+    if not os.path.exists("data/investing_scraper"):
+        os.makedirs("data/investing_scraper")
+    
     async def get_todays_data(scraper):
         return await scraper.get_calendar(
             calendar_name= InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
-            current_tab= InvestingParams.TIME_RANGES.TODAY,
+            current_tab= InvestingParams.TIME_RANGES.CUSTOM,
             importance=[InvestingParams.IMPORTANCE.LOW, InvestingParams.IMPORTANCE.MEDIUM, InvestingParams.IMPORTANCE.HIGH],
-            save_data=True)
+            date_from="2025-07-04",
+            date_to="2025-07-04",
+            save_data=False)
 
-    async def check_investing_latency():
-        # print now hour and minute and second 
-        print(datetime.now().hour, datetime.now().minute, datetime.now().second)
-        # check if now time is 16:45
-        if not os.path.exists("data/investing_scraper"):
-            os.makedirs("data/investing_scraper")
-        while True:
-            if datetime.now().hour == 17 and datetime.now().minute == 0:
-                now_time = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-                print("now time is 17:00")
-                df = await get_todays_data(no_proxy_scraper)
-                df.to_csv(f"data/investing_scraper/{now_time}.csv", index=False)
-                
-            else:
-                print("now time is not 17:00")
-                time.sleep(1)
-    asyncio.run(check_investing_latency())
-    # async def get_all_year_data(scraper):
-    async def get_all_year_data(scraper):
-        all_months = [f"0{i}" if i < 10 else f"{i}" for i in range(1, 13)]
-        days_ranges = ["01", "10", "20"]
-        for month_index, month in enumerate(all_months):
-            for day_index, day in enumerate(days_ranges):
-                # Calculate the next date in a cleaner way
-                if day_index < len(days_ranges) - 1:
-                    # Next day in same month
-                    date_to = f"2025-{month}-{days_ranges[day_index+1]}"
-                elif month_index < len(all_months) - 1:
-                    # First day of next month
-                    date_to = f"2025-{all_months[month_index+1]}-{days_ranges[0]}"
-                else:
-                    # First day of next year
-                    date_to = "2026-01-01"
+    today_data = asyncio.run(get_todays_data(scraper))
+    print(today_data)
+    # logger.info(f"Today data: {today_data.columns}")
+    # for index, event in today_data.iterrows():
+    #     if event["previous"] is None and event["actual"] is not None:
+    #         logger.info(f"Event name: {event['description'][::-1]}, Event forecast: {event['forecast']}, actual: {event['actual']}")
 
-                await scraper.get_calendar(
-                    calendar_name= InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
-                    current_tab= InvestingParams.TIME_RANGES.CUSTOM,
-                    importance=[InvestingParams.IMPORTANCE.LOW, InvestingParams.IMPORTANCE.MEDIUM, InvestingParams.IMPORTANCE.HIGH],
-                    date_from=f"2025-{month}-{day}",
-                    date_to=date_to,
-                    save_data=True)
+
 
