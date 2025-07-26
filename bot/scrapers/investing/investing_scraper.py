@@ -105,8 +105,13 @@ class InvestingScraper:
         holiday_data['vacation_time'] = None
         for idx, event in holiday_data.iterrows():
             if "שעת סגירה מוקדמת" in event["holiday"]:
-                time_match = re.search(r'(\d{1,2}:\d{2})', event["holiday"])
-                holiday_data.loc[idx, 'vacation_time'] = time_match.group(1) if time_match else "unknown time"
+                time_match = re.search(r'(\d{1,2}):(\d{2})', event["holiday"])
+                if time_match:
+                    hour, minute = int(time_match.group(1)), int(time_match.group(2))
+                    new_hour = (hour + 7) % 24  # Add 7 hours, handle 24-hour overflow
+                    holiday_data.loc[idx, 'vacation_time'] = f"{new_hour:02d}:{minute:02d}"
+                else:
+                    holiday_data.loc[idx, 'vacation_time'] = "unknown time"
             else:
                 holiday_data.loc[idx, 'vacation_time'] = "all day"
         
