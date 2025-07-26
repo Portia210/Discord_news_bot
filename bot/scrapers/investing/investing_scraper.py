@@ -100,6 +100,17 @@ class InvestingScraper:
         
         return events_by_date
     
+    @staticmethod
+    def process_holidays_data(holiday_data:pd.DataFrame):
+        holiday_data['vacation_time'] = None
+        for idx, event in holiday_data.iterrows():
+            if "שעת סגירה מוקדמת" in event["holiday"]:
+                time_match = re.search(r'(\d{1,2}:\d{2})', event["holiday"])
+                holiday_data.loc[idx, 'vacation_time'] = time_match.group(1) if time_match else "unknown time"
+            else:
+                holiday_data.loc[idx, 'vacation_time'] = "all day"
+        
+        return holiday_data
 
 
 
@@ -136,6 +147,8 @@ class InvestingScraper:
             
             flat_data = self.flatten_data(events_by_dates)
             df = pd.DataFrame(flat_data)
+            if page_name == "holiday_calendar":
+                df = self.process_holidays_data(df)
             if save_data:
                 now_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f") # with microseconds
                 self._save_data(f"{page_name}_{now_timestamp}", df)
@@ -173,7 +186,7 @@ class InvestingScraper:
 
 
 if __name__ == "__main__":
-    import time
+    import re
     scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
     if not os.path.exists("data/investing_scraper"):
         os.makedirs("data/investing_scraper")
@@ -183,12 +196,49 @@ if __name__ == "__main__":
             calendar_name= InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
             current_tab= InvestingParams.TIME_RANGES.CUSTOM,
             importance=[InvestingParams.IMPORTANCE.LOW, InvestingParams.IMPORTANCE.MEDIUM, InvestingParams.IMPORTANCE.HIGH],
-            date_from="2025-07-04",
+            date_from="2025-07-02",
             date_to="2025-07-04",
             save_data=False)
 
-    today_data = asyncio.run(get_todays_data(scraper))
-    print(today_data)
+
+    async def get_holidays_data(scraper):
+        return await scraper.get_calendar(
+            calendar_name= InvestingParams.CALENDARS.HOLIDAY_CALENDAR,
+            current_tab= InvestingParams.TIME_RANGES.CUSTOM,
+            importance=[InvestingParams.IMPORTANCE.LOW, InvestingParams.IMPORTANCE.MEDIUM, InvestingParams.IMPORTANCE.HIGH],
+            date_from="2025-01-01",
+            date_to="2025-12-31",
+            save_data=True)
+
+
+
+
+
+
+
+    
+    holidays_data = asyncio.run(get_holidays_data(scraper))
+
+
+
+
+
+
+
+    def check_vacation_today(today_data:pd.DataFrame):
+        today_data['vacation'] = None
+        vacation_events = today_data[today_data["volatility"] == "חופשה"]
+        
+        for idx, event in vacation_events.iterrows():
+            if event["time"] == "כל היום":
+                today_data.loc[idx, 'vacation'] = "all day"
+            else:
+                time_match = re.search(r'(\d{1,2}:\d{2})', event["description"])
+                today_data.loc[idx, 'vacation'] = time_match.group(1) if time_match else "unknown time"
+        
+        return today_data
+
+    
     # logger.info(f"Today data: {today_data.columns}")
     # for index, event in today_data.iterrows():
     #     if event["previous"] is None and event["actual"] is not None:
