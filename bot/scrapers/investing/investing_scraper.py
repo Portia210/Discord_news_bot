@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import os
 import pandas as pd
 import pytz
+import re
 from config import Config
 from utils import read_json_file, write_json_file, logger
 import json
@@ -12,10 +13,11 @@ from .investing_params import InvestingParams
 import asyncio
 
 class InvestingScraper:
-    def __init__(self, proxy=None):
+    def __init__(self, proxy=None, timezone=None):
         self.headers = read_json_file(f'scrapers/investing/investing_headers.json')
         self.proxy = proxy
-        logger.debug(f"Initialized investing scraper" + (" with proxy" if self.proxy else ""))
+        self.timezone = timezone
+        logger.debug(f"Initialized investing scraper" + (" with proxy" if self.proxy else "") + (" with timezone" if self.timezone else ""))
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):
@@ -100,16 +102,23 @@ class InvestingScraper:
         
         return events_by_date
     
-    @staticmethod
-    def process_holidays_data(holiday_data:pd.DataFrame):
+    def process_holidays_data(self, holiday_data:pd.DataFrame):
         holiday_data['vacation_time'] = None
+        
+        # Simple timezone offset calculation
+        time_offset = 0
+        if self.timezone:
+            target_tz = pytz.timezone(self.timezone)
+            eastern_tz = pytz.timezone(Config.TIMEZONES.EASTERN_US)
+            time_offset = target_tz.utcoffset(datetime.now()).total_seconds() / 3600 - eastern_tz.utcoffset(datetime.now()).total_seconds() / 3600
+        
         for idx, event in holiday_data.iterrows():
             if "שעת סגירה מוקדמת" in event["holiday"]:
                 time_match = re.search(r'(\d{1,2}):(\d{2})', event["holiday"])
                 if time_match:
                     hour, minute = int(time_match.group(1)), int(time_match.group(2))
-                    new_hour = (hour + 7) % 24  # Add 7 hours, handle 24-hour overflow
-                    holiday_data.loc[idx, 'vacation_time'] = f"{new_hour:02d}:{minute:02d}"
+                    new_hour = int((hour + time_offset) % 24)
+                    holiday_data.loc[idx, 'vacation_time'] = f"{new_hour}:{minute:02d}"
                 else:
                     holiday_data.loc[idx, 'vacation_time'] = "unknown time"
             else:
@@ -192,7 +201,8 @@ class InvestingScraper:
 
 if __name__ == "__main__":
     import re
-    scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
+    # Test with different timezones
+    scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY, timezone=Config.TIMEZONES.APP_TIMEZONE)
     if not os.path.exists("data/investing_scraper"):
         os.makedirs("data/investing_scraper")
     
