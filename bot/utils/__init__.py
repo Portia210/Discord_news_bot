@@ -15,7 +15,7 @@ from .read_write import (
 )
 
 # Time and Date Utilities
-from .timezones_convertor import convert_to_my_timezone
+from .timezones_convertor import convert_iso_time_to_datetime, get_time_deltas_for_date_range, get_time_delta_for_date
 from .timer import measure_time
 from .parse_hebrew_date import parse_hebrew_date
 
@@ -40,7 +40,9 @@ __all__ = [
     'write_binary_file',
     
     # Time and Date
-    'convert_to_my_timezone',
+    'convert_iso_time_to_datetime',
+    'get_time_deltas_for_date_range',
+    'get_time_delta_for_date',
     'measure_time',
     'parse_hebrew_date',
     

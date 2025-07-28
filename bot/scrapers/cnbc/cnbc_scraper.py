@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from config import Config
 import asyncio
 import aiohttp
-from utils import logger, read_json_file, write_json_file, convert_to_my_timezone
+from utils import logger, read_json_file, write_json_file, convert_iso_time_to_datetime
 
 
 
@@ -80,7 +80,7 @@ def get_clean_assets(all_modules: list, wanted_modules: list, optional_fields: l
                     for field in optional_fields:
                         if field in asset:
                             if field == "datePublished":
-                                formatted_date = convert_to_my_timezone(asset["datePublished"], pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).strftime('%Y-%m-%d %H:%M:%S')
+                                formatted_date = convert_iso_time_to_datetime(asset["datePublished"], pytz.timezone(Config.TIMEZONES.APP_TIMEZONE)).strftime('%Y-%m-%d %H:%M:%S')
                                 clean_asset[field] = formatted_date
                             else:
                                 clean_asset[field] = asset[field]

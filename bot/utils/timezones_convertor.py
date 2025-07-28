@@ -1,8 +1,42 @@
 from dateutil import parser
 import pytz
 from config import Config
+from datetime import datetime, timedelta
+import pandas as pd
 
-def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZONES.EASTERN_US)):
+
+
+def get_time_delta_for_date(date: str, target_tz: str, source_tz: str):
+    # Set timezones
+    tz_target = pytz.timezone(target_tz)
+    tz_source = pytz.timezone(source_tz)
+
+    date_obj = datetime.strptime(date, '%Y-%m-%d').date()
+
+    dt_naive = datetime(date_obj.year, date_obj.month, date_obj.day, 12, 0, 0)  # Naive datetime
+        
+    # Calculate offset difference (Israel offset - US offset)
+    target_offset = tz_target.utcoffset(dt_naive).total_seconds() / 3600
+    source_offset = tz_source.utcoffset(dt_naive).total_seconds() / 3600
+    delta_hours = target_offset - source_offset
+    
+    return {
+        'date': date,
+        'target_offset': target_offset,
+        'source_offset': source_offset,
+        'delta_hours': delta_hours
+    }
+
+def get_time_deltas_for_date_range(start_date: str, end_date: str, target_tz: str, source_tz: str):
+    """returns dataframe with date and delta_hours"""
+    results = []
+    while start_date < end_date:
+        results.append(get_time_delta_for_date(start_date, target_tz, source_tz))
+        start_date = (datetime.strptime(start_date, "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
+    return pd.DataFrame(results, columns=['date', 'delta_hours']).sort_values(by='date')
+
+
+def convert_iso_time_to_datetime(timestamp_str, timezone: str) -> datetime:
     """
     Convert any ISO timestamp to your timezone
     
@@ -24,6 +58,7 @@ def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZ
         'Z': '+00:00'
     }
     
+    timezone = pytz.timezone(timezone)
     # Handle military timezone letters
     if timestamp_str.endswith(tuple(military_tz.keys())):
         letter = timestamp_str[-1]
@@ -32,9 +67,9 @@ def convert_to_my_timezone(timestamp_str, my_timezone=pytz.timezone(Config.TIMEZ
     
     # Parse the timestamp (handles all formats automatically)
     dt = parser.parse(timestamp_str)
-    converted_time = dt.astimezone(my_timezone)
+    datetime_output = dt.astimezone(timezone)
     
-    return converted_time
+    return datetime_output
 
 
 if __name__ == "__main__":
@@ -47,5 +82,5 @@ if __name__ == "__main__":
 
     # Convert to Eastern Time
     for ts in timestamps:
-        eastern_time = convert_to_my_timezone(ts, pytz.timezone(Config.TIMEZONES.EASTERN_US))
+        eastern_time = convert_iso_time_to_datetime(ts, pytz.timezone(Config.TIMEZONES.EASTERN_US))
         print(f"{ts} -> Eastern: {eastern_time}")

@@ -22,7 +22,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 # Initialize new scheduler components
 discord_scheduler = None
 calendar_manager = None
-task_definitions = None
+tasks_manager = None
 notification_manager = None
 
 
@@ -109,18 +109,18 @@ async def on_ready():
         logger.error(f"❌ Failed to sync commands: {e}")
     
     try:
-        global discord_scheduler, task_definitions
+        global discord_scheduler, tasks_manager
         
         # Initialize scheduler components
         discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
-        task_definitions = TasksManager(discord_scheduler)
+        tasks_manager = TasksManager(discord_scheduler)
         
 
         
         logger.info("✅ Scheduler components initialized successfully!")
         
         # Setup all tasks
-        task_definitions.setup_all_tasks()
+        tasks_manager.setup_all_tasks()
         logger.info("✅ All tasks setup completed")
         
         # Start the scheduler

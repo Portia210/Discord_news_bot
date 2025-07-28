@@ -7,7 +7,7 @@ import pandas as pd
 import pytz
 import re
 from config import Config
-from utils import read_json_file, write_json_file, logger
+from utils import read_json_file, write_json_file, get_time_delta_for_date, logger
 import json
 from .investing_params import InvestingParams
 import asyncio
@@ -17,7 +17,7 @@ class InvestingScraper:
         self.headers = read_json_file(f'scrapers/investing/investing_headers.json')
         self.proxy = proxy
         self.timezone = timezone
-        logger.debug(f"Initialized investing scraper" + (" with proxy" if self.proxy else "") + (" with timezone" if self.timezone else ""))
+        logger.debug(f"Initialized investing scraper" + (" with proxy" if self.proxy else "") + (f" with timezone {self.timezone}" if self.timezone else ""))
     
     @staticmethod
     def get_element_attirbutes(soup_element, attributes):
@@ -102,27 +102,34 @@ class InvestingScraper:
         
         return events_by_date
     
-    def process_holidays_data(self, holiday_data:pd.DataFrame):
-        holiday_data['vacation_time'] = None
-        
-        # Simple timezone offset calculation
-        time_offset = 0
-        if self.timezone:
-            target_tz = pytz.timezone(self.timezone)
-            eastern_tz = pytz.timezone(Config.TIMEZONES.EASTERN_US)
-            time_offset = target_tz.utcoffset(datetime.now()).total_seconds() / 3600 - eastern_tz.utcoffset(datetime.now()).total_seconds() / 3600
+    def _adjust_date_format(self, date: str):
+        if re.match(r'^\d{1,2}\.\d{1,2}\.\d{4}$', date):
+            return datetime.strptime(date, "%d.%m.%Y").strftime("%Y-%m-%d")
+        return date
+    
+    def _process_holidays_data(self, holiday_data:pd.DataFrame):
+        holiday_data['time'] = None
         
         for idx, event in holiday_data.iterrows():
-            if "שעת סגירה מוקדמת" in event["holiday"]:
-                time_match = re.search(r'(\d{1,2}):(\d{2})', event["holiday"])
-                if time_match:
-                    hour, minute = int(time_match.group(1)), int(time_match.group(2))
-                    new_hour = int((hour + time_offset) % 24)
-                    holiday_data.loc[idx, 'vacation_time'] = f"{new_hour}:{minute:02d}"
+            try:
+                # Use self.timezone if available, otherwise fall back to config
+                target_timezone = self.timezone if self.timezone else Config.TIMEZONES.APP_TIMEZONE
+                
+                hours_offset = get_time_delta_for_date(event["date"], target_timezone, Config.TIMEZONES.EASTERN_US)["delta_hours"]
+                
+                if "שעת סגירה מוקדמת" in event["holiday"]:
+                    time_match = re.search(r'(\d{1,2}:\d{2})', event["holiday"])
+                    if time_match:
+                        time_str = time_match.group(1)
+                        adjusted_time = datetime.strptime(time_str, "%H:%M") + timedelta(hours=hours_offset)
+                        holiday_data.loc[idx, 'time'] = adjusted_time.strftime("%H:%M")
+                    else:
+                        holiday_data.loc[idx, 'time'] = "unknown time"
                 else:
-                    holiday_data.loc[idx, 'vacation_time'] = "unknown time"
-            else:
-                holiday_data.loc[idx, 'vacation_time'] = "all day"
+                    holiday_data.loc[idx, 'time'] = "all day"
+            except Exception as e:
+                logger.error(f"Error processing holiday data for {event.get('date', 'unknown date')}: {str(e)}")
+                holiday_data.loc[idx, 'time'] = "unknown time"
         
         return holiday_data
 
@@ -161,8 +168,12 @@ class InvestingScraper:
             
             flat_data = self.flatten_data(events_by_dates)
             df = pd.DataFrame(flat_data)
+            # adjust date format to yyyy-mm-dd
+            df['date'] = df['date'].apply(self._adjust_date_format)
+
             if page_name == "holiday_calendar":
-                df = self.process_holidays_data(df)
+                df = self._process_holidays_data(df)
+                pass
             if save_data:
                 now_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f") # with microseconds
                 self._save_data(f"{page_name}_{now_timestamp}", df)
@@ -180,8 +191,8 @@ class InvestingScraper:
             importance: list[str]=[InvestingParams.IMPORTANCE.LOW, InvestingParams.IMPORTANCE.MEDIUM, InvestingParams.IMPORTANCE.HIGH], 
             countries: list[str]=[InvestingParams.COUNTRIES.UNITED_STATES], 
             time_zone: str=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), 
-            date_from: str = None, 
-            date_to: str = None, 
+            from_date: str = None, 
+            to_date: str = None, 
             save_data: bool = False):
         
         payload = {
@@ -190,10 +201,10 @@ class InvestingScraper:
             "country[]": countries,
             "timeZone": time_zone,
         }
-        if date_from:
-            payload["dateFrom"] = date_from
-        if date_to:
-            payload["dateTo"] = date_to
+        if from_date:
+            payload["dateFrom"] = from_date
+        if to_date:
+            payload["dateTo"] = to_date
         return await self.run(calendar_name, payload, save_data)
     
 
