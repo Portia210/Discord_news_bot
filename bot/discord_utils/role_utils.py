@@ -20,7 +20,6 @@ async def get_role_mention(bot, role_name: str) -> str:
         # Find the role by name
         role = discord.utils.get(guild.roles, name=role_name)
         if role:
-            logger.info(f"✅ Role Name '{role_name}', Role Mention: {role.mention}")
             return role.mention
         else:
             logger.warning(f"⚠️ Role '{role_name}' not found in guild")

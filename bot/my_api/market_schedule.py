@@ -1,5 +1,4 @@
 from datetime import datetime, timedelta
-import pytz
 from utils import logger, get_time_deltas_for_date_range
 from config import Config
 from scrapers import InvestingScraper, InvestingParams
@@ -19,7 +18,7 @@ async def get_market_schedule_for_dates_range(start_date: str, end_date: str, ta
     holiday_df = await scraper.get_calendar("holiday_calendar", 
                                 InvestingParams.TIME_RANGES.CUSTOM, 
                                 importance= InvestingParams.IMPORTANCE.APP_IMPORTANCES,
-                                time_zone=Config.TIMEZONES.APP_TIMEZONE, 
+                                time_zone=InvestingParams.TIME_ZONES.ISRAEL, 
                                 from_date=start_date,
                                 to_date=end_date)
     if holiday_df is None:
@@ -58,15 +57,16 @@ async def get_market_schedule_for_dates_range(start_date: str, end_date: str, ta
 
 
 async def get_market_schedule_for_next_quarter(target_tz)-> pd.DataFrame:
+    """returns dataframe with date and open_time, close_time, holiday"""
 
-    file_path = "data/market_hours.csv"
+    output_file_path = "data/market_schedule.csv"
 
     today_date = datetime.now().strftime("%Y-%m-%d")
     quarter_from_now = (datetime.now() + timedelta(days=90)).strftime("%Y-%m-%d")
 
     # if df updated month forward, return the saved df
-    if os.path.exists(file_path):
-        df = pd.read_csv(file_path)
+    if os.path.exists(output_file_path):
+        df = pd.read_csv(output_file_path)
         month_from_now = (datetime.now() + timedelta(days=30))
         last_date = datetime.strptime(df.iloc[-1]['date'], "%Y-%m-%d")
         if month_from_now < last_date:
@@ -75,7 +75,7 @@ async def get_market_schedule_for_next_quarter(target_tz)-> pd.DataFrame:
    
     logger.info(f"Getting market hours for next 90 days")
     result = await get_market_schedule_for_dates_range(today_date, quarter_from_now, target_tz, source_tz=Config.TIMEZONES.EASTERN_US)
-    result.to_csv(file_path, index=False)
+    result.to_csv(output_file_path, index=False)
 
     return result
 

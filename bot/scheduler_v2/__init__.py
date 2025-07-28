@@ -1,10 +1,8 @@
 """
-Scheduler V2 - Using APScheduler for better reliability and features
+Scheduler V2 - APScheduler-based Discord scheduler with task management
 """
 
-from .discord_scheduler import DiscordScheduler
+from .core_scheduler import CoreScheduler
+from .tasks_scheduler import TasksScheduler
 
-from .tasks_manager import TasksManager
-from .job_summary import JobSummary
-
-__all__ = ['DiscordScheduler', 'TasksManager', 'JobSummary'] 
+__all__ = ['CoreScheduler', 'TasksScheduler'] 

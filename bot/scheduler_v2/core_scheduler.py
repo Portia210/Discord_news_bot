@@ -1,10 +1,10 @@
 """
-Discord Scheduler - APScheduler-based scheduler with Discord integration
+Discord Scheduler - APScheduler-based scheduler with Discord integration and task management
 """
 
 import asyncio
 import discord
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from typing import Optional, Callable, Union, List
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -12,21 +12,27 @@ from apscheduler.triggers.date import DateTrigger
 from apscheduler.triggers.interval import IntervalTrigger
 from apscheduler.jobstores.memory import MemoryJobStore
 from apscheduler.executors.asyncio import AsyncIOExecutor
-from utils import logger
+from utils.logger import logger
 from config import Config
 import pytz
 from .job_summary import JobSummary
+from discord_utils import send_dev_alert, send_alert
+from time import time
+from .global_scheduler import set_discord_scheduler
 
-class DiscordScheduler:
+
+class CoreScheduler:
     """APScheduler-based scheduler with Discord integration"""
     
-    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int = None, timezone: pytz.timezone = pytz.timezone(Config.TIMEZONES.APP_TIMEZONE), post_event_delay: int = 7):
+    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 7, schedule: Config.SCHEDULE = None):
+        
         self.bot = bot
         self.alert_channel_id = alert_channel_id
         self.dev_channel_id = dev_channel_id or Config.CHANNEL_IDS.DEV
-        self.timezone = timezone
+        self.timezone = pytz.timezone(timezone)
         self.post_event_delay = post_event_delay  # Delay in seconds for post-event updates
         self.job_summary = JobSummary(timezone)
+        self.schedule = schedule
         
         # Configure APScheduler
         jobstores = {
@@ -52,108 +58,6 @@ class DiscordScheduler:
         self.scheduler.add_listener(self._job_listener, mask=1 | 2 | 4096)  # Only listen to specific events
         
         self.running = False
-    
-    def _split_long_message(self, message: str, max_length: int = 1900) -> list:
-        """
-        Split a long message into chunks that fit within Discord's limits
-        
-        Args:
-            message: The message to split
-            max_length: Maximum length per chunk (default 1900 to leave room for formatting)
-        
-        Returns:
-            List of message chunks
-        """
-        if len(message) <= max_length:
-            return [message]
-        
-        chunks = []
-        current_chunk = ""
-        
-        # Split by lines to avoid breaking in the middle of content
-        lines = message.split('\n')
-        
-        for line in lines:
-            # If adding this line would exceed the limit, start a new chunk
-            if len(current_chunk) + len(line) + 1 > max_length:
-                if current_chunk:
-                    chunks.append(current_chunk.strip())
-                    current_chunk = line
-                else:
-                    # Single line is too long, split it
-                    while len(line) > max_length:
-                        chunks.append(line[:max_length])
-                        line = line[max_length:]
-                    current_chunk = line
-            else:
-                current_chunk += '\n' + line if current_chunk else line
-        
-        # Add the last chunk if it has content
-        if current_chunk.strip():
-            chunks.append(current_chunk.strip())
-        
-        return chunks
-
-    async def _send_message(self, channel_id: int, message: str, color: int, title: str, error_context: str):
-        """
-        Internal method to send a message to a specific channel with splitting support
-        
-        Args:
-            channel_id: Discord channel ID to send to
-            message: Message content
-            color: Embed color
-            title: Embed title
-            error_context: Context for error logging
-        """
-        try:
-            channel = self.bot.get_channel(channel_id)
-            if channel:
-                # Split message if it's too long
-                message_chunks = self._split_long_message(message)
-                
-                for i, chunk in enumerate(message_chunks):
-                    # Add part indicator if message was split
-                    part_indicator = f" (Part {i+1}/{len(message_chunks)})" if len(message_chunks) > 1 else ""
-                    current_title = title + part_indicator
-                    
-                    embed = discord.Embed(
-                        title=current_title,
-                        description=chunk,
-                        color=color,
-                        timestamp=datetime.now(self.timezone)
-                    )
-                    await channel.send(embed=embed)
-                    
-                    # Small delay between messages to avoid rate limiting
-                    if len(message_chunks) > 1 and i < len(message_chunks) - 1:
-                        await asyncio.sleep(0.5)
-            else:
-                logger.error(f"{error_context} channel {channel_id} not found")
-        except Exception as e:
-            logger.error(f"Error sending {error_context.lower()}: {e}")
-
-    async def send_alert(self, message: str, color: int = 0x00ff00, title: str = "📅 Scheduler Alert"):
-        """Send alert to the main alert channel (for actual data/messages)"""
-        await self._send_message(self.alert_channel_id, message, color, title, "Alert")
-    
-    async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
-        """Send alert to the dev channel (for scheduler status, errors, etc.)"""
-        await self._send_message(self.dev_channel_id, message, color, title, "Dev")
-    
-    async def send_mention_text(self, notification_role):
-        """Send a role mention as a separate text message to trigger notifications"""
-        try:
-            from discord_utils.role_utils import get_role_mention
-            
-            channel = self.bot.get_channel(self.alert_channel_id)
-            if channel:
-                role_mention = await get_role_mention(self.bot, notification_role.full_name)
-                await channel.send(role_mention)
-                logger.info(f"📢 Sent role mention for {notification_role.name}")
-            else:
-                logger.error(f"Alert channel {self.alert_channel_id} not found")
-        except Exception as e:
-            logger.error(f"Error sending role mention for {notification_role.name}: {e}")
     
     def add_cron_job(self, 
                      func: Callable, 
@@ -186,9 +90,8 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
-                    logger.info(f"✅ Job completed: {job_id}")
                     return result
                     
                 except Exception as e:
@@ -196,7 +99,7 @@ class DiscordScheduler:
                     logger.error(f"Job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_dev_alert(error_msg, 0xff0000)
+                        await send_dev_alert(self.bot, error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -252,10 +155,7 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
-                    
-                    logger.info(f"✅ Job completed: {job_id}")
-                    
+                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
                     return result
                     
@@ -264,7 +164,7 @@ class DiscordScheduler:
                     logger.error(f"One-time job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_dev_alert(error_msg, 0xff0000)
+                        await send_dev_alert(self.bot, error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -317,9 +217,8 @@ class DiscordScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await self.send_dev_alert(f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
                     
-                    logger.info(f"✅ Job completed: {job_id}")
                     return result
                     
                 except Exception as e:
@@ -327,7 +226,7 @@ class DiscordScheduler:
                     logger.error(f"Interval job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await self.send_dev_alert(error_msg, 0xff0000)
+                        await send_dev_alert(self.bot, error_msg, 0xff0000)
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -388,7 +287,8 @@ class DiscordScheduler:
             summary = self.generate_job_summary()
             logger.info(f"📋 Job Summary:\n{summary}")
             
-            asyncio.create_task(self.send_dev_alert(
+            asyncio.create_task(send_dev_alert(
+                self.bot,
                 summary,
                 0x00ff00,
                 "🔧 Scheduler Started"
@@ -471,4 +371,32 @@ class DiscordScheduler:
                         logger.warning(f"⚠️ Job significantly delayed: {job_id} - {delay:.1f}s late")
                 
         except Exception as e:
-            logger.debug(f"Error in job listener: {e}") 
+            logger.debug(f"Error in job listener: {e}")
+
+    async def send_alert(self, message: str, color: int = 0x00ff00, title: str = "📅 Scheduler Alert"):
+        """Send alert to the main alert channel"""
+        return await send_alert(self.bot, message, color, title)
+    
+    async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
+        """Send alert to the dev channel"""
+        return await send_dev_alert(self.bot, message, color, title)
+    
+    async def send_mention_text(self, notification_role):
+        """Send a role mention as a separate text message"""
+        try:
+            from discord_utils.role_utils import get_role_mention
+            
+            role_mention = await get_role_mention(self.bot, notification_role.full_name)
+            
+            if role_mention:
+                channel = self.bot.get_channel(self.alert_channel_id)
+                if channel:
+                    await channel.send(role_mention)
+                else:
+                    logger.error(f"❌ Could not find alert channel: {self.alert_channel_id}")
+            else:
+                logger.warning(f"⚠️ Could not find role: {notification_role.full_name}")
+        except Exception as e:
+            logger.error(f"❌ Error sending role mention: {e}")
+
+ 

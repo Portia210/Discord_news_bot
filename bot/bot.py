@@ -4,7 +4,8 @@ from discord.ext import commands
 from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
-from scheduler_v2 import DiscordScheduler, TasksManager
+from scheduler_v2 import TasksScheduler
+from discord_utils import send_dev_alert
 
 
 
@@ -19,11 +20,8 @@ intents.messages = True
 intents.guilds = True  # Required for slash commands
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Initialize new scheduler components
+# Initialize scheduler
 discord_scheduler = None
-calendar_manager = None
-tasks_manager = None
-notification_manager = None
 
 
 @bot.event
@@ -92,43 +90,38 @@ async def on_ready():
         
         bot_guild_ids = [guild.id for guild in bot.guilds]
         await bot.sync_commands(guild_ids=bot_guild_ids)
-        logger.info("✅ Commands synced to guilds successfully!")
         
         slash_commands = [cmd.name for cmd in bot.application_commands]
         text_commands = [cmd.name for cmd in bot.commands]
         logger.info(f"🔧 Available slash commands: {slash_commands}")
         logger.info(f"🔧 Available text commands: {text_commands}")
         
-        if slash_commands:
-            logger.info("🎉 Slash commands are now available in Discord!")
-            logger.info("💡 Guild sync is instant - commands should be visible immediately!")
-        else:
-            logger.warning("⚠️  No slash commands found - check your cogs!")
             
     except Exception as e:
         logger.error(f"❌ Failed to sync commands: {e}")
     
     try:
-        global discord_scheduler, tasks_manager
+        global discord_scheduler
         
-        # Initialize scheduler components
-        discord_scheduler = DiscordScheduler(bot, Config.CHANNEL_IDS.PYTHON_BOT, Config.CHANNEL_IDS.DEV)
-        tasks_manager = TasksManager(discord_scheduler)
-        
-
-        
-        logger.info("✅ Scheduler components initialized successfully!")
+        # Initialize scheduler with task management
+        discord_scheduler = TasksScheduler(
+            bot, 
+            Config.CHANNEL_IDS.PYTHON_BOT, 
+            Config.CHANNEL_IDS.DEV,
+            timezone=Config.TIMEZONES.APP_TIMEZONE,
+            schedule=Config.SCHEDULE
+        )
         
         # Setup all tasks
-        tasks_manager.setup_all_tasks()
-        logger.info("✅ All tasks setup completed")
+        await discord_scheduler.setup_all_tasks()
         
         # Start the scheduler
         discord_scheduler.start()
-        logger.info("✅ APScheduler started successfully!")
+        logger.debug("✅ APScheduler started successfully!")
         
         # Send bot startup message to dev channel
-        await discord_scheduler.send_dev_alert(
+        await send_dev_alert(
+            bot,
             "🚀 **Bot Started Successfully**\n"
             "🔔 Dev alerts will be sent to this channel\n"
             "📊 Data alerts will be sent to the main channel",
@@ -139,7 +132,8 @@ async def on_ready():
     except Exception as e:
         logger.error(f"❌ Failed to initialize scheduler: {e}")
         if discord_scheduler:
-            await discord_scheduler.send_dev_alert(
+            await send_dev_alert(
+                bot,
                 f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
                 0xff0000,
                 "🤖 Bot Status"
@@ -147,7 +141,6 @@ async def on_ready():
 
 async def load_cogs():
     """Load all command cogs"""
-    logger.info("🔄 load_cogs() called!")
     logger.info(f"📦 Currently loaded cogs: {list(bot.cogs.keys())}")
     
     cogs = [
@@ -167,7 +160,6 @@ async def load_cogs():
         except Exception as e:
             logger.error(f"❌ Failed to load cog {cog}: {e}")
     
-    logger.info(f"Successfully loaded {len(loaded_cogs)}/{len(cogs)} cogs")
     return loaded_cogs
 
 async def cleanup():
