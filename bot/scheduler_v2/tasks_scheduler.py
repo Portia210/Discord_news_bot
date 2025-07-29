@@ -17,7 +17,7 @@ from .core_scheduler import CoreScheduler
 class TasksScheduler(CoreScheduler):
     """DiscordScheduler with task management capabilities"""
     
-    def __init__(self, bot, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 7, schedule: Config.SCHEDULE = None):
+    def __init__(self, bot, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 3, schedule: Config.SCHEDULE = None):
         """Initialize TasksScheduler with DiscordScheduler functionality"""
         super().__init__(bot, alert_channel_id, dev_channel_id, timezone, post_event_delay, schedule)
         # Ensure the global scheduler points to this TasksScheduler instance
