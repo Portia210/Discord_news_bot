@@ -136,7 +136,7 @@ async def _schedule_alert_at_time(time_str: str, calendar_data: pd.DataFrame, di
                 })
             
             # Schedule update task (after event) - only if event hasn't passed
-            update_time = event_datetime + timedelta(minutes=2)
+            update_time = event_datetime + timedelta(seconds=discord_scheduler.post_event_delay)
             if update_time > current_time:
                 discord_scheduler.add_date_job(
                     func=economic_update_task,

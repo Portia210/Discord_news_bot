@@ -65,6 +65,7 @@ async def get_companies_description(companies_symbols):
     return descriptions
 
 async def main():
+    from ai_tools.chat_gpt import AIInterpreter
     companies_symbols2 = ["AAPL", "MSFT", "GOOGL", "PLTR", "IREN", "TSLA", "NVDA", "META", "AMZN", "GOOG", "NFLX", "TSM", "BABA", "WMT", "JPM", "V", "JNJ", "PG", "MA", "UNH", "XOM", "JPM", "A", "BAC", "CSCO", "DAL", "DIS", "GE", "GS", "HD", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM", "MRK", "MS", "NFLX", "NKE", "ORCL", "PEP", "PG", "T", "TSM", "UNH", "V", "VZ", "WMT", "XOM"]
     companies_symbols = ["IREN", "CORZ", "CRWV"]
     descriptions_path = "companies_descriptions.json"
@@ -74,7 +75,7 @@ async def main():
     not_processed_symbols = [symbol for symbol in companies_symbols if symbol not in descriptions]
 
     logger.info(f"Not processed symbols: {not_processed_symbols}")
-    input("Press Enter to continue...")
+    # input("Press Enter to continue...")
     for i in range(0, len(not_processed_symbols), 5):
         chunk = not_processed_symbols[i:i+5]
         descriptions_async = await get_companies_description(chunk)
@@ -82,6 +83,22 @@ async def main():
         descriptions.update(descriptions_async)
         # write to json file
         write_json_file(descriptions_path, descriptions)
+
+    ai_interpreter = AIInterpreter()
+    first_description = descriptions["IREN"]
+    prompt = f"""
+    You are a financial analyst and journalist.
+    You are given a description of a company.
+    You need to expand what the summary describes. Go in depth what exactly the compny do according to the last information that you have (not just in general), what exactly is it do, who are other compatitor that it has and what is the main product or service it provides.
+    *respond in hebrew*
+    *respond with no intro, headers or subheaders*
+    *use real new line to break the text into paragraphs*
+    """
+    response = ai_interpreter.get_interpretation(f"{str(first_description)} \n {prompt}")
+    print(response)
+    first_description["hebrew_description"] = response
+    write_json_file(descriptions_path, descriptions)
+
 
 if __name__ == "__main__":
     asyncio.run(main())
