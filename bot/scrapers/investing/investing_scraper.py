@@ -32,7 +32,7 @@ class InvestingScraper:
 
     async def _fetch_table(self, page_name, payload: dict):
         """Fetch and parse the webpage asynchronously"""
-        logger.debug(f"Fetching table data for {page_name}")
+        # logger.debug(f"Fetching table data for {page_name}")
         request_json = read_json_file(f'scrapers/investing/requests_json/{page_name}.json')
         try:
             async with aiohttp.ClientSession() as session:
@@ -158,13 +158,14 @@ class InvestingScraper:
         table_html = await self._fetch_table(page_name, payload)
         if not table_html:
             logger.error(f"Failed to fetch table data for {page_name}")
-            return None
+            return pd.DataFrame()
         events_by_dates = self._process_table_data(page_name, table_html)
         try:
-            write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
+            # os.makedirs("data/investing_scraper", exist_ok=True)
+            # write_json_file(f"data/investing_scraper/temp.json", events_by_dates)
             if events_by_dates == {}:
                 logger.error(f"No events found for {page_name}")
-                return None
+                return pd.DataFrame()
             
             flat_data = self.flatten_data(events_by_dates)
             df = pd.DataFrame(flat_data)
@@ -181,7 +182,7 @@ class InvestingScraper:
             return df
         except Exception as e:
             logger.error(f"Error running {page_name}: {str(e)}")
-            return None
+            return pd.DataFrame()
 
         
     async def get_calendar(

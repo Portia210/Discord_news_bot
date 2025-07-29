@@ -55,7 +55,7 @@ def setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone
     return logger
 
 # Create default logger instance
-logger = setup_logger(name="logger", level=logging.DEBUG, log_file=None, app_timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
+logger = setup_logger(name="logger", level=logging.INFO, log_file=None, app_timezone=pytz.timezone(Config.TIMEZONES.APP_TIMEZONE))
 
 
 if __name__ == "__main__":

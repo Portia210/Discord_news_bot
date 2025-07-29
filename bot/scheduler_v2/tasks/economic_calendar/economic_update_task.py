@@ -25,8 +25,8 @@ async def economic_update_task(time_str: str):
         # Initialize scraper
         scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
         
-        # Wait for event data to be published (max 30 seconds)
-        max_wait_time = 30
+        # Wait for event data to be published (max 60 seconds)
+        max_wait_time = 60
         wait_time = discord_scheduler.post_event_delay if discord_scheduler else 7
         poll_interval = 1
         
@@ -39,7 +39,7 @@ async def economic_update_task(time_str: str):
                 time_zone=InvestingParams.TIME_ZONES.ISRAEL
             )
             
-            if calendar_data is None or calendar_data.empty:
+            if calendar_data.empty:
                 logger.warning("⚠️ No economic calendar data for update")
                 return
             
@@ -55,7 +55,7 @@ async def economic_update_task(time_str: str):
                 break
                 
             # Log waiting status and continue polling
-            logger.info(f"⏳ There are {len(unupdated_events)} events that need to update...")
+            # logger.debug(f"⏳ There are {len(unupdated_events)} events that need to update...")
             wait_time += poll_interval
             await asyncio.sleep(poll_interval)
         else:

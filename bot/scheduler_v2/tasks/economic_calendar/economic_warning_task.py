@@ -20,7 +20,7 @@ async def economic_warning_task(time_str: str, time_events: pd.DataFrame):
             
         logger.info(f"⚠️ Sending 5-minute warning for {time_str}")
         
-        if not time_events or time_events.empty:
+        if time_events.empty:
             logger.info(f"⚠️ No events found for time {time_str}")
             return
         

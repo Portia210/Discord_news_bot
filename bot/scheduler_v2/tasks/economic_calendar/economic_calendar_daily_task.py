@@ -38,7 +38,7 @@ async def schedule_economic_calendar_task():
         )
         
         # Handle None or empty DataFrame
-        if calendar_data is None or calendar_data.empty:
+        if calendar_data.empty:
             logger.warning("⚠️ No economic calendar data received")
             return
         
