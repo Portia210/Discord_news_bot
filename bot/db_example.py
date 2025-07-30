@@ -35,8 +35,9 @@ print(f"Created: {new_symbol.symbol} - {new_symbol.name}")
 print("=== Example 2: READ ===")
 symbol = symbols_crud.get_by_field(db, "symbol", "AAPL")
 if symbol:
-    print(f"Found: {symbol.symbol} - {symbol.name}")
-    print(f"Exchange: {symbol.exchange}")
+    # print all fields of symbol
+    for field, value in symbol.__dict__.items():
+        print(f"{field}: {value}")
 
 #%%
 # Example 3: UPDATE - Modify existing symbol
@@ -48,3 +49,6 @@ if updated_symbol:
 
 db.close()
 print("=== Examples completed ===") 
+# %%
+db.close()
+# %%

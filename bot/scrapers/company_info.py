@@ -66,7 +66,6 @@ async def get_companies_description(companies_symbols):
 
 async def main():
     from ai_tools.chat_gpt import AIInterpreter
-    companies_symbols2 = ["AAPL", "MSFT", "GOOGL", "PLTR", "IREN", "TSLA", "NVDA", "META", "AMZN", "GOOG", "NFLX", "TSM", "BABA", "WMT", "JPM", "V", "JNJ", "PG", "MA", "UNH", "XOM", "JPM", "A", "BAC", "CSCO", "DAL", "DIS", "GE", "GS", "HD", "IBM", "INTC", "JNJ", "JPM", "KO", "MCD", "MMM", "MRK", "MS", "NFLX", "NKE", "ORCL", "PEP", "PG", "T", "TSM", "UNH", "V", "VZ", "WMT", "XOM"]
     companies_symbols = ["IREN", "CORZ", "CRWV"]
     descriptions_path = "companies_descriptions.json"
     if not os.path.exists(descriptions_path):

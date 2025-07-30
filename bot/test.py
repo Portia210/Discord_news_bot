@@ -2,11 +2,9 @@ import requests
 from config import Config
 from db.init_db import init_db
 from db.engine import get_db_sync
-from db.crud import create_symbol, get_symbols
+from db.crud import CRUDBase
 from db.models import SymbolsList
 from scrapers import get_symbols_list
-
-
 
 
 def populate_symbols_database():
@@ -46,10 +44,8 @@ def populate_symbols_database():
             symbol_data = {
                 "symbol": item["symbol"],
                 "name": item["name"],
-                "exchange": item.get("exchangeShortName", item.get("exchange", "")),
-                "type": item.get("type", ""),
-                "raw_description": item.get("name", ""),
-                "hebrew_description": None
+                "exchange": item.get("exchangeShortName", None),
+                "type": item.get("type", None),
             }
             
             symbols_to_add.append(SymbolsList(**symbol_data))

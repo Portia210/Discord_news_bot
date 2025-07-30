@@ -3,6 +3,7 @@ Task Manager - Extends DiscordScheduler with task management functionality
 """
 
 from datetime import datetime, timedelta, time
+import pandas as pd
 from utils.logger import logger
 from my_api.market_schedule import get_market_schedule_for_next_quarter
 from .tasks.news_report import (
@@ -82,7 +83,7 @@ class TasksScheduler(CoreScheduler):
             logger.info("🚪 Daily gatekeeper starting...")
             
             # Get market schedule
-            market_schedule = get_market_schedule_for_next_quarter(Config.TIMEZONES.APP_TIMEZONE)
+            market_schedule = await get_market_schedule_for_next_quarter(Config.TIMEZONES.APP_TIMEZONE)
             today_date = datetime.now().strftime("%Y-%m-%d")
             
             if today_date not in market_schedule['date'].values:
@@ -95,7 +96,7 @@ class TasksScheduler(CoreScheduler):
             market_close = datetime.strptime(today_data["close_time"], "%H:%M").time() if today_data["close_time"] is not None else None
             
             # Check if today is a holiday
-            if today_data['is_holiday']:
+            if pd.notna(today_data.get('holiday')):
                 logger.info(f"🏖️ Holiday detected: {today_data.get('holiday', 'Unknown holiday')}")
                 if market_open is None:
                     await self._setup_full_holiday_tasks()
@@ -119,7 +120,7 @@ class TasksScheduler(CoreScheduler):
             logger.error(f"❌ Error setting up full holiday tasks: {str(e)}")
             raise
 
-    async def _setup_partial_holiday_tasks(self, market_open: datetime, market_close: datetime):
+    async def _setup_partial_holiday_tasks(self, market_open: time, market_close: time):
         """Setup tasks for partial holiday days (currently empty)"""
         try:
             logger.info(f"🏖️ Setting up partial holiday tasks - Market open: {market_open}, close: {market_close}")
@@ -135,8 +136,12 @@ class TasksScheduler(CoreScheduler):
             logger.info(f"📅 Setting up regular tasks for today")
             
             # Calculate task times based on market times
-            morning_news_time = market_open - timedelta(minutes=30)  # 30 minutes before market open
-            evening_news_time = market_close + timedelta(minutes=1)  # 1 minute after market close
+            today = datetime.now(self.timezone).date()
+            market_open_dt = datetime.combine(today, market_open)
+            market_close_dt = datetime.combine(today, market_close)
+            
+            morning_news_time = market_open_dt - timedelta(minutes=30)  # 30 minutes before market open
+            evening_news_time = market_close_dt + timedelta(minutes=1)  # 1 minute after market close
             
             # Parse economic calendar time
             economic_calendar_time = self.schedule.DAILY_ECONOMIC_CALENDAR.time
