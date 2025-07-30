@@ -1,9 +1,7 @@
 import requests
-from bs4 import BeautifulSoup
 import asyncio
 import concurrent.futures
-import os
-from utils import logger, read_json_file, write_json_file
+from utils.logger import logger
 
 headers = {
     'accept': '*/*',
@@ -23,21 +21,10 @@ headers = {
 }
 
 
-# Create a session for consistent requests
-session = requests.Session()
-session.headers.update(headers)
-
-def extract_text_from_soup(soup: BeautifulSoup, selector):
-    element = soup.select_one(selector)
-    if element:
-        return element.get_text()
-    else:
-        return None
-
-def get_description(symbol):
+def get_company_info(symbol):
     url = f"https://production.dataviz.cnn.io/quote/profile/{symbol}"
     logger.info(f"Getting description for {symbol} from {url}")
-    response = session.get(url)
+    response = requests.get(url, headers=headers)
     if response.status_code == 200:
         data = response.json()[0]
         wanted_fields = ["symbol", "description", "market_cap", "market_cap_profile", "website_url", "profit_earnings_ratio"]
@@ -47,57 +34,26 @@ def get_description(symbol):
         logger.error(response.status_code)
         return {}
 
-async def get_description_async(symbol):
+async def get_info_async(symbol):
     loop = asyncio.get_event_loop()
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        return await loop.run_in_executor(executor, get_description, symbol)
+        return await loop.run_in_executor(executor, get_company_info, symbol)
 
-async def get_companies_description(companies_symbols):
+async def get_companies_info(companies_symbols):
     descriptions = {}
     for i, symbol in enumerate(companies_symbols):
         # Add delay between requests (except for the first one)
         if i > 0:
             await asyncio.sleep(0.5)  # 0.5 second delay between requests
-        description = await get_description_async(symbol)
+        description = await get_info_async(symbol)
         if description:
             descriptions[symbol] = description
 
     return descriptions
 
-async def main():
-    from ai_tools.chat_gpt import AIInterpreter
-    companies_symbols = ["IREN", "CORZ", "CRWV"]
-    descriptions_path = "companies_descriptions.json"
-    if not os.path.exists(descriptions_path):
-        write_json_file(descriptions_path, {})
-    descriptions = read_json_file(descriptions_path)
-    not_processed_symbols = [symbol for symbol in companies_symbols if symbol not in descriptions]
-
-    logger.info(f"Not processed symbols: {not_processed_symbols}")
-    # input("Press Enter to continue...")
-    for i in range(0, len(not_processed_symbols), 5):
-        chunk = not_processed_symbols[i:i+5]
-        descriptions_async = await get_companies_description(chunk)
-        # update descriptions
-        descriptions.update(descriptions_async)
-        # write to json file
-        write_json_file(descriptions_path, descriptions)
-
-    ai_interpreter = AIInterpreter()
-    first_description = descriptions["IREN"]
-    prompt = f"""
-    You are a financial analyst and journalist.
-    You are given a description of a company.
-    You need to expand what the summary describes. Go in depth what exactly the compny do according to the last information that you have (not just in general), what exactly is it do, who are other compatitor that it has and what is the main product or service it provides.
-    *respond in hebrew*
-    *respond with no intro, headers or subheaders*
-    *use real new line to break the text into paragraphs*
-    """
-    response = ai_interpreter.get_interpretation(f"{str(first_description)} \n {prompt}")
-    print(response)
-    first_description["hebrew_description"] = response
-    write_json_file(descriptions_path, descriptions)
-
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    # asyncio.run(main())
+    symbol = "SPY"
+    description = get_company_info(symbol)
+    print(description)

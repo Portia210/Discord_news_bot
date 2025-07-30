@@ -145,6 +145,7 @@ async def load_cogs():
     
     cogs = [
         "cogs.slash.test_slash",
+        "cogs.slash.stock_info",
         "cogs.slash.notification",
         "cogs.text.hello",
     ]

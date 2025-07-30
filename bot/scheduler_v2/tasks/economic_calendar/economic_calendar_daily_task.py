@@ -56,12 +56,8 @@ async def schedule_economic_calendar_task():
         _remove_existing_economic_jobs(discord_scheduler)
         
         # Schedule alerts for each unique time
-        scheduled_jobs = await _schedule_economic_alerts(unique_times, calendar_data, discord_scheduler)
-        
-        # Send job summary to dev channel
-        if scheduled_jobs:
-            await _send_job_summary(scheduled_jobs, discord_scheduler)
-        
+        await _schedule_economic_alerts(unique_times, calendar_data, discord_scheduler)
+
     except Exception as e:
         logger.error(f"❌ Error in economic calendar task: {e}")
 
@@ -149,26 +145,9 @@ async def _schedule_alert_at_time(time_str: str, calendar_data: pd.DataFrame, di
                     'time': update_time.strftime('%H:%M'),
                     'type': 'update'
                 })
-            
-            if jobs_added:
-                logger.info(f"📅 Scheduled {len(jobs_added)} jobs for {time_str}")
-        
+
     except Exception as e:
         logger.error(f"❌ Error scheduling economic alert for {time_str}: {e}")
     
     return jobs_added
 
-
-async def _send_job_summary(scheduled_jobs, discord_scheduler):
-    """Send job summary to dev channel"""
-    if discord_scheduler and scheduled_jobs:
-        # Create custom summary from scheduled_jobs
-        summary = f"📋 **Economic Event Jobs Scheduled** ({len(scheduled_jobs)} total)\n\n"
-        
-        if scheduled_jobs:
-            summary += "📅 **Scheduled Jobs:**\n"
-            for job in scheduled_jobs:
-                summary += f"  • `{job['id']}` - `{job['time']}` ({job['type']})\n"
-        
-        logger.info(f"📋 Scheduled {len(scheduled_jobs)} economic jobs")
-        await discord_scheduler.send_dev_alert(summary, 0x00ff00, "📋 Economic Event Jobs Scheduled") 

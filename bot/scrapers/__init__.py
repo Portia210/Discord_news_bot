@@ -25,9 +25,9 @@ from .cnbc.cnbc_scraper import (
 
 # Reuters Scraper
 from .company_info import (
-    get_description,
-    get_description_async,
-    get_companies_description
+    get_company_info,
+    get_info_async,
+    get_companies_info
 )
 
 
@@ -50,8 +50,8 @@ __all__ = [
     'get_clean_assets',
     
     # Reuters
-    'get_description',
-    'get_description_async',
-    'get_companies_description',
+    'get_company_info',
+    'get_info_async',
+    'get_companies_info',
 ]
 
