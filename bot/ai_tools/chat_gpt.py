@@ -8,7 +8,7 @@ from config import Config
 
 class AIInterpreter:
     def __init__(self):
-        self.openai_api_key = Config.TOKENS.OPENAI
+        self.openai_api_key = Config.TOKENS.OPENAI_API_KEY
         if not self.openai_api_key:
             logger.error("OpenAI API key not found in environment variables")
         

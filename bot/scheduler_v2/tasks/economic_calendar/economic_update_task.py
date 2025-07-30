@@ -26,7 +26,7 @@ async def economic_update_task(time_str: str):
         scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
         
         # Wait for event data to be published (max 60 seconds)
-        max_wait_time = 60
+        max_wait_time = 30
         wait_time = discord_scheduler.post_event_delay if discord_scheduler else 7
         poll_interval = 1
         

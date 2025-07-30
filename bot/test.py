@@ -1,64 +1,92 @@
-#%%
-
 import requests
+from config import Config
+from db.init_db import init_db
+from db.engine import get_db_sync
+from db.crud import create_symbol, get_symbols
+from db.models import SymbolsList
+from scrapers import get_symbols_list
 
 
-res = requests.get("https://financialmodelingprep.com/api/v3/stock/list?apikey=g6z1o9xxPfKvz9whloFgBvlzafxCLktW")
-
-if res.status_code == 200:
-    res_json = res.json()
-else:
-    print(f"Error: {res.status_code}")
 
 
-#%%
-
-len_of_res_json = len(res_json)
-print(len_of_res_json)
-
-#%%
-
-print(res_json[0])
-# %%
-clean_dict = {}
-for item in res_json:
-    # if only letters in symbol
-    if item["symbol"].isalpha():
-        clean_dict[item["symbol"]] = item
-print(len(clean_dict))
-# sort clean_dict by symbol alphabetically
-clean_dict = dict(sorted(clean_dict.items(), key=lambda item: item[0]))
-
-# %%
-def search_for_symbol(symbol: str, clean_dict: dict):
-    if symbol in clean_dict.keys():
+def populate_symbols_database():
+    """Populate the SymbolsList table with data from the API using bulk operations."""
+    try:
+        # Initialize database
+        print("Initializing database...")
+        init_db()
+        
+        # Get database session
+        db = get_db_sync()
+        
+        # Get symbols from API
+        print("Fetching symbols from API...")
+        symbols_data = get_symbols_list()
+        
+        if not symbols_data:
+            print("Failed to get symbols data from API")
+            return False
+        
+        print(f"Found {len(symbols_data)} symbols to process")
+        
+        # Get existing symbols to avoid duplicates
+        existing_symbols = {s.symbol for s in db.query(SymbolsList.symbol).all()}
+        print(f"Database already contains {len(existing_symbols)} symbols")
+        
+        # Prepare bulk data
+        symbols_to_add = []
+        skipped_count = 0
+        
+        for item in symbols_data:
+            if item["symbol"] in existing_symbols:
+                skipped_count += 1
+                continue
+                
+            # Prepare data for database
+            symbol_data = {
+                "symbol": item["symbol"],
+                "name": item["name"],
+                "exchange": item.get("exchangeShortName", item.get("exchange", "")),
+                "type": item.get("type", ""),
+                "raw_description": item.get("name", ""),
+                "hebrew_description": None
+            }
+            
+            symbols_to_add.append(SymbolsList(**symbol_data))
+        
+        print(f"Prepared {len(symbols_to_add)} symbols for bulk insert")
+        print(f"Skipped {skipped_count} existing symbols")
+        
+        # Bulk insert
+        if symbols_to_add:
+            print("Performing bulk insert...")
+            db.bulk_save_objects(symbols_to_add)
+            db.commit()
+            print(f"Bulk insert completed! Added {len(symbols_to_add)} symbols")
+        else:
+            print("No new symbols to add")
+        
+        db.close()
+        
         return True
-    else:
+        
+    except Exception as e:
+        print(f"Error populating database: {e}")
         return False
+
+
+def main():
+    """Main function to populate the database."""
+    print("Starting database population...")
     
-def search_for_symbols(symbols: list, clean_dict: dict):
-    output_dict = {}
-    for symbol in symbols:
-        output_dict[symbol] = search_for_symbol(symbol, clean_dict)
-    return output_dict
-
-# %%
-
-symbols_to_search = ["SPMO", "SPY", "TQQQ"]
-seach_result = search_for_symbols(symbols_to_search, clean_dict)
-for symbol in symbols_to_search:
-    if seach_result[symbol]:
-        print(clean_dict[symbol])
+    success = populate_symbols_database()
+    
+    if success:
+        print("Database population completed successfully!")
     else:
-        print(f"{symbol} not found")
-# %%
-
-# %%
-# print 10 symbols from clean_dict
-for i in range(100):
-    print(list(clean_dict.keys())[i])
-
-# %%
+        print("Database population failed!")
 
 
-# %%
+if __name__ == "__main__":
+    main()
+

@@ -4,7 +4,8 @@ dotenv.load_dotenv(override=True)
 
 class Tokens():
     DISCORD = os.getenv("DISCORD_TOKEN")
-    OPENAI = os.getenv("OPENAI_API_KEY")
+    OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    FMP_API_KEY = os.getenv("FMP_API_KEY")
 
 class ChannelIds():
     TWEETER_NEWS = 1328615279697330227

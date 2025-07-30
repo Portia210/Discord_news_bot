@@ -11,6 +11,9 @@ from .investing.investing_params import InvestingParams
 from .yf.yf_scraper import YfScraper
 from .yf.yf_params import QouteFields
 
+# Symbols List Scraper
+from .sybmols_list import get_symbols_list
+
 # CNBC Scraper
 from .cnbc.cnbc_scraper import (
     get_cnbc_world_assets,
@@ -21,7 +24,7 @@ from .cnbc.cnbc_scraper import (
 )
 
 # Reuters Scraper
-from .reuters.company_info import (
+from .company_info import (
     get_description,
     get_description_async,
     get_companies_description
