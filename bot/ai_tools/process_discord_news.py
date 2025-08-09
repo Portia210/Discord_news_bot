@@ -23,7 +23,7 @@ async def process_news_to_list(discord_bot: discord.Client, hours_back: int = 24
     def _ai_news_processing(messages: str) -> list[dict]:
         try:
             ai_interpreter = AIInterpreter()
-            news_summary_prompt = read_text_file("ai_tools/prompts/news_summary_hebrew.txt") + "\n".join(messages)
+            news_summary_prompt = read_text_file("ai_tools/prompts/news_summary_hebrew.txt") + "\n".join(messages) + read_text_file("ai_tools/prompts/correct_meanings.txt")
             response = ai_interpreter.get_json_response(news_summary_prompt)
             # response = [
             #     {

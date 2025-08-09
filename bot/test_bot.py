@@ -98,7 +98,7 @@ async def on_ready():
 
 
         news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
-        await news_report.generate_full_json_report("auto", 35)
+        await news_report.generate_full_json_report("auto", 45)
         await news_report.send_report_to_discord(Config.CHANNEL_IDS.MARKET_NEWS, Config.NOTIFICATION_ROLES.NEWS_REPORT)
 
             

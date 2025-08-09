@@ -72,15 +72,8 @@ def populate_symbols_database():
 
 
 def main():
-    """Main function to populate the database."""
-    print("Starting database population...")
-    
-    success = populate_symbols_database()
-    
-    if success:
-        print("Database population completed successfully!")
-    else:
-        print("Database population failed!")
+    from datetime import datetime
+    print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 
 if __name__ == "__main__":

@@ -73,7 +73,14 @@ class NewsReport:
                 discord_bot=self.discord_bot, 
                 hours_back=hours_back
             )
-            logger.info(f"✅ Loaded {len(news_list)} news items")
+            
+            # Sort news by date (oldest first)
+            if news_list:
+                news_list.sort(key=lambda x: x.get('date', ''), reverse=False)
+                logger.info(f"✅ Loaded and sorted {len(news_list)} news items by date")
+            else:
+                logger.info(f"✅ Loaded {len(news_list)} news items")
+                
             return news_list
         except Exception as e:
             logger.error(f"❌ Error loading news data: {e}")
@@ -182,7 +189,7 @@ class NewsReport:
             logger.error(f"❌ Error generating full JSON report: {e}")
             return None
         
-    async def send_report_to_server(self):
+    async def send_report_to_server(self) -> str:
         """
         Send the report to the server.
         """
@@ -203,25 +210,12 @@ class NewsReport:
             # Parse the JSON response
             response_data = response.json()
             link_to_report = response_data.get("link_to_report", "")
-            report_time = self.full_report.get("report_time", "auto")
-            
-            await send_embed_message(
-                self.discord_bot, 
-                Config.CHANNEL_IDS.MARKET_NEWS, 
-                f"📰 **{report_time} News Report**\nEnd of day news summary is ready!\n{link_to_report}", 
-                Config.COLORS.GREEN, 
-                "📰 Evening News Report"
-            )
-            
-            # Send role mention as separate text message
-            news_role = Config.NOTIFICATION_ROLES.NEWS_REPORT
-            await send_mention_message(self.discord_bot, Config.CHANNEL_IDS.MARKET_NEWS, news_role)
-            return response_data
+            return link_to_report
         except Exception as e:
             logger.error(f"❌ Error sending report to server: {e}")
             return None
         
-    async def send_report_to_discord(self, channel_id: int, notification_role):
+    async def send_report_to_discord(self, channel_id: int, notification_role: str):
         """
         Create and send embeds with the report data to Discord
         """
@@ -266,20 +260,32 @@ class NewsReport:
                 if channel:
                     await channel.send(embed=market_embed)
             
+            link_to_report = await self.send_report_to_server()
             # Create news summary embed
             news_data = self.full_report.get("news_data", [])
             if news_data:
                 news_summary = "📰 **חדשות אחרונות:**\n\n"
+                news_summary += f"[קישור לקריאה נוחה של החדשות באתר האינטרנט]({link_to_report})\n\n"
+
                 for i, news in enumerate(news_data, 1):  
                     message = news.get('message', 'N/A')
                     time = news.get('time', 'N/A')
-                    link = news.get('link', '')
+                    links = news.get('links', [])
                     
                     news_summary += f"{i}. {message}"
                     if time != 'N/A':
                         news_summary += f" **({time})**"
-                    if link:
-                        news_summary += f" [קישור]({link})"
+                    
+                    # Handle multiple links
+                    if links:
+                        # New format with multiple links
+                        link_texts = []
+                        for j, link_url in enumerate(links, 1):
+                            if link_url:
+                                link_texts.append(f"[קישור {j}]({link_url})")
+                        if link_texts:
+                            news_summary += f"\n{' | '.join(link_texts)}"  # New line with pipe separator between links
+                    
                     news_summary += "\n\n"
                 
                 

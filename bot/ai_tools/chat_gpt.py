@@ -48,6 +48,7 @@ class AIInterpreter:
             instructions="You are a helpful assistant.",
             max_output_tokens=10000,
             input=prompt,
+            temperature=0.1,  # Low temperature for consistent, factual output
         )
         return response.output_text
     
