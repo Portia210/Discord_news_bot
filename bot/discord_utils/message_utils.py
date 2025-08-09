@@ -4,7 +4,8 @@ Message Utilities for Discord
 
 import discord
 from utils.logger import logger
-from config import Config
+from config_ext import NotificationRole
+from .role_utils import get_role_mention
 
 
 def split_long_message(message: str, max_length: int = 1900) -> list:
@@ -49,7 +50,7 @@ def split_long_message(message: str, max_length: int = 1900) -> list:
     return chunks
 
 
-async def send_message(bot: discord.Client, channel_id: int, message: str, color: int = 0x00ff00, title: str = "📅 Alert", error_context: str = "send_message"):
+async def send_embed_message(bot: discord.Client, channel_id: int, message: str, color: int, title: str, error_context: str = "send_message"):
     """
     Send a message to a specific channel with splitting support
     
@@ -92,37 +93,23 @@ async def send_message(bot: discord.Client, channel_id: int, message: str, color
     except Exception as e:
         logger.error(f"❌ Error sending message to channel {channel_id} in {error_context}: {e}")
         return False
-
-
-async def send_dev_alert(bot: discord.Client, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
-    """
-    Send a message to the dev channel
     
-    Args:
-        bot: Discord bot instance
-        message: Message content
-        color: Embed color (hex)
-        title: Embed title
-    
-    Returns:
-        bool: True if successful, False otherwise
-    """
-    dev_channel_id = Config.CHANNEL_IDS.DEV
-    return await send_message(bot, dev_channel_id, message, color, title, "send_dev_alert")
 
+async def send_mention_message(bot: discord.Client, channel_id: int, notification_role: NotificationRole):
+    """Send a role mention as a separate text message"""
+    try:
+        
+        role_mention = await get_role_mention(bot, notification_role.full_name)
+        
+        if role_mention:
+            channel = bot.get_channel(channel_id)
+            if channel:
+                await channel.send(role_mention)
+            else:
+                logger.error(f"❌ Could not find alert channel: {channel_id}")
+        else:
+            logger.warning(f"⚠️ Could not find role: {notification_role.full_name}")
+    except Exception as e:
+        logger.error(f"❌ Error sending role mention: {e}")
 
-async def send_alert(bot: discord.Client, message: str, color: int = 0x00ff00, title: str = "📅 Alert"):
-    """
-    Send a message to the alert channel
-    
-    Args:
-        bot: Discord bot instance
-        message: Message content
-        color: Embed color (hex)
-        title: Embed title
-    
-    Returns:
-        bool: True if successful, False otherwise
-    """
-    alert_channel_id = Config.CHANNEL_IDS.PYTHON_BOT
-    return await send_message(bot, alert_channel_id, message, color, title, "send_alert") 
+ 

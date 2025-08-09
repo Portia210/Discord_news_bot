@@ -8,16 +8,17 @@ from datetime import datetime
 from utils.logger import logger
 from scrapers import InvestingScraper, InvestingParams, economic_calendar_to_text
 from config import Config
-from discord_utils import send_alert
-from scheduler_v2.global_scheduler import get_discord_scheduler
+from discord_utils import send_embed_message, send_mention_message
+from bot_manager import get_bot
+from scheduler_v2.scheduler_manager import get_scheduler
 
 
 async def economic_update_task(time_str: str):
     """Send post-event update for economic events"""
     try:
-        discord_scheduler = get_discord_scheduler()
-        if not discord_scheduler:
-            logger.error("❌ No DiscordScheduler instance available")
+        bot = get_bot()
+        if not bot:
+            logger.error("❌ No Discord bot instance available")
             return
             
         logger.info(f"📊 Sending post-event update for {time_str}")
@@ -27,6 +28,7 @@ async def economic_update_task(time_str: str):
         
         # Wait for event data to be published (max 60 seconds)
         max_wait_time = 30
+        discord_scheduler = get_scheduler()
         wait_time = discord_scheduler.post_event_delay if discord_scheduler else 7
         poll_interval = 1
         
@@ -69,11 +71,13 @@ async def economic_update_task(time_str: str):
             update_msg += summary_msg
             
             # Send to alert channel
-            await send_alert(discord_scheduler.bot, update_msg, 0x00ff00, "Economic Events Update")
+            await send_embed_message(bot, Config.CHANNEL_IDS.ECONOMIC_CALENDAR, update_msg, Config.COLORS.GREEN, "Economic Events Update")
             
             # Send role mention as separate text message
             economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
-            await discord_scheduler.send_mention_text(economic_role)
+            discord_scheduler = get_scheduler()
+            if discord_scheduler:
+                await discord_scheduler.send_mention_text(economic_role)
             
             logger.info(f"📊 Post-event update sent for {len(current_events)} events at {time_str}")
         else:
@@ -81,11 +85,12 @@ async def economic_update_task(time_str: str):
             
     except Exception as e:
         logger.error(f"❌ Error in economic update task for {time_str}: {e}")
-        discord_scheduler = get_discord_scheduler()
-        if discord_scheduler:
-            await send_alert(
-                discord_scheduler.bot,
+        bot = get_bot()
+        if bot:
+            await send_embed_message(
+                bot,
+                Config.CHANNEL_IDS.ECONOMIC_CALENDAR,
                 f"❌ **Economic Update Failed**\nTime: {time_str}\nError: {str(e)}",
-                0xff0000,
+                Config.COLORS.RED,
                 "📊 Economic Events Update"
             ) 

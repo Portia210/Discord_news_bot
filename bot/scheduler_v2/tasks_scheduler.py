@@ -7,23 +7,23 @@ import pandas as pd
 from utils.logger import logger
 from my_api.market_schedule import get_market_schedule_for_next_quarter
 from .tasks.news_report import (
-    morning_news_report_task,
-    evening_news_report_task
+    news_report_task
 )
 from .tasks.economic_calendar.economic_calendar_daily_task import schedule_economic_calendar_task
 from config import Config
 from .core_scheduler import CoreScheduler
+from .scheduler_manager import set_scheduler
 
 
 class TasksScheduler(CoreScheduler):
     """DiscordScheduler with task management capabilities"""
     
-    def __init__(self, bot, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 3, schedule: Config.SCHEDULE = None):
+    def __init__(self, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 3, schedule: Config.SCHEDULE = None):
         """Initialize TasksScheduler with DiscordScheduler functionality"""
-        super().__init__(bot, alert_channel_id, dev_channel_id, timezone, post_event_delay, schedule)
-        # Ensure the global scheduler points to this TasksScheduler instance
-        from .global_scheduler import set_discord_scheduler
-        set_discord_scheduler(self)
+        super().__init__(alert_channel_id, dev_channel_id, timezone, post_event_delay, schedule)
+        # Ensure the global scheduler points to this instance
+        set_scheduler(self)
+
     
     async def setup_all_tasks(self):
         """Setup all scheduled tasks"""
@@ -46,7 +46,7 @@ class TasksScheduler(CoreScheduler):
             
             if current_time.time() >= setup_time:
                 logger.info(f"🌅 Running economic calendar startup task")
-                await schedule_economic_calendar_task()
+                await self._daily_gatekeeper()
             else:
                 logger.info(f"🌙 Skipping startup task, waiting for daily cron job")
         except Exception as e:
@@ -159,16 +159,18 @@ class TasksScheduler(CoreScheduler):
             
             # Morning news report
             self.add_date_job(
-                func=morning_news_report_task,
+                func=news_report_task,
                 run_date=morning_news_time,
-                job_id="morning_news_report_today"
+                job_id="morning_news_report_today",
+                args=("morning", 17)  # morning report, 17 hours back
             )
             
             # Evening news report
             self.add_date_job(
-                func=evening_news_report_task,
+                func=news_report_task,
                 run_date=evening_news_time,
-                job_id="evening_news_report_today"
+                job_id="evening_news_report_today",
+                args=("evening", 7)  # evening report, 7 hours back
             )
             
             # Economic calendar

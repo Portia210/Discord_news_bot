@@ -4,11 +4,7 @@ from discord.ext import commands
 from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
-from scheduler_v2 import TasksScheduler
-from discord_utils import send_embed_message
-from bot_manager import set_bot
-
-
+from news_pdf.news_report import NewsReport
 
 logger.info(f"REMOTE_SERVER? {REMOTE_SERVER}")
 logger.info(f"ENABLE_PROXY? {ENABLE_PROXY}")
@@ -21,10 +17,9 @@ intents.messages = True
 intents.guilds = True  # Required for slash commands
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# Set global bot instance
-set_bot(bot)
+# Initialize scheduler
+discord_scheduler = None
 
-tasks_scheduler = None
 
 @bot.event
 async def on_application_command_error(ctx, error):
@@ -98,48 +93,20 @@ async def on_ready():
         logger.info(f"🔧 Available slash commands: {slash_commands}")
         logger.info(f"🔧 Available text commands: {text_commands}")
         
+        from discord_utils.message_handler import get_message_handler
+
+
+
+        news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
+        await news_report.generate_full_json_report("auto", 35)
+        await news_report.send_report_to_discord(Config.CHANNEL_IDS.MARKET_NEWS, Config.NOTIFICATION_ROLES.NEWS_REPORT)
+
             
     except Exception as e:
         logger.error(f"❌ Failed to sync commands: {e}")
     
-    try:
-        # Initialize scheduler with task management
-        global tasks_scheduler
-        tasks_scheduler = TasksScheduler(
-            Config.CHANNEL_IDS.PYTHON_BOT, 
-            Config.CHANNEL_IDS.DEV,
-            timezone=Config.TIMEZONES.APP_TIMEZONE,
-            schedule=Config.SCHEDULE
-        )
-        
-        # Setup all tasks
-        await tasks_scheduler.setup_all_tasks()
-        
-        # Start the scheduler
-        tasks_scheduler.start()
-        logger.debug("✅ APScheduler started successfully!")
-        
-        # Send bot startup message to dev channel
-        await send_embed_message(
-            bot,
-            Config.CHANNEL_IDS.DEV,
-            "🚀 **Bot Started Successfully**\n"
-            "🔔 Dev alerts will be sent to this channel\n"
-            "📊 Data alerts will be sent to the main channel",
-            Config.COLORS.GREEN,
-            "🤖 Bot Status"
-        )
-        
-    except Exception as e:
-        logger.error(f"❌ Failed to initialize scheduler: {e}")
-        if tasks_scheduler:
-            await send_embed_message(
-                bot,
-                Config.CHANNEL_IDS.DEV,
-                f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
-                Config.COLORS.RED,
-                "🤖 Bot Status"
-            )
+
+
 
 async def load_cogs():
     """Load all command cogs"""
@@ -149,8 +116,7 @@ async def load_cogs():
         "cogs.slash.test_slash",
         "cogs.slash.stock_info",
         "cogs.slash.notification",
-        "cogs.text.delete_messages",
-        "cogs.text.export",
+        "cogs.text.hello",
     ]
     
     loaded_cogs = []
@@ -169,8 +135,8 @@ async def load_cogs():
 async def cleanup():
     """Cleanup function to stop scheduler gracefully"""
     try:
-        if tasks_scheduler:
-            tasks_scheduler.stop()
+        if discord_scheduler:
+            discord_scheduler.stop()
             logger.info("✅ APScheduler stopped gracefully")
     except Exception as e:
         logger.error(f"❌ Error stopping scheduler: {e}")

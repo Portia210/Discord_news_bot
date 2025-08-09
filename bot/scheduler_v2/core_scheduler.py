@@ -16,17 +16,17 @@ from utils.logger import logger
 from config import Config
 import pytz
 from .job_summary import JobSummary
-from discord_utils import send_dev_alert, send_alert
+from discord_utils import send_embed_message, send_mention_message
 from time import time
-from .global_scheduler import set_discord_scheduler
+from bot_manager import get_bot
 
 
 class CoreScheduler:
     """APScheduler-based scheduler with Discord integration"""
     
-    def __init__(self, bot: discord.Client, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 7, schedule: Config.SCHEDULE = None):
+    def __init__(self, alert_channel_id: int, dev_channel_id: int, timezone: str, post_event_delay: int = 7, schedule: Config.SCHEDULE = None):
         
-        self.bot = bot
+        self.bot = get_bot()
         self.alert_channel_id = alert_channel_id
         self.dev_channel_id = dev_channel_id or Config.CHANNEL_IDS.DEV
         self.timezone = pytz.timezone(timezone)
@@ -90,7 +90,7 @@ class CoreScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, f"✅ **{job_id}** completed successfully", Config.COLORS.GREEN, "🔧 Scheduler Alert")
                     
                     return result
                     
@@ -99,7 +99,7 @@ class CoreScheduler:
                     logger.error(f"Job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, error_msg, 0xff0000)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, error_msg, Config.COLORS.RED, "🔧 Scheduler Alert")
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -155,7 +155,7 @@ class CoreScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, f"✅ **{job_id}** completed successfully", Config.COLORS.GREEN, "🔧 Scheduler Alert")
                     
                     return result
                     
@@ -164,7 +164,7 @@ class CoreScheduler:
                     logger.error(f"One-time job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, error_msg, 0xff0000)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, error_msg, Config.COLORS.RED, "🔧 Scheduler Alert")
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -217,7 +217,7 @@ class CoreScheduler:
                         result = await func()
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, f"✅ **{job_id}** completed successfully", 0x00ff00)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, f"✅ **{job_id}** completed successfully", Config.COLORS.GREEN, "🔧 Scheduler Alert")
                     
                     return result
                     
@@ -226,7 +226,7 @@ class CoreScheduler:
                     logger.error(f"Interval job failed {job_id}: {e}")
                     
                     if send_alert:
-                        await send_dev_alert(self.bot, error_msg, 0xff0000)
+                        await send_embed_message(self.bot, Config.CHANNEL_IDS.DEV, error_msg, Config.COLORS.RED, "🔧 Scheduler Alert")
             
             self.scheduler.add_job(
                 wrapped_func,
@@ -287,10 +287,11 @@ class CoreScheduler:
             summary = self.generate_job_summary()
             logger.info(f"📋 Job Summary:\n{summary}")
             
-            asyncio.create_task(send_dev_alert(
+            asyncio.create_task(send_embed_message(
                 self.bot,
+                Config.CHANNEL_IDS.DEV,
                 summary,
-                0x00ff00,
+                Config.COLORS.GREEN,
                 "🔧 Scheduler Started"
             ))
     
@@ -373,30 +374,3 @@ class CoreScheduler:
         except Exception as e:
             logger.debug(f"Error in job listener: {e}")
 
-    async def send_alert(self, message: str, color: int = 0x00ff00, title: str = "📅 Scheduler Alert"):
-        """Send alert to the main alert channel"""
-        return await send_alert(self.bot, message, color, title)
-    
-    async def send_dev_alert(self, message: str, color: int = 0x00ff00, title: str = "🔧 Dev Alert"):
-        """Send alert to the dev channel"""
-        return await send_dev_alert(self.bot, message, color, title)
-    
-    async def send_mention_text(self, notification_role):
-        """Send a role mention as a separate text message"""
-        try:
-            from discord_utils.role_utils import get_role_mention
-            
-            role_mention = await get_role_mention(self.bot, notification_role.full_name)
-            
-            if role_mention:
-                channel = self.bot.get_channel(self.alert_channel_id)
-                if channel:
-                    await channel.send(role_mention)
-                else:
-                    logger.error(f"❌ Could not find alert channel: {self.alert_channel_id}")
-            else:
-                logger.warning(f"⚠️ Could not find role: {notification_role.full_name}")
-        except Exception as e:
-            logger.error(f"❌ Error sending role mention: {e}")
-
- 

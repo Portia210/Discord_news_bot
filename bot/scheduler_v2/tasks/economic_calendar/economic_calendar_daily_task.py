@@ -11,19 +11,24 @@ from scrapers import InvestingScraper, InvestingParams, economic_calendar_to_tex
 from config import Config
 from .economic_warning_task import economic_warning_task
 from .economic_update_task import economic_update_task
-from discord_utils import send_alert
-from scheduler_v2.global_scheduler import get_discord_scheduler
+from discord_utils import send_embed_message
+from bot_manager import get_bot
+from scheduler_v2.scheduler_manager import get_scheduler
 
 
 async def schedule_economic_calendar_task():
     """Execute the economic calendar task"""
     try:
-        discord_scheduler = get_discord_scheduler()
+        bot = get_bot()
+        discord_scheduler = get_scheduler()
+        if not bot:
+            logger.error("❌ No Discord bot instance available")
+            return
+            
         if not discord_scheduler:
-            logger.error("❌ No DiscordScheduler instance available")
+            logger.error("❌ No TasksScheduler instance available")
             return
         
-
             
         logger.info("📊 Fetching economic calendar...")
         
@@ -43,7 +48,7 @@ async def schedule_economic_calendar_task():
             return
         
         # Send initial summary to alert channel
-        await _send_initial_summary(calendar_data, discord_scheduler)
+        await _send_tasks_initial_summary(calendar_data, bot, discord_scheduler)
         
         # Extract unique times from DataFrame
         unique_times: Set[str] = set()
@@ -62,13 +67,13 @@ async def schedule_economic_calendar_task():
         logger.error(f"❌ Error in economic calendar task: {e}")
 
 
-async def _send_initial_summary(calendar_data: pd.DataFrame, discord_scheduler):
+async def _send_tasks_initial_summary(calendar_data: pd.DataFrame, bot, discord_scheduler):
     """Send initial calendar summary to alert channel"""
     try:
         summary_msg = economic_calendar_to_text(calendar_data)
         
         # Send to alert channel using send_message
-        await send_alert(discord_scheduler.bot, summary_msg, 0x00ff00, "Economic Events For Today")
+        await send_embed_message(bot, Config.CHANNEL_IDS.ECONOMIC_CALENDAR, summary_msg, Config.COLORS.GREEN, "Economic Events For Today")
         
         # Send role mention as separate text message
         economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR

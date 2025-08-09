@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from config_ext import NotificationRoles, Tokens, ChannelIds, UserIds, Language, Schedule
+from config_ext import NotificationRoles, Tokens, ChannelIds, UserIds, Language, Schedule, Colors
 
 # Load environment variables from .env file
 load_dotenv(override=True)
@@ -44,3 +44,4 @@ class Config:
     LANGUAGE = Language
     NOTIFICATION_ROLES = NotificationRoles
     SCHEDULE = Schedule
+    COLORS = Colors

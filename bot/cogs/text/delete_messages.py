@@ -6,8 +6,8 @@ class CleanCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.command(name="clean", description="Clean messages from the channel")
-    async def clean(self, ctx, amount: int = 20):
+    @commands.command(name="delete", description="Delete messages from the channel")
+    async def delete_messages(self, ctx, amount: int = 20):
         if not ctx.author.guild_permissions.administrator:
             await ctx.send("You don't have permission to use this command!")
             return
