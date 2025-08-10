@@ -3,6 +3,7 @@ import os
 from utils.logger import logger
 from utils.read_write import read_json_file
 from config import Config
+import json
 
 # Create Blueprint for view routes
 views_bp = Blueprint('views', __name__)

@@ -23,28 +23,34 @@
         </div>
         
         <!-- Price Symbols Section -->
-        {% if price_symbols %}
+        {% if categorized_prices %}
         <div class="price-symbols">
-            <div class="symbols-container">
-                {% for symbol in price_symbols %}
-                <div class="symbol-item" id="symbol-{{ loop.index }}">
-                    <div class="symbol-main">
-                        <div class="symbol-price-section">
-                            <div class="symbol-price">{{ symbol.price|default('$0.00') }}</div>
-                            <div class="symbol-change">
-                                <span class="change-amount {{ 'positive' if symbol.is_positive else 'negative' }}">{{ symbol.change_amount|default('0.00') }}</span>
-                                <span class="change-percent {{ 'positive' if symbol.is_positive else 'negative' }}">({{ symbol.change_percent|default('0.00%') }})</span>
-                                <span class="change-arrow {{ 'up' if symbol.is_positive else 'down' }}">{{ '↗' if symbol.is_positive else '↘' }}</span>
+            {% for category_type, symbols in categorized_prices.items() %}
+            <div class="category-section">
+                <h2 class="category-title">{{ category_type|title }}</h2>
+                
+                <div class="symbols-container">
+                    {% for symbol in symbols %}
+                    <div class="symbol-item" id="symbol-{{ loop.index }}">
+                        <div class="symbol-main">
+                            <div class="symbol-price-section">
+                                <div class="symbol-price">{{ symbol.price|default('N/A') }}</div>
+                                <div class="symbol-change">
+                                    <span class="change-amount {{ 'positive' if symbol.is_positive else 'negative' }}">{{ symbol.abs_change|default('N/A') }}</span>
+                                    <span class="change-percent {{ 'positive' if symbol.is_positive else 'negative' }}">({{ symbol.percent_change|default('N/A') }})</span>
+                                    <span class="change-arrow {{ 'up' if symbol.is_positive else 'down' }}">{{ '↗' if symbol.is_positive else '↘' }}</span>
+                                </div>
+                            </div>
+                            <div class="symbol-info">
+                                <div class="symbol-ticker">{{ symbol.name|default('N/A') }}</div>
+                                <div class="symbol-company">{{ symbol.ticker|default('N/A') }}</div>
                             </div>
                         </div>
-                        <div class="symbol-info">
-                            <div class="symbol-ticker">{{ symbol.ticker|default('N/A') }}</div>
-                            <div class="symbol-company">{{ symbol.company|default('N/A') }}</div>
-                        </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
+            {% endfor %}
         </div>
         {% endif %}
         
@@ -55,9 +61,13 @@
                     <div class="news-item">
                         <div class="news-header">
                             <div class="news-time">{{ item.time|default('') }}</div>
-                            {% if item.link %}
-                            <a href="{{ item.link }}" class="news-link" target="_blank">צפה במקור</a>
-                            {% endif %}
+                            <div class="news-links">
+                                {% if item.links %}
+                                    {% for link in item.links %}
+                                        <a href="{{ link }}" class="news-link" target="_blank">קישור {{ loop.index }}</a>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
                         </div>
                         <div class="news-message">{{ item.message|default('') }}</div>
                     </div>
