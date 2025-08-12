@@ -14,7 +14,7 @@ def get_weekday_for_date(date: str):
 
 async def get_market_schedule_for_dates_range(start_date: str, end_date: str, target_tz, source_tz='America/New_York')-> pd.DataFrame:
     """returns dataframe with date and delta_hours"""
-    scraper = InvestingScraper()
+    scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY, timezone=Config.TIMEZONES.APP_TIMEZONE)
     holiday_df = await scraper.get_calendar("holiday_calendar", 
                                 InvestingParams.TIME_RANGES.CUSTOM, 
                                 importance= InvestingParams.IMPORTANCE.APP_IMPORTANCES,
