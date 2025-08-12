@@ -154,12 +154,13 @@ class NewsReport:
                 "price": company.get(qf.REGULAR_MARKET_PRICE)["fmt"],
                 "abs_change": company.get(qf.REGULAR_MARKET_CHANGE)["fmt"],
                 "percent_change": company.get(qf.REGULAR_MARKET_CHANGE_PERCENT)["fmt"],
-                "is_positive": float(company.get(qf.REGULAR_MARKET_CHANGE)["fmt"]) > 0
+                "is_positive": float(company.get(qf.REGULAR_MARKET_CHANGE)["raw"]) > 0
             }
             
             return symbol_data
             
         except Exception as e:
+            logger.error(f"❌ Error processing market summary: {json.dumps(company, indent=4)}")
             logger.error(f"❌ Error processing market summary: {e}")
             return None
     

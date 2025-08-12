@@ -35,5 +35,28 @@ class QouteFields:
     UNDERLYING_SYMBOL = "underlyingSymbol"
     STOCK_STORY = "stockStory"
 
+class QuoteSummaryModules:
+    ASSET_PROFILE = "assetProfile"
+    SEC_FILINGS = "secFilings"
+    CALENDAR_EVENTS = "calendarEvents"
+    PRICE = "price"
+    SUMMARY_DETAIL = "summaryDetail"
+    PAGE_VIEWS = "pageViews"
+    FINANCIALS_TEMPLATE = "financialsTemplate"
+    QUOTE_UNADJUSTED_PERFORMANCE_OVERVIEW = "quoteUnadjustedPerformanceOverview"
+    
+    # Default modules for comprehensive quote summary
+    DEFAULT_MODULES = [
+        ASSET_PROFILE,
+        SEC_FILINGS,
+        CALENDAR_EVENTS,
+        PRICE,
+        SUMMARY_DETAIL,
+        PAGE_VIEWS,
+        FINANCIALS_TEMPLATE,
+        QUOTE_UNADJUSTED_PERFORMANCE_OVERVIEW
+    ]
+
 class YfParams:
     QOUTE_FIELDS = QouteFields
+    QUOTE_SUMMARY_MODULES = QuoteSummaryModules

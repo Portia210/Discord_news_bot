@@ -1,6 +1,6 @@
 from scrapers.yf.yf_headers import headers
 import requests
-from scrapers.yf.yf_params import QouteFields as qf
+from scrapers.yf.yf_params import QouteFields as qf, QuoteSummaryModules as qsm
 
 
 class YfScraper:
@@ -84,6 +84,40 @@ class YfScraper:
 
         return self.make_request()
     
+    def get_quote_summary(self, symbol: str, modules: list[str] = None):
+        """
+        Get detailed quote summary for a specific symbol with various modules
+        
+        Args:
+            symbol: Stock symbol (e.g., 'NVO')
+            modules: List of modules to include. Default includes:
+                - assetProfile: Company profile information
+                - secFilings: SEC filings data
+                - calendarEvents: Earnings and events calendar
+                - price: Current price data
+                - summaryDetail: Summary statistics
+                - pageViews: Page view metrics
+                - financialsTemplate: Financial data template
+                - quoteUnadjustedPerformanceOverview: Performance data
+        """
+        self.url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}"
+        self.method = "GET"
+        
+        if modules is None:
+            modules = qsm.DEFAULT_MODULES
+        
+        self.params = {
+            "formatted": "true",
+            "modules": ",".join(modules),
+            "enablePrivateCompany": "true",
+            "overnightPrice": "true",
+            "lang": "en-US",
+            "region": "US",
+            "crumb": "X7OMi/Fe4nm"
+        }
+
+        return self.make_request()
+    
     def get_market_summary(self):
         self.url = "https://query1.finance.yahoo.com/v6/finance/quote/marketSummary"
         self.method = "GET"
@@ -106,15 +140,9 @@ if __name__ == "__main__":
     import os
     from utils import write_json_file, convert_iso_time_to_datetime
     from news_pdf.news_report import NewsReport
+    from utils import write_json_file
     yfr = YfScraper()
 
-    res = yfr.get_market_time()
-    open_time = res["finance"]["marketTimes"][0]["marketTime"][0]["open"]
-    print(open_time)
-    open_time = convert_iso_time_to_datetime(open_time, Config.TIMEZONES.APP_TIMEZONE)
-    print(open_time)
-
-
-    # os.makedirs("data/yf", exist_ok=True)
-    # write_json_file("data/yf/market_time.json", res)
-    
+    res = yfr.get_quote_summary("IREN")
+    write_json_file( "data/yf/iren.json", res)
+    # print(json.dumps(res["quoteSummary"]["result"][0], indent=4))
