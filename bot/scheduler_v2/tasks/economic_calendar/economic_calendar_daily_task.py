@@ -11,7 +11,7 @@ from scrapers import InvestingScraper, InvestingParams, economic_calendar_to_tex
 from config import Config
 from .economic_warning_task import economic_warning_task
 from .economic_update_task import economic_update_task
-from discord_utils import send_embed_message
+from discord_utils import send_embed_message, send_mention_message
 from bot_manager import get_bot
 from scheduler_v2.scheduler_manager import get_scheduler
 
@@ -70,6 +70,11 @@ async def schedule_economic_calendar_task():
 async def _send_tasks_initial_summary(calendar_data: pd.DataFrame, bot, discord_scheduler):
     """Send initial calendar summary to alert channel"""
     try:
+        bot = get_bot()
+        if not bot:
+            logger.error("❌ No Discord bot instance available")
+            return
+        
         summary_msg = economic_calendar_to_text(calendar_data)
         
         # Send to alert channel using send_message
@@ -77,7 +82,7 @@ async def _send_tasks_initial_summary(calendar_data: pd.DataFrame, bot, discord_
         
         # Send role mention as separate text message
         economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
-        await discord_scheduler.send_mention_text(economic_role)
+        await send_mention_message(bot, Config.CHANNEL_IDS.ECONOMIC_CALENDAR, economic_role)
 
         logger.debug(f"📊 Sent initial calendar summary")
     except Exception as e:

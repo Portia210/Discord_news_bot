@@ -36,9 +36,7 @@ async def economic_warning_task(time_str: str, time_events: pd.DataFrame):
         
         # Send role mention as separate text message
         economic_role = Config.NOTIFICATION_ROLES.ECONOMIC_CALENDAR
-        discord_scheduler = get_scheduler()
-        if discord_scheduler:
-            await discord_scheduler.send_mention_text(economic_role)
+        await send_mention_message(bot, Config.CHANNEL_IDS.ECONOMIC_CALENDAR, economic_role)
         
         logger.info(f"⚠️ 5-minute warning sent for {len(time_events)} events at {time_str}")
         

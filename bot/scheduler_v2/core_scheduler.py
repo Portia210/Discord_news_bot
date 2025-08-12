@@ -140,6 +140,27 @@ class CoreScheduler:
             send_alert: Whether to send Discord alert
         """
         try:
+            # Check if run_date is in the past
+            current_time = datetime.now(self.timezone)
+            if hasattr(run_date, 'replace') and hasattr(run_date, 'tzinfo'):
+                # run_date is a datetime object
+                if run_date.tzinfo is None:
+                    run_date = self.timezone.localize(run_date)
+                if run_date <= current_time:
+                    logger.info(f"⏰ Skipping past job {job_id} (scheduled for {run_date.strftime('%H:%M')})")
+                    return False
+            elif isinstance(run_date, str):
+                # run_date is a string, try to parse it
+                try:
+                    parsed_date = datetime.fromisoformat(run_date.replace('Z', '+00:00'))
+                    if parsed_date.tzinfo is None:
+                        parsed_date = self.timezone.localize(parsed_date)
+                    if parsed_date <= current_time:
+                        logger.info(f"⏰ Skipping past job {job_id} (scheduled for {parsed_date.strftime('%H:%M')})")
+                        return False
+                except ValueError:
+                    pass  # Continue with original logic if parsing fails
+            
             async def wrapped_func():
                 try:
                     # Remove one-time jobs from summary when they start

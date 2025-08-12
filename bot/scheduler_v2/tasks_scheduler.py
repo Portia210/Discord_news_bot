@@ -43,12 +43,19 @@ class TasksScheduler(CoreScheduler):
         try:
             current_time = datetime.now(self.timezone)
             setup_time = self.schedule.DAILY_SETUP.time
+            economic_calendar_time = self.schedule.DAILY_ECONOMIC_CALENDAR.time
             
+            # Run daily gatekeeper if past setup time
             if current_time.time() >= setup_time:
-                logger.info(f"🌅 Running economic calendar startup task")
+                logger.info(f"🌅 Running daily gatekeeper startup task")
                 await self._daily_gatekeeper()
-            else:
-                logger.info(f"🌙 Skipping startup task, waiting for daily cron job")
+            
+            # Run economic calendar task if past scheduled time
+            if current_time.time() >= economic_calendar_time:
+                logger.info(f"📊 Running economic calendar task on startup (past scheduled time)")
+                await schedule_economic_calendar_task()
+            elif current_time.time() < setup_time:
+                logger.info(f"🌙 Skipping startup tasks, waiting for daily cron job")
         except Exception as e:
             logger.error(f"❌ Error in startup setup: {str(e)}")
             raise
@@ -84,7 +91,7 @@ class TasksScheduler(CoreScheduler):
             
             # Get market schedule
             market_schedule = await get_market_schedule_for_next_quarter(Config.TIMEZONES.APP_TIMEZONE)
-            today_date = datetime.now().strftime("%Y-%m-%d")
+            today_date = datetime.now(self.timezone).strftime("%Y-%m-%d")
             
             if today_date not in market_schedule['date'].values:
                 logger.info("🚨 Today is not a market day - skipping tasks")
@@ -96,7 +103,7 @@ class TasksScheduler(CoreScheduler):
             market_close = datetime.strptime(today_data["close_time"], "%H:%M").time() if today_data["close_time"] is not None else None
             
             # Check if today is a holiday
-            if pd.notna(today_data.get('holiday')):
+            if today_data.get('holiday') is not None:
                 logger.info(f"🏖️ Holiday detected: {today_data.get('holiday', 'Unknown holiday')}")
                 if market_open is None:
                     await self._setup_full_holiday_tasks()
@@ -137,8 +144,8 @@ class TasksScheduler(CoreScheduler):
             
             # Calculate task times based on market times
             today = datetime.now(self.timezone).date()
-            market_open_dt = datetime.combine(today, market_open)
-            market_close_dt = datetime.combine(today, market_close)
+            market_open_dt = self.timezone.localize(datetime.combine(today, market_open))
+            market_close_dt = self.timezone.localize(datetime.combine(today, market_close))
             
             morning_news_time = market_open_dt - timedelta(minutes=30)  # 30 minutes before market open
             evening_news_time = market_close_dt + timedelta(minutes=1)  # 1 minute after market close
@@ -155,7 +162,6 @@ class TasksScheduler(CoreScheduler):
             logger.info(f"📋 DAILY TASKS SCHEDULED:")
             logger.info(f"   🌅 Morning news report: {morning_news_time.strftime('%H:%M')}")
             logger.info(f"   🌙 Evening news report: {evening_news_time.strftime('%H:%M')}")
-            logger.info(f"   📊 Economic calendar: {economic_calendar_datetime.strftime('%H:%M')}")
             
             # Morning news report
             self.add_date_job(
@@ -174,6 +180,7 @@ class TasksScheduler(CoreScheduler):
             )
             
             # Economic calendar
+            logger.info(f"   📊 Economic calendar: {economic_calendar_datetime.strftime('%H:%M')}")
             self.add_date_job(
                 func=schedule_economic_calendar_task,
                 run_date=economic_calendar_datetime,
