@@ -13,7 +13,7 @@ from .investing_params import InvestingParams
 import asyncio
 
 class InvestingScraper:
-    def __init__(self, proxy=None, timezone=None):
+    def __init__(self, proxy=None, timezone:str=Config.TIMEZONES.APP_TIMEZONE):
         self.headers = read_json_file(f'scrapers/investing/investing_headers.json')
         self.proxy = proxy
         self.timezone = timezone
@@ -107,15 +107,12 @@ class InvestingScraper:
             return datetime.strptime(date, "%d.%m.%Y").strftime("%Y-%m-%d")
         return date
     
-    def _process_holidays_data(self, holiday_data:pd.DataFrame):
+    def _process_holidays_calendar(self, holiday_data:pd.DataFrame):
         holiday_data['time'] = None
         
         for idx, event in holiday_data.iterrows():
             try:
-                # Use self.timezone if available, otherwise fall back to config
-                target_timezone = self.timezone if self.timezone else Config.TIMEZONES.APP_TIMEZONE
-                
-                hours_offset = get_time_delta_for_date(event["date"], target_timezone, Config.TIMEZONES.EASTERN_US)["delta_hours"]
+                hours_offset = get_time_delta_for_date(event["date"], self.timezone, Config.TIMEZONES.EASTERN_US)["delta_hours"]
                 
                 if "שעת סגירה מוקדמת" in event["holiday"]:
                     time_match = re.search(r'(\d{1,2}:\d{2})', event["holiday"])
@@ -173,7 +170,7 @@ class InvestingScraper:
             df['date'] = df['date'].apply(self._adjust_date_format)
 
             if page_name == "holiday_calendar":
-                df = self._process_holidays_data(df)
+                df = self._process_holidays_calendar(df)
                 pass
             if save_data:
                 now_timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S_%f") # with microseconds
@@ -236,18 +233,6 @@ if __name__ == "__main__":
             date_from="2025-01-01",
             date_to="2025-12-31",
             save_data=True)
-
-
-
-
-
-
-
-    
-    holidays_data = asyncio.run(get_holidays_data(scraper))
-
-
-
 
 
 
