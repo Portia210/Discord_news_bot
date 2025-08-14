@@ -35,7 +35,7 @@ class NewsReport:
     def _load_summary_symbols(self) -> dict:
         """Load symbols configuration from JSON file and flatten it"""
         try:
-            config = read_json_file("news_pdf/symbols_config.json")
+            config = read_json_file("report_generator/symbols_config.json")
             
             # Filter and flatten the config
             flattened_config = {}

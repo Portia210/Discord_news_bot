@@ -139,7 +139,7 @@ if __name__ == "__main__":
     from config import Config
     import os
     from utils import write_json_file, convert_iso_time_to_datetime
-    from news_pdf.news_report import NewsReport
+    from report_generator.news_report import NewsReport
     from utils import write_json_file
     yfr = YfScraper()
 

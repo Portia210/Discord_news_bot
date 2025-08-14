@@ -41,7 +41,7 @@ class PdfReportGenerator:
         }
     }
     
-    def __init__(self, discord_bot: discord.Client, template_file="news_pdf/template.html"):
+    def __init__(self, discord_bot: discord.Client, template_file="report_generator/template.html"):
         """
         Initialize the PdfReportGenerator.
         
@@ -58,9 +58,9 @@ class PdfReportGenerator:
         """Validate that required files exist."""
         required_files = [
             self.template_file,
-            "news_pdf/style/style.css",
-            "news_pdf/style/morning.css", 
-            "news_pdf/style/evening.css"
+            "report_generator/style/style.css",
+            "report_generator/style/morning.css", 
+            "report_generator/style/evening.css"
         ]
         
         missing_files = []
@@ -229,7 +229,7 @@ class PdfReportGenerator:
     
  
     
-    async def generate_pdf_report(self, output_pdf: str = "news_pdf/output.pdf", report_time: str = 'auto', 
+    async def generate_pdf_report(self, output_pdf: str = "report_generator/output.pdf", report_time: str = 'auto', 
                                 hours_back: int = 24) -> bool:
         """
         Generate a complete PDF report from news data with price symbols.
@@ -273,7 +273,7 @@ class PdfReportGenerator:
             
             # Step 5: Save HTML file
             try:
-                html_file_path = "news_pdf/output.html"
+                html_file_path = "report_generator/output.html"
                 write_text_file(html_file_path, html_content)
                 logger.info(f"✅ HTML file saved: {html_file_path}")
             except Exception as e:

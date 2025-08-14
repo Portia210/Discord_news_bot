@@ -4,7 +4,7 @@ from discord.ext import commands
 from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
-from news_pdf.news_report import NewsReport
+from report_generator.news_report import NewsReport
 
 logger.info(f"REMOTE_SERVER? {REMOTE_SERVER}")
 logger.info(f"ENABLE_PROXY? {ENABLE_PROXY}")

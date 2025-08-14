@@ -4,7 +4,7 @@ News Report Task - Generates and sends news reports (morning/evening)
 
 from typing import Any
 from utils.logger import logger
-from news_pdf.news_report import NewsReport
+from report_generator.news_report import NewsReport
 from discord_utils.send_file import send_file
 from config import Config
 from discord_utils import send_embed_message, send_mention_message

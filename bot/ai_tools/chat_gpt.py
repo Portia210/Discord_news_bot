@@ -79,4 +79,4 @@ if __name__ == "__main__":
 
     news_summary_prompt = read_text_file("ai_tools/prompts/news_summary_hebrew.txt") + messages
     response = ai_interpreter.get_json_response(news_summary_prompt)
-    write_json_file("news_pdf/news_data.json", response)
+    write_json_file("report_generator/news_data.json", response)
