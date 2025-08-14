@@ -1,0 +1,76 @@
+{
+    "categories": [
+        {
+            "category_type": "index_futures",
+            "category_hebrew_type": "חוזים עתידיים מדדים",
+            "symbols": {
+                "ES=F": {
+                    "name": "S&P 500"
+                },
+                "NQ=F": {
+                    "name": "Nasdaq"
+                },
+                "YM=F": {
+                    "name": "Dow Jones"
+                },
+                "RTY=F": {
+                    "name": "Russell 2000"
+                }
+            }
+        },
+        {
+            "category_type": "index",
+            "category_hebrew_type": "מדדים",
+            "symbols": {
+                "^GSPC": {
+                    "name": "S&P 500"
+                },
+                "^IXIC": {
+                    "name": "Nasdaq"
+                },
+                "^DJI": {
+                    "name": "Dow Jones"
+                },
+                "^RUT": {
+                    "name": "Russell 2000"
+                }
+            }
+        },
+        {
+            "category_type": "commodity",
+            "category_hebrew_type": "סחורות",
+            "symbols": {
+                "GC=F": {
+                    "name": "Gold"
+                },
+                "SI-F": {
+                    "name": "Silver"
+                },
+                "CL=F": {
+                    "name": "Crude Oil"
+                },
+                "NG=F": {
+                    "name": "Natural Gas"
+                }
+            }
+        },
+        {
+            "category_type": "crypto",
+            "category_hebrew_type": "קריפטו",
+            "symbols": {
+                "BTC-USD": {
+                    "name": "Bitcoin"
+                },
+                "ETH-USD": {
+                    "name": "Ethereum"
+                },
+                "SOL-USD": {
+                    "name": "Solana"
+                },
+                "XRP-USD": {
+                    "name": "XRP"
+                }
+            }
+        }
+    ]
+}

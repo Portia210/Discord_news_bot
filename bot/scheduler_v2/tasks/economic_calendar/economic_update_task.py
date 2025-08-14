@@ -24,7 +24,7 @@ async def economic_update_task(time_str: str):
         logger.info(f"📊 Sending post-event update for {time_str}")
         
         # Initialize scraper
-        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
+        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY, timezone=discord_scheduler.timezone)
         
         # Wait for event data to be published (max 60 seconds)
         max_wait_time = 30

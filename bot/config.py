@@ -9,6 +9,15 @@ REMOTE_SERVER = True if os.getenv("REMOTE_SERVER") == "true" else False
 ENABLE_PROXY = True if os.getenv("ENABLE_PROXY") == "true" else False
 
 
+class NewsProcessorConfig:
+    """Configuration for news processing pipeline."""
+    EMBEDDING_MODEL = "text-embedding-3-small"
+    SUMMARIZATION_MODEL = "gpt-4o-mini"
+    SIMILARITY_THRESHOLD = 0.85
+    MIN_CLUSTER_SIZE = 2
+    TOP_N_CLUSTERS = 10
+
+
 
 
 class Proxy():
@@ -45,3 +54,4 @@ class Config:
     NOTIFICATION_ROLES = NotificationRoles
     SCHEDULE = Schedule
     COLORS = Colors
+    NEWS_PROCESSOR = NewsProcessorConfig

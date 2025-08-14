@@ -33,7 +33,7 @@ async def schedule_economic_calendar_task():
         logger.info("📊 Fetching economic calendar...")
         
         # Get calendar data using InvestingDataScraper
-        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY)
+        scraper = InvestingScraper(proxy=Config.PROXY.APP_PROXY, timezone=discord_scheduler.timezone)
         calendar_data = await scraper.get_calendar(
             calendar_name=InvestingParams.CALENDARS.ECONOMIC_CALENDAR,
             current_tab=InvestingParams.TIME_RANGES.TODAY,

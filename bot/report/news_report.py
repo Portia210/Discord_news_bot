@@ -6,7 +6,7 @@ A class-based system for generating HTML and PDF news reports with theme support
 
 import json
 from datetime import datetime
-from utils.logger import logger
+from utils import logger, read_json_file
 from scrapers import YfScraper, QouteFields as qf
 import pytz
 import discord
@@ -29,15 +29,32 @@ class NewsReport:
         self.discord_bot = discord_bot
         self.timezone = pytz.timezone(timezone)
         self.yf_requests = YfScraper()
-        self.symbols_config = self._load_symbols_config()
+        self.summary_symbols = self._load_summary_symbols()
         self.full_report = None
     
-    def _load_symbols_config(self) -> dict:
-        """Load symbols configuration from JSON file"""
+    def _load_summary_symbols(self) -> dict:
+        """Load symbols configuration from JSON file and flatten it"""
         try:
-            with open("news_pdf/symbols_config.json", "r") as f:
-                config = json.load(f)
-            return config
+            config = read_json_file("news_pdf/symbols_config.json")
+            
+            # Filter and flatten the config
+            flattened_config = {}
+            allowed_types = ["index", "commodity", "crypto"]
+            
+            for category in config.get("categories", []):
+                category_type = category.get("category_type")
+                category_hebrew_type = category.get("category_hebrew_type")
+                
+                if category_type in allowed_types:
+                    symbols = category.get("symbols", {})
+                    for symbol, symbol_data in symbols.items():
+                        flattened_config[symbol] = {
+                            "name": symbol_data["name"],
+                            "type": category_type,
+                            "hebrew_type": category_hebrew_type
+                        }
+            
+            return flattened_config
         except Exception as e:
             logger.error(f"❌ Error loading symbols config: {e}")
             return {}
@@ -97,42 +114,62 @@ class NewsReport:
         try:
             yfr = YfScraper()
             # Group symbols by type
-
-            all_symbols = [symbol for symbol, data in self.symbols_config.items() if data["type"] in ["index", "commodity", "crypto"]]
-            res = yfr.get_quote(symbols= all_symbols)
+            all_symbols = list(self.summary_symbols.keys())
+            
+            if not all_symbols:
+                logger.error(f"❌ No symbols loaded from config. Summary symbols: {self.summary_symbols}")
+                return {"categories": []}
+            
+            logger.info(f"✅ Loading market data for {len(all_symbols)} symbols: {all_symbols}")
+            res = yfr.get_quote(symbols=all_symbols)
             if res is None:
                 logger.error(f"❌ Error loading market summary: {res}")
-                return []
+                return {"categories": []}
             return self._process_market_summary(res)
             
         except Exception as e:
             logger.error(f"❌ Error loading market summary: {e}")
-            return []
+            return {"categories": []}
             
     def _process_market_summary(self, res: dict) -> dict:
-        # Group symbols by type
-        categorized_data = {}
+        # Create structure similar to symbols_config.json
+        categorized_data = {
+            "categories": []
+        }
+        
+        # Group symbols by type first
+        symbols_by_type = {}
         
         for symbol_result in res["quoteResponse"]["result"]:
             try:
                 data_processed = self._process_symbol_data(symbol_result)
                 if data_processed is not None:
                     symbol = data_processed["ticker"]
-                    if symbol not in self.symbols_config:
+                    if symbol not in self.summary_symbols:
                         logger.error(f"❌ Symbol {symbol} not found in symbols config")
                         continue
                     
-                    data_processed["name"] = self.symbols_config[symbol]["name"]
-                    symbol_type = self.symbols_config[symbol]["type"]
+                    data_processed["name"] = self.summary_symbols[symbol]["name"]
+                    symbol_type = self.summary_symbols[symbol]["type"]
+                    symbol_hebrew_type = self.summary_symbols[symbol]["hebrew_type"]
                     data_processed["type"] = symbol_type
-                    
-                    # Add to appropriate category
-                    if symbol_type not in categorized_data:
-                        categorized_data[symbol_type] = []
-                    categorized_data[symbol_type].append(data_processed)
+                    data_processed["hebrew_type"] = symbol_hebrew_type
+
+                    # Group by type
+                    if symbol_type not in symbols_by_type:
+                        symbols_by_type[symbol_type] = {
+                            "category_type": symbol_type,
+                            "category_hebrew_type": symbol_hebrew_type,
+                            "symbols": []
+                        }
+                    symbols_by_type[symbol_type]["symbols"].append(data_processed)
                     
             except Exception as e:
                 print(f"Error processing symbol {symbol_result}: {e}")
+        
+        # Convert to final structure
+        for category_data in symbols_by_type.values():
+            categorized_data["categories"].append(category_data)
         
         return categorized_data
 
@@ -183,8 +220,9 @@ class NewsReport:
                 "generation_time": datetime.now(self.timezone).strftime("%Y-%m-%d %H:%M:%S"),
                 "report_time": report_time,
                 "news_data": news_data,
-                "categorized_prices": categorized_prices,
+                "market_summary_prices": categorized_prices,
             }
+            logger.info(json.dumps(self.full_report, indent=4))
             return self.full_report
         except Exception as e:
             logger.error(f"❌ Error generating full JSON report: {e}")
@@ -227,7 +265,7 @@ class NewsReport:
         
             
             # Create market data summary embed with inline fields
-            categorized_prices = self.full_report.get("categorized_prices", {})
+            categorized_prices = self.full_report.get("market_summary_prices", {})
             if categorized_prices:
                 # Create embed
                 market_embed = discord.Embed(
@@ -235,19 +273,22 @@ class NewsReport:
                     color=Config.COLORS.GREEN
                 )
                 
-                # Category headers mapping
-                category_headers = {
-                    "index": "📈 **מדדים**",
-                    "index_futures": "📈 **חוזים עתידיים מדדים**",
-                    "commodity": "💎 **סחורות**", 
-                    "crypto": "🚀 **קריפטו**"
+                # Emoji mappings for categories
+                category_emojis = {
+                    "index": "📈",
+                    "index_futures": "📈",
+                    "commodity": "💎", 
+                    "crypto": "🚀"
                 }
                 
                 # Process each category
-                for category_type, symbols in categorized_prices.items():
+                for category in categorized_prices.get("categories", []):
+                    symbols = category.get("symbols", [])
                     if symbols:  # Only process if category has symbols
-                        # Add category header
-                        header = category_headers.get(category_type, f"**{category_type.title()}**")
+                        category_type = category.get("category_type")
+                        hebrew_type = category.get("category_hebrew_type", category_type)
+                        emoji = category_emojis.get(category_type, "📊")
+                        header = f"{emoji} **{hebrew_type}**"
                         market_embed.add_field(name=header, value="", inline=False)
                         
                         for symbol in symbols[:6]:  # Limit to 6 per category

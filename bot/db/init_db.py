@@ -15,6 +15,8 @@ def init_db() -> bool:
         logger.info(f"Initializing database: {DATABASE_URL}")
         
         from .models import SymbolsList  # noqa: F401
+        from .models.news_models import NewsArticle, NewsCluster  # noqa: F401
+        from .models.news_test import NewsTest, NewsProcessingLog  # noqa: F401
         
         # Create all tables
         Base.metadata.create_all(bind=engine)
@@ -33,6 +35,8 @@ def drop_db() -> bool:
         logger.warning("Dropping all database tables")
         
         from .models import SymbolsList  # noqa: F401
+        from .models.news_models import NewsArticle, NewsCluster  # noqa: F401
+        from .models.news_test import NewsTest, NewsProcessingLog  # noqa: F401
         Base.metadata.drop_all(bind=engine)
         
         logger.info("All database tables dropped successfully")
