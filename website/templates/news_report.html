@@ -23,14 +23,15 @@
         </div>
         
         <!-- Price Symbols Section -->
-        {% if categorized_prices %}
+        {% set market_data = market_summary_prices or categorized_prices %}
+        {% if market_data and market_data.categories %}
         <div class="price-symbols">
-            {% for category_type, symbols in categorized_prices.items() %}
+            {% for category in market_data.categories %}
             <div class="category-section">
-                <h2 class="category-title">{{ category_type|title }}</h2>
+                <h2 class="category-title">{{ category.category_hebrew_type|title }}</h2>
                 
                 <div class="symbols-container">
-                    {% for symbol in symbols %}
+                    {% for symbol in category.symbols %}
                     <div class="symbol-item" id="symbol-{{ loop.index }}">
                         <div class="symbol-main">
                             <div class="symbol-price-section">
@@ -51,6 +52,12 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+        {% elif market_data and market_data.categories is defined and market_data.categories|length == 0 %}
+        <div class="price-symbols">
+            <div class="no-symbols">
+                <p>אין נתוני שוק זמינים כרגע</p>
+            </div>
         </div>
         {% endif %}
         

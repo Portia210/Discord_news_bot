@@ -87,6 +87,23 @@ body {
     break-inside: avoid;
 }
 
+.category-section {
+    margin-bottom: 25px;
+}
+
+.category-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: right;
+    margin-bottom: 15px;
+    padding: 0;
+    border: none;
+    background: none;
+    letter-spacing: 0.5px;
+    text-transform: none;
+}
+
 .symbols-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* 2 per row on small screens */
@@ -359,6 +376,12 @@ body {
     .price-symbols{
         padding: 10px;
     }
+    
+    .category-title {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
     .symbols-container {
         grid-template-columns: repeat(2, 1fr);
     }

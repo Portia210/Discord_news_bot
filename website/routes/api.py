@@ -53,7 +53,7 @@ def create_news_report():
             'report_time': report_time,
             'generation_time': data.get('generation_time', datetime.now().strftime('%Y-%m-%d %H:%M:%S')),
             'news_data': data['news_data'],
-            'categorized_prices': data.get('categorized_prices', {})
+            'market_summary_prices': data.get('market_summary_prices', {})
         }
         
         # Save to file
