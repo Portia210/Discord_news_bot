@@ -8,12 +8,12 @@ def measure_time(func):
     @functools.wraps(func)
     async def async_wrapper(*args, **kwargs):
         start_time = time.time()
-        logger.debug(f"Starting {func.__name__}")
+        logger.info(f"Starting {func.__name__}")
         try:
             result = await func(*args, **kwargs)
             end_time = time.time()
             duration = end_time - start_time
-            logger.debug(f"Finished {func.__name__} in {duration:.2f} seconds")
+            logger.info(f"Finished {func.__name__} in {duration:.2f} seconds")
             return result
         except Exception as e:
             end_time = time.time()
@@ -24,12 +24,12 @@ def measure_time(func):
     @functools.wraps(func)
     def sync_wrapper(*args, **kwargs):
         start_time = time.time()
-        logger.debug(f"Starting {func.__name__}")
+        logger.info(f"Starting {func.__name__}")
         try:
             result = func(*args, **kwargs)
             end_time = time.time()
             duration = end_time - start_time
-            logger.debug(f"Finished {func.__name__} in {duration:.2f} seconds")
+            logger.info(f"Finished {func.__name__} in {duration:.2f} seconds")
             return result
         except Exception as e:
             end_time = time.time()
