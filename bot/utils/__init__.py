@@ -26,6 +26,8 @@ from .caller_info import get_function_and_caller_info
 # HTML/PDF Conversion
 from .html_convertor import html_to_pdf, convert_html_to_image
 
+from .get_json_tree import get_json_tree
+
 # Main functions and classes to expose
 __all__ = [
     # Logger
@@ -54,7 +56,8 @@ __all__ = [
     'html_to_pdf',
     'convert_html_to_image',
     
-
+    # JSON Tree
+    'get_json_tree',
 ]
 
 
