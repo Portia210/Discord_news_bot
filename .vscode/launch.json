@@ -13,6 +13,15 @@
         "console": "integratedTerminal"
       },
       {
+        "name": "Run test_bot.py",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "test_bot.py",
+        "cwd": "${workspaceFolder}/bot",
+        "envFile": "${workspaceFolder}/.env",
+        "console": "integratedTerminal"
+      },
+      {
         "name": "Run cnbc_scraper/cnbc_scraper.py as module",
         "type": "debugpy",
         "request": "launch",
@@ -22,10 +31,19 @@
         "console": "integratedTerminal"
       },
       {
+        "name": "Run yf_scraper.py as module",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "scrapers.yf.yf_scraper",
+        "cwd": "${workspaceFolder}/bot",
+        "envFile": "${workspaceFolder}/.env",
+        "console": "integratedTerminal"
+      },
+      {
         "name": "Run news_report.py as module",
         "type": "debugpy",
         "request": "launch",
-        "module": "news_pdf.news_report",
+        "module": "report_generator.news_report",
         "cwd": "${workspaceFolder}/bot",
         "envFile": "${workspaceFolder}/.env",
         "console": "integratedTerminal"
