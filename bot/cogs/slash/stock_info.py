@@ -7,6 +7,7 @@ import yfinance as yf
 from db.init_db import init_db
 from db.engine import get_db_sync
 from db.crud import CRUDBase
+from config import Config
 from db.models import SymbolsList
 from ai_tools.process_company_description import get_hebrew_description
 
@@ -77,7 +78,7 @@ class StockInfoCommandsV2(commands.Cog):
                     return
             
             # Get Yahoo Finance data
-            yfr = YfScraper()
+            yfr = YfScraper(proxy=Config.PROXY.APP_PROXY)
             quote_data = await yfr.get_quote_summary(symbol.upper())
             
             if not quote_data:
