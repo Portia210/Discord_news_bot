@@ -1,36 +1,42 @@
+import aiohttp
+import asyncio
 from scrapers.yf.yf_headers import headers
-import requests
 from scrapers.yf.yf_params import QouteFields as qf, QuoteSummaryModules as qsm
+from config import Config
+from utils import logger, safe_get
 
 
 class YfScraper:
-    def __init__(self):
-        self.url = None
-        self.params = None
-        self.method = None
+    def __init__(self, proxy=None):
         self.headers = headers
+        self.proxy = proxy or Config.PROXY.APP_PROXY
 
-
-    def make_request(self):
-        response = requests.request(self.method, self.url, headers=self.headers, params=self.params)
-        response.raise_for_status()
-        return response.json()
+    async def make_request(self, url: str, params: dict = None):
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, headers=self.headers, params=params, proxy=self.proxy) as response:
+                    if not response.ok:
+                        logger.error(f"Error: {response.status} {await response.text()}")
+                        return None
+                    else:
+                        return await response.json()
+        except Exception as e:
+            logger.error(f"Error making request to {url}: {e}")
+            return None
     
-    def get_market_time(self):
-        self.url = "https://query1.finance.yahoo.com/v6/finance/markettime"
-        self.method = "GET"
-        self.params = {
+    async def get_market_time(self):
+        url = "https://query1.finance.yahoo.com/v6/finance/markettime"
+        params = {
             "formatted": "true",
             "key": "finance",
             "lang": "en-US",
             "region": "US"
         }
-        return self.make_request()
+        return await self.make_request(url, params)
 
-    def get_trending_us(self):
-        self.url = "https://query1.finance.yahoo.com/v1/finance/trending/US"
-        self.method = "GET"
-        self.params = {
+    async def get_trending_us(self):
+        url = "https://query1.finance.yahoo.com/v1/finance/trending/US"
+        params = {
             "count": "25",
             "fields": "logoUrl,longName,shortName,regularMarketChange,regularMarketChangePercent,regularMarketPrice",
             "format": "true",
@@ -40,13 +46,11 @@ class YfScraper:
             "region": "US",
             "crumb": "X7OMi/Fe4nm"
         }
-        return self.make_request()
+        return await self.make_request(url, params)
     
-    def get_spark(self, symbols: list[str], interval: str = "1d", range: str = "1mo"):
+    async def get_spark(self, symbols: list[str], interval: str = "1d", range: str = "1mo"):
         url = "https://query1.finance.yahoo.com/v7/finance/spark"
-        self.url = url
-        self.method = "GET"
-        self.params = {
+        params = {
             "includePrePost": "false",
             "includeTimestamps": "false",
             "indicators": "close", 
@@ -57,17 +61,41 @@ class YfScraper:
             "region": "US"
         }
 
-        return self.make_request()
+        return await self.make_request(url, params)
 
-    def get_quote(self, symbols: list[str]):
-        self.url = "https://query1.finance.yahoo.com/v7/finance/quote"
-        self.method = "GET"
+    async def get_chart_data(self, symbol: str, period1: int, period2: int, interval: str = "1d", include_pre_post: bool = True, events: str = "div|split|earn"):
+        """
+        Get historical chart data for a symbol
+        
+        Args:
+            symbol: Stock symbol (e.g., 'GOOGL')
+            period1: Start timestamp (epoch seconds)
+            period2: End timestamp (epoch seconds)
+            interval: Time interval ('1d', '1wk', '1mo', etc.)
+            include_pre_post: Include pre/post market data
+            events: Events to include ('div|split|earn' for dividends, splits, earnings)
+        """
+        url = f"https://query2.finance.yahoo.com/v8/finance/chart/{symbol}"
+        params = {
+            "period1": str(period1),
+            "period2": str(period2),
+            "interval": interval,
+            "includePrePost": str(include_pre_post).lower(),
+            "events": events,
+            "lang": "en-US",
+            "region": "US",
+            "source": "cosaic"
+        }
+        
+        return await self.make_request(url, params)
+
+    async def get_quote(self, symbols: list[str]):
+        url = "https://query1.finance.yahoo.com/v7/finance/quote"
 
         wanted_fields = [value for value in vars(qf).values() 
                         if isinstance(value, str)]
 
-
-        self.params = {
+        params = {
             "fields": ",".join(wanted_fields),
             "formatted": "true",
             "imgHeights": "50",
@@ -82,9 +110,25 @@ class YfScraper:
             "crumb": "X7OMi/Fe4nm",
         }
 
-        return self.make_request()
+        return await self.make_request(url, params)
     
-    def get_quote_summary(self, symbol: str, modules: list[str] = None):
+    
+    async def get_market_summary(self):
+        url = "https://query1.finance.yahoo.com/v6/finance/quote/marketSummary"
+
+        params = {
+            "fields": f"{qf.SHORT_NAME},{qf.REGULAR_MARKET_PRICE},{qf.REGULAR_MARKET_CHANGE},{qf.REGULAR_MARKET_CHANGE_PERCENT},{qf.PRE_MARKET_PRICE},{qf.PRE_MARKET_CHANGE},{qf.PRE_MARKET_CHANGE_PERCENT},{qf.POST_MARKET_PRICE},{qf.POST_MARKET_CHANGE},{qf.POST_MARKET_CHANGE_PERCENT}",
+            "formatted": "true",
+            "lang": "en-US",
+            "region": "US",
+            "market": "US",
+            "crumb": "X7OMi/Fe4nm"
+        }
+
+        return await self.make_request(url, params)
+
+
+    async def get_quote_summary(self, symbol: str, modules: list[str] = None):
         """
         Get detailed quote summary for a specific symbol with various modules
         
@@ -100,13 +144,12 @@ class YfScraper:
                 - financialsTemplate: Financial data template
                 - quoteUnadjustedPerformanceOverview: Performance data
         """
-        self.url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}"
-        self.method = "GET"
+        url = f"https://query1.finance.yahoo.com/v10/finance/quoteSummary/{symbol}"
         
         if modules is None:
             modules = qsm.DEFAULT_MODULES
         
-        self.params = {
+        params = {
             "formatted": "true",
             "modules": ",".join(modules),
             "enablePrivateCompany": "true",
@@ -116,33 +159,40 @@ class YfScraper:
             "crumb": "X7OMi/Fe4nm"
         }
 
-        return self.make_request()
+        return await self.make_request(url, params)
     
-    def get_market_summary(self):
-        self.url = "https://query1.finance.yahoo.com/v6/finance/quote/marketSummary"
-        self.method = "GET"
-
-        self.params = {
-            "fields": f"{qf.SHORT_NAME},{qf.REGULAR_MARKET_PRICE},{qf.REGULAR_MARKET_CHANGE},{qf.REGULAR_MARKET_CHANGE_PERCENT},{qf.PRE_MARKET_PRICE},{qf.PRE_MARKET_CHANGE},{qf.PRE_MARKET_CHANGE_PERCENT},{qf.POST_MARKET_PRICE},{qf.POST_MARKET_CHANGE},{qf.POST_MARKET_CHANGE_PERCENT}",
-            "formatted": "true",
-            "lang": "en-US",
-            "region": "US",
-            "market": "US",
-            "crumb": "X7OMi/Fe4nm"
-        }
-
-        return self.make_request()
-
+  
+    
+    def parse_quote_summary(self, result):
+        data = {}
+        data["symbol"] = safe_get(result, '["quoteSummary"]["result"][0]["price"]["symbol"]')
+        data["type"] = safe_get(result, '["quoteSummary"]["result"][0]["price"]["quoteType"]')
+        data["company_name"] = safe_get(result, '["quoteSummary"]["result"][0]["price"]["longName"]')
+        data["website"] = safe_get(result, '["quoteSummary"]["result"][0]["assetProfile"]["website"]')
+        data["ir_website"] = safe_get(result, '["quoteSummary"]["result"][0]["assetProfile"]["irWebsite"]')
+        data["industry"] = safe_get(result, '["quoteSummary"]["result"][0]["assetProfile"]["industry"]')
+        data["sector"] = safe_get(result, '["quoteSummary"]["result"][0]["assetProfile"]["sector"]')
+        data["business_summary"] = safe_get(result, '["quoteSummary"]["result"][0]["assetProfile"]["longBusinessSummary"]')
+        data["earnings_date"] = safe_get(result, '["quoteSummary"]["result"][0]["calendarEvents"]["earnings"]["earningsDate"][0]["fmt"]')
+        data["is_earning_estimated"] = safe_get(result, '["quoteSummary"]["result"][0]["calendarEvents"]["earnings"]["isEarningsDateEstimate"]')
+        data["last_price"] = safe_get(result, '["quoteSummary"]["result"][0]["price"]["regularMarketPrice"]["fmt"]')
+        pref_overview = safe_get(result, '["quoteSummary"]["result"][0]["quoteUnadjustedPerformanceOverview"]["performanceOverview"]')
+        data["pref_overview"] = {}
+        for key, value in pref_overview.items():
+            data["pref_overview"][key] = value.get("fmt")
+        return data
 
 if __name__ == "__main__":
     import json
     from config import Config
     import os
-    from utils import write_json_file, convert_iso_time_to_datetime
+    import pandas as pd
+    from utils import write_json_file, convert_iso_time_to_datetime, get_json_tree, safe_get, logger, write_text_file
     from report_generator.news_report import NewsReport
-    from utils import write_json_file
-    yfr = YfScraper()
 
-    res = yfr.get_quote_summary("IREN")
-    write_json_file( "data/yf/iren.json", res)
-    # print(json.dumps(res["quoteSummary"]["result"][0], indent=4))
+    yfr = YfScraper()
+    res = asyncio.run(yfr.get_quote(["nvo", "spy", "qqq", "spmo", "iwm", "gld"]))
+    tree = get_json_tree(res, list_limit = 2)
+    write_text_file("data/yf/quote_with_specific_fields.yaml", tree)
+        
+    

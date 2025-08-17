@@ -82,15 +82,13 @@ def get_json_tree(data_structure, path_format: Literal["json", "python"] = "pyth
     
     return output
 
-        
+
         
         
 if __name__ == "__main__":
     from utils import read_json_file
     json_input = read_json_file("data/yf/example.json")
-    output = get_json_tree({"a": {"b": "c", "x": {"y": None}}, "c": ["d", "e", "f"]}, path_format="python")
+    output = get_json_tree(json_input, path_format="python")
     print(output)
-    with open("data/yf/example.yaml", "w") as f:
-        f.write(output)
         
 

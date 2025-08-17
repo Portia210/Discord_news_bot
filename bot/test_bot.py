@@ -5,6 +5,7 @@ from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
 from report_generator.news_report import NewsReport
+from bot_manager import set_bot
 
 logger.info(f"REMOTE_SERVER? {REMOTE_SERVER}")
 logger.info(f"ENABLE_PROXY? {ENABLE_PROXY}")
@@ -19,6 +20,7 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 # Initialize scheduler
 discord_scheduler = None
+set_bot(bot)
 
 
 @bot.event
@@ -78,11 +80,9 @@ async def on_ready():
     logger.info(f'{bot.user} has connected to Discord!')
     logger.info(f'Bot is in {len(bot.guilds)} guilds')
     
-    # Load command cogs
-    await load_cogs()
-    
-    # Sync slash commands to specific guilds for faster updates
     try:
+        await load_cogs()
+
         logger.info(f"📦 Loaded cogs: {[cog for cog in bot.cogs.keys()]}")
         
         bot_guild_ids = [guild.id for guild in bot.guilds]
@@ -93,14 +93,18 @@ async def on_ready():
         logger.info(f"🔧 Available slash commands: {slash_commands}")
         logger.info(f"🔧 Available text commands: {text_commands}")
         
-        from discord_utils.message_handler import get_message_handler
 
 
 
-        news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
-        await news_report.generate_full_json_report("auto", 10)
-        await news_report.send_report_to_discord(Config.CHANNEL_IDS.MARKET_NEWS, Config.NOTIFICATION_ROLES.NEWS_REPORT)
+        # news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
+        # await news_report.generate_full_json_report("auto", 10)
+        # await news_report.send_report_to_discord(Config.CHANNEL_IDS.MARKET_NEWS, Config.NOTIFICATION_ROLES.NEWS_REPORT)
 
+        # from news_processor.pipeline import NewsProcessorPipeline
+        # from utils import write_json_file
+        # pipeline = NewsProcessorPipeline()
+        # articles = await pipeline.discord_news_loader(hours_back=24)
+        # write_json_file("news_processor/articles.json", articles)
             
     except Exception as e:
         logger.error(f"❌ Failed to sync commands: {e}")
@@ -115,6 +119,7 @@ async def load_cogs():
     cogs = [
         "cogs.slash.test_slash",
         "cogs.slash.stock_info",
+        "cogs.slash.stock_info_v2",
         "cogs.slash.notification",
         "cogs.text.hello",
         "cogs.text.export",

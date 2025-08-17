@@ -27,6 +27,7 @@ from .caller_info import get_function_and_caller_info
 from .html_convertor import html_to_pdf, convert_html_to_image
 
 from .get_json_tree import get_json_tree
+from .safe_get import safe_get
 
 # Main functions and classes to expose
 __all__ = [
@@ -58,6 +59,7 @@ __all__ = [
     
     # JSON Tree
     'get_json_tree',
+    'safe_get',
 ]
 
 

@@ -1,129 +1,139 @@
 import discord
 from discord.ext import commands
+from scrapers.yf.yf_scraper import YfScraper
+from discord_utils.interaction_utils import split_text_at_sentences
+from utils.logger import logger
+import yfinance as yf
 from db.init_db import init_db
 from db.engine import get_db_sync
 from db.crud import CRUDBase
 from db.models import SymbolsList
-from scrapers.company_info import get_company_info
 from ai_tools.process_company_description import get_hebrew_description
-from discord_utils.interaction_utils import respond_with_progress, update_interaction_response, truncate_text, split_text_at_sentences
-from utils.logger import logger
 
-class StockInfoCommands(commands.Cog):
+class StockInfoCommandsV2(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @discord.slash_command(name="stock_info", description="Check if a stock symbol exists in the database")
-    async def stock_info(self, ctx, 
-                        symbol: str = discord.Option(str, "Stock symbol to check", required=True)):
-        """Check if a stock symbol exists in the database"""
+    def is_ticker_exists(self, ticker_name):
+        """Check if a ticker exists using yfinance search"""
         try:
-            # Defer immediately to prevent timeout
+            ticker = yf.Search(ticker_name, max_results=3, enable_fuzzy_query=True)
+            return any(quote["symbol"] == ticker_name for quote in ticker.all["quotes"])
+        except Exception as e:
+            logger.error(f"Error checking ticker existence: {e}")
+            return False
+    
+    def create_embed(self, symbol, parsed_data, hebrew_desc=None):
+        """Create embed with stock information"""
+        embed = discord.Embed(title=f"📊 {symbol.upper()} Information", color=0x0099ff)
+        
+        # Add basic fields
+        fields = [
+            ("📈 Symbol", parsed_data.get("symbol")),
+            ("🏷️ Type", parsed_data.get("type")),
+            ("🏢 Company Name", parsed_data.get("company_name")),
+            ("🌐 Website", parsed_data.get("website")),
+            ("📊 IR Website", parsed_data.get("ir_website")),
+            ("🏭 Industry", parsed_data.get("industry")),
+            ("📋 Sector", parsed_data.get("sector")),
+            ("💰 Last Price", parsed_data.get("last_price"))
+        ]
+        
+        for name, value in fields:
+            if value and value not in ["N/A", "None"]:
+                embed.add_field(name=name, value=str(value)[:1024], inline=True)
+        
+        # Add Hebrew description if available
+        if hebrew_desc:
+            chunks = split_text_at_sentences(hebrew_desc, 1024)
+            if chunks:
+                embed.add_field(name="📝 תיאור החברה", value=chunks[0], inline=False)
+        
+        return embed, chunks[1:] if hebrew_desc and len(chunks) > 1 else []
+    
+    @discord.slash_command(name="stock_info", description="Get stock information using Yahoo Finance API")
+    async def stock_info(self, ctx, symbol: str = discord.Option(str, "Stock symbol to check", required=True)):
+        """Get stock information using Yahoo Finance API"""
+        db = None
+        try:
             await ctx.defer(ephemeral=False)
             
-            # Initialize database and create CRUD instance
+            # Initialize database
             init_db()
             symbols_crud = CRUDBase(SymbolsList)
             db = get_db_sync()
             
-            # Check if symbol exists
-            symbol_data = symbols_crud.get_by_field(db, "symbol", symbol.upper())
+            # Check database first
+            symbol_data = symbols_crud.get_by_field(db, "symbol", symbol.upper()) # this will return None if the symbol is not in the database
+            hebrew_desc = symbol_data.hebrew_description if symbol_data else None
             
-            if not symbol_data:
-                await ctx.followup.send(f"❌ Symbol **{symbol.upper()}** not found in database", ephemeral=False)
-                db.close()
-                return
+            # Always create a progress message to edit later
+            progress_msg = await ctx.followup.send("🔄 Getting stock information...", ephemeral=False)
             
-            # Check if it's a stock
-            if symbol_data.type and symbol_data.type.lower() != "stock":
-                await ctx.followup.send(f"**{symbol.upper()}** is not a company, it's a **{symbol_data.type}**", ephemeral=False)
-                db.close()
-                return
-            
-            # Fetch company info only if raw_description is empty
-            company_info = None
-            progress_message = None
-            
-            if not symbol_data.raw_description:
-                progress_message = await ctx.followup.send("🔄 Getting company information...", ephemeral=False)
-                company_info = get_company_info(symbol.upper())
-                if not company_info:
-                    await progress_message.edit(content="Sorry, there is an issue fetching company information.")
-                    db.close()
+            # Check yfinance only if not in database
+            if not hebrew_desc:
+                if not self.is_ticker_exists(symbol.upper()):
+                    await progress_msg.edit(content=f"❌ Symbol **{symbol.upper()}** not found")
                     return
-                
-                # Update database with company info
-                update_data = {
-                    "raw_description": company_info.get("description", ""),
-                    "market_cap": company_info.get("market_cap"),
-                    "market_cap_profile": company_info.get("market_cap_profile"),
-                    "website_url": company_info.get("website_url")
-                }
-                symbols_crud.update_by_field(db, "symbol", symbol.upper(), update_data)
-            else:
-                # Use existing data
-                company_info = {
-                    "description": symbol_data.raw_description,
-                    "market_cap": symbol_data.market_cap,
-                    "market_cap_profile": symbol_data.market_cap_profile,
-                    "website_url": symbol_data.website_url
-                }
             
-            # Get Hebrew description only if it's empty
-            if not symbol_data.hebrew_description:
-                if progress_message:
-                    await progress_message.edit(content="🔄 Getting Hebrew description...")
-                else:
-                    progress_message = await ctx.followup.send("🔄 Getting Hebrew description...", ephemeral=False)
-                
+            # Get Yahoo Finance data
+            yfr = YfScraper()
+            quote_data = await yfr.get_quote_summary(symbol.upper())
+            
+            if not quote_data:
+                await progress_msg.edit(content=f"❌ Error getting stock information for symbol **{symbol.upper()}**")
+                return
+            
+            parsed_data = yfr.parse_quote_summary(quote_data)
+            if not parsed_data or not parsed_data.get("symbol"):
+                await progress_msg.edit(content=f"❌ Unable to parse data for symbol **{symbol.upper()}**")
+                return
+            
+            # Process Hebrew description if needed
+            if not hebrew_desc:
+                business_summary = parsed_data.get("business_summary")
+                if business_summary:
+                    await progress_msg.edit(content="🔄 Processing Hebrew description...")
+                    
+                    try:
+                        hebrew_desc = get_hebrew_description(symbol.upper(), business_summary)
+                        
+                        # Save to database
+                        if symbol_data:
+                            symbols_crud.update_by_field(db, "symbol", symbol.upper(), {"hebrew_description": hebrew_desc})
+                        else:
+                            symbols_crud.create(db, {"symbol": symbol.upper(), "hebrew_description": hebrew_desc})
+                            
+                    except Exception as e:
+                        logger.error(f"Error processing Hebrew description: {e}")
+                        hebrew_desc = None
+            
+            # Replace progress message with final embed
+            main_embed, remaining_chunks = self.create_embed(symbol, parsed_data, hebrew_desc)
+            await progress_msg.edit(content=None, embed=main_embed)
+            
+            # Send remaining chunks
+            for i, chunk in enumerate(remaining_chunks, 2):
                 try:
-                    hebrew_desc = get_hebrew_description(symbol.upper(), company_info.get("description", ""))
-                    symbols_crud.update_by_field(db, "symbol", symbol.upper(), {"hebrew_description": hebrew_desc})
+                    desc_embed = discord.Embed(
+                        color=0x0099ff
+                    )
+                    desc_embed.add_field(name="📝 תיאור החברה", value=chunk, inline=False)
+                    desc_embed.set_footer(text=f"תיאור החברה (חלק {i})")
+                    await ctx.channel.send(embed=desc_embed)
                 except Exception as e:
-                    await progress_message.edit(content="Sorry, there is an issue processing the description.")
-                    db.close()
-                    return
-            else:
-                hebrew_desc = symbol_data.hebrew_description
-            
-            # Delete progress message if it exists
-            if progress_message:
-                await progress_message.delete()
-            
-            # Split description into multiple embeds if needed
-            description_chunks = split_text_at_sentences(hebrew_desc, 1024)
-            
-            # Send main embed with basic info
-            main_embed = discord.Embed(
-                title=f"📊 {symbol.upper()} Information",
-                color=0x0099ff
-            )
-            main_embed.add_field(name="Symbol", value=symbol.upper(), inline=True)
-            main_embed.add_field(name="Company Name", value=symbol_data.name, inline=True)
-            main_embed.add_field(name="Website", value=company_info.get("website_url", "N/A"), inline=True)
-            
-            
-            # Add first part of description to main embed (ensure it's not too long)
-            if description_chunks:
-                main_embed.add_field(name="Description", value= description_chunks[0], inline=False)
-            
-            await ctx.followup.send(embed=main_embed, ephemeral=False)
-            
-            # Send additional embeds for remaining description chunks
-            for i, chunk in enumerate(description_chunks[1:], 2):
-                desc_embed = discord.Embed(
-                    title=f"📊 {symbol.upper()} Description (Part {i})",
-                    color=0x0099ff
-                )
-                desc_embed.add_field(name="Description", value=chunk, inline=False)
-                await ctx.channel.send(embed=desc_embed)
-            
-            db.close()
+                    logger.error(f"Error sending additional embed {i}: {e}")
+                    await ctx.channel.send(f"📊 {symbol.upper()} תיאור החברה (חלק {i}):\n{chunk}")
             
         except Exception as e:
-            await ctx.respond(f"❌ Error getting stock info", ephemeral=True)
             logger.error(f"Error getting stock info: {e}")
-            db.close()
+            try:
+                await ctx.followup.send(f"❌ Error getting stock info: {str(e)}", ephemeral=False)
+            except:
+                await ctx.respond(f"❌ Error getting stock info: {str(e)}", ephemeral=True)
+        finally:
+            if db:
+                db.close()
 
 def setup(bot):
-    bot.add_cog(StockInfoCommands(bot)) 
+    bot.add_cog(StockInfoCommandsV2(bot))

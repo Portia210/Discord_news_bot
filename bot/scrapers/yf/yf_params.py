@@ -35,6 +35,7 @@ class QouteFields:
     UNDERLYING_SYMBOL = "underlyingSymbol"
     STOCK_STORY = "stockStory"
 
+
 class QuoteSummaryModules:
     ASSET_PROFILE = "assetProfile"
     SEC_FILINGS = "secFilings"

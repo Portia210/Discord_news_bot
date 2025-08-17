@@ -1,8 +1,8 @@
 """
-News processing pipeline for clustering and summarizing articles.
+News processing pipeline for clustering and summarizing news articles.
 """
 
-from .processor import NewsProcessor
-from .models import NewsArticle, NewsCluster
+from .data_loader import DiscordNewsLoader
+from .pipeline import NewsProcessorPipeline
 
-__all__ = ['NewsProcessor', 'NewsArticle', 'NewsCluster']
+__all__ = ['DiscordNewsLoader', 'NewsProcessorPipeline']

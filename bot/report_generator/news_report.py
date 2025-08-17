@@ -28,7 +28,7 @@ class NewsReport:
         """
         self.discord_bot = discord_bot
         self.timezone = pytz.timezone(timezone)
-        self.yf_requests = YfScraper()
+        self.yf_requests = YfScraper(proxy=Config.PROXY.APP_PROXY)
         self.summary_symbols = self._load_summary_symbols()
         self.full_report = None
     
@@ -112,7 +112,6 @@ class NewsReport:
             list: List of price symbol data for the template
         """
         try:
-            yfr = YfScraper()
             # Group symbols by type
             all_symbols = list(self.summary_symbols.keys())
             
@@ -121,7 +120,7 @@ class NewsReport:
                 return {"categories": []}
             
             logger.info(f"✅ Loading market data for {len(all_symbols)} symbols: {all_symbols}")
-            res = yfr.get_quote(symbols=all_symbols)
+            res = await self.yf_requests.get_quote(symbols=all_symbols)
             if res is None:
                 logger.error(f"❌ Error loading market summary: {res}")
                 return {"categories": []}
@@ -222,7 +221,7 @@ class NewsReport:
                 "news_data": news_data,
                 "market_summary_prices": categorized_prices,
             }
-            logger.info(json.dumps(self.full_report, indent=4))
+            # logger.info(json.dumps(self.full_report, indent=4))
             return self.full_report
         except Exception as e:
             logger.error(f"❌ Error generating full JSON report: {e}")
