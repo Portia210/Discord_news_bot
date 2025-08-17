@@ -221,7 +221,6 @@ class NewsReport:
                 "news_data": news_data,
                 "market_summary_prices": categorized_prices,
             }
-            # logger.info(json.dumps(self.full_report, indent=4))
             return self.full_report
         except Exception as e:
             logger.error(f"❌ Error generating full JSON report: {e}")
