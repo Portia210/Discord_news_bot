@@ -1,0 +1,213 @@
+================================================================================
+NEWS CLUSTERING RESULTS
+================================================================================
+Generated: 2025-08-19 04:16:52
+Total Articles: 18
+Total Clusters: 4
+Noise Points: 4
+
+CLUSTER SUMMARY
+----------------------------------------
+Cluster 0: 6 articles
+  Label: TRUMP (ORG) | ELECTIONS (ORG) | TRUMP ON TRUTH SOCIAL: (ORG)
+  Summary: Former President Trump is advocating for significant changes to the electoral process, including a movement to eliminate mail-in ballots and voting machines, while planning to sign an executive order aimed at ensuring "honesty" in the upcoming 2026 midterm elections. He asserts that states should adhere to federal directives regarding these electoral reforms.
+
+Cluster 1: 2 articles
+  Label: SCHEDULE (ORG) | The White House (ORG) | South Portico (GPE)
+  Summary: On August 18, 2025, President Biden's schedule includes welcoming European leaders and a meeting with the President of Ukraine, with Vice President JD Vance also attending the Trump-Zelenskyy meeting. The events highlight ongoing diplomatic engagements at the White House.
+
+Cluster 2: 3 articles
+  Label: WEDBUSH (ORG) | DAN (ORG) | GOOGL (PERSON)
+  Summary: Dan Ives of Wedbush has released the "Ives AI 30," highlighting top AI investment opportunities across various sectors, including hyperscalers and cybersecurity. Meanwhile, Goldman Sachs reports that S&P 500 companies have significantly exceeded earnings expectations, and Morgan Stanley predicts that AI could generate substantial annual gains for these firms, potentially adding $920 billion in net benefits.
+
+Cluster 3: 3 articles
+  Label: Powell (PERSON) | GOLDMAN SACHS EXPECTS (ORG) | FED (ORG)
+  Summary: Goldman Sachs anticipates the Federal Reserve will implement three rate cuts this year due to slowing job growth, while analysts speculate that Jerome Powell's upcoming Jackson Hole speech may not provide clear signals for easing, potentially supporting the dollar amidst concerns over economic stagnation.
+
+
+================================================================================
+DETAILED CLUSTER ANALYSIS
+================================================================================
+
+CLUSTER 0
+--------------------------------------------------
+Articles: 6
+Label: TRUMP (ORG) | ELECTIONS (ORG) | TRUMP ON TRUTH SOCIAL: (ORG)
+Summary: Former President Trump is advocating for significant changes to the electoral process, including a movement to eliminate mail-in ballots and voting machines, while planning to sign an executive order aimed at ensuring "honesty" in the upcoming 2026 midterm elections. He asserts that states should adhere to federal directives regarding these electoral reforms.
+
+ENTITIES BY TYPE:
+  ORG:
+    - TRUMP (count: 2)
+    - ELECTIONS (count: 2)
+    - TRUMP ON TRUTH SOCIAL: (count: 2)
+  GPE:
+    - U.S. (count: 1)
+
+ARTICLES IN THIS CLUSTER:
+  7. 🚨 TRUMP: GOING TO LEAD A MOVEMENT TO GET RID OF MAIL-IN BALLOTS
+     URL: https://twitter.com/DeItaone/status/1957401734919184640
+     Time: 2025-08-18T14:18:00
+
+  8. TRUMP: SIGNING AN EXECUTIVE ORDER ON 2026 MIDTERM ELECTIONS
+     URL: https://twitter.com/DeItaone/status/1957401832470233155
+     Time: 2025-08-18T14:18:00
+
+  9. 🚨 TRUMP: U.S. STATES MUST DO WHAT FEDERAL GOVERNMENT TELLS THEM
+     URL: https://twitter.com/DeItaone/status/1957401965534527526
+     Time: 2025-08-18T14:19:00
+
+  11. TRUMP ON TRUTH SOCIAL: TO LEAD MOVEMENT TO GET RID OF VOTING MACHINES
+     URL: https://twitter.com/DeItaone/status/1957403430227480927
+     Time: 2025-08-18T14:25:00
+
+  12. TRUMP ON TRUTH SOCIAL: VOTING MACHINES INACCURATE, COST 10 TIMES MORE THAN ACCURATE, SOPHISTICATED WATERMARK PAPER
+     URL: https://twitter.com/DeItaone/status/1957403710415364291
+     Time: 2025-08-18T14:26:00
+
+  13. TRUMP ON TRUTH SOCIAL: TO SIGN EXECUTIVE ORDER TO HELP BRING 'HONESTY' TO 2026 MIDTERM ELECTIONS
+     URL: https://twitter.com/DeItaone/status/1957404050980257861
+     Time: 2025-08-18T14:27:00
+
+
+================================================================================
+
+CLUSTER 1
+--------------------------------------------------
+Articles: 2
+Label: SCHEDULE (ORG) | The White House (ORG) | South Portico (GPE)
+Summary: On August 18, 2025, President Biden's schedule includes welcoming European leaders and a meeting with the President of Ukraine, with Vice President JD Vance also attending the Trump-Zelenskyy meeting. The events highlight ongoing diplomatic engagements at the White House.
+
+ENTITIES BY TYPE:
+  PERSON:
+    - JD VANCE WILL (count: 1)
+    - ATTEND TRUMP-ZELENSKYY MEETING - ABC (count: 1)
+  ORG:
+    - SCHEDULE (count: 1)
+    - The White House (count: 1)
+  GPE:
+    - South Portico (count: 1)
+    - Ukraine (count: 1)
+
+ARTICLES IN THIS CLUSTER:
+  4. 📅 PRESIDENT’S SCHEDULE — MONDAY, AUGUST 18, 2025  🔸 9:00 AM – In-Town Pool Call Time (The White House)  🔸 12:00 PM – European Leaders arrive at the White House (South Portico)  🔸 1:00 PM – President greets the President of Ukraine (Stakeout Location, Open Press)  🔸 1:15 PM –
+     URL: https://twitter.com/DeItaone/status/1957391322756636956
+     Time: 2025-08-18T13:37:00
+
+  6. VICE PRES. JD VANCE WILL ATTEND TRUMP-ZELENSKYY MEETING - ABC NEWS
+     URL: https://twitter.com/DeItaone/status/1957399048333250595
+     Time: 2025-08-18T14:07:00
+
+
+================================================================================
+
+CLUSTER 2
+--------------------------------------------------
+Articles: 3
+Label: WEDBUSH (ORG) | DAN (ORG) | GOOGL (PERSON)
+Summary: Dan Ives of Wedbush has released the "Ives AI 30," highlighting top AI investment opportunities across various sectors, including hyperscalers and cybersecurity. Meanwhile, Goldman Sachs reports that S&P 500 companies have significantly exceeded earnings expectations, and Morgan Stanley predicts that AI could generate substantial annual gains for these firms, potentially adding $920 billion in net benefits.
+
+ENTITIES BY TYPE:
+  PERSON:
+    - GOOGL (count: 1)
+    - AMZN (count: 1)
+    - ORCL (count: 1)
+  ORG:
+    - WEDBUSH (count: 1)
+    - DAN (count: 1)
+    - IBM (count: 1)
+  GPE:
+    - AI (count: 1)
+
+ARTICLES IN THIS CLUSTER:
+  1. WEDBUSH’S DAN IVES RELEASED THE “IVES AI 30,” FEATURING TOP AI PLAYS:  🔸 Hyperscalers: $MSFT, $GOOGL, $AMZN, $ORCL  🔸 Software: $PLTR, $CRM, $IBM, $NOW, $SNOW, $PEGA, $MDB, $SOUN, $INOD  🔸 Consumer Internet: $BABA, $AAPL, $META, $BIDU, $RBLX  🔸 Cybersecurity: $PANW, $ZS,
+     URL: https://twitter.com/DeItaone/status/1957389532187205818
+     Time: 2025-08-18T13:30:00
+
+  5. S&P 500 EARNINGS SMASH EXPECTATIONS  Goldman Sachs says S&P 500 companies beat forecasts this earnings season, with Q2 EPS up 11% vs. 4% expected. About 60% beat estimates by wide margins, one of the strongest seasons on record. Firms offset tariffs by cutting costs, reshaping https://t.co/LIIOHJiYiZ
+     URL: https://twitter.com/DeItaone/status/1957392821213683964
+     Time: 2025-08-18T13:43:00
+
+  15. AI COULD ADD $920B IN ANNUAL GAINS TO S&P 500: MORGAN STANLEY  Morgan Stanley estimates AI could deliver $920B in yearly net benefits to S&P 500 firms, with long-term value creation of $13–16T (about 25% of market cap). Gains would come from cost cuts and productivity, with the
+     URL: https://twitter.com/DeItaone/status/1957409163472146897
+     Time: 2025-08-18T14:48:00
+
+
+================================================================================
+
+CLUSTER 3
+--------------------------------------------------
+Articles: 3
+Label: Powell (PERSON) | GOLDMAN SACHS EXPECTS (ORG) | FED (ORG)
+Summary: Goldman Sachs anticipates the Federal Reserve will implement three rate cuts this year due to slowing job growth, while analysts speculate that Jerome Powell's upcoming Jackson Hole speech may not provide clear signals for easing, potentially supporting the dollar amidst concerns over economic stagnation.
+
+ENTITIES BY TYPE:
+  PERSON:
+    - Powell (count: 2)
+  ORG:
+    - GOLDMAN SACHS EXPECTS (count: 1)
+    - FED (count: 1)
+    - POWELL (count: 1)
+  GPE:
+    - U.S. (count: 1)
+    - Jackson Hole (count: 1)
+
+ARTICLES IN THIS CLUSTER:
+  2. GOLDMAN SACHS EXPECTS THE FED TO CUT RATES THREE TIMES THIS YEAR  In September, October, and December — citing weakening U.S. job growth. Analysts note job gains have slowed to ~30k per month, well below the ~80k needed for full employment, and future revisions are likely
+     URL: https://twitter.com/DeItaone/status/1957389952095772735
+     Time: 2025-08-18T13:31:00
+
+  3. POWELL’S JACKSON HOLE SPEECH COULD SUPPORT DOLLAR  MUFG says the dollar may rise if Powell avoids clear rate-cut signals Friday, unlike last year when remarks preceded a 50 bps cut. He may wait for more data before September, easing pressure on the dollar.
+     URL: https://twitter.com/DeItaone/status/1957390188469956783
+     Time: 2025-08-18T13:32:00
+
+  10. FED RATE CUTS: WILL POWELL DISAPPOINT AT JACKSON HOLE?  Markets expect a 0.25% Fed rate cut in September, but analysts say Powell may avoid signaling easing in his Jackson Hole speech Friday. Despite weak jobs data and political pressure, concerns over stagflation and rising
+     URL: https://twitter.com/DeItaone/status/1957403006749520079
+     Time: 2025-08-18T14:23:00
+
+
+================================================================================
+
+NOISE POINTS (Unclustered Articles)
+--------------------------------------------------
+1. MOST AMERICANS SAY THEY EAT HEALTHY  Gallup finds 84% of U.S. adults rate their diet as at least somewhat healthy (24% very, 60% somewhat), a trend steady since 2001. Higher income, education, women, and older adults are more likely to report healthy diets than their https://t.co/BHidwQWCbF
+   URL: https://twitter.com/DeItaone/status/1957405986961912003
+   Time: 2025-08-18T14:35:00
+
+2. INDIA PM MODI: PUTIN PHONE CALL ON MEETING WITH TRUMP IN ALASKA  INDIA PM MODI: PUTIN SHARED INSIGHTS ON MEETING WITH TRUMP
+   URL: https://twitter.com/DeItaone/status/1957411814314058038
+   Time: 2025-08-18T14:58:00
+
+3. $MSTR - MICROSTRATEGY PURCHASES 430 BITCOINS BETWEEN AUG 11 - AUG 17 AT AN AVERAGE OF $119,666 (TOTAL: $51.40M)
+   URL: https://twitter.com/DeItaone/status/1957412741544628419
+   Time: 2025-08-18T15:02:00
+
+4. $TSLA - TESLA: MODEL Y L COMING SOON - CHINA SOCIAL MEDIA POST
+   URL: https://twitter.com/DeItaone/status/1957415860022243555
+   Time: 2025-08-18T15:14:00
+
+
+================================================================================
+GLOBAL ENTITY FREQUENCY ANALYSIS
+================================================================================
+
+MOST FREQUENT ENTITIES ACROSS ALL CLUSTERS:
+  TRUMP (ORG): 2 occurrences
+  ELECTIONS (ORG): 2 occurrences
+  U.S. (GPE): 2 occurrences
+  TRUMP ON TRUTH SOCIAL: (ORG): 2 occurrences
+  Powell (PERSON): 2 occurrences
+  TRUMP ON TRUTH SOCIAL: TO LEAD MOVEMENT (ORG): 1 occurrences
+  HONESTY (ORG): 1 occurrences
+  SCHEDULE (ORG): 1 occurrences
+  The White House (ORG): 1 occurrences
+  South Portico (GPE): 1 occurrences
+  Ukraine (GPE): 1 occurrences
+  JD VANCE WILL (PERSON): 1 occurrences
+  ATTEND TRUMP-ZELENSKYY MEETING - ABC (PERSON): 1 occurrences
+  WEDBUSH (ORG): 1 occurrences
+  DAN (ORG): 1 occurrences
+  GOOGL (PERSON): 1 occurrences
+  AMZN (PERSON): 1 occurrences
+  ORCL (PERSON): 1 occurrences
+  PLTR (PERSON): 1 occurrences
+  IBM (ORG): 1 occurrences

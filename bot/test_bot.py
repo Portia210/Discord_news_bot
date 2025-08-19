@@ -46,14 +46,7 @@ async def on_application_command(ctx):
 @bot.event
 async def on_application_command_completion(ctx):
     logger.info(f"✅ Command /{ctx.command.name} completed successfully")
-    # logger.info(f"📊 Commands available after: {[cmd.name for cmd in bot.application_commands]}")
-    
-    # Check bot permissions after command
-    # guild = ctx.guild
-    # bot_permissions = guild.me.guild_permissions
-    # logger.info(f"🔐 Bot permissions - Use App Commands: {bot_permissions.use_application_commands}")
-    # logger.info(f"🔐 Bot permissions - Manage Roles: {bot_permissions.manage_roles}")
-    # logger.info(f"👑 Bot top role: {guild.me.top_role.name} (position: {guild.me.top_role.position})")
+
 
 @bot.event
 async def on_guild_update(before, after):
@@ -96,8 +89,8 @@ async def on_ready():
 
 
 
-        # news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
-        # await news_report.generate_full_json_report("auto", 10)
+        news_report = NewsReport(bot, Config.TIMEZONES.APP_TIMEZONE)
+        await news_report.generate_full_json_report("auto", 10)
         # await news_report.send_report_to_discord(Config.CHANNEL_IDS.MARKET_NEWS, Config.NOTIFICATION_ROLES.NEWS_REPORT)
 
         # from news_processor.pipeline import NewsProcessorPipeline

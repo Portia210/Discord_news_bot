@@ -4,7 +4,7 @@ Main pipeline orchestrator for news processing.
 
 from typing import List, Dict, Any
 from datetime import datetime
-from .data_loader import DiscordNewsLoader
+from .discord_news_parser import DiscordNewsLoader
 from bot_manager import get_bot
 from utils.logger import logger
 
@@ -12,18 +12,6 @@ from utils.logger import logger
 class NewsProcessorPipeline:
     """Main pipeline for processing news articles."""
     
-    def __init__(self):
-        """Initialize the pipeline using bot manager."""
-        self.data_loader = None
-    
-    def _get_data_loader(self):
-        """Get data loader instance using bot manager."""
-        if not self.data_loader:
-            bot = get_bot()
-            if not bot:
-                raise RuntimeError("No Discord bot instance available")
-            self.data_loader = DiscordNewsLoader(bot)
-        return self.data_loader
     
     async def discord_news_loader(self, hours_back: int = 24) -> List[Dict[str, Any]]:
         """
@@ -36,8 +24,8 @@ class NewsProcessorPipeline:
             List of parsed news articles (JSON serializable)
         """
         try:
-            data_loader = self._get_data_loader()
-            articles = await data_loader.load_news_messages(hours_back=hours_back)
+            bot = get_bot()
+            articles = await DiscordNewsLoader(bot).load_news_messages(hours_back=hours_back)
             logger.info(f"Loaded {len(articles)} articles from Discord")
             return articles
         except Exception as e:

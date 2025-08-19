@@ -1,6 +1,6 @@
 import discord
 from datetime import datetime, timezone, timedelta
-from utils.logger import logger
+from utils import logger, write_json_file
 import pytz
 from config import Config
 import os
@@ -99,6 +99,7 @@ class MessageHandler:
                     })
             
             logger.info(f"Read {len(messages_list)} messages from {channel.name}")
+            # write_json_file("messages_example.json", messages_list)
             return messages_list, channel.name
             
         except Exception as e:
