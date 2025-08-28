@@ -78,6 +78,11 @@ class CoreScheduler:
             send_alert: Whether to send Discord alert
         """
         try:
+            # Check if job already exists
+            existing_job = self.get_job(job_id)
+            if existing_job:
+                logger.warning(f"⚠️ Job {job_id} already exists, replacing it")
+            
             async def wrapped_func():
                 try:
                     if args and kwargs:
@@ -115,6 +120,9 @@ class CoreScheduler:
                 'expression': cron_expression,
                 'timezone': str(self.timezone)
             })
+            
+            action = "replaced" if existing_job else "added"
+            logger.info(f"✅ Cron job {job_id} {action} successfully")
             return True
             
         except Exception as e:
@@ -295,7 +303,9 @@ class CoreScheduler:
         """Get all jobs"""
         return self.scheduler.get_jobs()
     
-
+    def is_running(self) -> bool:
+        """Check if the scheduler is running"""
+        return self.running
     
     def start(self):
         """Start the scheduler"""
@@ -315,6 +325,8 @@ class CoreScheduler:
                 Config.COLORS.GREEN,
                 "🔧 Scheduler Started"
             ))
+        else:
+            logger.warning("⚠️ Scheduler is already running, ignoring start request")
     
     def stop(self):
         """Stop the scheduler"""

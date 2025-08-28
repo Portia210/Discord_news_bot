@@ -4,9 +4,9 @@ Handles dynamic topic clustering using HDBSCAN.
 """
 
 import numpy as np
-from typing import List, Dict, Any, Tuple
+from typing import List, Dict, Any
 import hdbscan
-from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import cosine_distances
 from .config import Config
 
 class ArticleClusterer:
@@ -16,18 +16,25 @@ class ArticleClusterer:
         self.cluster_labels = None
 
     def cluster_articles(self, articles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """Cluster articles using HDBSCAN with optimized parameters for topic-specific clustering"""
         if not articles or len(articles) < 2:
             return articles
 
         embeddings = np.array([article['embedding'] for article in articles])
         
+        # Pre-compute cosine distances
+        distance_matrix = cosine_distances(embeddings)
+        
+        # Optimized HDBSCAN parameters for topic-specific clustering
         self.clusterer = hdbscan.HDBSCAN(
-            min_cluster_size=self.min_cluster_size,
-            metric='cosine',
-            cluster_selection_method='eom'
+            min_cluster_size=2,  # Minimum 2 articles to form a cluster
+            min_samples=1,  # More sensitive to local density
+            cluster_selection_epsilon=0.15,  # Tighter clusters - requires closer similarity
+            metric='precomputed',
+            cluster_selection_method='leaf'  # More conservative clustering
         )
         
-        self.cluster_labels = self.clusterer.fit_predict(embeddings)
+        self.cluster_labels = self.clusterer.fit_predict(distance_matrix)
         
         for i, article in enumerate(articles):
             article['cluster_id'] = int(self.cluster_labels[i])
@@ -37,11 +44,13 @@ class ArticleClusterer:
         return articles
 
     def _get_cluster_size(self, cluster_id: int) -> int:
+        """Get size of a cluster"""
         if cluster_id == -1:
             return 1
         return int(np.sum(self.cluster_labels == cluster_id))
 
     def _get_cluster_confidence(self, article_index: int) -> float:
+        """Get confidence score for cluster assignment"""
         if self.clusterer is None:
             return 0.0
         
@@ -49,9 +58,10 @@ class ArticleClusterer:
         if cluster_id == -1:
             return 0.0
         
-        return 1.0  # Simplified confidence calculation
+        return 1.0
 
     def get_cluster_summary(self, articles: List[Dict[str, Any]]) -> Dict[int, Dict[str, Any]]:
+        """Generate summary statistics for each cluster"""
         cluster_summary = {}
         
         for article in articles:
@@ -87,13 +97,5 @@ class ArticleClusterer:
         return cluster_summary
     
     def get_noise_articles(self, articles: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-        """
-        Get articles that were classified as noise (no cluster).
-        
-        Args:
-            articles: List of articles with cluster IDs
-            
-        Returns:
-            Articles classified as noise
-        """
+        """Get articles classified as noise (no cluster)"""
         return [article for article in articles if article.get('cluster_id') == -1]

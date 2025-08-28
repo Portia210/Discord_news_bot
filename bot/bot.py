@@ -5,6 +5,7 @@ from utils.logger import logger
 from config import Config, ENABLE_PROXY, REMOTE_SERVER
 import asyncio
 from scheduler_v2 import TasksScheduler
+from scheduler_v2.scheduler_manager import is_scheduler_running, clear_scheduler
 from discord_utils import send_embed_message
 from bot_manager import set_bot
 
@@ -102,44 +103,48 @@ async def on_ready():
     except Exception as e:
         logger.error(f"❌ Failed to sync commands: {e}")
     
-    try:
-        # Initialize scheduler with task management
-        global tasks_scheduler
-        tasks_scheduler = TasksScheduler(
-            Config.CHANNEL_IDS.PYTHON_BOT, 
-            Config.CHANNEL_IDS.DEV,
-            timezone=Config.TIMEZONES.APP_TIMEZONE,
-            schedule=Config.SCHEDULE
-        )
-        
-        # Setup all tasks
-        await tasks_scheduler.setup_all_tasks()
-        
-        # Start the scheduler
-        tasks_scheduler.start()
-        logger.debug("✅ APScheduler started successfully!")
-        
-        # Send bot startup message to dev channel
-        await send_embed_message(
-            bot,
-            Config.CHANNEL_IDS.DEV,
-            "🚀 **Bot Started Successfully**\n"
-            "🔔 Dev alerts will be sent to this channel\n"
-            "📊 Data alerts will be sent to the main channel",
-            Config.COLORS.GREEN,
-            "🤖 Bot Status"
-        )
-        
-    except Exception as e:
-        logger.error(f"❌ Failed to initialize scheduler: {e}")
-        if tasks_scheduler:
+    # Initialize scheduler only once
+    global tasks_scheduler
+    if not is_scheduler_running():
+        try:
+            logger.info("🔧 Initializing scheduler for the first time...")
+            tasks_scheduler = TasksScheduler(
+                Config.CHANNEL_IDS.PYTHON_BOT, 
+                Config.CHANNEL_IDS.DEV,
+                timezone=Config.TIMEZONES.APP_TIMEZONE,
+                schedule=Config.SCHEDULE
+            )
+            
+            # Setup all tasks
+            await tasks_scheduler.setup_all_tasks()
+            
+            # Start the scheduler
+            tasks_scheduler.start()
+            logger.info("✅ APScheduler started successfully!")
+            
+            # Send bot startup message to dev channel
             await send_embed_message(
                 bot,
                 Config.CHANNEL_IDS.DEV,
-                f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
-                Config.COLORS.RED,
+                "🚀 **Bot Started Successfully**\n"
+                "🔔 Dev alerts will be sent to this channel\n"
+                "📊 Data alerts will be sent to the main channel",
+                Config.COLORS.GREEN,
                 "🤖 Bot Status"
             )
+            
+        except Exception as e:
+            logger.error(f"❌ Failed to initialize scheduler: {e}")
+            if tasks_scheduler:
+                await send_embed_message(
+                    bot,
+                    Config.CHANNEL_IDS.DEV,
+                    f"❌ **Scheduler Initialization Failed**\nError: {str(e)}",
+                    Config.COLORS.RED,
+                    "🤖 Bot Status"
+                )
+    else:
+        logger.info("🔄 Scheduler already running, skipping re-initialization")
 
 async def load_cogs():
     """Load all command cogs"""
@@ -169,9 +174,8 @@ async def load_cogs():
 async def cleanup():
     """Cleanup function to stop scheduler gracefully"""
     try:
-        if tasks_scheduler:
-            tasks_scheduler.stop()
-            logger.info("✅ APScheduler stopped gracefully")
+        clear_scheduler()
+        logger.info("✅ APScheduler stopped gracefully")
     except Exception as e:
         logger.error(f"❌ Error stopping scheduler: {e}")
 
